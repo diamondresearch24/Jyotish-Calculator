@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ज्योतिष यंत्र · Jyotish Calculator - Redirect</title>
+    <style>
+        :root {
+            --night: #0b1026;
+            --night2: #141a3a;
+            --panel: #1b2148;
+            --gold: #e8b54a;
+            --gold-soft: #f0d089;
+            --ink: #eae6f7;
+            --muted: #a7a3c8;
+            --line: #3a3f70;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(1200px 600px at 70% -10%, #1d2552 0%, transparent 60%),
+                        radial-gradient(900px 500px at 0% 100%, #241a3e 0%, transparent 55%),
+                        var(--night);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            background: linear-gradient(180deg, var(--panel), var(--night2));
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .om {
+            font-size: 48px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(232, 181, 74, 0.4));
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(232, 181, 74, 0.4)); }
+            to { filter: drop-shadow(0 0 30px rgba(232, 181, 74, 0.6)); }
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: clamp(24px, 5vw, 36px);
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            color: var(--ink);
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .launch-btn {
+            display: inline-block;
+            background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+            color: #2a1c00;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(232, 181, 74, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(232, 181, 74, 0.45);
+        }
+
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "ॐ";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 12px;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(232, 181, 74, 0.1);
+            border: 1px solid rgba(232, 181, 74, 0.3);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+            color: var(--gold);
+            font-size: 14px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .launch-btn {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="om">ॐ</div>
+        <h1>ज्योतिष यंत्र</h1>
+        <p class="subtitle">Jyotish Calculator · Vedic Astrology Predictive Engine</p>
+        
+        <p class="description">
+            A comprehensive browser-based Vedic Astrology calculation and prediction engine. 
+            Generate detailed Kundli charts, explore educational content, and access predictive 
+            analysis entirely in your browser.
+        </p>
+
+        <a href="jyotish_calculator .html" class="launch-btn" onclick="showLoading(event)">
+            🚀 Launch Jyotish Calculator
+        </a>
+
+        <div class="loading" id="loading">
+            Loading the Jyotish Calculator... Please wait...
+        </div>
+
+        <div class="features">
+            <ul class="feature-list">
+                <li>Complete Kundli generation with 16 Vargas</li>
+                <li>Vimshottari Dasha with detailed timing analysis</li>
+                <li>Transit analysis (Gochar) for current predictions</li>
+                <li>Educational content for learning Vedic astrology</li>
+                <li>Interactive charts and visualizations</li>
+                <li>Bilingual Hindi-English interface</li>
+                <li>Works offline - no internet required after loading</li>
+            </ul>
+        </div>
+
+        <div class="disclaimer">
+            <strong>⚠️ Educational Purpose:</strong> This tool is designed for educational learning and research. 
+            For professional astrological consultations and important life decisions, 
+            please consult qualified Vedic astrology practitioners.
+        </div>
+    </div>
+
+    <script>
+        function showLoading(event) {
+            event.preventDefault();
+            const loading = document.getElementById('loading');
+            const btn = event.target;
+            
+            // Show loading message
+            loading.classList.add('show');
+            btn.style.opacity = '0.7';
+            btn.textContent = '🔄 Loading...';
+            
+            // Navigate to the main application after a short delay
+            setTimeout(() => {
+                window.location.href = btn.href;
+            }, 1000);
+        }
+
+        // Auto-redirect if user prefers direct access
+        if (window.location.search.includes('direct=true')) {
+            window.location.href = 'jyotish_calculator .html';
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.8s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
