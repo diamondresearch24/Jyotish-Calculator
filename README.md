@@ -2,14 +2,18 @@
 
 **A comprehensive Vedic Astrology Predictive Engine with educational features**
 
-![Jyotish Calculator](https://img.shields.io/badge/Version-1.0-gold) ![Status](https://img.shields.io/badge/Status-Active-green) ![License](https://img.shields.io/badge/License-Educational-blue)
+![Jyotish Calculator](https://img.shields.io/badge/Version-2.0-gold) ![Status](https://img.shields.io/badge/Status-Active-green) ![License](https://img.shields.io/badge/License-Educational-blue)
 
 ## 📁 Project Structure
 
 ```
 Jyotish Calculator/
 ├── README.md                           # This documentation file
-├── jyotish_calculator .html            # Main application (single-page app)
+├── index.html                          # Landing page with app launcher
+├── jyotish_calculator.html             # Main application (single-page app)
+├── .git/                              # Version control
+├── .gitattributes                      # Git configuration
+├── CNAME                              # Custom domain (if deployed)
 └── .DS_Store                          # macOS system file (auto-generated)
 ```
 
@@ -17,29 +21,39 @@ Jyotish Calculator/
 
 ज्योतिष यंत्र (Jyotish Calculator) is a sophisticated browser-based Vedic Astrology calculation and prediction engine. Built as a single-page HTML application, it provides comprehensive astrological calculations, educational content, and predictive analysis entirely in the browser without requiring any server-side processing.
 
+**Version 2.0** introduces a multi-module application structure with dedicated modules for Personal Prediction, Match Making, and Muhurat (auspicious timing), along with enhanced dasha calculations extending to Prana Dasha level.
+
 ## ✨ Key Features
 
 ### 🔮 **Core Astrological Calculations**
 - **Kundli Generation** - Complete birth chart with 16 Vargas (divisional charts)
 - **Planetary Positions** - Accurate calculations using Keplerian algorithms
-- **Dasha System** - Vimshottari Dasha with full nested periods (Pratyantar Dasha)
+- **Enhanced Dasha System** - Vimshottari Dasha with 5-level nested periods (Mahadasha → Prana Dasha)
 - **Transit Analysis** - Gochar calculations for current planetary movements
 - **Yoga Detection** - Automatic identification of major astrological combinations
+- **Reference Date System** - Check dasha and predictions for any specific date
+
+### 📱 **Multi-Module Application Structure**
+- **🧑 Personal Prediction** - Comprehensive life predictions with timing analysis
+- **💑 Match Making** - Ashtakoot guna milan compatibility analysis (Coming Soon)
+- **🕉 Muhurat** - Auspicious timing for 30+ life events based on Panchanga
 
 ### 📚 **Educational Modes**
 - **Prediction Mode** - Complete predictive analysis with confidence levels
 - **Learning Mode** - Comprehensive educational content for all astrological concepts
 - **Charts Mode** - Interactive visualization of all divisional charts
-- **Dasha Mode** - Detailed timing analysis with period breakdowns
+- **Dasha Mode** - Detailed timing analysis with 5-level period breakdowns
 - **Transit Mode** - Current planetary influences and predictions
-- **Subtle Mode** - Advanced predictive techniques and subtle analysis
+- **Micro-Timing Analysis** - Day/hour-level predictions with Sookshma & Prana dasha
 
-### 🎨 **User Experience**
+### 🎨 **Enhanced User Experience**
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
 - **Bilingual Interface** - Hindi (Devanagari) with English support
 - **Dark Theme** - Eye-friendly design optimized for extended use
 - **City Search** - Instant location lookup with timezone detection
 - **Font Size Control** - Adjustable text size for accessibility
+- **PDF Export** - Download reports and muhurat analysis as PDF
+- **Print Optimization** - Clean, printer-friendly layouts
 
 ## 🚀 Quick Start
 
@@ -48,17 +62,31 @@ Jyotish Calculator/
 - No additional software or installation required
 
 ### Installation & Usage
-1. **Download** the `jyotish_calculator .html` file
-2. **Open** the file in any modern web browser
-3. **Enter birth details** (date, time, location)
-4. **Click "रिपोर्ट बनाएँ"** to generate your kundli
-5. **Explore different modes** using the mode buttons
+1. **Download** the project files
+2. **Open** `index.html` in any modern web browser
+3. **Click "🚀 Launch Jyotish Calculator"** on the landing page
+4. **Select your desired module:**
+   - **🧑 Personal Prediction** - Enter birth details for comprehensive analysis
+   - **🕉 Muhurat** - Find auspicious timing for life events
+   - **💑 Match Making** - Compatibility analysis (Coming Soon)
+5. **Enter birth details** (date, time, location) for Personal Prediction
+6. **Click "रिपोर्ट बनाएँ"** to generate your kundli
+7. **Explore different modes** using the navigation buttons
 
 ### No Setup Required
 - ✅ No installation needed
 - ✅ No internet connection required (after initial download)
 - ✅ No server dependencies
 - ✅ All calculations happen in your browser
+- ✅ Works offline once loaded
+
+### Local Development (Optional)
+```bash
+# For local testing with a server
+cd "Jyotish Calculator"
+python3 -m http.server 8000
+# Then visit http://localhost:8000
+```
 
 ## 🛠️ Technical Architecture
 
@@ -67,19 +95,29 @@ Jyotish Calculator/
 - **Calculations**: Custom JavaScript astronomical algorithms
 - **UI Framework**: Custom CSS with CSS Grid and Flexbox
 - **Data Storage**: LocalStorage for user preferences
-- **Architecture**: Single Page Application (SPA)
+- **External Libraries**: 
+  - html2canvas (for PDF generation)
+  - jsPDF (for PDF export)
+- **Architecture**: Multi-module Single Page Application (SPA)
 
 ### **Core Components**
 ```javascript
 // Main calculation engines
 - computeChart()     // Core planetary calculations
-- buildDasha()       // Dasha period calculations
+- buildDasha()       // 5-level Dasha period calculations
 - buildTransit()     // Transit calculations
 - julianDay()        // Astronomical date conversion
 
+// New in v2.0
+- panchangAt()       // Panchanga calculations for muhurat
+- muhScore()         // Muhurat scoring algorithm
+- chainAt()          // Dasha chain analysis
+- garbhScore()       // Garbhadhana muhurat calculations
+
 // UI and interaction
 - setMode()          // Mode switching
-- show()             // Content display
+- showApp()          // Module selection (Personal/Muhurat/Match)
+- showMuhurat()      // Muhurat module interface
 - buildNav()         // Navigation generation
 - run()              // Report generation
 ```
@@ -89,6 +127,7 @@ Jyotish Calculator/
 - **Ayanamsa**: Lahiri (Chitrapaksha) - Standard in Vedic Astrology
 - **Accuracy**: ~0.1-0.5° for planetary positions
 - **Coverage**: All major planets, Rahu, Ketu, and lunar nodes
+- **Muhurat System**: Based on Muhurta Chintamani, BPHS, Dharma Sindhu
 
 ## 📖 Educational Content
 
@@ -111,13 +150,29 @@ Jyotish Calculator/
 - **D12 (Dwadashamsa)** - Parents and ancestors
 - **And 8 more specialized charts**
 
+### **🕉 Muhurat Module**
+- **30+ Life Events** - Comprehensive muhurat calculations for various activities:
+  - Marriage, Job Joining, Business Start, Investment
+  - Travel, Vehicle Purchase, Property Registration
+  - Education, Medical Procedures, Naming Ceremonies
+  - Garbhadhana (conception), Yagya, Temple Visit
+- **Panchanga-Based** - Tithi, Vara, Nakshatra, Yoga analysis
+- **Classical References** - Based on Muhurta Chintamani, BPHS, Dharma Sindhu
+- **Scoring System** - Scientific scoring (0-100%) for each date
+- **PDF Export** - Download muhurat reports with detailed analysis
+- **45-Day Scan** - Find auspicious dates in the next 45 days
+- **Personalization** - Incorporates birth chart for personalized muhurat
+
 ## 🎯 Features in Detail
 
-### **Prediction Engine**
+### **Enhanced Prediction Engine**
+- **5-Level Dasha Analysis** - Mahadasha → Antardasha → Pratyantar → Sookshma → Prana
+- **Micro-Timing** - Day and hour-level predictions
 - **Confidence Levels** - Every prediction includes strength indicators
 - **Timing Analysis** - Specific timeframes for predictions
 - **Multiple Factors** - Considers planets, houses, signs, and dashas
 - **Educational References** - Sources and classical references for predictions
+- **Reference Date Feature** - Check predictions for any specific date
 
 ### **Chart Visualization**
 - **Interactive Charts** - Clickable chart elements with detailed information
@@ -134,15 +189,24 @@ Jyotish Calculator/
 ## 🔧 Customization
 
 ### **User Preferences**
-- **Font Size** - Adjustable from 100% to 150%
+- **Font Size** - Adjustable from 80% to 150%
 - **Language** - Hindi primary with English support
 - **Theme** - Dark theme optimized for astrological study
 - **Layout** - Responsive design adapts to screen size
+- **Reference Date** - Set any date for dasha and prediction analysis
+- **Module Selection** - Switch between Personal, Muhurat, and Match modules
 
 ### **Calculation Settings**
 - **Ayanamsa** - Lahiri (standard) - can be modified for other systems
 - **Coordinate System** - Decimal degrees for precision
 - **Time Format** - 24-hour format with timezone support
+- **Dasha Levels** - View up to 5 levels of dasha periods
+- **Muhurat Preferences** - Customize event types and scoring parameters
+
+### **Export Options**
+- **PDF Reports** - Download complete predictions and muhurat analysis
+- **Print Layouts** - Optimized printing with clean formatting
+- **Chart Export** - Save charts as images (coming soon)
 
 ## 📊 Data & Accuracy
 
@@ -212,10 +276,14 @@ consult qualified astrologer for decisions.
 - **Documentation** - Update documentation for any new features
 
 ### **Areas for Enhancement**
+- **Match Making Module** - Complete Ashtakoot guna milan analysis
 - **Additional Vargas** - More divisional charts
 - **Regional Languages** - Support for more Indian languages
-- **Export Features** - PDF/chart export capabilities
+- **Chart Export** - Save charts as images and SVG
 - **Advanced Calculations** - More sophisticated predictive techniques
+- **Remedies Module** - Detailed remedial measures and gemstone recommendations
+- **Transit Alerts** - Personalized transit notifications
+- **Cloud Sync** - Save and sync charts across devices (future)
 
 ## 📄 License
 
@@ -233,8 +301,58 @@ This project is provided for **educational purposes only**. The astrological cal
 - **Clear browser cache** if experiencing issues
 - **Check JavaScript is enabled** in your browser settings
 
+## 📋 Version History
+
+### **Version 2.0** (Current)
+- ✨ **Multi-Module Architecture** - Personal, Muhurat, and Match modules
+- ✨ **Enhanced Dasha System** - 5-level analysis (Mahadasha → Prana Dasha)
+- ✨ **Muhurat Module** - 30+ life events with Panchanga-based calculations
+- ✨ **Reference Date System** - Check predictions for any specific date
+- ✨ **PDF Export** - Download reports and muhurat analysis
+- ✨ **Garbhadhana Muhurat** - Specialized conception timing analysis
+- ✨ **Micro-Timing** - Day/hour-level predictions
+- ✨ **Improved UI** - Enhanced navigation and user experience
+- ✨ **Classical References** - Expanded source documentation
+
+### **Version 1.0** (Original)
+- 🔮 **Core Astrological Calculations** - Kundli generation with 16 Vargas
+- 📚 **Educational Modes** - Prediction, Learning, Charts, Dasha, Transit modes
+- 🎨 **Responsive Design** - Mobile-friendly interface
+- 🌍 **Offline Support** - Works without internet connection
+- 📖 **Comprehensive Documentation** - Educational content for all concepts
+
+## 🔮 Future Roadmap
+
+### **Phase 1** (Near Future)
+- Complete **Match Making Module** with Ashtakoot analysis
+- **Chart Export** functionality (PNG/SVG)
+- **Remedies Module** with detailed recommendations
+
+### **Phase 2** (Mid-term)
+- **Regional Language Support** (Tamil, Telugu, Bengali, etc.)
+- **Transit Alert System** for personalized notifications
+- **Advanced Yoga Detection** with more combinations
+
+### **Phase 3** (Long-term)
+- **Cloud Sync** for chart storage across devices
+- **Mobile App** (React Native)
+- **AI-Powered Insights** for enhanced predictions
+
 ---
 
 **ॐ शांति** | **Om Shanti** | **Peace**
 
 *Built with dedication to the ancient science of Vedic Astrology for educational purposes.*
+
+---
+
+## 🙏 Acknowledgments
+
+This project draws inspiration from and is based on the following classical texts:
+- **Brihat Parashara Hora Shastra** - The foundational text of Vedic Astrology
+- **Muhurta Chintamani** - Classical text on auspicious timing
+- **Dharma Sindhu & Nirnaya Sindhu** - Traditional muhurat guidelines
+- **Saravali** - Comprehensive astrological principles
+- **Phaladeepika** - Predictive astrology techniques
+
+Special thanks to the ancient sages and scholars who preserved this sacred knowledge for humanity.
