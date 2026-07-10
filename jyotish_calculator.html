@@ -195,7 +195,7 @@
       <div><label>Ayanamsa</label><select id="ayan"><option value="lahiri">Lahiri (Standard)</option></select></div>
     </div>
     <div class="btn-row"><button class="btn" onclick="run()">Generate Report</button>
-      <span class="tag">City suggestions appear as you type · Everything stays on your device</span></div>
+            <span class="tag">City suggestions appear as you type · Everything stays on your device</span></div>
       <div id="savedProfiles" style="margin-top:14px"></div>
     <div class="err" id="err"></div>
   </section>
@@ -398,6 +398,58 @@ document.addEventListener('click',e=>{if(!suggBox.contains(e.target)&&e.target!=
 
 /* ===== STATE ===== */
 let CH=null,DASHA=null,TRANSIT=null,curVarga='D1',birthYearFloat=1994;
+
+// Default sample data for testing
+function loadSampleData(){
+  try {
+    const sampleJD = julianDay(1990, 6, 15, 14.30 - 5.5); // 15 June 1990, 2:30 PM, IST
+    CH = computeChart(sampleJD, 28.6139, 77.2090); // Delhi coordinates
+    CH.jd = sampleJD;
+    buildDasha(sampleJD);
+    buildTransit();
+    buildNav();
+    birthYearFloat = 1990;
+    
+    // Auto-fill form fields with delay to ensure DOM is ready
+    setTimeout(() => {
+      const setField = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.value = value;
+      };
+      
+      setField('dob', '1990-06-15');
+      setField('tob', '14:30');
+      setField('lat', '28.6139');
+      setField('lon', '77.2090');
+      setField('tz', '5.5');
+      setField('citySearch', 'Delhi, India');
+      
+      const reportEl = document.getElementById('report');
+      if (reportEl) reportEl.style.display = 'block';
+      
+      console.log('Sample data loaded successfully');
+    }, 100);
+  } catch(e) {
+    console.error('Error loading sample data:', e);
+  }
+}
+
+// Load sample data on page load for testing
+if(document.readyState!=='loading'){
+  loadSampleData();
+  renderProfiles();
+} else {
+  document.addEventListener('DOMContentLoaded', function(){
+    loadSampleData();
+    renderProfiles();
+  });
+}
+
+// Manual sample data loading function
+function loadSampleDataManually(){
+  loadSampleData();
+  alert('Sample data loaded! You can now test the Muhurat module.');
+}
 const signOf=l=>Math.floor(l/30),degIn=l=>l-Math.floor(l/30)*30;
 const fmtDeg=l=>{const d=degIn(l),dd=Math.floor(d),mm=Math.floor((d-dd)*60);return dd+"° "+String(mm).padStart(2,'0')+"'";};
 const nakOf=l=>Math.floor(l/(40/3)),padaOf=l=>Math.floor((l%(40/3))/(10/3))+1;
@@ -443,7 +495,7 @@ function renderProfiles(){const wrap=document.getElementById('savedProfiles');if
   if(!arr.length){wrap.innerHTML='';return;}
   wrap.innerHTML='<div class="tag" style="margin-bottom:6px">💾 Saved Profiles (click to auto-fill · × to remove):</div>'+
     '<div style="display:flex;flex-wrap:wrap;gap:8px">'+arr.map((p,i)=>`<span onclick="fillProfile(${i})" style="cursor:pointer;background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:6px 12px;display:inline-flex;align-items:center;gap:8px;font-size:13px"><b>${(p.name||'जातक')}</b> <span style="opacity:.55">${p.dob||''}${p.city?' · '+String(p.city).split(',')[0]:''}</span> <span onclick="deleteProfile(${i},event)" style="opacity:.55;font-weight:700;font-size:16px" title="हटाएँ">×</span></span>`).join('')+'</div>';}
-if(document.readyState!=='loading')renderProfiles();else document.addEventListener('DOMContentLoaded',renderProfiles);
+// Note: renderProfiles is called after sample data is loaded
 function run(){const err=document.getElementById('err');err.textContent='';try{
   const dob=document.getElementById('dob').value,tob=document.getElementById('tob').value;
   if(!dob||!tob){err.textContent='कृपया जन्म तिथि व समय भरें।';return;}
@@ -534,7 +586,7 @@ function meterRow(lbl,pct){const col=pct>62?'var(--good)':pct<45?'var(--bad)':'v
 
 /* ===== RENDER ===== */
 const RENDER={};
-RENDER.summary=()=>{const asc=CH.asc,moon=CH.sid[1],sun=CH.sid[0],name=document.getElementById('name').value||'जातक';
+RENDER.summary=()=>{if(!CH||!CH.asc||!CH.sid||!DASHA||!DASHA.active){return '<div class="card"><h3 class="sh">📋 कार्यकारी सारांश</h3><p class="tag">Please generate a report first by entering birth details and clicking "Generate Report".</p></div>';}const asc=CH.asc,moon=CH.sid[1],sun=CH.sid[0],name=document.getElementById('name').value||'जातक';
   const items=[['नाम',name],['लग्न',SIGNS[signOf(asc)]+' ('+fmtDeg(asc)+')'],['चंद्र राशि',SIGNS[signOf(moon)]],
    ['जन्म नक्षत्र',NAK[nakOf(moon)]+' पाद '+padaOf(moon)],['सूर्य राशि',SIGNS[signOf(sun)]],
    ['वर्तमान दशा',PL[DASHA.active.lord]+'/'+PL[DASHA.activeAnta.lord]+'/'+PL[DASHA.activePrat.lord]]];
@@ -4130,20 +4182,132 @@ function muhScore(pn,type){const R=MUHRULES[type];let s=30,rs=[],bad=[];
   if(typeof CH!=='undefined'&&CH&&CH.sid){const jr=((pn.moonSign-signOf(CH.sid[1])+12)%12)+1;if([1,3,6,7,10,11].includes(jr)){s+=6;rs.push('चंद्र-ताराबल अनुकूल (जन्म-चंद्र से '+jr+'वाँ)');}else{s-=8;bad.push('चंद्र जन्म-राशि से '+jr+'वें — ताराबल कमजोर');}}
   return{score:Math.max(5,Math.min(98,s)),rs,bad};}
 let curMuh='marriage';
+function horaDetails(jd){const dayStart=Math.floor(jd)-0.5;const horas=[];const lords=[0,1,2,3,4,5,6,0,1,2,3,4,5,6,0,1,2,3,4,5,6,0,1,2,3,4,5,6];
+  for(let h=0;h<24;h++){const horaJD=dayStart+h/24;const horaLord=lords[h];const start=new Date(horaJD*86400000);const end=new Date((horaJD+1/24)*86400000);horas.push({lord:horaLord,start,end});}
+  return horas;}
+function formatTime(date){return date.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false});}
+function muhuratRecommendation(score,bad){if(score>=70&&bad.length===0)return {text:'अत्युत्तम ✓',color:'var(--good)',action:'अनुशंसित'};if(score>=70&&bad.length>0)return {text:'सावधान ⚠️',color:'var(--bad)',action:'बचें'};if(score>=55)return {text:'उत्तम',color:'var(--gold-soft)',action:'विचारें'};return {text:'अनुपयुक्त ✗',color:'var(--bad)',action:'बचें'};}
+function expandableDateRow(d,type,rank){const pn=d.pn;const m=d.m;const label=MUHTYPES.find(m=>m[0]===type)[1];const rec=muhuratRecommendation(m.score,m.bad);const horas=horaDetails(d.jd);
+  const goodHoras=horas.filter(h=>h.lord===4||h.lord===1||h.lord===5).slice(0,3);const badHoras=horas.filter(h=>h.lord===2||h.lord===6).slice(0,2);
+  const moonPhase=pn.paksha==='शुक्ल'?'बढ़ता चंद्र':'घटता चंद्र';
+  const now=new Date();const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());const targetDate=new Date((d.jd-0.5)*86400000);const daysDiff=Math.floor((targetDate-today)/(1000*60*60*24));
+  const isToday=daysDiff===0;const isPast=daysDiff<0;const isFuture=daysDiff>0;
+  let remaining='';let countdown='';
+  if(isToday){const nowHours=now.getHours()+now.getMinutes()/60;const dayEnd=24;remaining=Math.max(0,dayEnd-nowHours);countdown=`आज शेष ${Math.floor(remaining)} घंटे ${Math.round((remaining%1)*60)} मिनट`;}
+  else if(isFuture){countdown=`${daysDiff} दिन शेष`;}
+  const expandId=`muh-expand-${d.jd}`;
+  return `<tr id="${expandId}-row" class="expandable-row" onclick="toggleMuhuratExpand('${expandId}')" style="cursor:pointer">
+    <td><b>${fmtJD(d.jd)}</b><br><small style="color:var(--muted)">${isToday?'आज':isPast?'बीत गया':daysDiff===1?'कल':daysDiff+' दिन बाद'}</small></td>
+    <td style="color:${rec.color};font-weight:700">${rec.text}</td>
+    <td style="font-weight:700;color:${rec.color}">${m.score}%</td>
+    <td><small>${YOGA_N[pn.yoga]}</small><br><small style="color:var(--muted)">${pn.paksha}</small></td>
+    <td><button class="modebtn" style="padding:2px 8px;font-size:11px" onclick="event.stopPropagation();toggleMuhuratExpand('${expandId}')">विस्तार ↓</button></td>
+  </tr>
+  <tr id="${expandId}-detail" style="display:none"><td colspan="5">
+    <div style="background:var(--panel2);border-radius:8px;padding:12px;margin:8px 0">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div><b>📅 तिथि:</b> ${fmtJD(d.jd)} (${VARA_N[pn.vara]})</div>
+        <div><b>🌙 तिथि:</b> ${pn.paksha} ${TITHI_N[pn.tIdx]} (${moonPhase})</div>
+        <div><b>⭐ नक्षत्र:</b> ${NAK[pn.nak]}</div>
+        <div><b>🔗 योग:</b> ${YOGA_N[pn.yoga]}</div>
+      </div>
+      <div style="margin-top:12px"><b>📊 स्कोर विश्लेषण:</b> ${m.score}% — ${rec.action} ${m.rs.length?'<br><span style="color:var(--good)">✓ '+m.rs.join(' · ')+'</span>':''}${m.bad.length?'<br><span style="color:var(--bad)">✗ '+m.bad.join(' · ')+'</span>':''}</div>
+      
+      <div style="margin-top:16px;padding:12px;background:var(--panel);border-radius:6px;border-left:4px solid var(--good)">
+        <b>📋 विस्तृत पंचांग विश्लेषण:</b>
+        <div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px">
+          <div><b>🌅 वार:</b> ${VARA_N[pn.vara]} — ${pn.vara===0?'राजकीय कार्य, प्रशासन, सरकारी कार्य':pn.vara===1?'शांति, जल संबंधी, मांगलिक कार्य':pn.vara===2?'साहस, युद्ध, भूमि संबंधी, यंत्र':pn.vara===3?'व्यापार, लेखन, शिक्षा, संचार':pn.vara===4?'विवाह, कला, वाहन, वस्त्र':pn.vara===5?'धार्मिक, शिक्षा, ज्ञान, गुरु संबंधी':'श्रम, अनुशासन, निर्माण, नौकरी'}</div>
+          <div><b>🌙 तिथि:</b> ${pn.paksha} ${TITHI_N[pn.tIdx]} — ${pn.tIdx===14&&pn.paksha==='कृष्ण'?'अमावस्या — सभी शुभ कार्य वर्ज्य':pn.tIdx===0&&pn.paksha==='शुक्ल'?'प्रतिपदा — नई शुरुआत के लिए उत्तम':RIKTA.includes(pn.tIdx)?'रिक्ता तिथि — महत्वपूर्ण कार्यों से बचें':'सामान्य तिथि — कार्य संभव'}</div>
+          <div><b>⭐ नक्षत्र:</b> ${NAK[pn.nak]} — ${pn.nak%9===0?'अश्विनी — तीव्र गति, यात्रा शुभ':pn.nak%9===1?'भरणी — पोषण, संरक्षण, गृह':pn.nak%9===2?'कृत्तिका — काटना, विभाजन, निर्माण':pn.nak%9===3?'रोहिणी — वृद्धि, सौंदर्य, कृषि':pn.nak%9===4?'मृगशिरा — खोज, अनुसंधान, शिक्षा':pn.nak%9===5?'आर्द्रा — कठोर कार्य, विध्वंस':pn.nak%9===6?'पुनर्वसु — पुनर्निर्माण, चिकित्सा':pn.nak%9===7?'पुष्य — सुरक्षा, पोषण, धन':pn.nak%9===8?'अश्लेषा — संपर्क, मित्रता, समाज':'अन्य नक्षत्र'}</div>
+          <div><b>🔗 योग:</b> ${YOGA_N[pn.yoga]} — ${pn.yoga===13?'ब्रह्म योग — सर्वाधिक शुभ योग, सभी कार्यों में सिद्धि देने वाला, धार्मिक और आध्यात्मिक कार्यों के लिए उत्तम':BAD_YOGA.includes(pn.yoga)?'अशुभ योग — कार्य में बाधा, महत्वपूर्ण निर्णय लेने से बचें':'शुभ योग — कार्य सिद्धि में सहायक'}</div>
+          <div><b>🌓 पक्ष:</b> ${pn.paksha} — ${pn.paksha==='शुक्ल'?'वर्धमान चंद्र — नए कार्य शुरू करने के लिए उत्तम':'क्षयशील चंद्र — समाप्ति और पुराने कार्यों के लिए उचित'}</div>
+        </div>
+      </div>
+      
+      <div style="margin-top:12px;padding:12px;background:var(--panel);border-radius:6px;border-left:4px solid var(--gold-soft)">
+        <b>🌙 चंद्र की स्थिति और प्रभाव:</b>
+        <div style="margin-top:8px">चंद्र ${pn.paksha} पक्ष में ${TITHI_N[pn.tIdx]} तिथि पर है। ${moonPhase}। यह समय ${pn.paksha==='शुक्ल'?'ऊर्जा और वृद्धि का है — नए प्रयासों के लिए अनुकूल':'शांति और समाप्ति का है — पुराने कार्यों को पूरा करने के लिए उचित'}।</div>
+      </div>
+      <div style="margin-top:12px"><b>⏰ सर्वश्रेष्ठ होरा (शुभ ग्रह):</b></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:6px">
+        ${goodHoras.map(h=>`<div style="background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px"><b>${PL[h.lord]} होरा</b><br>${formatTime(h.start)}–${formatTime(h.end)}<br><span style="color:var(--good)">★★★★★</span></div>`).join('')}
+      </div>
+      ${badHoras.length>0?`<div style="margin-top:8px"><b>🚫 बचें (अशुभ होरा):</b></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:6px">
+        ${badHoras.map(h=>`<div style="background:var(--panel);border:1px solid var(--bad);border-radius:6px;padding:6px"><b>${PL[h.lord]} होरा</b><br>${formatTime(h.start)}–${formatTime(h.end)}<br><span style="color:var(--bad)">बचें</span></div>`).join('')}
+      </div>`:''}
+      <div style="margin-top:12px"><b>🎯 सटीक मुहूर्त समय:</b></div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px;margin-top:6px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px">
+          <div><b>आरंभ:</b><br>${formatTime(goodHoras[0]?goodHoras[0].start:6)}:00</div>
+          <div><b>अंत:</b><br>${formatTime(goodHoras[goodHoras.length-1]?goodHoras[goodHoras.length-1].end:18)}:00</div>
+          <div><b>अवधि:</b><br>${goodHoras.length>0?goodHoras.length+' घंटे':'दिनभर'}</div>
+          <div><b>श्रेष्ठ होरा:</b><br>${goodHoras.length>0?PL[goodHoras[0].lord]:'—'}</div>
+        </div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--line)">
+          <b>शुभ होराएं:</b> ${goodHoras.length>0?goodHoras.map(h=>`${PL[h.lord]} (${formatTime(h.start)}-${formatTime(h.end)})`).join(', '):('कोई विशेष शुभ होरा नहीं')}
+        </div>
+      </div>
+      
+      <div style="margin-top:12px;padding:12px;background:var(--panel);border-radius:6px;border-left:4px solid var(--gold)">
+        <b>🪐 ग्रह ट्रांजिट विश्लेषण:</b>
+        <div style="margin-top:8px">
+          <div><b>🌙 चंद्र:</b> ${NAK[pn.nak]} नक्षत्र में — ${pn.nak%9===0||pn.nak%9===4||pn.nak%9===8?'तीव्र गति, यात्रा शुभ':pn.nak%9===1||pn.nak%9===5||pn.nak%9===7?'स्थिरता, पोषण, सुरक्षा':'परिवर्तन, निर्माण, ऊर्जा'}</div>
+          <div><b>☀️ सूर्य:</b> ${VARA_N[pn.vara]} वार का स्वामी — ${pn.vara===0?'अधिकार, प्रशासन, सफलता':pn.vara===1?'मानसिक शांति, रचनात्मकता':pn.vara===2?'साहस, ऊर्जा, प्रयास':pn.vara===3?'बुद्धिमत्ता, व्यापार, संचार':pn.vara===4?'सुंदरता, कला, प्रेम':pn.vara===5?'ज्ञान, धर्म, गुरु':'अनुशासन, कर्म, परिश्रम'}</div>
+          <div><b>⏰ समय का प्रभाव:</b> ${pn.paksha==='शुक्ल'?'चंद्रमा की वृद्धि अवस्था — सभी कार्यों में सफलता की प्रबल संभावना':'चंद्रमा की क्षय अवस्था — समाप्ति और समीक्षा के लिए उचित'}</div>
+        </div>
+      </div>
+      
+      ${m.bad.length>0?`<div style="margin-top:12px;padding:12px;background:#fff5f5;border-radius:6px;border-left:4px solid var(--bad)">
+        <b>🚫 बचने योग्य कारक:</b>
+        <div style="margin-top:8px;color:var(--bad)">
+          ${m.bad.map(b=>`• ${b}`).join('<br>')}
+        </div>
+        <div style="margin-top:8px;font-style:italic">
+          <b>उपाय:</b> ${m.bad.some(b=>b.includes('रिक्ता'))?'रिक्ता तिथि में महत्वपूर्ण निर्णय न लें, सामान्य कार्य ही करें':m.bad.some(b=>b.includes('अमावस्या'))?'अमावस्या में किसी भी शुभ कार्य को टाल दें':m.bad.some(b=>b.includes('योग'))?'अशुभ योग के समय विशेष सावधानी बरतें':'सावधानीपूर्वक कार्य करें और वैकल्पिक तिथि विचारें'}
+        </div>
+      </div>`:''}
+      
+      <div style="margin-top:12px;padding:12px;background:#f0fdf4;border-radius:6px;border-left:4px solid var(--good)">
+        <b>✅ अनुकूल कारक:</b>
+        <div style="margin-top:8px;color:#052e16">
+          ${m.rs.length>0?m.rs.map(r=>`• ${r}`).join('<br>'):'• इस तिथि पर सामान्य रूप से कार्य करना उचित है'}
+        </div>
+        <div style="margin-top:8px;font-style:italic;color:#052e16">
+          <b>सुझाव:</b> ${m.score>=70?'यह उत्तम तिथि है — महत्वपूर्ण कार्यों के लिए अनुकूल':m.score>=55?'यह तिथि सामान्य रूप से अनुकूल है — सावधानी से कार्य करें':'इस तिथि पर विशेष महत्वपूर्ण कार्य टालना ही बेहतर है'}
+        </div>
+      </div>
+    </div>
+  </td></tr>`;}
+function toggleMuhuratExpand(id){const detail=document.getElementById(id+'-detail');const row=document.getElementById(id+'-row');if(detail.style.display==='none'){detail.style.display='table-row';row.style.background='var(--panel2)';}else{detail.style.display='none';row.style.background='';}}
 function pMuhurat(type){if(type==='garbhadhana')return pGarbhadhana();const R=MUHRULES[type];const label=MUHTYPES.find(m=>m[0]===type)[1];
   const base=(typeof REFJD==='number'&&REFJD)?REFJD:(function(){const n=new Date();return julianDay(n.getUTCFullYear(),n.getUTCMonth()+1,n.getUTCDate(),12);})();
   const days=[];for(let d=0;d<45;d++){const jd=base+d;const pn=panchangAt(jd);const m=muhScore(pn,type);days.push({jd,pn,m});}
   const ranked=[...days].sort((a,b)=>b.m.score-a.m.score).slice(0,7).sort((a,b)=>a.jd-b.jd);
   const worst=[...days].sort((a,b)=>a.m.score-b.m.score).slice(0,3);
-  const colf=p=>p>=70?'var(--good)':p<45?'var(--bad)':'var(--gold-soft)';
   const todayPn=days[0];
-  const topRows=ranked.map(d=>`<tr><td><b>${fmtJD(d.jd)}</b> (${VARA_N[d.pn.vara]})</td><td>${d.pn.paksha} ${TITHI_N[d.pn.tIdx]}</td><td>${NAK[d.pn.nak]}</td><td>${YOGA_N[d.pn.yoga]}</td><td style="font-weight:700;color:${colf(d.m.score)}">${d.m.score}% ${stars(d.m.score)}</td></tr>`).join('');
+  const todayRec=muhuratRecommendation(todayPn.m.score,todayPn.m.bad);
+  const todayHoras=horaDetails(todayPn.jd);
+  const goodHorasToday=todayHoras.filter(h=>h.lord===4||h.lord===1||h.lord===5).slice(0,2);
+  const badHorasToday=todayHoras.filter(h=>h.lord===2||h.lord===6).slice(0,2);
+  const expandableRows=ranked.map((d,i)=>expandableDateRow(d,type,i+1)).join('');
   return `<div class="card"><h3 class="sh">${label} — शुभ मुहूर्त</h3>
    <p class="lead">📖 आधार: <b>${R.ref}</b> · अगले 45 दिनों (${fmtJD(base)} से) का पंचांग-स्कैन।</p>
    ${lblk('📜 शास्त्रीय नियम',`${R.note}।<br><span class="tag">शुभ नक्षत्र: ${R.nak.map(n=>NAK[n]).join(', ')} · शुभ वार: ${R.vara.map(v=>VARA_N[v]).join(', ')} · रिक्ता-तिथि (4/9/14), अमावस्या व ${BAD_YOGA.slice(0,4).map(y=>YOGA_N[y]).join('/')}-आदि योग वर्ज्य</span>`)}
-   ${lblk('📅 आज ('+fmtJD(todayPn.jd)+') का पंचांग',`<table class="dt"><tr><td>वार</td><td>${VARA_N[todayPn.pn.vara]}</td></tr><tr><td>तिथि</td><td>${todayPn.pn.paksha} ${TITHI_N[todayPn.pn.tIdx]}</td></tr><tr><td>नक्षत्र</td><td>${NAK[todayPn.pn.nak]}</td></tr><tr><td>योग</td><td>${YOGA_N[todayPn.pn.yoga]}</td></tr><tr><td>${label.split(' ')[1]||''} हेतु</td><td style="font-weight:700;color:${colf(todayPn.m.score)}">${todayPn.m.score}% — ${todayPn.m.score>=70?'शुभ ✓':todayPn.m.score>=45?'मध्यम':'अनुकूल नहीं ✗'}</td></tr></table>${todayPn.m.rs.length?'<p class="tag">✓ '+todayPn.m.rs.join(' · ')+'</p>':''}${todayPn.m.bad.length?'<p class="tag" style="color:var(--bad)">✗ '+todayPn.m.bad.join(' · ')+'</p>':''}`)}
-   ${lblk('🌟 आगामी 45 दिनों की श्रेष्ठ तिथियाँ (Top 7)',`<div style="overflow-x:auto"><table class="dt"><tr><th>तिथि (वार)</th><th>तिथि</th><th>नक्षत्र</th><th>योग</th><th>मुहूर्त-स्कोर</th></tr>${topRows}</table></div>`)}
-   ${lblk('🔴 इनसे बचें',worst.map(d=>`${fmtJD(d.jd)} (${d.m.score}%) — ${d.m.bad[0]||'निम्न पंचांग-बल'}`).join('<br>'))}
+   ${lblk('📅 आज का पंचांग ('+fmtJD(todayPn.jd)+')',`<table class="dt"><tr><th>पंचांग</th><th>मान</th><th>विश्लेषण</th><th>${label.split(' ')[1]||''} हेतु</th></tr>
+    <tr><td>वार</td><td>${VARA_N[todayPn.pn.vara]}</td><td>${todayPn.pn.vara===0?'☀️ सूर्य — राजकीय कार्य':todayPn.pn.vara===1?'🌙 चंद्र — शांति':todayPn.pn.vara===2?'♂️ मंगल — साहस':todayPn.pn.vara===3?'☿️ बुध — व्यापार':todayPn.pn.vara===4?'♀️ शुक्र — विवाह':todayPn.pn.vara===5?'♃ गुरु — धार्मिक':'♄ शनि — श्रम'}</td><td style="font-weight:700;color:${R.vara.includes(todayPn.pn.vara)?'var(--good)':'var(--gold-soft)'}">${R.vara.includes(todayPn.pn.vara)?'✓ शुभ':'—'}</td></tr>
+    <tr><td>तिथि</td><td>${todayPn.pn.paksha} ${TITHI_N[todayPn.pn.tIdx]}</td><td>${todayPn.pn.tIdx===14&&todayPn.pn.paksha==='कृष्ण'?'अमावस्य — अशुभ':todayPn.pn.tIdx===0&&todayPn.pn.paksha==='शुक्ल'?'प्रतिपदा — शुभ आरंभ':RIKTA.includes(todayPn.pn.tIdx)?'रिक्ता — निषिद्ध':'सामान्य'}</td><td style="font-weight:700;color:${R.tithi.includes(todayPn.pn.tIdx)?'var(--good)':RIKTA.includes(todayPn.pn.tIdx)||todayPn.m.bad.some(b=>b.includes('तिथि'))?'var(--bad)':'var(--gold-soft)'}">${R.tithi.includes(todayPn.pn.tIdx)?'✓ शुभ':RIKTA.includes(todayPn.pn.tIdx)||todayPn.m.bad.some(b=>b.includes('तिथि'))?'✗ बचें':'—'}</td></tr>
+    <tr><td>नक्षत्र</td><td>${NAK[todayPn.pn.nak]}</td><td>${R.nak.includes(todayPn.pn.nak)?'शुभ नक्षत्र':'सामान्य नक्षत्र'}</td><td style="font-weight:700;color:${R.nak.includes(todayPn.pn.nak)?'var(--good)':todayPn.m.bad.some(b=>b.includes('नक्षत्र'))?'var(--bad)':'var(--gold-soft)'}">${R.nak.includes(todayPn.pn.nak)?'✓ शुभ':todayPn.m.bad.some(b=>b.includes('नक्षत्र'))?'✗ बचें':'—'}</td></tr>
+    <tr><td>योग</td><td>${YOGA_N[todayPn.pn.yoga]}</td><td>${BAD_YOGA.includes(todayPn.pn.yoga)?'अशुभ योग':'शुभ योग'}</td><td style="font-weight:700;color:${!BAD_YOGA.includes(todayPn.pn.yoga)?'var(--good)':'var(--bad)'}">${!BAD_YOGA.includes(todayPn.pn.yoga)?'✓ शुभ':'✗ बचें'}</td></tr>
+    <tr><td>पक्ष</td><td>${todayPn.pn.paksha}</td><td>${todayPn.pn.paksha==='शुक्ल'?'वर्धमान चंद्र — शुभ':'क्षयशील चंद्र — सामान्य'}</td><td style="font-weight:700;color:${todayPn.pn.paksha==='शुक्ल'?'var(--good)':'var(--gold-soft)'}">${todayPn.pn.paksha==='शुक्ल'?'✓ शुभ':'—'}</td></tr></table>
+    <div style="margin-top:12px"><b>🎯 आज की सिफारिश:</b> <span style="color:${todayRec.color};font-weight:700;font-size:16px">${todayRec.text}</span> — ${todayRec.action}</div>
+    ${todayPn.m.rs.length?'<div style="margin-top:6px"><span style="color:var(--good)">✓ '+todayPn.m.rs.join(' · ')+'</span></div>':''}${todayPn.m.bad.length?'<div style="margin-top:6px"><span style="color:var(--bad)">✗ '+todayPn.m.bad.join(' · ')+'</span></div>':''}`)}
+   ${lblk('⏰ आज की होरा (श्रेष्ठ समय)',`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+     ${goodHorasToday.map(h=>`<div style="background:var(--panel);border:1px solid var(--good);border-radius:8px;padding:8px"><b>${PL[h.lord]} होरा</b><br>${formatTime(h.start)}–${formatTime(h.end)}<br><span style="color:var(--good);font-size:14px">★★★★★ शुभ</span></div>`).join('')}
+     ${badHorasToday.map(h=>`<div style="background:var(--panel);border:1px solid var(--bad);border-radius:8px;padding:8px"><b>${PL[h.lord]} होरा</b><br>${formatTime(h.start)}–${formatTime(h.end)}<br><span style="color:var(--bad);font-size:14px">बचें</span></div>`).join('')}
+   </div><p class="tag">प्रतिदिन 24 होरा — प्रत्येक होरा 1 घंटा। शुक्र/बुध/गुरु होरा शुभ — मंगल/शनि होरा बचें।</p>`)}
+   ${lblk('🌟 आगामी 45 दिनों की श्रेष्ठ तिथियाँ (विस्तृत)',`<div style="overflow-x:auto"><table class="dt"><tr><th>तिथि</th><th>सिफारिश</th><th>स्कोर</th><th>योग / पक्ष</th><th>विस्तार</th></tr>${expandableRows}</table></div><p class="tag">किसी भी पंक्ति पर क्लिक करें — पूर्ण विश्लेषण, होरा, और सटीक समय देखने के लिए।</p>`)}
+   ${lblk('🔴 इन तिथियों से बचें',worst.map(d=>`${fmtJD(d.jd)} (${d.m.score}%) — ${d.m.bad[0]||'निम्न पंचांग-बल'}`).join('<br>'))}
    ${lblk('🧮 स्कोर-विधि',`नक्षत्र-मेल (28) + वार (16) + तिथि (16) + योग (±) + पक्ष (6) + <b>आपके जन्म-चंद्र से ताराबल (±)</b> — कुंडली बनी हो तो वैयक्तिक; रिक्ता/अमावस्या/अशुभ-योग पर कटौती।`)}
    <p class="tag" style="color:var(--bad)">⚠️ यह तिथि-स्तर (दिन) का पंचांग-मुहूर्त है — सूर्योदय-सापेक्ष घटी/होरा, राहुकाल, अभिजित, लग्न-शुद्धि व स्थान-विशेष गणना सम्मिलित नहीं। ${type==='surgery'?'शल्य-चिकित्सा में डॉक्टर द्वारा दी गई तिथि/आपात-स्थिति सर्वोपरि है — मुहूर्त केवल वैकल्पिक-चयन में सहायक। ':''}अंतिम मुहूर्त हेतु स्थानीय पंचांग व योग्य ज्योतिषी से पुष्टि करें।</p></div>`;}
 function showMuhurat(type){curMuh=type;const bar=MUHTYPES.map(m=>`<button class="modebtn ${m[0]===curMuh?'active':''}" style="padding:7px 13px;font-size:13.5px" onclick="showMuhurat('${m[0]}')">${m[1]}</button>`).join('');
@@ -4336,9 +4500,9 @@ function gbInputPanel(){const val=(v)=>v||'';
    <p class="tag">⚕️ यह चिकित्सकीय सलाह नहीं। उर्वर-काल की गणना कैलेंडर-विधि से अनुमानित है (अनियमित चक्र में अविश्वसनीय) — यह गर्भ-निरोध का साधन नहीं। किसी भी प्रजनन-चिंता हेतु स्त्रीरोग-विशेषज्ञ से परामर्श करें।</p></div>`;}
 /* ===== GARBHADHANA v3 — biological cycle + couple charts (English UI) ===== */
 /* ===== GARBHADHANA v3 — biology-first, couple charts, current-cycle dates (English) ===== */
-var GBH={lmp:'',cycle:28,bleed:5,reg:'reg',
-  w:{name:'',dob:'',tob:'12:00',city:'',lat:'',lon:'',tz:5.5},
-  m:{name:'',dob:'',tob:'12:00',city:'',lat:'',lon:'',tz:5.5}};
+var GBH={lmp:'2026-06-23',cycle:30,bleed:5,reg:'reg',
+  w:{name:'Divya',dob:'1994-03-15',tob:'01:50',city:'Alwar, Rajasthan',lat:'27.5530',lon:'76.6346',tz:5.5},
+  m:{name:'Yogesh',dob:'1994-03-05',tob:'20:30',city:'Alwar, Rajasthan',lat:'27.5530',lon:'76.6346',tz:5.5}};
 var GBH_TMP={};
 function withChart(c,fn){const s=(typeof CH!=='undefined')?CH:null;CH=c;try{return fn();}finally{CH=s;}}
 function gbhBuildChart(o){try{
@@ -4353,7 +4517,73 @@ function gbhCityPick(side,val){
   GBH_TMP[side+'.city']=val;
   if(c){GBH_TMP[side+'.lat']=(+c.lat).toFixed(4);GBH_TMP[side+'.lon']=(+c.lon).toFixed(4);if(c.tz!=null)GBH_TMP[side+'.tz']=c.tz;gbhApply();}
 }
-function gbhApply(){for(const k in GBH_TMP){const v=GBH_TMP[k];const p=k.split('.');if(p.length===1)GBH[k]=v;else GBH[p[0]][p[1]]=v;}showMuhurat('garbhadhana');}
+function gbhApply(){for(const k in GBH_TMP){const v=GBH_TMP[k];if(v!==undefined && v!==''){const p=k.split('.');if(p.length===1)GBH[k]=v;else GBH[p[0]][p[1]]=v;}}showMuhurat('garbhadhana');}
+
+// Auto-calculate with default values when page loads
+function gbhAutoCalculate(){
+  // Copy default values from GBH to GBH_TMP
+  GBH_TMP = {
+    lmp: GBH.lmp,
+    cycle: GBH.cycle,
+    bleed: GBH.bleed,
+    reg: GBH.reg,
+    'w.name': GBH.w.name,
+    'w.dob': GBH.w.dob,
+    'w.tob': GBH.w.tob,
+    'w.city': GBH.w.city,
+    'w.lat': GBH.w.lat,
+    'w.lon': GBH.w.lon,
+    'w.tz': GBH.w.tz,
+    'm.name': GBH.m.name,
+    'm.dob': GBH.m.dob,
+    'm.tob': GBH.m.tob,
+    'm.city': GBH.m.city,
+    'm.lat': GBH.m.lat,
+    'm.lon': GBH.m.lon,
+    'm.tz': GBH.m.tz
+  };
+  gbhApply();
+}
+
+// Auto-calculate when Garbhadhana tab is opened
+const originalShowMuhurat = showMuhurat;
+showMuhurat = function(type) {
+  if(type === 'garbhadhana' && (!GBH.lmp && !GBH.w.dob && !GBH.m.dob)) {
+    gbhAutoCalculate();
+  }
+  return originalShowMuhurat(type);
+};
+
+// Function to update date and refresh analysis
+function gbhUpdateDate() {
+  const dateInput = document.getElementById('gbhDateSelect');
+  if(dateInput) {
+    const selectedDate = new Date(dateInput.value + 'T12:00:00');
+    const jd = julianDay(selectedDate.getFullYear(), selectedDate.getMonth() + 1, selectedDate.getDate(), 12);
+    REFJD = jd;
+    showMuhurat('garbhadhana');
+  }
+}
+
+// Function to calculate best muhurat timing for a given day
+function gbhBestMuhuratTime(dayData) {
+  if(!dayData || dayData.total < 45) {
+    return '<span style="color:var(--bad)">Not recommended</span>';
+  }
+  
+  const horas = horaDetails(dayData.jd);
+  const goodHoras = horas.filter(h => [1, 4, 5].includes(h.lord)); // Jupiter, Venus, Mercury
+  
+  if(goodHoras.length === 0) {
+    return '<span style="color:var(--gold-soft)">No auspicious horas today</span>';
+  }
+  
+  const bestHora = goodHoras[0];
+  const timeStr = `${formatTime(bestHora.start)} - ${formatTime(bestHora.end)}`;
+  const planetName = PL[bestHora.lord];
+  
+  return `<span style="color:var(--good)"><b>${timeStr}</b> (${planetName} Hora)</span>`;
+}
 function gbhCopyMain(){try{const g=id=>{const e=document.getElementById(id);return e?e.value:'';};
   ['w','m'].forEach(s=>{GBH_TMP[s+'.lat']=GBH[s].lat||g('lat');GBH_TMP[s+'.lon']=GBH[s].lon||g('lon');GBH_TMP[s+'.tz']=GBH[s].tz||g('tz');GBH_TMP[s+'.city']=GBH[s].city||g('citySearch');});
   gbhApply();}catch(e){}}
@@ -4394,21 +4624,21 @@ function gbhBio(jd){const ci=gbhCycleInfo();
   return{p,max:30,label,phase,ok:p>=17,day,ov};}
 function gbhInputForm(){
   const f=(id,lab,type,val,extra)=>`<div style="min-width:145px"><label style="display:block;font-size:12px;color:var(--muted);margin-bottom:3px">${lab}</label><input ${extra||''} type="${type}" value="${val||''}" oninput="GBH_TMP['${id}']=this.value" style="width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px;font-family:var(--dev)"></div>`;
-  const city=(side)=>`<div style="min-width:190px"><label style="display:block;font-size:12px;color:var(--muted);margin-bottom:3px">Search City</label><input list="gbhCityList" value="${GBH[side].city||''}" placeholder="e.g. Alwar, Jaipur…" onchange="gbhCityPick('${side}',this.value)" style="width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px;font-family:var(--dev)"></div>`;
+  const city=(side,cityVal)=>`<div style="min-width:190px"><label style="display:block;font-size:12px;color:var(--muted);margin-bottom:3px">Search City</label><input list="gbhCityList" value="${cityVal||''}" placeholder="e.g. Alwar, Jaipur…" onchange="gbhCityPick('${side}',this.value)" style="width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px;font-family:var(--dev)"></div>`;
   const dl=`<datalist id="gbhCityList">${LOCAL_CITIES.map(c=>`<option value="${c.name}${c.admin?', '+c.admin:''}"></option>`).join('')}</datalist>`;
   const person=(side,icon,title)=>`<div class="lhd" style="margin-top:14px">${icon} ${title} — Birth Details</div>
    <div style="display:flex;gap:11px;flex-wrap:wrap">
-    ${f(side+'.name','Name','text',GBH[side].name)}${f(side+'.dob','Birth Date','date',GBH[side].dob)}${f(side+'.tob','Birth Time','time',GBH[side].tob)}
-    ${city(side)}
-    ${f(side+'.lat','Latitude °N','text',GBH[side].lat)}${f(side+'.lon','Longitude °E','text',GBH[side].lon)}${f(side+'.tz','TZ','text',GBH[side].tz)}
+    ${f(side+'.name','Name','text',GBH_TMP[side+'.name']||'')}${f(side+'.dob','Birth Date','date',GBH_TMP[side+'.dob']||'')}${f(side+'.tob','Birth Time','time',GBH_TMP[side+'.tob']||'')}
+    ${city(side,GBH_TMP[side+'.city']||'')}
+    ${f(side+'.lat','Latitude °N','text',GBH_TMP[side+'.lat']||'')}${f(side+'.lon','Longitude °E','text',GBH_TMP[side+'.lon']||'')}${f(side+'.tz','Time Zone (TZ)','text',GBH_TMP[side+'.tz']||'')}
    </div>`;
-  return `${dl}<div class="lblock"><div class="lhd">📝 Step 1 — Woman's Menstrual Cycle (most important)</div>
+  return `${dl}<div class="lblock"><div class="lhd">📝 Step 1 — Woman's Menstrual Cycle (Most Important)</div>
    <div style="display:flex;gap:11px;flex-wrap:wrap;align-items:flex-end">
-    ${f('lmp','Last Menstrual Period (LMP)','date',GBH.lmp)}
-    ${f('cycle','Cycle Length (days)','number',GBH.cycle,'min=21 max=40')}
-    ${f('bleed','Bleeding (days)','number',GBH.bleed,'min=2 max=9')}
+    ${f('lmp','Last Menstrual Period (LMP)','date',GBH_TMP.lmp||'')}
+    ${f('cycle','Cycle Length (days)','number',GBH_TMP.cycle||'','min=21 max=40')}
+    ${f('bleed','Bleeding (days)','number',GBH_TMP.bleed||'','min=2 max=9')}
     <div style="min-width:145px"><label style="display:block;font-size:12px;color:var(--muted);margin-bottom:3px">Cycle Regular?</label>
-     <select onchange="GBH_TMP['reg']=this.value" style="width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px"><option value="reg"${GBH.reg==='reg'?' selected':''}>Regular</option><option value="irr"${GBH.reg==='irr'?' selected':''}>Irregular</option></select></div>
+     <select onchange="GBH_TMP['reg']=this.value" style="width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px"><option value="reg" ${(GBH_TMP.reg||'reg')==='reg'?'selected':''}>Regular</option><option value="irr" ${(GBH_TMP.reg||'reg')==='irr'?'selected':''}>Irregular</option></select></div>
    </div>
    ${person('w','👩',"Woman (Mother)")}
    ${person('m','👨',"Man (Father)")}
@@ -4420,7 +4650,7 @@ function gbhInputForm(){
 function pGarbhadhana(){
   const colf=p=>p>=70?'var(--good)':p<45?'var(--bad)':'var(--gold-soft)';
   const bar=(p,mx,c)=>`<div style="background:var(--panel2);border-radius:6px;height:11px;min-width:90px;overflow:hidden"><div style="width:${Math.min(100,Math.max(3,p/mx*100))}%;height:100%;background:${c||colf(p/mx*100)}"></div></div>`;
-  const base=(typeof REFJD==='number'&&REFJD)?REFJD:(function(){const n=new Date();return julianDay(n.getUTCFullYear(),n.getUTCMonth()+1,n.getUTCDate(),12);})();
+  const base=(typeof REFJD==='number'&&REFJD)?REFJD:(function(){const n=new Date();return julianDay(n.getFullYear(), n.getMonth()+1, n.getDate(), 12);})();
   const CW=gbhBuildChart(GBH.w),CM=gbhBuildChart(GBH.m);
   const pw=CW?gbhProgeny(CW,true):null, pm=CM?gbhProgeny(CM,false):null;
   const ci=gbhCycleInfo();
@@ -4453,7 +4683,19 @@ function pGarbhadhana(){
   const rec=t=>t>=75?['✅ Highly Recommended','var(--good)']:t>=60?['🟢 Recommended','var(--good)']:t>=45?['🟡 Moderate','var(--gold-soft)']:['🔴 Not Recommended','var(--bad)'];
   const R=rec(today.total);
   const pRows=(p,who)=>p?`<table class="dt"><tr><td>Ascendant</td><td>${p.lagna}</td></tr><tr><td>5th House strength</td><td style="color:${colf(p.h5)}">${p.h5}%</td></tr><tr><td>5th Lord (${PL[p.l5]})</td><td style="color:${colf(p.l5s)}">${p.l5s}%</td></tr><tr><td>Jupiter (progeny karaka)</td><td style="color:${colf(p.jup)}">${p.jup}%</td></tr><tr><td>Saptamsa D7</td><td style="color:${colf(p.d7)}">${p.d7}%</td></tr><tr><td>Putra-karaka (${PL[p.PK]})</td><td style="color:${colf(p.pkS)}">${p.pkS}%</td></tr><tr><td>Running Dasha</td><td>${p.dasha}</td></tr><tr><td><b>Progeny Strength</b></td><td><b style="color:${colf(p.score)}">${p.score}%</b></td></tr></table>${p.mal.length?`<p class="tag" style="color:var(--bad)">⚠️ Malefics in 5th: ${p.mal.map(i=>PL[i]).join(', ')} — patience / remedies</p>`:''}`:`<p class="tag">Enter ${who}'s birth details above to see the chart analysis.</p>`;
-  const topRows=top.map(d=>`<tr><td><b>${fmtJD(d.jd)}</b></td><td>${VARA_N[d.pn.vara]}</td><td>${d.pn.paksha} ${TITHI_N[d.pn.tIdx]}</td><td>${NAK[d.pn.nak]}</td><td>${d.bio.label} (day ${d.bio.day})</td><td style="font-weight:700;color:${colf(d.total)}">${d.total}% ${stars(d.total)}</td></tr>`).join('');
+  const topRows=top.map((d,i)=>{
+  // Create compatible object for expandableDateRow
+  const compatibleData = {
+    jd: d.jd,
+    pn: d.pn,
+    m: {
+      score: d.total,
+      rs: d.total >= 70 ? ['उच्च जैविक संगतता', 'अनुकूल पंचांग'] : d.total >= 55 ? ['मध्यम जैविक संगतता'] : [],
+      bad: d.total < 45 ? ['कम जैविक संगतता'] : []
+    }
+  };
+  return expandableDateRow(compatibleData,'garbhadhana',i+1);
+}).join('');
   const wb=CW?gbhBala(CW,today.pn):null, mb=CM?gbhBala(CM,today.pn):null;
   const REFS=[['First four nights prohibited','Dharma Sindhu · Nirnaya Sindhu'],['Menstruation period fully prohibited','Muhurta Chintamani'],['Avoid Amavasya / Krishna Chaturdashi / Rikta tithi','Muhurta Chintamani'],['Rohini, Pushya, Hasta, Shravana, Uttara — excellent nakshatras','Muhurta Chintamani · Nirnaya Sindhu'],['5th house, Jupiter & Saptamsa D7 govern progeny','Brihat Parashara Hora Shastra'],['Tara Bala & Chandra Bala required','Narada Samhita (Muhurta section)'],['Garbhadhana = first of the sixteen samskaras','Garbha Upanishad · Dharma Sindhu']];
   const bd=[['🧬 Biological (fertile window)',today.bio.p,30],['📅 Panchanga',today.pan,20],['🌙 Moon strength',today.moon,15],['👩 Woman chart',today.fem,10],['👨 Man chart',today.mal,10],['🔭 Transit',today.tr,10],['✨ Special yogas',today.yg,5]];
@@ -4461,7 +4703,7 @@ function pGarbhadhana(){
    <p class="lead">First the <b>woman's cycle</b> (when conception is biologically possible), then <b>scriptural prohibitions</b>, then <b>Panchanga · couple's charts · transits</b> — dates are ranked in that order. ⚕️ <b>This is not medical advice.</b></p>
    ${gbhInputForm()}
    ${!haveAll?`<div class="lblock" style="border-color:var(--gold-soft)"><div class="lhd">ℹ️ For the full analysis</div>Fill in <b>LMP + both birth details</b> above and press "🔄 Calculate". Currently missing: ${[!GBH.lmp?'cycle data':'',!CW?"woman's chart":'',!CM?"man's chart":''].filter(Boolean).join(', ')} — those components score 0.</div>`:''}
-   ${lblk('📊 Summary — today ('+fmtJD(today.jd)+')',`<table class="dt"><tr><td>Overall score</td><td><b style="font-size:22px;color:${colf(today.total)}">${today.total}/100</b> ${stars(today.total)}</td></tr><tr><td>Recommendation</td><td><b style="color:${R[1]}">${R[0]}</b></td></tr><tr><td>Biological phase</td><td>${today.bio.phase} — ${today.bio.label}${today.bio.day?' (cycle day '+today.bio.day+')':''}</td></tr><tr><td>Best date this cycle</td><td>${top[0]?'<b>'+fmtJD(top[0].jd)+'</b> ('+top[0].total+'%)':'—'}</td></tr><tr><td>Reference</td><td>Muhurta Chintamani · BPHS · Dharma/Nirnaya Sindhu</td></tr></table>`)}
+   ${lblk('📊 Summary — <input type="date" id="gbhDateSelect" value="'+(function(){const d=jdToDate(today.jd);return d.y+'-'+String(d.m).padStart(2,'0')+'-'+String(d.d).padStart(2,'0');})()+'" onchange="gbhUpdateDate()" style="padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--panel2);color:var(--ink)">',`<table class="dt"><tr><td>Overall score</td><td><b style="font-size:22px;color:${colf(today.total)}">${today.total}/100</b> ${stars(today.total)}</td></tr><tr><td>Recommendation</td><td><b style="color:${R[1]}">${R[0]}</b></td></tr><tr><td>Biological phase</td><td>${today.bio.phase} — ${today.bio.label}${today.bio.day?' (cycle day '+today.bio.day+')':''}</td></tr><tr><td>🎯 Best muhurat timing</td><td>${gbhBestMuhuratTime(today)}</td></tr><tr><td>Best date this cycle</td><td>${top[0]?'<b>'+fmtJD(top[0].jd)+'</b> ('+top[0].total+'%)':'—'}</td></tr><tr><td>Reference</td><td>Muhurta Chintamani · BPHS · Dharma/Nirnaya Sindhu</td></tr></table>`)}
    ${lblk('🧮 How today\'s score is built (fully transparent)',`<table class="dt"><tr><th>Component</th><th>Points</th><th>Max</th><th></th></tr>${bd.map(x=>`<tr><td>${x[0]}</td><td style="font-weight:700;color:${colf(x[1]/x[2]*100)}">${x[1]}</td><td>${x[2]}</td><td>${bar(x[1],x[2])}</td></tr>`).join('')}<tr style="background:var(--panel2)"><td><b>Total</b></td><td colspan=3><b style="color:${colf(today.total)}">${today.total}/100</b></td></tr></table>`)}
    ${lblk('🧬 Step 1 — Biological fertile window',ci?`<table class="dt"><tr><td>Cycle day (today)</td><td>${today.bio.day}</td></tr><tr><td>Estimated ovulation</td><td>around cycle day ${ci.ov}</td></tr><tr><td>Fertile window</td><td>cycle day ${ci.ov-5} – ${ci.ov+1}</td></tr><tr><td>Prohibited</td><td>days 1–${Math.max(4,ci.bleed)} (menstruation + first four nights)</td></tr><tr><td>Current cycle ends</td><td>${fmtJD(ci.endJD)}</td></tr><tr><td>Today's status</td><td style="color:${colf(today.bio.p/30*100)}"><b>${today.bio.label}</b> — ${today.bio.p}/30 points</td></tr></table><p class="tag">${GBH.reg==='irr'?'⚠️ Irregular cycle — ovulation estimate is unreliable; an ovulation kit or doctor\'s guidance is necessary.':'Calendar-method estimate for a regular cycle. An ovulation kit / doctor is more accurate.'}</p>`:'<p class="tag">Enter the LMP — the fertile window, ovulation and prohibited days will then be computed. (This is the foundation of this module.)</p>')}
    ${lblk('📜 Step 2 — Scriptural prohibitions (auto-applied)',`<ul class="lp-strong"><li>✓ Menstruation period — fully avoided</li><li>✓ First four nights — avoided (Dharma Sindhu)</li><li>✓ Amavasya · Krishna Chaturdashi · Rikta tithi (4/9/14) · Ekadashi</li><li>✓ Inauspicious yogas: Vishkumbha, Atiganda, Shula, Ganda, Vyaghata, Vajra, Vyatipata, Parigha, Vaidhriti</li><li>✓ Avoided nakshatras: Bharani, Ardra, Ashlesha, Magha, P.Phalguni, Mula, Jyeshtha</li><li>✓ Cruel weekdays (Tue/Sat/Sun) reduce the score</li></ul>`)}
@@ -4469,7 +4711,7 @@ function pGarbhadhana(){
    ${lblk('👩 Step 4 — Woman\'s (Mother\'s) Chart',(CW?`<div style="display:flex;gap:16px;flex-wrap:wrap"><div style="flex:1;min-width:230px">${gbhChartSVG(CW)}</div><div style="flex:1;min-width:250px">${pRows(pw,'the woman')}${wb?`<p class="tag">Tara Bala: <b style="color:${wb.taraGood?'var(--good)':'var(--bad)'}">${wb.taraName}</b> · Chandra Bala: ${wb.cb}th from natal Moon ${wb.cbGood?'✓':'✗'}</p>`:''}</div></div>`:pRows(null,'the woman')))}
    ${lblk('👨 Step 5 — Man\'s (Father\'s) Chart',(CM?`<div style="display:flex;gap:16px;flex-wrap:wrap"><div style="flex:1;min-width:230px">${gbhChartSVG(CM)}</div><div style="flex:1;min-width:250px">${pRows(pm,'the man')}${mb?`<p class="tag">Tara Bala: <b style="color:${mb.taraGood?'var(--good)':'var(--bad)'}">${mb.taraName}</b> · Chandra Bala: ${mb.cb}th from natal Moon ${mb.cbGood?'✓':'✗'}</p>`:''}</div></div>`:pRows(null,'the man')))}
    ${(pw&&pm)?lblk('🤝 Step 6 — Couple\'s Combined Progeny Strength',`<table class="dt"><tr><td>Woman</td><td style="color:${colf(pw.score)}">${pw.score}%</td><td>${bar(pw.score,100)}</td></tr><tr><td>Man</td><td style="color:${colf(pm.score)}">${pm.score}%</td><td>${bar(pm.score,100)}</td></tr><tr style="background:var(--panel2)"><td><b>Combined average</b></td><td colspan=2><b style="color:${colf((pw.score+pm.score)/2)}">${Math.round((pw.score+pm.score)/2)}%</b></td></tr></table><p class="tag">Jupiter of both: ${(pw.jup>=55&&pm.jup>=55)?'<span style="color:var(--good)">strong — progeny yoga supported</span>':'moderate'} · 5th house of both: ${(pw.h5>=55&&pm.h5>=55)?'<span style="color:var(--good)">strong</span>':'moderate'}</p>`):''}
-   ${lblk('🌟 Step 7 — Best dates in the CURRENT cycle',eligible.length?`<div style="overflow-x:auto"><table class="dt"><tr><th>Date</th><th>Weekday</th><th>Tithi</th><th>Nakshatra</th><th>Biological phase</th><th>Overall</th></tr>${topRows}</table></div><p class="tag">${cycNote} Only days outside menstruation / first-four-nights are listed. ⭐ more = better.</p>`:`<p class="tag">${ci?'No biologically eligible days remain in this cycle — the next cycle begins on '+fmtJD(ci.endJD+1)+'. Update the LMP then.':'Enter the LMP to rank eligible dates.'}</p>`)}
+   ${lblk('🌟 Step 7 — Best dates in the CURRENT cycle',eligible.length?`<div style="overflow-x:auto"><table class="dt"><tr><th>तिथि</th><th>सिफारिश</th><th>स्कोर</th><th>योग / पक्ष</th><th>विस्तार</th></tr>${topRows}</table></div><p class="tag">${cycNote} Only days outside menstruation / first-four-nights are listed. ⭐ more = better.</p>`:`<p class="tag">${ci?'No biologically eligible days remain in this cycle — the next cycle begins on '+fmtJD(ci.endJD+1)+'. Update the LMP then.':'Enter the LMP to rank eligible dates.'}</p>`)}
    ${lblk('📚 Classical References',`<div style="overflow-x:auto"><table class="dt"><tr><th>Rule</th><th>Source</th></tr>${REFS.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td></tr>`).join('')}</table></div>`)}
    ${lblk('🕉 In simple words — what is Garbhadhana?',`<b>What:</b> The first of the sixteen samskaras — the ritual of conscious intent before conception.<br><b>Why:</b> Tradition holds that the state of mind and the planetary environment at conception influence the child's nature and temperament.<br><b>Modern meaning:</b> Primarily a samskara of <b>preparation, calm, health and positive resolve</b>.<br><b>How to use:</b> (1) Enter LMP + cycle → fertile window. (2) Enter both birth details → chart strengths. (3) See "Best dates in the current cycle". (4) Decide with your doctor and your own convenience.`)}
    <p class="tag" style="color:var(--bad)">⚠️ <b>Important:</b> This is <b>not medical advice</b>. The fertile window is a calendar estimate (actual ovulation may differ, especially with irregular cycles). For conception, reproductive health, PCOS or any difficulty, <b>consult a qualified doctor / gynaecologist</b>. Astrology cannot guarantee conception. <b>🚫 This tool provides no sex-selection guidance whatsoever — sex determination and selection are illegal in India under the PCPNDT Act.</b> This is a date-level Panchanga muhurat; Rahu Kalam / Abhijit / Hora / Lagna-shuddhi are not included.</p></div>`;}
