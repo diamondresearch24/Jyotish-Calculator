@@ -2630,7 +2630,7 @@ function pKP(sub){
 /* ============ PREDICTION ENGINES — CAREER v2 (weighted + contradiction) ============ */
 let curEngine='career',curCareer='verdict',curPersonality='verdict',curMarriage='verdict',curWealth='verdict',curHealth='verdict',curChild='verdict',curForeign='verdict',curEducation='verdict',curSpirit='verdict',curProperty='verdict';
 const ENGINES=[['career','💼 Career'],['personality','🧠 Personality'],['marriage','💍 Marriage'],['wealth','💰 Wealth'],['child','👶 Child'],['foreign','✈️ Foreign'],['health','🩺 Health'],['education','📖 Education'],['spirit','🧘 Spirituality'],['property','🏡 Property']];
-const CELIST=[['verdict','Final Career Verdict'],['scorecard','Weighted Scorecard'],['houses','भाव विश्लेषण'],['planets','ग्रह विश्लेषण'],['yogas','करियर योग'],['charts','Divisional Charts'],['nakshatra','नक्षत्र विश्लेषण'],['argala','Argala'],['arudha','Arudha (AL+A10)'],['jaimini','Jaimini'],['strength','ग्रह शक्ति'],['dasha','दशा Engine'],['transit','गोचर Engine'],['kp','KP Timing'],['timeline','Career Timeline'],['risks','जोखिम विश्लेषण'],['contradiction','Contradiction Engine'],['why','WHY यह भविष्यवाणी?'],['verify','Astrologer Verification']];
+const CELIST=[['verdict','Final Career Verdict'],['explanation','📖 Approach Explained'],['scorecard','Weighted Scorecard'],['houses','भाव विश्लेषण'],['planets','ग्रह विश्लेषण'],['yogas','करियर योग'],['charts','Divisional Charts'],['nakshatra','नक्षत्र विश्लेषण'],['argala','Argala'],['arudha','Arudha (AL+A10)'],['jaimini','Jaimini'],['strength','ग्रह शक्ति'],['dasha','दशा Engine'],['transit','गोचर Engine'],['kp','KP Timing'],['timeline','Career Timeline'],['risks','जोखिम विश्लेषण'],['contradiction','Contradiction Engine'],['why','WHY यह भविष्यवाणी?'],['verify','Astrologer Verification']];
 function careerData(){const l10=lordOfHouse(10),K=charaKarakas(),AK=K[0][0],AmK=K[1][0],ascS=signOf(CH.asc);
   const hStr=H=>{const occ=occupants(H);const o=occ.length?Math.round(occ.reduce((a,i)=>a+finalStrength(i),0)/occ.length):pscore(lordOfHouse(H));return Math.round((pscore(lordOfHouse(H))+o)/2);};
   const d10=vScore(l10,'D10'),d9=vScore(l10,'D9'),d60=vScore(l10,'D60');
@@ -2707,8 +2707,9 @@ function careerData(){const l10=lordOfHouse(10),K=charaKarakas(),AK=K[0][0],AmK=
   const indTop=indScored.slice(0,20),indBottom=indScored.slice(-10).reverse();
   const strongP=[];for(let i=0;i<9;i++)strongP.push([i,finalStrength(i)]);strongP.sort((a,b)=>b[1]-a[1]);
   return{l10,AK,AmK,hStr,d10,d9,d60,rj,vip,yogaRaw,A10,AL,AG,jRelOK,jRaw,sav10,sav11,sav6,E,trig,mdSup,cur,satT,jupT,tRaw,mnH,W,wFinal,ADJ,adj,final,nature,best,d1Raw,shRaw,nkL,nkRaw,indTop,indBottom,indScored,strongP};}
-function engineTabsHTML(){return '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">'+
-  ENGINES.map(e=>`<button class="modebtn ${curEngine===e[0]?'active':''}" style="padding:8px 16px" onclick="showEngineTab('${e[0]}')">${e[1]}</button>`).join('')+'</div>';}
+function engineTabsHTML(){return '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center">'+
+  ENGINES.map(e=>`<button class="modebtn ${curEngine===e[0]?'active':''}" style="padding:8px 16px" onclick="showEngineTab('${e[0]}')">${e[1]}</button>`).join('')+
+  (curEngine==='career'?'<button class="modebtn" style="padding:8px 16px;margin-left:auto;background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#1a1030;border-color:var(--gold);font-weight:700" onclick="downloadCareerPDF()">⬇️ PDF डाउनलोड करें</button>':'')+'</div>';}
 function showEngineTab(eng){curEngine=eng;RERENDER=function(){showEngineTab(eng);};buildNavEngine();if(eng==='personality')showPersonality(curPersonality||'verdict');else if(eng==='marriage')showMarriage(curMarriage||'verdict');else if(eng==='wealth')showWealth(curWealth||'verdict');else if(eng==='health')showHealth(curHealth||'verdict');else if(eng==='child')showChild(curChild||'verdict');else if(eng==='foreign')showForeign(curForeign||'verdict');else if(eng==='education')showEducation(curEducation||'verdict');else if(eng==='spirit')showSpirit(curSpirit||'verdict');else if(eng==='property')showProperty(curProperty||'verdict');else showCareer(curCareer||'verdict');}
 function buildNavEngine(){if(curEngine==='property'){document.getElementById('nav').innerHTML='<div class="grp">🏡 PROPERTY ENGINE — संपत्ति बहु-स्तर संगम</div>'+
   PRLIST.map(s=>`<button id="prnav-${s[0]}" onclick="showProperty('${s[0]}')" class="${curProperty===s[0]?'active':''}">▸ ${s[1]}</button>`).join('');return;}
@@ -2816,6 +2817,167 @@ function pCareer(sub){const C=careerData();const ascS=signOf(CH.asc);
           `<p class="tag">तर्क: उप-दशा-स्वामी का बल + धन/लाभ/पंचम-भाव (2·5·11) से जुड़ाव − जोखिम-भाव (8·12) से गणना। ⚠️ यह शैक्षिक अनुमान है — निवेश हेतु SEBI-पंजीकृत सलाहकार व अपनी जोखिम-क्षमता देखें।`);})()+
       microAreaBlock('करियर',[10,6,2,11],[0,6])+
       lblk('🔍 Auditable','हर % का प्रमाण बाएँ nav में — Weighted Scorecard से Astrologer Verification तक।'));}
+  case 'explanation':{
+    const flowChart=`
+<div style="background:var(--panel2);border-radius:12px;padding:20px;margin:16px 0;overflow-x:auto">
+  <div style="text-align:center;font-weight:700;font-size:18px;margin-bottom:20px;color:var(--gold)">🔄 Career Prediction Flowchart / करियर भविष्यवाणी प्रवाह-चित्र</div>
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+    <div style="background:linear-gradient(135deg,#4a1942,#2d1b4e);padding:14px 28px;border-radius:10px;text-align:center;border:2px solid var(--gold)">
+      <b style="font-size:16px">📥 INPUT: जन्म विवरण</b><br><span style="font-size:13px;color:var(--muted)">जन्म तिथि · समय · स्थान</span>
+    </div>
+    <div style="font-size:24px;color:var(--gold)">⬇️</div>
+    <div style="background:var(--panel);padding:14px 28px;border-radius:10px;text-align:center;border:1px solid var(--line)">
+      <b>🧮 कुंडली गणना</b><br><span style="font-size:13px;color:var(--muted)">ग्रह स्थिति · लग्न · भाव · वर्ग</span>
+    </div>
+    <div style="font-size:24px;color:var(--gold)">⬇️</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <div style="background:#1a3a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>D1</b><br><span style="font-size:11px">मूल कुंडली</span></div>
+      <div style="background:#1a3a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>D10</b><br><span style="font-size:11px">दशांश</span></div>
+      <div style="background:#1a3a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>योग</b><br><span style="font-size:11px">राज/विपरीत</span></div>
+      <div style="background:#1a3a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>दशा</b><br><span style="font-size:11px">समय-चक्र</span></div>
+    </div>
+    <div style="font-size:20px;color:var(--gold)">+ + + +</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <div style="background:#2a2a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>षड्बल</b><br><span style="font-size:11px">6-बल प्रणाली</span></div>
+      <div style="background:#2a2a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>नक्षत्र</b><br><span style="font-size:11px">तारा विश्लेषण</span></div>
+      <div style="background:#2a2a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>Jaimini</b><br><span style="font-size:11px">कारक-पद्धति</span></div>
+      <div style="background:#2a2a1a;padding:10px 16px;border-radius:8px;text-align:center;min-width:100px"><b>KP</b><br><span style="font-size:11px">Sub Lord</span></div>
+    </div>
+    <div style="font-size:24px;color:var(--gold)">⬇️</div>
+    <div style="background:#3a2a1a;padding:14px 28px;border-radius:10px;text-align:center;border:1px solid var(--gold-soft)">
+      <b>⚖️ Weighted Scoring (भारित अंकन)</b><br><span style="font-size:13px;color:var(--muted)">हर स्तर × उसका भार = अंक</span>
+    </div>
+    <div style="font-size:24px;color:var(--gold)">⬇️</div>
+    <div style="background:#2a1a2a;padding:14px 28px;border-radius:10px;text-align:center;border:1px solid var(--bad)">
+      <b>🔄 Contradiction Check</b><br><span style="font-size:13px;color:var(--muted)">विरोधी संकेतों का समायोजन</span>
+    </div>
+    <div style="font-size:24px;color:var(--gold)">⬇️</div>
+    <div style="background:linear-gradient(135deg,#1a4a2a,#2a5a3a);padding:16px 32px;border-radius:10px;text-align:center;border:2px solid var(--good)">
+      <b style="font-size:18px">📊 FINAL VERDICT</b><br><span style="font-size:14px">Career Potential: <b style="color:var(--gold)">${C.final}%</b></span>
+    </div>
+  </div>
+</div>`;
+    return card('📖 Career Prediction Approach — विस्तृत व्याख्या','यह Engine कैसे काम करती है? — सामान्य भाषा में समझें।',
+      tlay('यह पृष्ठ बताता है कि हम आपके करियर की भविष्यवाणी कैसे करते हैं — बिना किसी जटिल शब्दावली के, सरल भाषा में। कोई भी व्यक्ति इसे समझ सकता है।')+
+      flowChart+
+      lblk('🎯 मूल अवधारणा — "करियर" क्या देखते हैं?',
+        `<b>सोचिए:</b> जैसे एक डॉक्टर आपकी सेहत जानने के लिए कई जाँचें करता है (BP, शुगर, X-ray, आदि), वैसे ही ज्योतिष में करियर जानने के लिए कुंडली की कई "परतें" देखी जाती हैं।<br><br>`+
+        `<b>करियर की 3 बड़ी बातें:</b><br>`+
+        `<span style="color:var(--good)">1️⃣ <b>क्या होगा?</b></span> — नौकरी या व्यवसाय? किस क्षेत्र में? (IT, चिकित्सा, कानून, कला...)<br>`+
+        `<span style="color:var(--gold-soft)">2️⃣ <b>कितना होगा?</b></span> — सफलता का स्तर कैसा? (उच्च पद, मध्यम, संघर्ष)<br>`+
+        `<span style="color:var(--bad)">3️⃣ <b>कब होगा?</b></span> — किस उम्र में उन्नति? किस साल में अवसर?`)+
+      lblk('📊 Step 1: कुंडली बनाना',
+        `<b>आप क्या देते हैं:</b> जन्म तिथि, समय, स्थान।<br><br>`+
+        `<b>हम क्या करते हैं:</b> उस क्षण आकाश में ग्रह कहाँ थे — यह गणित से निकालते हैं। फिर 12 "भावों" (घरों) में बाँटते हैं। हर भाव जीवन के एक पहलू से जुड़ा है:<br>`+
+        `• <b>10वाँ भाव</b> = पेशा, पद, यश<br>`+
+        `• <b>6ठा भाव</b> = नौकरी, सेवा, प्रतिस्पर्धा<br>`+
+        `• <b>2रा भाव</b> = आय, संचय<br>`+
+        `• <b>11वाँ भाव</b> = लाभ, इच्छापूर्ति<br><br>`+
+        `<span class="tag">📌 जैसे शरीर के अंग अलग-अलग काम करते हैं, वैसे ही 12 भाव जीवन के 12 पहलू दर्शाते हैं।</span><br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 संदर्भ ग्रंथ:</b><br>• <b>BPHS</b> अध्याय 4 — भाव-विवेचन (12 भावों का स्वरूप)<br>• <b>BPHS</b> अध्याय 11-12 — भावेश-फल<br>• <b>बृहत् जातक</b> — ग्रह-स्थिति गणना</div>`)+
+      lblk('🔬 Step 2: 16 स्तरों से जाँच (Multi-Layer Analysis)',
+        `<b>क्यों 16 स्तर?</b> एक अच्छा ज्योतिषी सिर्फ़ एक चीज़ देखकर निर्णय नहीं करता — वह कई कोणों से पुष्टि करता है। हम भी यही करते हैं:<br><br>`+
+        `<table class="dt" style="font-size:13px"><tr><th>#</th><th>स्तर</th><th>क्या देखता है?</th><th>उदाहरण</th><th>📖 संदर्भ</th></tr>`+
+        `<tr><td>1</td><td><b>D1 भाव-तंत्र</b></td><td>मूल कुंडली में 10/6/2/11वें भाव कैसे हैं</td><td>10वें में गुरु = उच्च पद की संभावना</td><td>BPHS अ.11-12</td></tr>`+
+        `<tr><td>2</td><td><b>D10 दशांश</b></td><td>करियर की "ज़ूम-इन" कुंडली</td><td>D10 में शनि उच्च = स्थिर करियर</td><td>BPHS अ.6-7</td></tr>`+
+        `<tr><td>3</td><td><b>योग</b></td><td>विशेष ग्रह-संयोग (राजयोग, धनयोग)</td><td>केन्द्र-त्रिकोण योग = बड़ी सफलता</td><td>BPHS अ.39-40, सारावली</td></tr>`+
+        `<tr><td>4</td><td><b>दशा</b></td><td>जीवन की "टाइमलाइन" — कब क्या</td><td>शनि दशा में स्थिरता, सूर्य में पद</td><td>BPHS अ.46-49</td></tr>`+
+        `<tr><td>5</td><td><b>षड्बल</b></td><td>ग्रहों की 6 प्रकार की शक्ति</td><td>दशमेश बली = करियर प्रबल</td><td>BPHS अ.27</td></tr>`+
+        `<tr><td>6</td><td><b>नक्षत्र</b></td><td>27 तारा-समूहों का प्रभाव</td><td>मघा नक्षत्र = नेतृत्व-गुण</td><td>तैत्तिरीय संहिता</td></tr>`+
+        `<tr><td>7</td><td><b>Jaimini</b></td><td>एक अलग प्राचीन पद्धति</td><td>अमात्यकारक = करियर-निर्धारक ग्रह</td><td>जैमिनी सूत्र</td></tr>`+
+        `<tr><td>8</td><td><b>KP</b></td><td>सूक्ष्म समय-निर्धारण</td><td>10वें cusp का Sub Lord = "हाँ/ना"</td><td>कृष्णमूर्ति पद्धति</td></tr>`+
+        `</table><br>`+
+        `<span class="tag">+ गोचर, Argala, Arudha, D9, D60 — कुल 16 स्तर।</span><br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 संदर्भ ग्रंथ:</b><br>• <b>BPHS</b> — मुख्य आधार (भाव, दशा, वर्ग, षड्बल)<br>• <b>जैमिनी सूत्र</b> — चर कारक, अमात्यकारक<br>• <b>कृष्णमूर्ति पद्धति</b> — Sub Lord Theory<br>• <b>सारावली</b> अ.9 — पंचमहापुरुष योग</div>`)+
+      lblk('⚖️ Step 3: भारित अंकन (Weighted Scoring)',
+        `<b>समस्या:</b> 16 स्तर हैं, हर एक अलग % देता है। अंतिम निर्णय कैसे?<br><br>`+
+        `<b>समाधान:</b> सब स्तर बराबर नहीं होते। जैसे परीक्षा में गणित के 100 अंक हों पर खेल के 10 — वैसे ही:<br>`+
+        `• <b>D1 भाव-तंत्र</b> = 25% भार (सबसे महत्वपूर्ण)<br>`+
+        `• <b>D10 दशांश</b> = 20% भार<br>`+
+        `• <b>योग</b> = 15% भार<br>`+
+        `• <b>दशा</b> = 15% भार<br>`+
+        `• <b>षड्बल</b> = 10% भार<br>`+
+        `• <b>नक्षत्र/Jaimini/KP</b> = 5-5-5% भार<br><br>`+
+        `<b>गणना:</b> हर स्तर का स्कोर × उसका भार = अंक। सब अंक जोड़ो = <b>भारित योग (${C.wFinal}%)</b>।<br><br>`+
+        `<span class="tag">📌 यह वैसे ही है जैसे CGPA निकालते समय हर विषय के credit अलग होते हैं।</span><br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 भार-निर्धारण का शास्त्रीय आधार:</b><br><br>`+
+        `<b>D1 (25%) क्यों सबसे भारी?</b><br>• <b>BPHS</b> अध्याय 11-12 में दशम भाव को "कर्म-स्थान" कहा गया है — मूल कुंडली ही सर्वप्रथम देखी जाती है।<br>• <b>बृहत् जातक</b> में वराहमिहिर ने लिखा: "लग्न-कुंडली ही जीवन का दर्पण है।"<br><br>`+
+        `<b>D10 (20%) दूसरे स्थान पर क्यों?</b><br>• <b>BPHS</b> अध्याय 6-7 में 16 वर्ग-कुंडलियों का वर्णन है; दशांश (D10) विशेषतः करियर/कर्म के लिए निर्धारित।<br>• <b>जातक पारिजात</b>: "दशम वर्ग से कर्म-फल ज्ञात होता है।"<br><br>`+
+        `<b>योग (15%) का भार:</b><br>• <b>BPHS</b> अध्याय 39-40 में राजयोग, धनयोग आदि का विस्तृत वर्णन है।<br>• <b>सारावली</b> अध्याय 9 — पंचमहापुरुष योग<br>• <b>फलदीपिका</b> अध्याय 6 — गजकेसरी, बुधादित्य योग<br><br>`+
+        `<b>दशा (15%):</b><br>• <b>BPHS</b> अध्याय 46-49 — विम्शोत्तरी दशा-पद्धति का पूर्ण विवरण।<br>• "बिना दशा के फलादेश अधूरा है" — पराशर<br><br>`+
+        `<b>षड्बल (10%):</b><br>• <b>BPHS</b> अध्याय 27 — छह प्रकार के बल (स्थान, दिक्, काल, चेष्टा, नैसर्गिक, दृक्)<br>• <b>होरा सार</b> — ग्रह-बल गणना<br><br>`+
+        `<b>नक्षत्र/Jaimini/KP (5-5-5%):</b><br>• <b>तैत्तिरीय संहिता</b> — 27 नक्षत्रों का मूल स्रोत<br>• <b>जैमिनी सूत्र</b> — चर कारक, अमात्यकारक (करियर-कारक ग्रह)<br>• <b>कृष्णमूर्ति पद्धति</b> — आधुनिक Sub Lord Theory (के.एस. कृष्णमूर्ति)<br>• <b>उत्तर कालामृत</b> — KP का शास्त्रीय आधार</div>`)+
+      lblk('🔄 Step 4: Contradiction Check (विरोध-जाँच)',
+        `<b>समस्या:</b> कभी-कभी एक स्तर कहता है "बहुत अच्छा" पर दूसरा कहता है "ख़राब"। यह विरोध है।<br><br>`+
+        `<b>समाधान:</b> हम कुछ "माध्यमिक" कारक (गोचर, Argala, Arudha) को अलग रखते हैं। यदि वे मूल स्कोर से बहुत अलग हों तो थोड़ा समायोजन करते हैं:<br>`+
+        `• यदि माध्यमिक कारक <b>ऊपर</b> हों → +कुछ अंक जोड़ते हैं<br>`+
+        `• यदि <b>नीचे</b> हों → −कुछ अंक घटाते हैं<br><br>`+
+        `<b>आपके लिए:</b> भारित योग ${C.wFinal}% ${C.adj>=0?'+':''}${C.adj} (विरोध-समायोजन) = <b>Final ${C.final}%</b><br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 संदर्भ ग्रंथ:</b><br>• <b>जैमिनी सूत्र</b> — Argala (प्रभाव-रोध) सिद्धांत<br>• <b>BPHS</b> अध्याय 29 — अरुध-पद (A10 = करियर-छवि)<br>• <b>सर्वार्थ चिंतामणि</b> — विरोधी ग्रह-फलों का समायोजन</div>`)+
+      lblk('📊 Step 5: अंतिम निर्णय (Final Verdict)',
+        `<b>Final Score का अर्थ:</b><br>`+
+        `• <b style="color:var(--good)">70%+</b> = उत्कृष्ट करियर-योग — उच्च पद, सफलता, मान्यता<br>`+
+        `• <b style="color:var(--gold-soft)">55-70%</b> = अच्छा करियर — स्थिर प्रगति, अवसर<br>`+
+        `• <b style="color:var(--bad)">&lt;55%</b> = चुनौतीपूर्ण — अधिक प्रयास, उपाय आवश्यक<br><br>`+
+        `<b>आपका Final Career Potential: <span style="font-size:22px;color:${colf(C.final)}">${C.final}%</span></b><br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 संदर्भ ग्रंथ:</b><br>• <b>जातक पारिजात</b> — समग्र फलादेश का सिद्धांत<br>• <b>BPHS</b> — "बहुविध प्रमाणों से पुष्टि हो तो फल निश्चित"</div>`)+
+      lblk('🧭 "किस क्षेत्र में?" — Career Nature कैसे निकलती है?',
+        `<b>हर ग्रह कुछ क्षेत्रों से जुड़ा है:</b><br>`+
+        `• <b>सूर्य</b> = सरकार, नेतृत्व, प्रशासन<br>`+
+        `• <b>चंद्र</b> = जनसेवा, होटल, नर्सिंग<br>`+
+        `• <b>मंगल</b> = सेना, इंजीनियरिंग, खेल<br>`+
+        `• <b>बुध</b> = व्यापार, लेखन, IT, संचार<br>`+
+        `• <b>गुरु</b> = शिक्षा, कानून, धर्म, परामर्श<br>`+
+        `• <b>शुक्र</b> = कला, फैशन, मनोरंजन, विलासिता<br>`+
+        `• <b>शनि</b> = विनिर्माण, खनन, न्याय, अनुशासन<br><br>`+
+        `<b>आपके सबसे बली ग्रह:</b> ${C.strongP.slice(0,3).map(x=>PL[x[0]]+' ('+x[1]+'%)').join(', ')} → इन ग्रहों से जुड़े क्षेत्र आपके लिए स्वाभाविक रूप से अनुकूल हैं।<br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 संदर्भ ग्रंथ:</b><br>• <b>BPHS</b> अध्याय 3 — ग्रहों के कारकत्व (सूर्य=राजा, चंद्र=जन, आदि)<br>• <b>उत्तर कालामृत</b> — ग्रह-व्यवसाय संबंध (विस्तृत)<br>• <b>फलदीपिका</b> — ग्रह-स्वभाव व कार्य-क्षेत्र</div>`)+
+      lblk('⏰ "कब होगा?" — Timing कैसे पता चलता है?',
+        `<b>दशा-प्रणाली:</b> विंशोत्तरी दशा 120 वर्षों को 9 ग्रहों में बाँटती है। हर ग्रह की "महादशा" कुछ वर्षों की होती है।<br><br>`+
+        `<b>मूल नियम:</b><br>`+
+        `• जब करियर-कारक ग्रह (दशमेश, शनि, सूर्य, अमात्यकारक) की दशा चले → करियर में उन्नति<br>`+
+        `• जब दुस्थान-स्वामी (6/8/12) की दशा चले → संघर्ष/सीख<br><br>`+
+        `<b>आपकी वर्तमान दशा:</b> ${PL[DASHA.active.lord]} महादशा → ${C.trig.includes(DASHA.active.lord)?'करियर-कारक ✓ — अनुकूल काल':'सामान्य'}<br><br>`+
+        `<div style="background:var(--panel);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)"><b>📖 संदर्भ ग्रंथ:</b><br>• <b>BPHS</b> अध्याय 46-49 — विम्शोत्तरी दशा का पूर्ण विवरण<br>• <b>सर्वार्थ चिंतामणि</b> — घटना-काल निर्धारण<br>• <b>प्रश्न मार्ग</b> — सूक्ष्म समय-निर्धारण</div>`)+
+      lblk('🔍 सारांश: पूरी प्रक्रिया एक नज़र में',
+        `<ol style="line-height:1.9">`+
+        `<li><b>जन्म विवरण</b> → कुंडली गणना (ग्रह, भाव, लग्न)</li>`+
+        `<li><b>16 स्तरों</b> से स्वतंत्र विश्लेषण (D1, D10, योग, दशा...)</li>`+
+        `<li><b>भारित अंकन</b> — महत्वपूर्ण स्तरों को अधिक भार</li>`+
+        `<li><b>विरोध-जाँच</b> — असंगत संकेतों का समायोजन</li>`+
+        `<li><b>Final Verdict</b> — ${C.final}% Career Potential</li>`+
+        `<li><b>Career Nature</b> — किस प्रकार का काम अनुकूल</li>`+
+        `<li><b>Timing</b> — दशा-आधारित जीवन-चरण</li>`+
+        `</ol>`)+
+      lblk('❓ अक्सर पूछे जाने वाले प्रश्न (FAQ)',
+        `<b>Q: क्या यह 100% सही है?</b><br>`+
+        `A: नहीं, यह एक शैक्षिक अनुमान है। ज्योतिष "रुझान" बताता है, "नियति" नहीं। आपकी मेहनत, निर्णय और परिस्थितियाँ भी महत्वपूर्ण हैं।<br><br>`+
+        `<b>Q: कम % का अर्थ क्या असफलता है?</b><br>`+
+        `A: बिल्कुल नहीं! इसका अर्थ है कि आपको अधिक प्रयास करना होगा या सही क्षेत्र चुनना होगा। उपाय भी सहायक हैं।<br><br>`+
+        `<b>Q: Top 20 उद्योग कैसे निकले?</b><br>`+
+        `A: हर उद्योग किन्हीं ग्रहों से जुड़ा है। आपके जो ग्रह बली हैं, उनसे जुड़े उद्योग ऊपर आते हैं।`)+
+      lblk('📚 आधार — सम्पूर्ण ग्रंथ-सूची',
+        `<b>इस Career Prediction Engine में प्रयुक्त सभी शास्त्रीय ग्रंथ:</b><br><br>`+
+        `<table class="dt" style="font-size:13px"><tr><th>ग्रंथ</th><th>रचयिता</th><th>उपयोग</th></tr>`+
+        `<tr><td><b>बृहत् पराशर होरा शास्त्र (BPHS)</b></td><td>महर्षि पराशर</td><td>भाव, दशा, वर्ग, षड्बल, अष्टकवर्ग — मुख्य आधार</td></tr>`+
+        `<tr><td><b>बृहत् जातक</b></td><td>वराहमिहिर</td><td>जन्म-फल, ग्रह-योग</td></tr>`+
+        `<tr><td><b>सारावली</b></td><td>कल्याण वर्मा</td><td>पंचमहापुरुष योग</td></tr>`+
+        `<tr><td><b>फलदीपिका</b></td><td>मंत्रेश्वर</td><td>गजकेसरी, बुधादित्य योग</td></tr>`+
+        `<tr><td><b>जातक पारिजात</b></td><td>वैद्यनाथ दीक्षित</td><td>समग्र फलादेश, राजयोग</td></tr>`+
+        `<tr><td><b>होरा सार</b></td><td>पृथुयशस</td><td>ग्रह-बल गणना</td></tr>`+
+        `<tr><td><b>उत्तर कालामृत</b></td><td>कालिदास</td><td>ग्रह-व्यवसाय, KP-आधार</td></tr>`+
+        `<tr><td><b>जैमिनी सूत्र</b></td><td>महर्षि जैमिनी</td><td>चर कारक, अमात्यकारक, Argala</td></tr>`+
+        `<tr><td><b>कृष्णमूर्ति पद्धति</b></td><td>के.एस. कृष्णमूर्ति</td><td>Sub Lord Theory, cusp analysis</td></tr>`+
+        `<tr><td><b>सर्वार्थ चिंतामणि</b></td><td>—</td><td>घटना-काल, Timing</td></tr>`+
+        `<tr><td><b>प्रश्न मार्ग</b></td><td>—</td><td>सूक्ष्म समय-निर्धारण</td></tr>`+
+        `<tr><td><b>तैत्तिरीय संहिता</b></td><td>—</td><td>27 नक्षत्र, देवता</td></tr>`+
+        `</table><br>`+
+        `<span class="tag">पराशरी · Jaimini · KP — बहु-पद्धति संश्लेषण ★★★★★</span>`)+
+      lblk('🔗 अन्य Career विश्लेषण खंड — क्रमवार देखें',
+        `<p style="margin-bottom:12px">नीचे दिए गए बटनों से Career Engine के सभी विश्लेषण खंडों को क्रमवार देखें:</p>`+
+        `<div style="display:flex;flex-wrap:wrap;gap:8px">`+
+        CELIST.map((s,i)=>`<button onclick="showCareer('${s[0]}')" style="padding:8px 14px;border-radius:6px;border:1px solid var(--line);background:${s[0]==='explanation'?'var(--gold)':'var(--panel)'};color:${s[0]==='explanation'?'#000':'var(--ink)'};cursor:pointer;font-size:13px"><b>${i+1}.</b> ${s[1]}</button>`).join('')+
+        `</div>`));}
   case 'scorecard':{const rows=C.W.map(x=>{const pts=(x[1]*x[2]/100).toFixed(1);return `<tr><td>${x[0]}</td><td>${x[2]}%</td><td>${x[1]}%</td><td style="font-weight:700">${pts}/${x[2]}</td></tr>`;}).join('');
     return card('📇 Weighted Career Scorecard','हर कारक का भार × स्कोर = अंक — वैज्ञानिक रूप से auditable।',
       tlay('सब कारक बराबर नहीं होते: D1 (25%) व D10 (20%) सबसे भारी; नक्षत्र/Jaimini/KP सूक्ष्म-परतें (5-5%)। भारित योग = आधार-स्कोर; फिर Contradiction Engine ±समायोजन करता है।')+
@@ -4659,6 +4821,112 @@ function muhMakePDF(){
         }
       }
       pdf.save(muhFileName());
+      if(btn){btn.disabled=false;btn.textContent='⬇️ Download PDF';}
+   })
+   .catch(function(err){
+      if(btn){btn.disabled=false;btn.textContent='⬇️ Download PDF';}
+      alert('PDF generation failed: '+err.message+'\n\nUse 🖨️ Print → "Save as PDF" instead.');
+   });
+}
+/* ===== CAREER PDF DOWNLOAD ===== */
+function careerReportInner(){
+  if(typeof CH==='undefined'||!CH)return '<p>पहले रिपोर्ट बनाएँ।</p>';
+  const name=(typeof window.formData!=='undefined'&&window.formData&&window.formData.name)?window.formData.name:'—';
+  const dob=(typeof window.formData!=='undefined'&&window.formData&&window.formData.date)?window.formData.date:'—';
+  const tob=(typeof window.formData!=='undefined'&&window.formData&&window.formData.time)?window.formData.time:'—';
+  const pob=(typeof window.formData!=='undefined'&&window.formData&&window.formData.place)?window.formData.place:'—';
+  let html=`<style>
+    #careerBody{--panel:#f5f5f5;--panel2:#eee;--ink:#222;--gold:#b8860b;--gold-soft:#daa520;--good:#228b22;--bad:#c41e3a;--line:#ccc;color:#222}
+    #careerBody .card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px;margin-bottom:16px}
+    #careerBody .sh{color:#333;border-bottom:2px solid #d4af37}
+    #careerBody .lblock{background:#f9f9f9;border:1px solid #e0e0e0;border-radius:8px;padding:12px;margin:10px 0}
+    #careerBody .lhd{color:#b8860b;font-weight:700;margin-bottom:8px}
+    #careerBody .tag{background:#f0f0f0;color:#444;border:1px solid #ccc;padding:2px 8px;border-radius:4px;font-size:12px}
+    #careerBody .dt{width:100%;border-collapse:collapse;font-size:13px}
+    #careerBody .dt th{background:#f5f5f5;color:#333;padding:8px;text-align:left;border:1px solid #ddd}
+    #careerBody .dt td{padding:8px;border:1px solid #ddd;color:#333}
+    #careerBody .lead{color:#555}
+    #careerBody table{background:#fff}
+    #careerBody b,#careerBody strong{color:#222}
+    #careerBody ul,#careerBody li{color:#333}
+  </style>
+  <div style="text-align:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid #d4af37">
+    <h1 style="color:#b8860b;margin:0 0 8px 0">💼 Career Prediction Report</h1>
+    <h2 style="margin:0 0 10px 0;font-weight:400;color:#333">करियर भविष्यवाणी प्रतिवेदन</h2>
+    <p style="margin:4px 0;color:#333"><b>नाम:</b> ${name} · <b>जन्म:</b> ${dob} · <b>समय:</b> ${tob} · <b>स्थान:</b> ${pob}</p>
+    <p style="margin:4px 0;font-size:12px;color:#666">Generated: ${new Date().toLocaleString('en-IN')}</p>
+  </div>`;
+  const sectionsToInclude=['verdict','explanation','scorecard','houses','planets','yogas','charts','nakshatra','argala','arudha','jaimini','strength','dasha','transit','kp','timeline','risks','contradiction','why','verify'];
+  sectionsToInclude.forEach(sec=>{
+    const label=CELIST.find(s=>s[0]===sec);
+    if(label){
+      html+=`<div style="page-break-inside:avoid;margin-bottom:20px">`;
+      html+=`<h3 style="color:#d4af37;border-bottom:1px solid #d4af37;padding-bottom:5px;margin-bottom:10px">${label[1]}</h3>`;
+      try{html+=pCareer(sec);}catch(e){html+=`<p style="color:#999">Section unavailable</p>`;}
+      html+=`</div>`;
+    }
+  });
+  html+=`<div style="text-align:center;margin-top:30px;padding-top:15px;border-top:1px solid #ccc;font-size:11px;color:#666">
+    <p>⚠️ यह रिपोर्ट शैक्षिक उद्देश्य हेतु है। महत्वपूर्ण निर्णयों के लिए योग्य ज्योतिषी से परामर्श करें।</p>
+    <p>Generated by Jyotish Calculator · Multi-Method Vedic Astrology Engine</p>
+  </div>`;
+  return html;
+}
+function careerOverlayOpen(){
+  const old=document.getElementById('careerOverlay');if(old)old.remove();
+  const ov=document.createElement('div');ov.id='careerOverlay';
+  ov.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:9999;overflow:auto;padding:20px';
+  ov.innerHTML='<div id="careerBar" style="position:sticky;top:0;background:#1a1030;padding:12px 20px;display:flex;gap:12px;z-index:10000">'
+    +'<button id="careerDlBtn" onclick="careerMakePDF()" style="padding:10px 20px;background:linear-gradient(180deg,#f0d080,#d4af37);color:#1a1030;border:none;border-radius:6px;font-weight:700;cursor:pointer">⬇️ Download PDF</button>'
+    +'<button onclick="careerPrint()" style="padding:10px 20px;background:#333;color:#fff;border:none;border-radius:6px;cursor:pointer">🖨️ Print</button>'
+    +'<button onclick="careerCloseOverlay()" style="padding:10px 20px;background:#666;color:#fff;border:none;border-radius:6px;cursor:pointer">✖ Close</button></div>'
+    +'<div id="careerBody" style="max-width:900px;margin:20px auto;color:#000;font-family:sans-serif">'+careerReportInner()+'</div>';
+  document.body.appendChild(ov);
+  try{window.scrollTo(0,0);}catch(e){}
+  return ov;
+}
+function downloadCareerPDF(){if(careerOverlayOpen())careerMakePDF();}
+function careerCloseOverlay(){const o=document.getElementById('careerOverlay');if(o)o.remove();}
+function careerPrint(){try{window.focus();window.print();}catch(e){alert('Printing blocked — use ⬇️ Download PDF.');}}
+function careerFileName(){
+  const name=(typeof window.formData!=='undefined'&&window.formData&&window.formData.name)?window.formData.name.replace(/\s+/g,'_'):'Report';
+  const d=new Date().toISOString().slice(0,10);
+  return 'Career_'+name+'_'+d+'.pdf';
+}
+function careerMakePDF(){
+  const btn=document.getElementById('careerDlBtn');
+  const body=document.getElementById('careerBody');
+  if(!body){alert('Report not ready.');return;}
+  const jsPDFctor=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF;
+  if(typeof html2canvas!=='function'||!jsPDFctor){
+    alert('PDF library could not load (no internet?).\n\nUse 🖨️ Print → "Save as PDF" instead.');
+    return;
+  }
+  if(btn){btn.disabled=true;btn.textContent='⏳ Generating PDF…';}
+  html2canvas(body,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false,windowWidth:body.scrollWidth})
+   .then(function(canvas){
+      const pdf=new jsPDFctor({orientation:'p',unit:'mm',format:'a4'});
+      const pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight();
+      const m=8,iw=pw-m*2;
+      const ih=canvas.height*iw/canvas.width;
+      const img=canvas.toDataURL('image/jpeg',0.92);
+      if(ih<=ph-m*2){pdf.addImage(img,'JPEG',m,m,iw,ih);}
+      else{
+        const pageH=ph-m*2;
+        const pxPerMM=canvas.width/iw;
+        const sliceH=Math.floor(pageH*pxPerMM);
+        let y=0,page=0;
+        while(y<canvas.height){
+          const hSlice=Math.min(sliceH,canvas.height-y);
+          const c2=document.createElement('canvas');c2.width=canvas.width;c2.height=hSlice;
+          const ctx=c2.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c2.width,c2.height);
+          ctx.drawImage(canvas,0,y,canvas.width,hSlice,0,0,canvas.width,hSlice);
+          if(page>0)pdf.addPage();
+          pdf.addImage(c2.toDataURL('image/jpeg',0.92),'JPEG',m,m,iw,hSlice/pxPerMM);
+          y+=hSlice;page++;
+        }
+      }
+      pdf.save(careerFileName());
       if(btn){btn.disabled=false;btn.textContent='⬇️ Download PDF';}
    })
    .catch(function(err){
