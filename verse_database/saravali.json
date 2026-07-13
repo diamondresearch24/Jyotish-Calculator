@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "id": "saravali",
+    "name": "Saravali",
+    "author": "Kalyana Varma",
+    "period": "10th Century",
+    "edition": "V.S. Sharma",
+    "lastUpdated": "2026-07-11",
+    "implementationStats": {
+      "totalVerses": 1,
+      "implemented": 1,
+      "partial": 0,
+      "notImplemented": 0
+    }
+  },
+  "chapters": {
+    "9": {
+      "title": "पंचमहापुरुष योग (Panchamahapurusha Yogas)",
+      "verseCount": 25,
+      "keyTopics": ["ruchaka", "bhadra", "hamsa", "malavya", "shasha"]
+    },
+    "13": {
+      "title": "ग्रह फल (Planet Results)",
+      "verseCount": 40,
+      "keyTopics": ["planet_effects", "house_placement", "dignity_effects"]
+    },
+    "38": {
+      "title": "दशा फल (Dasha Results)",
+      "verseCount": 30,
+      "keyTopics": ["mahadasha_effects", "antardasha_effects", "timing"]
+    }
+  },
+  "verses": [
+    {
+      "id": "SARA_9_5",
+      "text": "मंगलेन्द्रः केन्द्रे वा त्रिकोणे रुचको योगः",
+      "transliteration": "Maṅgalendraḥ kendre vā trikoṇe rucako yogaḥ",
+      "translations": {
+        "en": "When Mars is in kendra or trine, Ruchaka Yoga is formed",
+        "hi": "मंगल के केंद्र या त्रिकोण में होने पर रुचक योग बनता है"
+      },
+      "source": {
+        "text": "Saravali",
+        "chapter": 9,
+        "verse": 5,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "panchamahapurusha",
+      "applicability": {
+        "conditions": ["mars_kendra_trikona"],
+        "exceptions": ["mars_debilitated", "mars_combust"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-11",
+        "notes": "Implemented in detectYogas() as PMP yoga"
+      },
+      "crossReferences": [
+        {
+          "text": "BPHS",
+          "chapter": 39,
+          "verse": 8,
+          "relationship": "similar"
+        }
+      ]
+    }
+  ]
+}

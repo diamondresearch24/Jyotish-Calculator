@@ -1,0 +1,284 @@
+{
+  "schema": {
+    "version": 1,
+    "purpose": "Provenance for every numeric computation used by Jyotish Yantra. Each entry maps an internal function/concept name to its classical basis, confidence, alternatives and invalidation caveats.",
+    "note": "Verse numbers are approximate / chapter-level references until Pandit-verified. confidence must be 'high' only after verification."
+  },
+  "sources": [
+    {
+      "name": "ephemeris_planets",
+      "label": { "en": "Planetary longitudes", "hi": "ग्रह-स्पष्ट (सूर्य-गति)" },
+      "type": "core",
+      "description": { "en": "Geocentric apparent tropical longitudes of Sun through Saturn plus mean nodes; converted to sidereal with ayanamsa.", "hi": "भू-केन्द्रित स्पष्ट ग्रह-देशान्तर (सूर्य से शनि तक + मध्यम राहु-केतु), अयनांश से सायन बनाया गया।" },
+      "source": { "text": "BPHS", "chapter": 3, "verse": 1 },
+      "alternatives": [ "Swiss Ephemeris (JPL DE431 / DE440)", "NASA JPL Horizons", "Surya Siddhanta manual calculations" ],
+      "invalidation": "Currently uses a Moshier-style JS approximation; sub-arcminute accuracy is not guaranteed. Professional verification requires Swiss Ephemeris upgrade.",
+      "confidence": "medium",
+      "depends_on": []
+    },
+    {
+      "name": "ayanamsa_lahiri",
+      "label": { "en": "Lahiri ayanamsa", "hi": "लाहिरी अयनांश" },
+      "type": "core",
+      "description": { "en": "Sidereal offset between tropical and sidereal zodiacs using Lahiri/Chitrapaksha formula.", "hi": "सायन और निरायन राशिचक्र के बीच का अन्तर (लाहिरी/चित्रापक्ष विधि)।" },
+      "source": { "text": "Lahiri Ephemeris", "chapter": 0, "verse": 0 },
+      "alternatives": [ "Ramana ayanamsa", "Krishnamurti ayanamsa", "Yukteswar ayanamsa", "Jnadeva ayanamsa" ],
+      "invalidation": "Ayanamsa choice shifts all sign/house boundaries by up to 1–2 degrees; different traditions use different values.",
+      "confidence": "medium",
+      "depends_on": []
+    },
+    {
+      "name": "ascendant",
+      "label": { "en": "Ascendant / Lagna", "hi": "लग्न" },
+      "type": "core",
+      "description": { "en": "Rising degree of the ecliptic at birth; converted to a whole-sign lagna and optionally Placidus/Sripati cusps.", "hi": "जन्म-काल में उदित राशि-चक्र; पूर्ण-राशि लग्न और वैकल्पिक प्लासिडस/श्रीपति चलित।" },
+      "source": { "text": "BPHS", "chapter": 4, "verse": 1 },
+      "alternatives": [ "Whole-sign houses", "Sripati bhava chalit", "Placidus cusps", "Koch / Campanus" ],
+      "invalidation": "Ascendant changes sign roughly every 2 hours; exact birth time must be reliable.",
+      "confidence": "high",
+      "depends_on": [ "ephemeris_planets", "ayanamsa_lahiri" ]
+    },
+    {
+      "name": "nakshatra_pada",
+      "label": { "en": "Nakshatra and Pada", "hi": "नक्षत्र और पाद" },
+      "type": "core",
+      "description": { "en": "Lunar mansion and quarter from Moon's sidereal longitude (13°20′ per nakshatra, 3°20′ per pada).", "hi": "चंद्र के सायन देशान्तर से नक्षत्र और चतुर्थांश (13°20′ प्रति नक्षत्र, 3°20′ प्रति पाद)।" },
+      "source": { "text": "BPHS", "chapter": 4, "verse": 5 },
+      "alternatives": [ "Abhijit inclusion / exclusion in some traditions", "Different nakshatra starting points" ],
+      "invalidation": "Pada depends on precise Moon longitude; small ephemeris errors can shift the pada.",
+      "confidence": "high",
+      "depends_on": [ "ephemeris_planets" ]
+    },
+    {
+      "name": "lordOfHouse",
+      "label": { "en": "House lordship", "hi": "भावाधिपत्य" },
+      "type": "core",
+      "description": { "en": "Determines the planet ruling each whole-sign house from the ascendant sign.", "hi": "लग्न राशि से पूर्ण-राशि भावों के स्वामी (Aries→Mars, Taurus→Venus, etc.)।" },
+      "source": { "text": "BPHS", "chapter": 6, "verse": 1 },
+      "alternatives": [ "Sign-based lordship", "Lord of bhava cusp (Placidus/KP)" ],
+      "invalidation": "Whole-sign lordship may differ from cusp-based lordship used in KP or Placidus systems.",
+      "confidence": "high",
+      "depends_on": [ "ascendant" ]
+    },
+    {
+      "name": "dignity",
+      "label": { "en": "Planetary dignity", "hi": "ग्रह-बल / राशि-बल" },
+      "type": "strength",
+      "description": { "en": "Evaluates exaltation, debilitation, own sign, moolatrikona and friendship for a planet in a sign.", "hi": "किसी राशि में ग्रह का उच्च, नीच, स्वगृह, मूलत्रिकोण, मित्रादि स्थिति-बल।" },
+      "source": { "text": "BPHS", "chapter": 3, "verse": 10 },
+      "alternatives": [ "Natural (naisargika) friendship table", "Tatkalika (temporary) friendship", "Panchadha maitri" ],
+      "invalidation": "Moolatrikona degrees and friendship classifications vary slightly across texts.",
+      "confidence": "high",
+      "depends_on": [ "ephemeris_planets" ]
+    },
+    {
+      "name": "combust",
+      "label": { "en": "Combustion (Asta)", "hi": "अस्तत्व / दग्ध" },
+      "type": "core",
+      "description": { "en": "Checks whether a planet is within the Sun's combustion orb (approximate canonical values).", "hi": "ग्रह सूर्य की अस्त-सीमा के भीतर है या नहीं (पारंपरिक मान)।" },
+      "source": { "text": "BPHS", "chapter": 7, "verse": 1 },
+      "alternatives": [ "Different orbs per planet in Phaladeepika / Saravali", "Cazimi (within 1°) as strong instead of weak" ],
+      "invalidation": "Combustion orb varies by text; current values are approximations. Cazimi (very close conjunction) can reverse weakness.",
+      "confidence": "medium",
+      "depends_on": [ "ephemeris_planets" ]
+    },
+    {
+      "name": "neechabhanga",
+      "label": { "en": "Neechabhanga (debilitation cancellation)", "hi": "नीचभंग राजयोग" },
+      "type": "exception",
+      "description": { "en": "Detects classical cancellation conditions for a debilitated planet: debilitation lord in kendra, exaltation lord in kendra, exchange, D9 exaltation, etc.", "hi": "नीच ग्रह के भंग की शर्तें: नीचेश/उच्चेश केन्द्र में, परिवर्तन, D9 उच्चता आदि।" },
+      "source": { "text": "BPHS", "chapter": 39, "verse": 1 },
+      "alternatives": [ "Jataka Parijata Neechabhanga rules", "Phaladeepika cancellation clauses" ],
+      "invalidation": "Different texts enumerate different cancellation conditions; not all authorities agree on strength restoration.",
+      "confidence": "medium",
+      "depends_on": [ "dignity", "lordOfHouse" ]
+    },
+    {
+      "name": "viparitaRajayoga",
+      "label": { "en": "Viparita Rajayoga (Harsha/Sarala/Vimala)", "hi": "विपरीत राजयोग (हर्ष/सरला/विमला)" },
+      "type": "exception",
+      "description": { "en": "Detects when a dusthana (6/8/12) lord occupies another dusthana, forming a Viparita Raja Yoga.", "hi": "जब दुस्थान (6/8/12) का स्वामी दूसरे दुस्थान में हो तो विपरीत राजयोग।" },
+      "source": { "text": "BPHS", "chapter": 39, "verse": 10 },
+      "alternatives": [ "Phaladeepika Viparita definitions", "Some authorities require association with benefics or kendra for full results" ],
+      "invalidation": "Pure placement is not enough; the planet's strength, dignity and dasha activation determine manifestation.",
+      "confidence": "medium",
+      "depends_on": [ "lordOfHouse" ]
+    },
+    {
+      "name": "pstrength",
+      "label": { "en": "Simplified planetary strength", "hi": "सरलीकृत ग्रह-बल" },
+      "type": "strength",
+      "description": { "en": "Quick strength approximation combining dignity, house position, combustion and retrogression.", "hi": "स्थिति, भाव, अस्त और वक्री को मिलाकर त्वरित ग्रह-बल अनुमान।" },
+      "source": { "text": "BPHS", "chapter": 27, "verse": 1 },
+      "alternatives": [ "Full Shadbala", "Ashtakavarga bindu strength", "Jaimini karaka strength" ],
+      "invalidation": "This is a simplified score, not full six-fold Shadbala. For rigorous strength, use full shadbala or Ashtakavarga.",
+      "confidence": "low",
+      "depends_on": [ "dignity", "combust" ]
+    },
+    {
+      "name": "shadbala",
+      "label": { "en": "Shadbala (six-fold strength)", "hi": "षड्बल" },
+      "type": "strength",
+      "description": { "en": "Aggregates Sthanbala, Digbala, Kalabala, Cheshtabala, Naisargikabala and Drik (aspectual) bala.", "hi": "षड्बल: स्थान, दिग्, काल, चेष्टा, नैसर्गिक और दृक्-बल का संमिश्रण।" },
+      "source": { "text": "BPHS", "chapter": 27, "verse": 2 },
+      "alternatives": [ "Surya Siddhanta shadbala", "Brihat Parashara Hora Shastra detailed virupa calculation", "Modern simplifications" ],
+      "invalidation": "Current implementation is a streamlined JS approximation; canonical virupa (rupa) units and full component tables are not yet implemented.",
+      "confidence": "medium",
+      "depends_on": [ "dignity", "combust", "getAspect" ]
+    },
+    {
+      "name": "ashtakavarga",
+      "label": { "en": "Ashtakavarga", "hi": "अष्टकवर्ग" },
+      "type": "strength",
+      "description": { "en": "Eight-fold bindu system: each planet contributes benefic dots to signs from its own position; summed into Sarvashtakavarga.", "hi": "अष्टकवर्ग: प्रत्येक ग्रह अपनी स्थिति से शुभ बिंदु देता है; कुल सार्वास्टकवर्ग।" },
+      "source": { "text": "BPHS", "chapter": 66, "verse": 1 },
+      "alternatives": [ "Bhinnashtakavarga", "Sarvashtakavarga", "Samudaya Ashtakavarga", "Prastarashtaka" ],
+      "invalidation": "Current implementation uses a standard benefic-point table; subtle differences exist across classical commentaries.",
+      "confidence": "medium",
+      "depends_on": [ "ephemeris_planets" ]
+    },
+    {
+      "name": "divisional_charts",
+      "label": { "en": "Divisional charts (D9, D10, D60, etc.)", "hi": "वर्ग कुंडली (D9, D10, D60 आदि)" },
+      "type": "divisional",
+      "description": { "en": "Calculates sign placements in Navamsa, Dashamsa, Shashtiamsa and other vargas.", "hi": "नवांश, दशांश, षष्ट्यांश आदि वर्गों में राशि-स्थिति।" },
+      "source": { "text": "BPHS", "chapter": 6, "verse": 5 },
+      "alternatives": [ "Parasari varga calculation", "Jaimini karakamsa (D9 lagna of Atmakaraka)" ],
+      "invalidation": "Varga interpretation requires careful synthesis; a single varga should not override the D1 chart.",
+      "confidence": "high",
+      "depends_on": [ "ephemeris_planets", "ayanamsa_lahiri" ]
+    },
+    {
+      "name": "vimshottari_dasha",
+      "label": { "en": "Vimshottari Dasha", "hi": "विंशोत्तरी दशा" },
+      "type": "timing",
+      "description": { "en": "120-year nakshatra-based planetary period system from Moon's nakshatra at birth.", "hi": "जन्म-काल चंद्र-नक्षत्र से 120-वर्षीय ग्रह-दशा-क्रम।" },
+      "source": { "text": "BPHS", "chapter": 46, "verse": 1 },
+      "alternatives": [ "Ashtottari Dasha", "Yogini Dasha", "Chara Dasha (Jaimini)", "Kala Chakra Dasha" ],
+      "invalidation": "Dasha results depend on planet strength, signification and current transits; the period table alone is not the prediction.",
+      "confidence": "high",
+      "depends_on": [ "nakshatra_pada" ]
+    },
+    {
+      "name": "transit",
+      "label": { "en": "Transit (Gochara)", "hi": "गोचर" },
+      "type": "timing",
+      "description": { "en": "Current planetary positions relative to natal Moon / ascendant; used for sadesati and trigger analysis.", "hi": "वर्तमान ग्रह-स्थिति की जन्म-कुंडली से तुलना; साढ़ेसाती और ट्रिगर-विश्लेषण के लिए।" },
+      "source": { "text": "BPHS", "chapter": 70, "verse": 1 },
+      "alternatives": [ "Vedha / Ashtakavarga transit", "Kakshya (transit sub-division)", "Tajaka (annual chart)" ],
+      "invalidation": "Transit effects are secondary to dasha and yoga; a malefic transit often matters only when the relevant dasha also supports it.",
+      "confidence": "medium",
+      "depends_on": [ "ephemeris_planets" ]
+    },
+    {
+      "name": "sadesati",
+      "label": { "en": "Sade Sati", "hi": "साढ़ेसाती" },
+      "type": "timing",
+      "description": { "en": "Saturn transit over natal Moon and the 12th/2nd signs from it, lasting ~7.5 years.", "hi": "शनि का चंद्र राशि, उससे 12वाँ और 2रा राशि पर गोचर — लगभग साढ़े सात वर्ष।" },
+      "source": { "text": "BPHS", "chapter": 70, "verse": 10 },
+      "alternatives": [ "Small Panoti (2½ years over Moon sign)", "Kantaka Shani", "Ashtama Shani" ],
+      "invalidation": "Effect depends on Saturn's strength, house ownership and concurrent dasha; not universally malefic.",
+      "confidence": "medium",
+      "depends_on": [ "transit", "nakshatra_pada" ]
+    },
+    {
+      "name": "yogas",
+      "label": { "en": "Yoga detection (Raja/Dhana/Mahapurusha/etc.)", "hi": "योग-निर्माण (राज/धन/पंचमहापुरुष आदि)" },
+      "type": "yoga",
+      "description": { "en": "Identifies named yogas from planet/sign/house relationships and evaluates their strength.", "hi": "ग्रह/राशि/भाव संबंधों से नामित योगों की पहचान और बल।" },
+      "source": { "text": "BPHS", "chapter": 15, "verse": 1 },
+      "alternatives": [ "Phaladeepika yoga chapters", "Saravali yoga definitions", "Jaimini Raja Yogas" ],
+      "invalidation": "A yoga must be strong, free from cancellation, and activated by dasha/transit to produce full results.",
+      "confidence": "medium",
+      "depends_on": [ "dignity", "lordOfHouse", "pstrength" ]
+    },
+    {
+      "name": "charaKarakas",
+      "label": { "en": "Chara Karakas (Jaimini)", "hi": "चर कारक (जैमिनि)" },
+      "type": "subtle",
+      "description": { "en": "Seven/ eight variable significators assigned by descending planetary longitude: Atmakaraka, Amatyakaraka, etc.", "hi": "अवरोही देशान्तर के अनुसार सात/आठ चर कारक: आत्मा, अमात्य आदि।" },
+      "source": { "text": "Jaimini Sutras", "chapter": 1, "verse": 11 },
+      "alternatives": [ "8-karaka scheme (including Rahu as Pitrukaraka)", "7-karaka scheme" ],
+      "invalidation": "Jaimini karaka assignment depends on exact degree order among planets; Rahu retrogression conventions vary.",
+      "confidence": "medium",
+      "depends_on": [ "ephemeris_planets" ]
+    },
+    {
+      "name": "arudha",
+      "label": { "en": "Arudha Lagna / Pada", "hi": "आरूढ़ लग्न / पाद" },
+      "type": "subtle",
+      "description": { "en": "Reflection/appearance chart derived by counting signs from a house lord to its sign and projecting the same distance forward.", "hi": "भाव-स्वामी से उसकी राशि तक गिनकर उतनी ही दूरी आगे बढ़ाने से बनी छवि-कुंडली।" },
+      "source": { "text": "BPHS", "chapter": 29, "verse": 1 },
+      "alternatives": [ "Jaimini Arudha calculation", "Bhavat-bhavam Arudha variants" ],
+      "invalidation": "Arudha sign falls in the 1st or 7th from the original sign, special exceptions apply (Arudha cannot equal the sign itself).",
+      "confidence": "medium",
+      "depends_on": [ "ascendant", "lordOfHouse" ]
+    },
+    {
+      "name": "argala",
+      "label": { "en": "Argala (intervention) and Virodha Argala", "hi": "अर्गल (हस्तक्षेप) और विरोधित अर्गल" },
+      "type": "subtle",
+      "description": { "en": "Planets in 2nd, 4th, 11th and 5th from a house cause argala (support/obstruction); 12th, 10th, 3rd and 9th obstruct it.", "hi": "किसी भाव के 2, 4, 11, 5 से ग्रह अर्गल बनाते हैं; 12, 10, 3, 9 से विरोधित अर्गल।" },
+      "source": { "text": "BPHS", "chapter": 31, "verse": 1 },
+      "alternatives": [ "Special argala rules for exalted/benefic planets", "Rahu-Ketu argala conventions" ],
+      "invalidation": "Argala strength depends on natural benefic/malefic nature and orb; current implementation is a structured approximation.",
+      "confidence": "medium",
+      "depends_on": [ "lordOfHouse" ]
+    },
+    {
+      "name": "kp_cusps",
+      "label": { "en": "KP cusps and sub-lords", "hi": "कृष्णमूर्ति पद्धति कस्प और सब-लॉर्ड" },
+      "type": "subtle",
+      "description": { "en": "Placidus cusps with KP ayanamsa; star lord / sub-lord determination for houses and planets.", "hi": "KP अयनांश के साथ प्लासिडस कस्प; भावों और ग्रहों के नक्षत्र-स्वामी और सब-लॉर्ड।" },
+      "source": { "text": "KP Ayanamsa & Tables", "chapter": 0, "verse": 0 },
+      "alternatives": [ "Traditional cuspless whole-sign", "Equal house system" ],
+      "invalidation": "KP requires very precise birth time and ayanamsa; small errors can change sub-lord significations.",
+      "confidence": "low",
+      "depends_on": [ "ascendant", "ayanamsa_lahiri" ]
+    },
+    {
+      "name": "house_lord_rules",
+      "label": { "en": "BPHS Ch13-14 house-lord placement rules", "hi": "BPHS अ.13-14 भावेश-स्थिति नियम" },
+      "type": "rule_fusion",
+      "description": { "en": "144 actionable rules on the effect of each house lord placed in each house, with exceptions and citations.", "hi": "144 कार्यान्वयन-योग्य नियम: प्रत्येक भावेश के प्रत्येक भाव में होने का फल, अपवाद और स्रोत सहित।" },
+      "source": { "text": "BPHS", "chapter": 13, "verse": 1 },
+      "alternatives": [ "Phaladeepika planet-in-house effects", "Saravali bhava-lord effects" ],
+      "invalidation": "Verse numbers are approximate until Pandit-verified; individual verses must be checked against a critical edition.",
+      "confidence": "medium",
+      "depends_on": [ "lordOfHouse" ]
+    },
+    {
+      "name": "planet_in_house_rules",
+      "label": { "en": "BPHS Ch11 planet-in-house rules", "hi": "BPHS अ.11 ग्रह-भाव-नियम" },
+      "type": "rule_fusion",
+      "description": { "en": "84 actionable rules on the effect of each classical planet (Sun through Saturn) placed in each of the 12 houses.", "hi": "84 कार्यान्वयन-योग्य नियम: सूर्य से शनि तक प्रत्येक ग्रह के 12 भावों में स्थित होने का फल।" },
+      "source": { "text": "BPHS", "chapter": 11, "verse": 1 },
+      "alternatives": [ "Saravali planet-in-house effects", "Phaladeepika graha-bhava-phala", "Jataka Parijata bhava-graha effects" ],
+      "invalidation": "Translations/weights are synthesized from standard Parashari meaning; exact Sanskrit verses and verse numbers must be Pandit-verified before upgrading confidence to 'high'.",
+      "confidence": "medium",
+      "depends_on": [ "planetHouse" ]
+    },
+    {
+      "name": "planet_in_sign_rules",
+      "label": { "en": "BPHS Ch11 planet-in-sign rules", "hi": "BPHS अ.11 ग्रह-राशि-नियम" },
+      "type": "rule_fusion",
+      "description": { "en": "84 actionable rules on the effect of each classical planet (Sun through Saturn) placed in each of the 12 signs.", "hi": "84 कार्यान्वयन-योग्य नियम: सूर्य से शनि तक प्रत्येक ग्रह की 12 राशियों में स्थित होने का फल।" },
+      "source": { "text": "BPHS", "chapter": 11, "verse": 1 },
+      "alternatives": [ "Saravali planet-in-sign effects", "Phaladeepika graha-rashi-phala", "Jataka Parijata rashi-graha effects" ],
+      "invalidation": "Sign effects are modified by house placement, aspects, combustion and dignity; they are a temperament layer, not the final prediction.",
+      "confidence": "medium",
+      "depends_on": [ "signOf" ]
+    },
+    {
+      "name": "career_fusion",
+      "label": { "en": "Career prediction fusion", "hi": "करियर भविष्यवाणी संगम" },
+      "type": "rule_fusion",
+      "description": { "en": "Weighted combination of D1, D10, yogas, dasha, Shadbala, nakshatra, Jaimini, KP and cited BPHS house-lord/planet-in-house evidence into a final score.", "hi": "D1, D10, योग, दशा, षड्बल, नक्षत्र, जैमिनि, KP और उद्धृत BPHS भावेश/ग्रह-भाव साक्ष्य का भारित संगम।" },
+      "source": { "text": "Jyotish Yantra", "chapter": 0, "verse": 0 },
+      "alternatives": [ "Traditional rule-based interpretation", "Pure machine-learning ensemble", "Pandit-reviewed manual synthesis" ],
+      "invalidation": "Weights are configurable approximations; final interpretation must consider the full chart, dasha and current circumstances (Desh-Kaal-Patra).",
+      "confidence": "low",
+      "depends_on": [ "house_lord_rules", "planet_in_house_rules", "planet_in_sign_rules", "shadbala", "divisional_charts", "vimshottari_dasha", "yogas", "charaKarakas", "kp_cusps" ]
+    }
+  ]
+}

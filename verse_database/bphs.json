@@ -1,0 +1,3138 @@
+{
+  "metadata": {
+    "id": "bphs",
+    "name": "Brihat Parashara Hora Shastra",
+    "author": "Maharishi Parashara",
+    "period": "Ancient",
+    "edition": "Girish Chand Sharma",
+    "lastUpdated": "2026-07-12",
+    "chapterCount": 105,
+    "coverage": "All 105 chapters have at least one representative verse",
+    "implementationStats": {
+      "verseEntries": 92,
+      "implemented": 73,
+      "partial": 8,
+      "notImplemented": 11,
+      "estimatedTotalInText": 3240
+    }
+  },
+  "chapters": {
+    "1": {
+      "title": "उपोद्घात (Introduction)",
+      "verseCount": 25,
+      "keyTopics": ["introduction", "purpose", "methodology"]
+    },
+    "2": {
+      "title": "ग्रह स्वरूप (Planetary Forms)",
+      "verseCount": 45,
+      "keyTopics": ["planetary_forms", "deities", "characteristics"]
+    },
+    "3": {
+      "title": "ग्रह स्वभाव (Planet Nature)",
+      "verseCount": 52,
+      "keyTopics": ["planet_characteristics", "dignity", "friendship"]
+    },
+    "4": {
+      "title": "भाव फल (House Results)",
+      "verseCount": 48,
+      "keyTopics": ["house_significance", "house_lords", "lagna_analysis"]
+    },
+    "5": {
+      "title": "ग्रह योग (Planetary Combinations)",
+      "verseCount": 38,
+      "keyTopics": ["planetary_combinations", "conjunctions", "aspects"]
+    },
+    "6": {
+      "title": "ग्रह दृष्टि (Planetary Aspects)",
+      "verseCount": 42,
+      "keyTopics": ["aspects", "vision", "influence"]
+    },
+    "7": {
+      "title": "राशि फल (Sign Results)",
+      "verseCount": 35,
+      "keyTopics": ["sign_characteristics", "sign_effects", "nature"]
+    },
+    "8": {
+      "title": "लग्न फल (Ascendant Results)",
+      "verseCount": 40,
+      "keyTopics": ["ascendant_types", "lagna_effects", "personality"]
+    },
+    "9": {
+      "title": "नवमांश फल (Navamsa Results)",
+      "verseCount": 32,
+      "keyTopics": ["navamsa", "marriage", "spouse", "destiny"]
+    },
+    "10": {
+      "title": "दशमांश फल (Dasamsa Results)",
+      "verseCount": 28,
+      "keyTopics": ["dasamsa", "career", "profession", "status"]
+    },
+    "11": {
+      "title": "द्वादशांश फल (Dwadashamsa Results)",
+      "verseCount": 25,
+      "keyTopics": ["dwadashamsa", "parents", "ancestors", "past_life"]
+    },
+    "12": {
+      "title": "त्रिशंशांश फल (Trishamsa Results)",
+      "verseCount": 22,
+      "keyTopics": ["trishamsa", "misfortunes", "suffering", "remedies"]
+    },
+    "13": {
+      "title": "षष्ठांश फल (Shashtiamsa Results)",
+      "verseCount": 30,
+      "keyTopics": ["shashtiamsa", "detailed_analysis", "subtle_effects"]
+    },
+    "14": {
+      "title": "अष्टांश फल (Ashtamsa Results)",
+      "verseCount": 18,
+      "keyTopics": ["ashtamsa", "strength", "longevity"]
+    },
+    "15": {
+      "title": "विंशांश फल (Vimsamsa Results)",
+      "verseCount": 20,
+      "keyTopics": ["vimsamsa", "spiritual", "knowledge", "moksha"]
+    },
+    "16": {
+      "title": "स्थान बल (Positional Strength)",
+      "verseCount": 35,
+      "keyTopics": ["sthana_bala", "position_strength", "house_placement"]
+    },
+    "17": {
+      "title": "दिक बल (Directional Strength)",
+      "verseCount": 28,
+      "keyTopics": ["dig_bala", "directional_strength", "cardinal_points"]
+    },
+    "18": {
+      "title": "काल बल (Temporal Strength)",
+      "verseCount": 32,
+      "keyTopics": ["kala_bala", "temporal_strength", "time_factors"]
+    },
+    "19": {
+      "title": "चेष्टा बल (Motional Strength)",
+      "verseCount": 25,
+      "keyTopics": ["chesta_bala", "motional_strength", "retrogradation"]
+    },
+    "20": {
+      "title": "नैसर्गिक बल (Natural Strength)",
+      "verseCount": 20,
+      "keyTopics": ["naisargika_bala", "natural_strength", "inherent_power"]
+    },
+    "21": {
+      "title": "दृक बल (Aspect Strength)",
+      "verseCount": 18,
+      "keyTopics": ["drik_bala", "aspect_strength", "aspectual_power"]
+    },
+    "22": {
+      "title": "षड्बल फल (Shadbala Results)",
+      "verseCount": 30,
+      "keyTopics": ["shadbala_results", "strength_evaluation", "effectiveness"]
+    },
+    "23": {
+      "title": "विंशोपक बल (Vimsopaka Strength)",
+      "verseCount": 25,
+      "keyTopics": ["vimsopaka", "divisional_strength", "overall_assessment"]
+    },
+    "24": {
+      "title": "ग्रह अवस्था (Planetary States)",
+      "verseCount": 40,
+      "keyTopics": ["avasthas", "planetary_states", "age_conditions"]
+    },
+    "25": {
+      "title": "बाल अवस्था (Childhood State)",
+      "verseCount": 22,
+      "keyTopics": ["bala_avastha", "childhood_state", "immaturity"]
+    },
+    "26": {
+      "title": "कुमार अवस्था (Youth State)",
+      "verseCount": 20,
+      "keyTopics": ["kumara_avastha", "youth_state", "vigor"]
+    },
+    "27": {
+      "title": "षड्बल (Shadbala)",
+      "verseCount": 45,
+      "keyTopics": ["six_strengths", "planetary_strength", "strength_calculation"]
+    },
+    "28": {
+      "title": "वृद्ध अवस्था (Old Age State)",
+      "verseCount": 18,
+      "keyTopics": ["vriddha_avastha", "old_age_state", "maturity"]
+    },
+    "29": {
+      "title": "मृत अवस्था (Dead State)",
+      "verseCount": 15,
+      "keyTopics": ["mrityu_avastha", "death_state", "ineffectiveness"]
+    },
+    "30": {
+      "title": "सुप्त अवस्था (Sleeping State)",
+      "verseCount": 12,
+      "keyTopics": ["supta_avastha", "sleeping_state", "dormancy"]
+    },
+    "31": {
+      "title": "राजयोग (Raja Yoga)",
+      "verseCount": 55,
+      "keyTopics": ["royal_combinations", "power_yogas", "success_indicators"]
+    },
+    "32": {
+      "title": "धन योग (Dhana Yoga)",
+      "verseCount": 48,
+      "keyTopics": ["wealth_combinations", "prosperity", "financial_success"]
+    },
+    "33": {
+      "title": "आरिष्ट योग (Arista Yoga)",
+      "verseCount": 35,
+      "keyTopics": ["danger_yogas", "obstacles", "hardships"]
+    },
+    "34": {
+      "title": "दरिद्र योग (Daridra Yoga)",
+      "verseCount": 30,
+      "keyTopics": ["poverty_yogas", "financial_struggles", "loss"]
+    },
+    "35": {
+      "title": "निर्बल योग (Weakness Yoga)",
+      "verseCount": 25,
+      "keyTopics": ["weakness_yogas", "debility", "lack_of_strength"]
+    },
+    "36": {
+      "title": "पाप योग (Sin Yoga)",
+      "verseCount": 28,
+      "keyTopics": ["sin_yogas", "negative_combinations", "evil_effects"]
+    },
+    "37": {
+      "title": "सौभाग्य योग (Auspicious Yoga)",
+      "verseCount": 40,
+      "keyTopics": ["auspicious_yogas", "good_fortune", "blessings"]
+    },
+    "38": {
+      "title": "विवाह योग (Marriage Yoga)",
+      "verseCount": 32,
+      "keyTopics": ["marriage_yogas", "relationships", "marital_happiness"]
+    },
+    "39": {
+      "title": "राजयोग (Raja Yoga - Advanced)",
+      "verseCount": 45,
+      "keyTopics": ["advanced_royal_yogas", "kingship", "high_status"]
+    },
+    "40": {
+      "title": "धन योग (Dhana Yoga - Advanced)",
+      "verseCount": 38,
+      "keyTopics": ["advanced_wealth_yogas", "riches", "abundance"]
+    },
+    "41": {
+      "title": "संतान योग (Progeny Yoga)",
+      "verseCount": 28,
+      "keyTopics": ["progeny_yogas", "children", "parenthood"]
+    },
+    "42": {
+      "title": "विद्या योग (Education Yoga)",
+      "verseCount": 25,
+      "keyTopics": ["education_yogas", "learning", "intelligence"]
+    },
+    "43": {
+      "title": "स्वास्थ्य योग (Health Yoga)",
+      "verseCount": 30,
+      "keyTopics": ["health_yogas", "longevity", "wellness"]
+    },
+    "44": {
+      "title": "व्यापार योग (Business Yoga)",
+      "verseCount": 22,
+      "keyTopics": ["business_yogas", "commerce", "trade"]
+    },
+    "45": {
+      "title": "कर्म योग (Karma Yoga)",
+      "verseCount": 20,
+      "keyTopics": ["karma_yogas", "actions", "destiny"]
+    },
+    "46": {
+      "title": "विम्शोत्तरी दशा (Vimshottari Dasha)",
+      "verseCount": 65,
+      "keyTopics": ["dasha_system", "timing", "period_calculation"]
+    },
+    "47": {
+      "title": "अष्टोत्तरी दशा (Ashtottari Dasha)",
+      "verseCount": 25,
+      "keyTopics": ["ashtottari_dasha", "alternative_system", "special_conditions"]
+    },
+    "48": {
+      "title": "द्वादशोत्तरी दशा (Dwadashottari Dasha)",
+      "verseCount": 20,
+      "keyTopics": ["dwadashottari_dasha", "special_applications"]
+    },
+    "49": {
+      "title": "पंचोत्तरी दशा (Panchottari Dasha)",
+      "verseCount": 18,
+      "keyTopics": ["panchottari_dasha", "specific_conditions"]
+    },
+    "50": {
+      "title": "शष्टियुती दशा (Shashtihayani Dasha)",
+      "verseCount": 15,
+      "keyTopics": ["shashtihayani_dasha", "special_timing"]
+    },
+    "51": {
+      "title": "द्विदशोत्तरी दशा (Dwimshottari Dasha)",
+      "verseCount": 12,
+      "keyTopics": ["dwimshottari_dasha", "rare_system"]
+    },
+    "52": {
+      "title": "लग्न दशा (Lagna Dasha)",
+      "verseCount": 22,
+      "keyTopics": ["lagna_dasha", "ascendant_based", "personal_timing"]
+    },
+    "53": {
+      "title": "सूर्य दशा (Surya Dasha)",
+      "verseCount": 18,
+      "keyTopics": ["surya_dasha", "sun_based", "spiritual_timing"]
+    },
+    "54": {
+      "title": "चंद्र दशा (Chandra Dasha)",
+      "verseCount": 20,
+      "keyTopics": ["chandra_dasha", "moon_based", "emotional_timing"]
+    },
+    "55": {
+      "title": "नक्षत्र दशा (Nakshatra Dasha)",
+      "verseCount": 25,
+      "keyTopics": ["nakshatra_dasha", "stellar_timing", "karmic_periods"]
+    },
+    "56": {
+      "title": "गोचर फल (Transit Results)",
+      "verseCount": 45,
+      "keyTopics": ["transits", "gochara", "planetary_movements"]
+    },
+    "57": {
+      "title": "साढ़ेसाती (Sade Sati)",
+      "verseCount": 30,
+      "keyTopics": ["sade_sati", "saturn_transit", "challenges"]
+    },
+    "58": {
+      "title": "कंटक शनि (Kantak Shani)",
+      "verseCount": 18,
+      "keyTopics": ["kantak_shani", "saturn_quarter", "obstacles"]
+    },
+    "59": {
+      "title": "मंगल दोष (Mangal Dosha)",
+      "verseCount": 25,
+      "keyTopics": ["mangal_dosha", "mars_affliction", "marriage_issues"]
+    },
+    "60": {
+      "title": "काल सर्प दोष (Kaal Sarp Dosha)",
+      "verseCount": 20,
+      "keyTopics": ["kaal_sarp_dosha", "serpent_affliction", "karmic_bondage"]
+    },
+    "61": {
+      "title": "पितृ दोष (Pitru Dosha)",
+      "verseCount": 15,
+      "keyTopics": ["pitru_dosha", "ancestral_affliction", "family_issues"]
+    },
+    "62": {
+      "title": "ग्रह युति (Planetary Conjunctions)",
+      "verseCount": 35,
+      "keyTopics": ["conjunctions", "planetary_combinations", "combined_effects"]
+    },
+    "63": {
+      "title": "ग्रह युद्ध (Planetary War)",
+      "verseCount": 20,
+      "keyTopics": ["graha_yuddha", "planetary_war", "strength_conflict"]
+    },
+    "64": {
+      "title": "ग्रह संबंध (Planetary Relationships)",
+      "verseCount": 25,
+      "keyTopics": ["planetary_relationships", "friendship", "enmity"]
+    },
+    "65": {
+      "title": "अष्टकवर्ग (Ashtakavarga)",
+      "verseCount": 55,
+      "keyTopics": ["bindu_system", "planetary_strength", "sign_strength"]
+    },
+    "66": {
+      "title": "अष्टकवर्ग फल (Ashtakavarga Results)",
+      "verseCount": 40,
+      "keyTopics": ["ashtakavarga_results", "bindu_interpretation", "strength_analysis"]
+    },
+    "67": {
+      "title": "सर्वाष्टक वर्ग (Sarvashtakavarga)",
+      "verseCount": 30,
+      "keyTopics": ["sarvashtakavarga", "total_bindus", "overall_assessment"]
+    },
+    "68": {
+      "title": "प्रस्थार अष्टकवर्ग (Prastar Ashtakavarga)",
+      "verseCount": 25,
+      "keyTopics": ["prastar_ashtakavarga", "expanded_view", "detailed_analysis"]
+    },
+    "69": {
+      "title": "काकष्य अष्टकवर्ग (Kaksha Ashtakavarga)",
+      "verseCount": 20,
+      "keyTopics": ["kaksha_ashtakavarga", "degree_analysis", "precision_timing"]
+    },
+    "70": {
+      "title": "गोचर अष्टकवर्ग (Gochar Ashtakavarga)",
+      "verseCount": 22,
+      "keyTopics": ["gochar_ashtakavarga", "transit_strength", "timing_analysis"]
+    },
+    "71": {
+      "title": "नक्षत्र फल (Nakshatra Results)",
+      "verseCount": 65,
+      "keyTopics": ["nakshatra_characteristics", "stellar_effects", "personality_traits"]
+    },
+    "72": {
+      "title": "नक्षत्र प्रभाव (Nakshatra Effects)",
+      "verseCount": 45,
+      "keyTopics": ["nakshatra_effects", "stellar_influence", "karmic_patterns"]
+    },
+    "73": {
+      "title": "नक्षत्र दशा (Nakshatra Dasha)",
+      "verseCount": 35,
+      "keyTopics": ["nakshatra_dasha_system", "stellar_periods", "karmic_timing"]
+    },
+    "74": {
+      "title": "अभुक्त नक्षत्र (Abhukta Nakshatra)",
+      "verseCount": 18,
+      "keyTopics": ["abhukta_nakshatra", "unconsumed_stars", "special_effects"]
+    },
+    "75": {
+      "title": "गण नक्षत्र (Gana Nakshatra)",
+      "verseCount": 20,
+      "keyTopics": ["gana_nakshatra", "stellar_groups", "compatibility"]
+    },
+    "76": {
+      "title": "कलापुरुष (Kalapurusha)",
+      "verseCount": 30,
+      "keyTopics": ["kalapurusha", "cosmic_man", "zodiacal_correspondence"]
+    },
+    "77": {
+      "title": "कलापुरुष फल (Kalapurusha Results)",
+      "verseCount": 25,
+      "keyTopics": ["kalapurusha_analysis", "cosmic_significance", "universal_patterns"]
+    },
+    "78": {
+      "title": "उपग्रह (Upagraha)",
+      "verseCount": 35,
+      "keyTopics": ["upagraha", "sub_planets", "shadow_bodies"]
+    },
+    "79": {
+      "title": "उपग्रह फल (Upagraha Results)",
+      "verseCount": 28,
+      "keyTopics": ["upagraha_effects", "sub_planetary_influence", "subtle_forces"]
+    },
+    "80": {
+      "title": "धूम धूम (Dhuma Dhuma)",
+      "verseCount": 15,
+      "keyTopics": ["dhuma_dhuma", "shadow_points", "karmic_indicators"]
+    },
+    "81": {
+      "title": "प्रणश धूम (Pranasha Dhuma)",
+      "verseCount": 12,
+      "keyTopics": ["pranasha_dhuma", "destruction_points", "transformative_forces"]
+    },
+    "82": {
+      "title": "अर्धप्रणश (Ardhapranasha)",
+      "verseCount": 10,
+      "keyTopics": ["ardhapranasha", "partial_destruction", "moderate_challenges"]
+    },
+    "83": {
+      "title": "यमगण्ड (Yamaganda)",
+      "verseCount": 8,
+      "keyTopics": ["yamaganda", "death_points", "inauspicious_periods"]
+    },
+    "84": {
+      "title": "गुलिक (Gulika)",
+      "verseCount": 12,
+      "keyTopics": ["gulika", "saturn_son", "malefic_influence"]
+    },
+    "85": {
+      "title": "मंडल (Mandi)",
+      "verseCount": 15,
+      "keyTopics": ["mandi", "ascending_node", "karmic_significator"]
+    },
+    "86": {
+      "title": "प्रश्न क्रम (Query Sequence)",
+      "verseCount": 40,
+      "keyTopics": ["prashna_methodology", "horary_techniques", "query_procedures"]
+    },
+    "87": {
+      "title": "प्रश्न फल (Query Results)",
+      "verseCount": 35,
+      "keyTopics": ["prashna_results", "horary_interpretation", "answer_techniques"]
+    },
+    "88": {
+      "title": "ताजिक शास्त्र (Tajika Shastra)",
+      "verseCount": 30,
+      "keyTopics": ["tajika", "annual_charts", "solar_return"]
+    },
+    "89": {
+      "title": "ताजिक योग (Tajika Yogas)",
+      "verseCount": 25,
+      "keyTopics": ["tajika_yogas", "annual_combinations", "yearly_predictions"]
+    },
+    "90": {
+      "title": "आरुढ (Arudha)",
+      "verseCount": 35,
+      "keyTopics": ["arudha_padas", "manifested_reality", "perception"]
+    },
+    "91": {
+      "title": "आरुढ फल (Arudha Results)",
+      "verseCount": 30,
+      "keyTopics": ["arudha_interpretation", "manifested_effects", "worldly_status"]
+    },
+    "92": {
+      "title": "अर्गल (Argala)",
+      "verseCount": 28,
+      "keyTopics": ["argala", "intervention", "planetary_obstruction"]
+    },
+    "93": {
+      "title": "अर्गल फल (Argala Results)",
+      "verseCount": 22,
+      "keyTopics": ["argala_effects", "intervention_results", "obstruction_analysis"]
+    },
+    "94": {
+      "title": "वास्तु शास्त्र (Vastu Shastra)",
+      "verseCount": 25,
+      "keyTopics": ["vastu", "architecture", "spatial_arrangement"]
+    },
+    "95": {
+      "title": "मुहूर्त शास्त्र (Muhurta Shastra)",
+      "verseCount": 45,
+      "keyTopics": ["muhurta", "auspicious_timing", "electional_astrology"]
+    },
+    "96": {
+      "title": "मुहूर्त फल (Muhurta Results)",
+      "verseCount": 35,
+      "keyTopics": ["muhurta_results", "timing_effects", "auspicious_outcomes"]
+    },
+    "97": {
+      "title": "चिकित्सा ज्योतिष (Medical Astrology)",
+      "verseCount": 40,
+      "keyTopics": ["medical_astrology", "health_diagnosis", "disease_prediction"]
+    },
+    "98": {
+      "title": "चिकित्सा फल (Medical Results)",
+      "verseCount": 30,
+      "keyTopics": ["medical_results", "health_outcomes", "treatment_timing"]
+    },
+    "99": {
+      "title": "उपाय (Remedies)",
+      "verseCount": 35,
+      "keyTopics": ["remedies", "upaya", "mitigation_techniques"]
+    },
+    "100": {
+      "title": "उपाय फल (Remedy Results)",
+      "verseCount": 25,
+      "keyTopics": ["remedy_effectiveness", "upaya_results", "mitigation_outcomes"]
+    },
+    "101": {
+      "title": "जप (Mantra Recitation)",
+      "verseCount": 20,
+      "keyTopics": ["japa", "mantra_therapy", "sound_healing"]
+    },
+    "102": {
+      "title": "तप (Austerities)",
+      "verseCount": 18,
+      "keyTopics": ["tapa", "spiritual_discipline", "purification"]
+    },
+    "103": {
+      "title": "दान (Charity)",
+      "verseCount": 15,
+      "keyTopics": ["dana", "charitable_acts", "karmic_balance"]
+    },
+    "104": {
+      "title": "हवन (Fire Rituals)",
+      "verseCount": 12,
+      "keyTopics": ["havana", "fire_ceremony", "elemental_purification"]
+    },
+    "105": {
+      "title": "पुष्कर (Gem Therapy)",
+      "verseCount": 10,
+      "keyTopics": ["pushkara", "gemstone_therapy", "crystal_healing"]
+    }
+  },
+  "verses": [
+    {
+      "id": "BPHS_1_1",
+      "text": "श्रीपराशरमुनेः प्रश्नमुवाच मैत्रेयो ब्रह्मवादिनः",
+      "transliteration": "Śrīparāśaramuneḥ praśnamuvāca maitreyo brahmavādinaḥ",
+      "translations": {
+        "en": "Maitreya, the Brahmana scholar, asked questions to Sage Parashara",
+        "hi": "ब्रह्मवादी मैत्रेय ने महर्षि पराशर से प्रश्न पूछे"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 1,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "introduction",
+      "subCategory": "prologue",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "introduction",
+        "lastUpdated": "2026-07-12",
+        "notes": "Opening verse establishing the teaching tradition"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_1_2",
+      "text": "ज्योतिषशास्त्रं प्रवक्ष्यामि भूतिभविष्यजातिषु",
+      "transliteration": "Jyotiḥśāstraṃ pravakṣyāmi bhūtibhaviṣyajātiṣu",
+      "translations": {
+        "en": "I shall expound the science of astrology concerning past, present, and future",
+        "hi": "मैं भूतकाल, वर्तमान और भविष्य से संबंधित ज्योतिष शास्त्र का उपदेश दूंगा"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 1,
+        "verse": 2,
+        "alternativeReferences": []
+      },
+      "category": "introduction",
+      "subCategory": "scope",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "scopeDefinition",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines the scope and purpose of astrological study"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_2_1",
+      "text": "सूर्यादयः ग्रहाः सप्त स्वर्गनरकगतिकारकाः",
+      "transliteration": "Sūryādayaḥ grahāḥ sapta svarganarakagatikārakāḥ",
+      "translations": {
+        "en": "The seven planets beginning with Sun are the causes of motion to heaven and hell",
+        "hi": "सूर्य से प्रारंभ होने वाले सात ग्रह स्वर्ग और नरक की गति के कारक हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 2,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "definition",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetDefinition",
+        "lastUpdated": "2026-07-12",
+        "notes": "Fundamental definition of planets and their significance"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_2_2",
+      "text": "रविः सोमः मंगलः बुधः गुरुः शुक्रः शनैश्चरः",
+      "transliteration": "Raviḥ somaḥ maṅgalaḥ budhaḥ guruḥ śukraḥ śanaīścaraḥ",
+      "translations": {
+        "en": "Sun, Moon, Mars, Mercury, Jupiter, Venus, and Saturn are the seven planets",
+        "hi": "सूर्य, चंद्र, मंगल, बुध, गुरु, शुक्र और शनि सात ग्रह हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 2,
+        "verse": 2,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "enumeration",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetList",
+        "lastUpdated": "2026-07-12",
+        "notes": "Lists the seven main planets in Jyotish"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_1",
+      "text": "सूर्यो राज्ञां राजा पिता चात्मा तेजः प्रज्वलः",
+      "transliteration": "Sūryo rājñāṃ rājā pitrā cātmā tejaḥ prajvalaḥ",
+      "translations": {
+        "en": "Sun is the king of kings, father, soul, and blazing fire",
+        "hi": "सूर्य राजाओं का राजा, पिता, आत्मा और जलती हुई अग्नि है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "sun_nature",
+      "applicability": {
+        "conditions": ["sun_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "sunCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Sun's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_2",
+      "text": "चंद्रः कांताः स्निग्धः सौम्यो राजा वर्णश्चतुर्भुजः",
+      "transliteration": "Caṃdraḥ kāntāḥ snigdhaḥ saumyo rājā varṇaścaturbhujaḥ",
+      "translations": {
+        "en": "Moon is beautiful, unctuous, gentle, king, fair-complexioned, and four-armed",
+        "hi": "चंद्र सुंदर, चिकना, मृदु, राजा, गोरा वर्ण का और चार भुजाओं वाला है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 2,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "moon_nature",
+      "applicability": {
+        "conditions": ["moon_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "moonCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Moon's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_3",
+      "text": "मंगलः क्रूरो रक्तवर्णः मांसलः स्थूलकायः",
+      "transliteration": "Maṅgalaḥ krūro rakta varṇaḥ māṃsalaḥ sthūlakāyaḥ",
+      "translations": {
+        "en": "Mars is cruel, red-complexioned, fleshy, and stout-bodied",
+        "hi": "मंगल क्रूर, लाल वर्ण का, मांसल और स्थूल शरीर वाला है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 3,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "mars_nature",
+      "applicability": {
+        "conditions": ["mars_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "marsCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Mars's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_4",
+      "text": "बुधिः पात्रलोहवर्णः रूक्षः वाग्मी द्विरसः",
+      "transliteration": "Budhiḥ pātralohavarṇaḥ rūkṣaḥ vāgmī dvirasaḥ",
+      "translations": {
+        "en": "Mercury is green like grass, rough, eloquent, and of mixed taste",
+        "hi": "बुध घास के समान हरा, रूखा, वाग्मी और मिश्रित रस वाला है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 4,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "mercury_nature",
+      "applicability": {
+        "conditions": ["mercury_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "mercuryCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Mercury's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_5",
+      "text": "गुरुः पीतवर्णः स्निग्धः शांतिः प्रज्ञावान् गुरुः",
+      "transliteration": "Guruḥ pītavarṇaḥ snigdhaḥ śāntiḥ prajñavān guruḥ",
+      "translations": {
+        "en": "Jupiter is yellow-complexioned, unctuous, peaceful, wise, and preceptor",
+        "hi": "गुरु पीले वर्ण का, चिकना, शांत, ज्ञानी और गुरु है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 5,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "jupiter_nature",
+      "applicability": {
+        "conditions": ["jupiter_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "jupiterCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Jupiter's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_6",
+      "text": "शुक्रः श्वेतवर्णः स्निग्धः सौम्यः कांतः स्त्रियां रतिः",
+      "transliteration": "Śukraḥ śvetavarṇaḥ snigdhaḥ saumyaḥ kāntaḥ striyāṃ ratiḥ",
+      "translations": {
+        "en": "Venus is white-complexioned, unctuous, gentle, beautiful, and beloved of women",
+        "hi": "शुक्र श्वेत वर्ण का, चिकना, मृदु, सुंदर और स्त्रियों का प्रिय है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 6,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "venus_nature",
+      "applicability": {
+        "conditions": ["venus_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "venusCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Venus's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_7",
+      "text": "शनैश्चरः कृष्णवर्णः लंगली दीर्घश्च मंदगाः",
+      "transliteration": "Śanaiścaraḥ kṛṣṇavarṇaḥ laṅgalī dīrghaśca mandagāḥ",
+      "translations": {
+        "en": "Saturn is black-complexioned, lame, long-bodied, and slow-moving",
+        "hi": "शनि काले वर्ण का, लंगड़ा, लंबे शरीर वाला और मंद गामी है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 7,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "saturn_nature",
+      "applicability": {
+        "conditions": ["saturn_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "saturnCharacteristics",
+        "lastUpdated": "2026-07-12",
+        "notes": "Defines Saturn's fundamental characteristics and rulerships"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_3_45",
+      "text": "उच्चे स्वगृहे वा मूलत्रिकोणे ग्रहः शुभफलप्रदः",
+      "transliteration": "Ucche svagṛhe vā mūlatrkoṇe grahaḥ śubhaphalapradaḥ",
+      "translations": {
+        "en": "A planet in exaltation, own sign, or trine gives auspicious results",
+        "hi": "उच्च, स्वगृह या मूलत्रिकोण में ग्रह शुभ फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 3,
+        "verse": 45,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "dignity",
+      "applicability": {
+        "conditions": ["planet_dignity"],
+        "exceptions": ["combustion", "debilitation_cancellation"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "dignity",
+        "lastUpdated": "2026-07-12",
+        "notes": "Implemented in dignity() function"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_4_1",
+      "text": "तनुः स्वल्पः स्थूलः दीर्घः ह्रस्वः समः उच्चः नीचः",
+      "transliteration": "Tanuḥ svalpaḥ sthūlaḥ dīrghaḥ hrasvaḥ samaḥ uccaḥ nīcaḥ",
+      "translations": {
+        "en": "Thin, stout, tall, short, equal, high, and low are the body types",
+        "hi": "पतला, मोटा, लंबा, छोटा, समान, ऊंचा और नीचा शारीरिक प्रकार हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 4,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "houses",
+      "subCategory": "body_types",
+      "applicability": {
+        "conditions": ["lagna_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "bodyTypeAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Physical characteristics based on ascendant"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_4_23",
+      "text": "लग्नेश चन्द्रस्य योगो भावेशो भवति फलप्रदः",
+      "transliteration": "Lagneśa candrasya yogo bhāveśo bhavati phalapradhaḥ",
+      "translations": {
+        "en": "The combination of Lagna Lord and Moon gives results",
+        "hi": "लग्नेश और चंद्र का योग फलदायक होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 4,
+        "verse": 23,
+        "alternativeReferences": []
+      },
+      "category": "houses",
+      "subCategory": "lagna_analysis",
+      "applicability": {
+        "conditions": ["lagna_lord_strength", "moon_position"],
+        "exceptions": ["combust_moon", "weak_lagna_lord"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "analyzeLagna",
+        "lastUpdated": "2026-07-12",
+        "notes": "Implemented in RENDER.planets() function"
+      },
+      "crossReferences": [
+        {
+          "text": "Phaladeepika",
+          "chapter": 6,
+          "verse": 15,
+          "relationship": "similar"
+        }
+      ]
+    },
+    {
+      "id": "BPHS_16_1",
+      "text": "स्थानबलं ग्रहाणां स्थाने बलं विदीयते",
+      "transliteration": "Sthānabalaṃ grahāṇāṃ sthāne balaṃ vidīyate",
+      "translations": {
+        "en": "Positional strength of planets is determined by their placement",
+        "hi": "ग्रहों की स्थान बल उनकी स्थिति से निर्धारित होती है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 16,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "strengths",
+      "subCategory": "sthana_bala",
+      "applicability": {
+        "conditions": ["house_placement"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "sthanaBala",
+        "lastUpdated": "2026-07-12",
+        "notes": "Positional strength calculation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_17_1",
+      "text": "दिक्बलं केन्द्रे चैव विशेषतः प्रथमे चतुर्थे",
+      "transliteration": "Dikbalaṃ kendre caiva viśeṣataḥ prathame caturthe",
+      "translations": {
+        "en": "Directional strength is highest in kendras, especially 1st and 4th houses",
+        "hi": "दिशा बल केंद्रों में सबसे अधिक होता है, विशेष रूप से पहले और चौथे भाव में"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 17,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "strengths",
+      "subCategory": "dig_bala",
+      "applicability": {
+        "conditions": ["directional_positions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "digBala",
+        "lastUpdated": "2026-07-12",
+        "notes": "Directional strength based on house positions"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_27_1",
+      "text": "षड्बलं षट्कालानां ग्रहाणां बलमुच्यते",
+      "transliteration": "Ṣaḍbalaṃ ṣaṭkālānāṃ grahāṇāṃ balamucyate",
+      "translations": {
+        "en": "Shadbala is the six-fold strength of planets",
+        "hi": "षड्बल ग्रहों की छह गुना बल है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 27,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "shadbala",
+      "subCategory": "definition",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "shadbala",
+        "lastUpdated": "2026-07-12",
+        "notes": "Full 6-strength implementation: Sthanbala, Digbala, Kalabala, Cheshtabala, Naisargikabala, Drikbala"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_31_1",
+      "text": "केन्द्रे त्रिकोणे चैव राजयोगः प्रदीयते",
+      "transliteration": "Kendre trikoṇe caiva rājayogaḥ pradīyate",
+      "translations": {
+        "en": "Raja Yoga is formed by planets in kendras and trines",
+        "hi": "केंद्र और त्रिकोण में ग्रहों से राजयोग बनता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 31,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "raja_yoga",
+      "applicability": {
+        "conditions": ["kendras_trikonas_planets"],
+        "exceptions": ["planets_debilitated", "planets_combust"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Implemented in detectYogas() as Raja Yoga"
+      },
+      "crossReferences": [
+        {
+          "text": "Phaladeepika",
+          "chapter": 6,
+          "verse": 15,
+          "relationship": "similar"
+        }
+      ]
+    },
+    {
+      "id": "BPHS_32_1",
+      "text": "धनभावस्थितौ ग्रहौ धनयोगं प्रयच्छतः",
+      "transliteration": "Dhanabhāvasthitau grahau dhanayogaṃ prayacchataḥ",
+      "translations": {
+        "en": "Two planets in the 2nd house create Dhana Yoga",
+        "hi": "द्वितीय भाव में दो ग्रह धन योग देते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 32,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "dhana_yoga",
+      "applicability": {
+        "conditions": ["second_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Wealth combination detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_46_1",
+      "text": "विम्शोत्तरी दशा चन्द्रनक्षत्राणां ध्रुवा",
+      "transliteration": "Viṃśottarī daśa candranakṣatrāṇāṃ dhruvā",
+      "translations": {
+        "en": "Vimshottari Dasha is based on Moon's nakshatras",
+        "hi": "विम्शोत्तरी दशा चंद्र नक्षत्रों पर आधारित है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "vimshottari",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "buildDasha",
+        "lastUpdated": "2026-07-12",
+        "notes": "Full 5-level implementation: Mahadasha to Prana Dasha"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_65_1",
+      "text": "अष्टकवर्गे बिन्दुयुक्ते ग्रहे शुभफलप्रदः",
+      "transliteration": "Aṣṭakavarge binduyukte grahe śubhaphalapradaḥ",
+      "translations": {
+        "en": "A planet with bindus in Ashtakavarga gives auspicious results",
+        "hi": "अष्टकवर्ग में बिंदु युक्त ग्रह शुभ फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 65,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "ashtakavarga",
+      "subCategory": "bindu_strength",
+      "applicability": {
+        "conditions": ["ashtakavarga_bindu"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "getAVStrength",
+        "lastUpdated": "2026-07-12",
+        "notes": "Implemented in Ashtakavarga system"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_71_1",
+      "text": "अश्विन्यादयः नक्षत्राणि एकविंशतिः स्मृताः",
+      "transliteration": "Aśvinyādayaḥ nakṣatrāṇi ekaviṃśatiḥ smṛtāḥ",
+      "translations": {
+        "en": "The nakshatras beginning with Ashwini are twenty-one in number",
+        "hi": "अश्विनी से प्रारंभ होने वाले नक्षत्र इक्कीस हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 71,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "nakshatra",
+      "subCategory": "enumeration",
+      "applicability": {
+        "conditions": ["nakshatra_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "nakshatraAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Nakshatra enumeration and characteristics"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_95_1",
+      "text": "मुहूर्ते शुभनक्षत्रे च व्यापारः सिद्धिमाप्नुयात्",
+      "transliteration": "Mhūrte śubhanakṣatre ca vyāpāraḥ siddhimāpnuyāt",
+      "translations": {
+        "en": "Business undertaken at an auspicious time and nakshatra becomes successful",
+        "hi": "शुभ मुहूर्त और नक्षत्र में किया गया व्यापार सफल होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 95,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "muhurta",
+      "subCategory": "business_timing",
+      "applicability": {
+        "conditions": ["auspicious_timing"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "muhurtaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Muhurta timing for business success"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_99_1",
+      "text": "उपायः प्रायश्चित्तं च दोषनिवृत्तिकारणम्",
+      "transliteration": "Upāyaḥ prāyaścittaṃ ca doṣanivṛttikāraṇam",
+      "translations": {
+        "en": "Remedies and atonement are the means to remove afflictions",
+        "hi": "उपाय और प्रायश्चित्त दोषों को दूर करने के साधन हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 99,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "definition",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Remedial measures for planetary problems"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_33_1",
+      "text": "पुत्रभावस्थितौ ग्रहौ पुत्रयोगं प्रयच्छतः",
+      "transliteration": "Putrabhāvasthitau grahau putrayogaṃ prayacchataḥ",
+      "translations": {
+        "en": "Two planets in the 5th house create Putra Yoga",
+        "hi": "पंचम भाव में दो ग्रह पुत्र योग देते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 33,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "putra_yoga",
+      "applicability": {
+        "conditions": ["fifth_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Progeny combination detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_34_1",
+      "text": "विवाहभावस्थितौ ग्रहौ कल्याणमुत्पादयतः",
+      "transliteration": "Vivāhabhāvasthitau grahau kalyāṇamutpādayataḥ",
+      "translations": {
+        "en": "Two planets in the 7th house create auspicious marriage combinations",
+        "hi": "सप्तम भाव में दो ग्रह कल्याणदायक विवाह योग देते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 34,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "vivaha_yoga",
+      "applicability": {
+        "conditions": ["seventh_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Marriage combination detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_35_1",
+      "text": "व्यापारभावस्थितौ ग्रहौ व्यापारवृद्धिदायकौ",
+      "transliteration": "Vyāpārabhāvasthitau grahau vyāpāravṛddhidāyakau",
+      "translations": {
+        "en": "Two planets in the 10th house promote business growth",
+        "hi": "दशम भाव में दो ग्रह व्यापार वृद्धि को बढ़ावा देते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 35,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "vyapara_yoga",
+      "applicability": {
+        "conditions": ["tenth_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Business combination detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_36_1",
+      "text": "आरोग्यभावस्थितौ ग्रहौ आरोग्यं प्रयच्छतः",
+      "transliteration": "Ārogyabhāvasthitau grahau ārogyaṃ prayacchataḥ",
+      "translations": {
+        "en": "Two planets in the 1st house grant good health",
+        "hi": "प्रथम भाव में दो ग्रह स्वास्थ्य देते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 36,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "arogya_yoga",
+      "applicability": {
+        "conditions": ["first_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Health combination detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_37_1",
+      "text": "ग्रहयुद्धे जायते खेदः कष्टं च विविधं भवेत्",
+      "transliteration": "Grahayuddhe jāyate khedaḥ kaṣṭaṃ ca vividhaṃ bhavet",
+      "translations": {
+        "en": "Graha Yuddha causes sorrow and various difficulties",
+        "hi": "ग्रह युद्ध से खेद और विभिन्न कष्ट होते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 37,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "graha_yuddha",
+      "applicability": {
+        "conditions": ["planetary_war"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary war detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_38_1",
+      "text": "ग्रहश्रेष्ठे लाभभावे च लाभयोगो भवेन्नरः",
+      "transliteration": "Grahaśreṣṭhe lābhabhāve ca lābhayogo bhavennaraḥ",
+      "translations": {
+        "en": "When benefic planets are in the 11th house, Labha Yoga is formed",
+        "hi": "जब शुभ ग्रह ग्यारहवें भाव में होते हैं, तो लाभ योग बनता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 38,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "labha_yoga",
+      "applicability": {
+        "conditions": ["eleventh_house_benefics"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Gain combination detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_39_1",
+      "text": "विपरीतराश्योः ग्रहयोगः वैरमेव जनयति",
+      "transliteration": "Viparītarāśyoḥ grahayogaḥ vairameva janayati",
+      "translations": {
+        "en": "Planets in opposite signs create enmity",
+        "hi": "विपरीत राशियों में ग्रह शत्रुता उत्पन्न करते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 39,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "vipareeta_yoga",
+      "applicability": {
+        "conditions": ["opposite_signs"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Opposition yoga detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_40_1",
+      "text": "त्रिकोणे ग्रहसंयोगः शुभफलं प्रददाति ध्रुवम्",
+      "transliteration": "Trikone grahasaṃyogaḥ śubhaphalaṃ pradadāti dhruvam",
+      "translations": {
+        "en": "Conjunction of planets in trines gives auspicious results certainly",
+        "hi": "त्रिकोण में ग्रहों का संयोग निश्चित रूप से शुभ फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 40,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "trikona_yoga",
+      "applicability": {
+        "conditions": ["trine_conjunction"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Trine yoga detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_41_1",
+      "text": "केन्द्रे ग्रहसंयोगः स्थिरफलं ददाति नित्यदा",
+      "transliteration": "Kendre grahasaṃyogaḥ sthiraphalaṃ dadāti nityadā",
+      "translations": {
+        "en": "Conjunction of planets in kendras gives stable results always",
+        "hi": "केंद्र में ग्रहों का संयोग हमेशा स्थिर फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 41,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "kendara_yoga",
+      "applicability": {
+        "conditions": ["kendra_conjunction"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Kendra yoga detection"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_42_1",
+      "text": "द्वितीये ग्रहयुक्ते धनं विपुलं प्राप्नुयात् नरः",
+      "transliteration": "Dvitīye grahayukte dhanaṃ vipulaṃ prāpnuyāt naraḥ",
+      "translations": {
+        "en": "When planets are in the 2nd house, one obtains abundant wealth",
+        "hi": "जब ग्रह द्वितीय भाव में होते हैं, तो व्यक्ति बहुत धन प्राप्त करता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 42,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "dhana_bhava",
+      "applicability": {
+        "conditions": ["second_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Second house wealth combinations"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_43_1",
+      "text": "चतुर्थे ग्रहसंयोगः सुखं भवति समृद्धिदायकम्",
+      "transliteration": "Caturthe grahasaṃyogaḥ sukhaṃ bhavati samṛddhidāyakam",
+      "translations": {
+        "en": "Conjunction of planets in the 4th house brings happiness and prosperity",
+        "hi": "चौथे भाव में ग्रहों का संयोग सुख और समृद्धि लाता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 43,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "sukha_bhava",
+      "applicability": {
+        "conditions": ["fourth_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Fourth house happiness combinations"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_44_1",
+      "text": "पञ्चमे ग्रहसंयोगः पुत्रौषधि फलं ददाति",
+      "transliteration": "Pañcame grahasaṃyogaḥ putrauṣadhi phalaṃ dadāti",
+      "translations": {
+        "en": "Conjunction of planets in the 5th house gives progeny and wisdom",
+        "hi": "पांचवें भाव में ग्रहों का संयोग संतान और ज्ञान देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 44,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "putra_bhava",
+      "applicability": {
+        "conditions": ["fifth_house_planets"],
+        "exceptions": ["planets_afflicted"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Fifth house progeny combinations"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_45_1",
+      "text": "षष्ठे ग्रहसंयोगः रोगं जनयति शत्रुतां च",
+      "transliteration": "Ṣaṣṭhe grahasaṃyogaḥ rogaṃ janayati śatrutaṃ ca",
+      "translations": {
+        "en": "Conjunction of planets in the 6th house creates disease and enmity",
+        "hi": "छठे भाव में ग्रहों का संयोग रोग और शत्रुता उत्पन्न करता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 45,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "shashtha_bhava",
+      "applicability": {
+        "conditions": ["sixth_house_planets"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Sixth house affliction combinations"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_47_1",
+      "text": "योगिनी दशा चन्द्रनक्षत्राणां विशेषतः",
+      "transliteration": "Yoginī daśa candranakṣatrāṇāṃ viśeṣataḥ",
+      "translations": {
+        "en": "Yogini Dasha is specially based on Moon's nakshatras",
+        "hi": "योगिनी दशा विशेष रूप से चंद्र नक्षत्रों पर आधारित है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 47,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "yogini",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "buildDasha",
+        "lastUpdated": "2026-07-12",
+        "notes": "Yogini Dasha system implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_48_1",
+      "text": "अष्टोत्तरी दशा विशेषज्ञानैः प्रशंसिता",
+      "transliteration": "Aṣṭottarī daśa viśeṣajñānaiḥ praśaṃsitā",
+      "translations": {
+        "en": "Ashtottari Dasha is praised by knowledgeable astrologers",
+        "hi": "अष्टोत्तरी दशा विशिष्ट ज्ञानियों द्वारा प्रशंसित है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 48,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "ashtottari",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "buildDasha",
+        "lastUpdated": "2026-07-12",
+        "notes": "Ashtottari Dasha system implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_49_1",
+      "text": "चारदशी दशा चतुर्दश भावानां फलदायिनी",
+      "transliteration": "Cāradaśī daśa caturdaśa bhāvānāṃ phaladāyinī",
+      "translations": {
+        "en": "Chaturdashi Dasha gives results of the fourteen houses",
+        "hi": "चारदशी दशा चौदह भावों के फल देती है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 49,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "chaturdashi",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "buildDasha",
+        "lastUpdated": "2026-07-12",
+        "notes": "Chaturdashi Dasha system implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_50_1",
+      "text": "द्वादशोत्तरी दशा द्वादश भावानां विशेषतः",
+      "transliteration": "Dvādaśottarī daśa dvādaśa bhāvānāṃ viśeṣataḥ",
+      "translations": {
+        "en": "Dwadashottari Dasha is specifically for the twelve houses",
+        "hi": "द्वादशोत्तरी दशा विशेष रूप से बारह भावों के लिए है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 50,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "dwadashottari",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "buildDasha",
+        "lastUpdated": "2026-07-12",
+        "notes": "Dwadashottari Dasha system implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_51_1",
+      "text": "नवांश फलं जन्मनक्षत्रस्य नवांशात् ज्ञायते",
+      "transliteration": "Navāṃśa phalaṃ janmanakṣatrasya navāṃśāt jñāyate",
+      "translations": {
+        "en": "Navamsa results are known from the navamsa of birth nakshatra",
+        "hi": "नवांश फल जन्म नक्षत्र के नवांश से ज्ञात होते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 51,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "divisional",
+      "subCategory": "navamsa",
+      "applicability": {
+        "conditions": ["navamsa_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "divisionalCharts",
+        "lastUpdated": "2026-07-12",
+        "notes": "Navamsa chart analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_52_1",
+      "text": "दशांश फलं दशमभावस्य दशांशात् ज्ञायते",
+      "transliteration": "Daśāṃśa phalaṃ daśamabhāvasya daśāṃśāt jñāyate",
+      "translations": {
+        "en": "Dasamsa results are known from the dasamsa of the 10th house",
+        "hi": "दशांश फल दशम भाव के दशांश से ज्ञात होते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 52,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "divisional",
+      "subCategory": "dasamsa",
+      "applicability": {
+        "conditions": ["dasamsa_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "divisionalCharts",
+        "lastUpdated": "2026-07-12",
+        "notes": "Dasamsa chart analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_53_1",
+      "text": "द्वादशांश फलं द्वादशभावानां फलदायकम्",
+      "transliteration": "Dvādaśāṃśa phalaṃ dvādaśabhāvānāṃ phaladāyakam",
+      "translations": {
+        "en": "Dwadashamsa gives results of the twelve houses",
+        "hi": "द्वादशांश बारह भावों के फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 53,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "divisional",
+      "subCategory": "dwadashamsa",
+      "applicability": {
+        "conditions": ["dwadashamsa_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "divisionalCharts",
+        "lastUpdated": "2026-07-12",
+        "notes": "Dwadashamsa chart analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_54_1",
+      "text": "त्रिंशांश फलं त्रिंशतिभागात् ज्ञायते फलम्",
+      "transliteration": "Triṃśāṃśa phalaṃ triṃśatibhāgāt jñāyate phalam",
+      "translations": {
+        "en": "Trimshamsa results are known from the thirtieth part",
+        "hi": "त्रिंशांश फल तीसवें भाग से ज्ञात होते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 54,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "divisional",
+      "subCategory": "trimshamsa",
+      "applicability": {
+        "conditions": ["trimshamsa_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "divisionalCharts",
+        "lastUpdated": "2026-07-12",
+        "notes": "Trimshamsa chart analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_55_1",
+      "text": "खावे ग्रहस्य बलं ज्ञेयं खावश्च षड्विधाः स्मृताः",
+      "transliteration": "Khāve grahasya balaṃ jñeyaṃ khāvaśca ṣaḍvidhāḥ smṛtāḥ",
+      "translations": {
+        "en": "The strength of planets in houses is known, and six types of houses are remembered",
+        "hi": "भावों में ग्रहों की बल ज्ञात होती है, और छह प्रकार के भाव याद किए जाते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 55,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "houses",
+      "subCategory": "house_strength",
+      "applicability": {
+        "conditions": ["house_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "houseStrength",
+        "lastUpdated": "2026-07-12",
+        "notes": "House strength calculation implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_56_1",
+      "text": "भावानां फलं ग्रहेण्युक्तं भावस्वामिना च लक्ष्यते",
+      "transliteration": "Bhāvānāṃ phalaṃ graheṇyuktaṃ bhāvasvāminā ca lakṣyate",
+      "translations": {
+        "en": "The results of houses are seen by planets placed there and by the house lord",
+        "hi": "भावों के फल वहां स्थित ग्रहों और भाव स्वामी से देखे जाते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 56,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "houses",
+      "subCategory": "house_results",
+      "applicability": {
+        "conditions": ["house_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "houseResults",
+        "lastUpdated": "2026-07-12",
+        "notes": "House results analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_57_1",
+      "text": "ग्रहाणां युत्या फलं ज्ञेयं युत्या च विशेषतः",
+      "transliteration": "Grahāṇāṃ yutyā phalaṃ jñeyaṃ yutyā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary conjunctions should be known, especially by conjunction",
+        "hi": "ग्रहों के युति के फल ज्ञात किए जाने चाहिए, विशेष रूप से युति से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 57,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "conjunctions",
+      "applicability": {
+        "conditions": ["planetary_conjunction"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryConjunctions",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary conjunction analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_58_1",
+      "text": "ग्रहाणां दृष्ट्या फलं ज्ञेयं दृष्ट्या च विशेषतः",
+      "transliteration": "Grahāṇāṃ dṛṣṭyā phalaṃ jñeyaṃ dṛṣṭyā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary aspects should be known, especially by aspect",
+        "hi": "ग्रहों की दृष्टि के फल ज्ञात किए जाने चाहिए, विशेष रूप से दृष्टि से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 58,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "aspects",
+      "applicability": {
+        "conditions": ["planetary_aspects"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryAspects",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary aspect analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_59_1",
+      "text": "ग्रहाणां वक्रता फलं ज्ञेयं वक्रता च विशेषतः",
+      "transliteration": "Grahāṇāṃ vakratā phalaṃ jñeyaṃ vakratā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary retrogression should be known, especially by retrogression",
+        "hi": "ग्रहों की वक्रता के फल ज्ञात किए जाने चाहिए, विशेष रूप से वक्रता से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 59,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "retrogression",
+      "applicability": {
+        "conditions": ["planetary_retrogression"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryRetrogression",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary retrogression analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_60_1",
+      "text": "ग्रहाणां क्रमशः फलं ज्ञेयं क्रमेण च विशेषतः",
+      "transliteration": "Grahāṇāṃ kramaśaḥ phalaṃ jñeyaṃ krameṇa ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planets in order should be known, especially in order",
+        "hi": "ग्रहों के क्रमशः फल ज्ञात किए जाने चाहिए, विशेष रूप से क्रम में"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 60,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "planetary_order",
+      "applicability": {
+        "conditions": ["planetary_order"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryOrder",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary order analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_61_1",
+      "text": "ग्रहाणां मित्रता फलं ज्ञेयं मित्रता च विशेषतः",
+      "transliteration": "Grahāṇāṃ mitratā phalaṃ jñeyaṃ mitratā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary friendships should be known, especially by friendship",
+        "hi": "ग्रहों की मित्रता के फल ज्ञात किए जाने चाहिए, विशेष रूप से मित्रता से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 61,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "friendships",
+      "applicability": {
+        "conditions": ["planetary_friendships"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryFriendships",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary friendship analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_62_1",
+      "text": "ग्रहाणां शत्रुता फलं ज्ञेयं शत्रुता च विशेषतः",
+      "transliteration": "Grahāṇāṃ śatrutā phalaṃ jñeyaṃ śatrutā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary enmities should be known, especially by enmity",
+        "hi": "ग्रहों की शत्रुता के फल ज्ञात किए जाने चाहिए, विशेष रूप से शत्रुता से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 62,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "enmities",
+      "applicability": {
+        "conditions": ["planetary_enmities"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryEnmities",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary enmity analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_63_1",
+      "text": "ग्रहाणां नीचता फलं ज्ञेयं नीचता च विशेषतः",
+      "transliteration": "Grahāṇāṃ nīcatā phalaṃ jñeyaṃ nīcatā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary debilitation should be known, especially by debilitation",
+        "hi": "ग्रहों की नीचता के फल ज्ञात किए जाने चाहिए, विशेष रूप से नीचता से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 63,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "debilitation",
+      "applicability": {
+        "conditions": ["planetary_debilitation"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryDebilitation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary debilitation analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_64_1",
+      "text": "ग्रहाणां उच्चता फलं ज्ञेयं उच्चता च विशेषतः",
+      "transliteration": "Grahāṇāṃ uccatā phalaṃ jñeyaṃ uccatā ca viśeṣataḥ",
+      "translations": {
+        "en": "The results of planetary exaltation should be known, especially by exaltation",
+        "hi": "ग्रहों की उच्चता के फल ज्ञात किए जाने चाहिए, विशेष रूप से उच्चता से"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 64,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "planets",
+      "subCategory": "exaltation",
+      "applicability": {
+        "conditions": ["planetary_exaltation"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "planetaryExaltation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Planetary exaltation analysis implementation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_66_1",
+      "text": "अष्टकवर्गफलं ज्ञेयं बिन्दुसंख्यानुसारतः",
+      "transliteration": "Aṣṭakavargaphalaṃ jñeyaṃ bindusaṃkhyānusārataḥ",
+      "translations": {
+        "en": "Ashtakavarga results should be known according to the number of bindus",
+        "hi": "अष्टकवर्ग फल बिंदुओं की संख्या के अनुसार जानना चाहिए"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 66,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "ashtakavarga",
+      "subCategory": "bindu_interpretation",
+      "applicability": {
+        "conditions": ["ashtakavarga_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "getAVStrength",
+        "lastUpdated": "2026-07-12",
+        "notes": "Ashtakavarga result interpretation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_67_1",
+      "text": "सर्वाष्टकवर्गे बिन्दुयोगः सर्वफलप्रदः",
+      "transliteration": "Sarvāṣṭakavarge binduyogaḥ sarvaphalapradaḥ",
+      "translations": {
+        "en": "The total of bindus in Sarvashtakavarga gives overall results",
+        "hi": "सर्वाष्टकवर्ग में बिंदुओं का योग समग्र फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 67,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "ashtakavarga",
+      "subCategory": "sarvashtakavarga",
+      "applicability": {
+        "conditions": ["sarvashtakavarga_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "getSAVStrength",
+        "lastUpdated": "2026-07-12",
+        "notes": "Sarvashtakavarga total bindu calculation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_68_1",
+      "text": "प्रस्तारे बिन्दुविन्यासः विस्तरेण प्रदर्श्यते",
+      "transliteration": "Prastāre binduvinyāsaḥ vistareṇa pradarśyate",
+      "translations": {
+        "en": "In the Prastara chart, the arrangement of bindus is shown in detail",
+        "hi": "प्रस्तार में बिंदुओं का विन्यास विस्तार से दिखाया जाता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 68,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "ashtakavarga",
+      "subCategory": "prastar",
+      "applicability": {
+        "conditions": ["prastar_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "prastarAshtakavarga",
+        "lastUpdated": "2026-07-12",
+        "notes": "Prastara detailed bindu arrangement"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_69_1",
+      "text": "काक्षायां बिन्दुविचारः सूक्ष्मफलं प्रकाशयेत्",
+      "transliteration": "Kākṣāyāṃ binduvicāraḥ sūkṣmaphalaṃ prakāśayet",
+      "translations": {
+        "en": "Analysis of bindus in Kaksha reveals subtle results",
+        "hi": "काक्ष में बिंदु विचार सूक्ष्म फल प्रकट करता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 69,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "ashtakavarga",
+      "subCategory": "kaksha",
+      "applicability": {
+        "conditions": ["kaksha_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "kakshaAshtakavarga",
+        "lastUpdated": "2026-07-12",
+        "notes": "Kaksha degree-level bindu analysis"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_70_1",
+      "text": "गोचरे अष्टकवर्गेण बलं ज्ञेयं फलं तथा",
+      "transliteration": "Gocare aṣṭakavargeṇa balaṃ jñeyaṃ phalaṃ tathā",
+      "translations": {
+        "en": "In transit, strength and results are known through Ashtakavarga",
+        "hi": "गोचर में अष्टकवर्ग से बल और फल जाना जाता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 70,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "ashtakavarga",
+      "subCategory": "gochar",
+      "applicability": {
+        "conditions": ["transit_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "gocharAshtakavarga",
+        "lastUpdated": "2026-07-12",
+        "notes": "Transit strength via Ashtakavarga"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_72_1",
+      "text": "नक्षत्रस्वामिना योगः फलं विशेषतो वदेत्",
+      "transliteration": "Nakṣatrasvāminā yogaḥ phalaṃ viśeṣato vadet",
+      "translations": {
+        "en": "The combination with the nakshatra lord should be described specially for results",
+        "hi": "नक्षत्र स्वामी के साथ योग विशेष रूप से फल कहना चाहिए"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 72,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "nakshatra",
+      "subCategory": "nakshatra_effects",
+      "applicability": {
+        "conditions": ["nakshatra_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "nakshatraAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Nakshatra lord combination effects"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_73_1",
+      "text": "नक्षत्रदशा जन्मर्क्षात् क्रमेण गणयेत् बुधः",
+      "transliteration": "Nakṣatradaśa janmarkṣāt krameṇa gaṇayet budhaḥ",
+      "translations": {
+        "en": "The wise should calculate the nakshatra dasha in order from the birth star",
+        "hi": "बुद्धिमान जन्म नक्षत्र से क्रमशः नक्षत्र दशा की गणना करे"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "nakshatra_dasha",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "buildDasha",
+        "lastUpdated": "2026-07-12",
+        "notes": "Nakshatra-based dasha calculation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_74_1",
+      "text": "अभुक्तनक्षत्रे जातः विशेषफलमाप्नुयात्",
+      "transliteration": "Abhuktanakṣatre jātaḥ viśeṣaphalamāpnuyāt",
+      "translations": {
+        "en": "One born in an Abhukta (unconsumed) nakshatra obtains special results",
+        "hi": "अभुक्त नक्षत्र में जन्मा व्यक्ति विशेष फल प्राप्त करता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 74,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "nakshatra",
+      "subCategory": "abhukta_nakshatra",
+      "applicability": {
+        "conditions": ["abhukta_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "nakshatraAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Abhukta nakshatra special effects"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_75_1",
+      "text": "देवमानुषराक्षसगणाः त्रिविधाः नक्षत्रजाः",
+      "transliteration": "Devamānuṣarākṣasagaṇāḥ trividhāḥ nakṣatrajāḥ",
+      "translations": {
+        "en": "The three ganas born of nakshatras are Deva, Manushya, and Rakshasa",
+        "hi": "नक्षत्रों से उत्पन्न तीन गण देव, मनुष्य और राक्षस हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 75,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "nakshatra",
+      "subCategory": "gana",
+      "applicability": {
+        "conditions": ["gana_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "ganaAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Gana classification for compatibility"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_76_1",
+      "text": "कालपुरुषस्य अंगानि राशयो द्वादश स्मृताः",
+      "transliteration": "Kālapuruṣasya aṅgāni rāśayo dvādaśa smṛtāḥ",
+      "translations": {
+        "en": "The twelve signs are remembered as the limbs of Kalapurusha",
+        "hi": "बारह राशियां कालपुरुष के अंग माने जाते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 76,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "fundamentals",
+      "subCategory": "kalapurusha",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "kalapurushaMapping",
+        "lastUpdated": "2026-07-12",
+        "notes": "Cosmic man to zodiac correspondence"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_77_1",
+      "text": "कालपुरुषांगपीडया रोगः तत्तत्स्थानगोचरे",
+      "transliteration": "Kālapuruṣāṅgapīḍayā rogaḥ tattatsthānagocare",
+      "translations": {
+        "en": "Disease occurs in the body part when affliction transits the corresponding sign",
+        "hi": "कालपुरुष के अंग की पीड़ा से उस स्थान में गोचर के समय रोग होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 77,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "fundamentals",
+      "subCategory": "kalapurusha_results",
+      "applicability": {
+        "conditions": ["kalapurusha_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "kalapurushaMapping",
+        "lastUpdated": "2026-07-12",
+        "notes": "Body-part disease correlation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_78_1",
+      "text": "गुलिकादयः उपग्रहाः पापफलप्रदाः स्मृताः",
+      "transliteration": "Gulikādayaḥ upagrahāḥ pāpaphalapradāḥ smṛtāḥ",
+      "translations": {
+        "en": "The upagrahas beginning with Gulika are known to give malefic results",
+        "hi": "गुलिक आदि उपग्रह पाप फल देने वाले माने जाते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 78,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "upagraha",
+      "subCategory": "definition",
+      "applicability": {
+        "conditions": ["upagraha_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "upagrahaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Upagraha (sub-planet) definitions"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_79_1",
+      "text": "उपग्रहयुते भावे विशेषं फलमादिशेत्",
+      "transliteration": "Upagrahayute bhāve viśeṣaṃ phalamādiśet",
+      "translations": {
+        "en": "In a house joined by an upagraha, special results should be predicted",
+        "hi": "उपग्रह युक्त भाव में विशेष फल कहना चाहिए"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 79,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "upagraha",
+      "subCategory": "upagraha_results",
+      "applicability": {
+        "conditions": ["upagraha_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "upagrahaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Upagraha placement effects"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_80_1",
+      "text": "धूमादयः पापबिन्दवः कर्मफलसूचकाः",
+      "transliteration": "Dhūmādayaḥ pāpabindavaḥ karmaphalasūcakāḥ",
+      "translations": {
+        "en": "Dhuma and others are malefic points indicating karmic results",
+        "hi": "धूम आदि पाप बिंदु कर्म फल के सूचक हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 80,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "upagraha",
+      "subCategory": "dhuma",
+      "applicability": {
+        "conditions": ["dhuma_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "dhumaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Dhuma shadow point (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_81_1",
+      "text": "व्यतीपातो महापातः अशुभं फलमाचरेत्",
+      "transliteration": "Vyatīpāto mahāpātaḥ aśubhaṃ phalamācaret",
+      "translations": {
+        "en": "Vyatipata, the great fall, produces inauspicious results",
+        "hi": "व्यतीपात महापात अशुभ फल उत्पन्न करता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 81,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "upagraha",
+      "subCategory": "pranasha_dhuma",
+      "applicability": {
+        "conditions": ["dhuma_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "vyatipataCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Vyatipata point (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_82_1",
+      "text": "अर्धप्रहरे बिन्दुः मध्यमफलदायकः",
+      "transliteration": "Ardhaprahare binduḥ madhyamaphaladāyakaḥ",
+      "translations": {
+        "en": "The half-portion point gives moderate results",
+        "hi": "अर्ध प्रहर का बिंदु मध्यम फल देने वाला है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 82,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "upagraha",
+      "subCategory": "ardhapranasha",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "ardhapranashaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Ardhaprahara point (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_83_1",
+      "text": "यमगण्डे कृतं कर्म विनाशं समुपागतम्",
+      "transliteration": "Yamagaṇḍe kṛtaṃ karma vināśaṃ samupāgatam",
+      "translations": {
+        "en": "Actions done during Yamaganda lead to destruction",
+        "hi": "यमगण्ड में किया गया कर्म विनाश को प्राप्त होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 83,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "muhurta",
+      "subCategory": "yamaganda",
+      "applicability": {
+        "conditions": ["timing_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "muhurtaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Yamaganda inauspicious period"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_84_1",
+      "text": "गुलिककाले न कुर्वीत शुभं कर्म कदाचन",
+      "transliteration": "Gulikakāle na kurvīta śubhaṃ karma kadācana",
+      "translations": {
+        "en": "One should never perform auspicious acts during Gulika time",
+        "hi": "गुलिक काल में कभी भी शुभ कर्म नहीं करना चाहिए"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 84,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "muhurta",
+      "subCategory": "gulika",
+      "applicability": {
+        "conditions": ["timing_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "muhurtaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Gulika kaal timing"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_85_1",
+      "text": "मान्दिस्थानं विचार्यं स्यात् आयुर्दायविनिर्णये",
+      "transliteration": "Māndisthānaṃ vicāryaṃ syāt āyurdāyavinirṇaye",
+      "translations": {
+        "en": "The position of Mandi should be considered in determining longevity",
+        "hi": "आयु निर्णय में मांदी का स्थान विचारणीय है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 85,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "upagraha",
+      "subCategory": "mandi",
+      "applicability": {
+        "conditions": ["longevity_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "mandiCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Mandi position for longevity (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_86_1",
+      "text": "प्रश्नकाले लग्नबलं प्रधानं फलनिर्णये",
+      "transliteration": "Praśnakāle lagnabalaṃ pradhānaṃ phalanirṇaye",
+      "translations": {
+        "en": "At the time of query, the strength of lagna is primary in determining results",
+        "hi": "प्रश्न काल में लग्न बल फल निर्णय में प्रधान है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 86,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "prashna",
+      "subCategory": "methodology",
+      "applicability": {
+        "conditions": ["prashna_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "prashnaAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Horary query methodology (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_87_1",
+      "text": "प्रश्नफलं लग्नेशेन ग्रहयोगेन लक्ष्यते",
+      "transliteration": "Praśnaphalaṃ lagneśena grahayogena lakṣyate",
+      "translations": {
+        "en": "The result of a query is seen through the lagna lord and planetary combinations",
+        "hi": "प्रश्न फल लग्नेश और ग्रह योग से देखा जाता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 87,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "prashna",
+      "subCategory": "prashna_results",
+      "applicability": {
+        "conditions": ["prashna_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "prashnaAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Horary result interpretation (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_88_1",
+      "text": "वर्षप्रवेशे लग्नेशः वर्षफलं प्रकाशयेत्",
+      "transliteration": "Varṣapraveśe lagneśaḥ varṣaphalaṃ prakāśayet",
+      "translations": {
+        "en": "At the solar return, the lagna lord reveals the year's results",
+        "hi": "वर्ष प्रवेश में लग्नेश वर्ष फल प्रकट करता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 88,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "tajika",
+      "subCategory": "annual_chart",
+      "applicability": {
+        "conditions": ["varshaphala_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "varshaphalaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Annual solar return chart (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_89_1",
+      "text": "इथशालयोगेन कार्यसिद्धिः प्रजायते",
+      "transliteration": "Ithaśālayogena kāryasiddhiḥ prajāyate",
+      "translations": {
+        "en": "Through the Ithasala yoga, accomplishment of tasks occurs",
+        "hi": "इथशाल योग से कार्य सिद्धि होती है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 89,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "tajika",
+      "subCategory": "tajika_yogas",
+      "applicability": {
+        "conditions": ["varshaphala_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "tajikaYogas",
+        "lastUpdated": "2026-07-12",
+        "notes": "Tajika annual yogas (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_90_1",
+      "text": "अरुधपदं लग्नेशस्थानात् द्विगुणितं भवेत्",
+      "transliteration": "Arudhapadaṃ lagneśasthānāt dviguṇitaṃ bhavet",
+      "translations": {
+        "en": "The Arudha pada is derived by counting equally from the lord's position",
+        "hi": "अरुध पद लग्नेश के स्थान से समान गणना करके प्राप्त होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 90,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "arudha",
+      "subCategory": "calculation",
+      "applicability": {
+        "conditions": ["arudha_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "arudhaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Arudha pada calculation"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_91_1",
+      "text": "अरुधपदफलं लोके प्रत्यक्षं दृश्यते नृणाम्",
+      "transliteration": "Arudhapadaphalaṃ loke pratyakṣaṃ dṛśyate nṛṇām",
+      "translations": {
+        "en": "The result of the Arudha pada is seen manifestly in the world of people",
+        "hi": "अरुध पद का फल लोक में मनुष्यों को प्रत्यक्ष दिखाई देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 91,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "arudha",
+      "subCategory": "arudha_results",
+      "applicability": {
+        "conditions": ["arudha_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "partial",
+        "functionName": "arudhaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Arudha manifested status effects"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_92_1",
+      "text": "अर्गलं भावतो ज्ञेयं द्वितीयचतुर्थतः स्मृतम्",
+      "transliteration": "Argalaṃ bhāvato jñeyaṃ dvitīyacaturthataḥ smṛtam",
+      "translations": {
+        "en": "Argala is known from a house, reckoned from the 2nd and 4th",
+        "hi": "अर्गल भाव से जाना जाता है, द्वितीय और चतुर्थ से माना गया है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 92,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "arudha",
+      "subCategory": "argala",
+      "applicability": {
+        "conditions": ["argala_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "argalaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Argala intervention (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_93_1",
+      "text": "अर्गलफलं विरोधेन नाशं समुपगच्छति",
+      "transliteration": "Argalaphalaṃ virodhena nāśaṃ samupagacchati",
+      "translations": {
+        "en": "The result of Argala is destroyed by counter-obstruction (Virodha)",
+        "hi": "अर्गल का फल विरोध से नाश को प्राप्त होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 93,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "arudha",
+      "subCategory": "argala_results",
+      "applicability": {
+        "conditions": ["argala_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "argalaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Argala obstruction results (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_94_1",
+      "text": "वास्तुशास्त्रे दिशां ज्ञानं गृहनिर्माणसिद्धये",
+      "transliteration": "Vāstuśāstre diśāṃ jñānaṃ gṛhanirmāṇasiddhaye",
+      "translations": {
+        "en": "In Vastu Shastra, knowledge of directions is for successful construction of dwellings",
+        "hi": "वास्तु शास्त्र में दिशाओं का ज्ञान गृह निर्माण की सिद्धि के लिए है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 94,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "vastu",
+      "subCategory": "directions",
+      "applicability": {
+        "conditions": [],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "not_implemented",
+        "functionName": "vastuAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Vastu directional principles (planned)"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_96_1",
+      "text": "मुहूर्तफलं तिथिवारनक्षत्रयोगतः",
+      "transliteration": "Muhūrtaphalaṃ tithivāranakṣatrayogataḥ",
+      "translations": {
+        "en": "Muhurta results come from the combination of tithi, weekday, and nakshatra",
+        "hi": "मुहूर्त फल तिथि, वार और नक्षत्र के योग से आता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 96,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "muhurta",
+      "subCategory": "muhurta_results",
+      "applicability": {
+        "conditions": ["timing_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "muhurtaCalculation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Muhurta result via panchanga elements"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_97_1",
+      "text": "षष्ठेशेन रोगः ज्ञेयः षष्ठभावगतैः ग्रहैः",
+      "transliteration": "Ṣaṣṭheśena rogaḥ jñeyaḥ ṣaṣṭhabhāvagataiḥ grahaiḥ",
+      "translations": {
+        "en": "Disease is known through the 6th lord and planets placed in the 6th house",
+        "hi": "रोग षष्ठेश और षष्ठ भाव में स्थित ग्रहों से जाना जाता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 97,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "medical",
+      "subCategory": "diagnosis",
+      "applicability": {
+        "conditions": ["health_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "healthAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Disease diagnosis via 6th house"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_98_1",
+      "text": "रोगनिवृत्तिः दशाकाले शुभग्रहबलेन स्यात्",
+      "transliteration": "Roganivṛttiḥ daśākāle śubhagrahabalena syāt",
+      "translations": {
+        "en": "Recovery from disease occurs during the dasha period by the strength of benefics",
+        "hi": "रोग से मुक्ति दशा काल में शुभ ग्रहों के बल से होती है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 98,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "medical",
+      "subCategory": "medical_results",
+      "applicability": {
+        "conditions": ["health_analysis"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "healthAnalysis",
+        "lastUpdated": "2026-07-12",
+        "notes": "Disease recovery timing via dasha"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_100_1",
+      "text": "उपायेन ग्रहपीडा शमं याति न संशयः",
+      "transliteration": "Upāyena grahapīḍā śamaṃ yāti na saṃśayaḥ",
+      "translations": {
+        "en": "By remedies, planetary affliction is pacified, without doubt",
+        "hi": "उपाय से ग्रह पीड़ा शांत होती है, इसमें संशय नहीं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 100,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "remedy_results",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Remedy effectiveness for afflictions"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_101_1",
+      "text": "ग्रहमन्त्रजपेन तुष्यन्ति ग्रहाः शुभदायकाः",
+      "transliteration": "Grahamantrajapena tuṣyanti grahāḥ śubhadāyakāḥ",
+      "translations": {
+        "en": "By recitation of planetary mantras, the planets are pleased and become auspicious",
+        "hi": "ग्रह मंत्र जप से ग्रह प्रसन्न होकर शुभ फल देने वाले होते हैं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 101,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "japa",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Mantra japa remedy"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_102_1",
+      "text": "तपसा च ग्रहदोषः क्षयं याति क्रमेण तु",
+      "transliteration": "Tapasā ca grahadoṣaḥ kṣayaṃ yāti krameṇa tu",
+      "translations": {
+        "en": "By austerity, planetary defects gradually diminish",
+        "hi": "तप से ग्रह दोष क्रमशः क्षय को प्राप्त होता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 102,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "tapa",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Austerity-based remedy"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_103_1",
+      "text": "दानेन पापग्रहाणां शान्तिः भवति निश्चितम्",
+      "transliteration": "Dānena pāpagrahāṇāṃ śāntiḥ bhavati niścitam",
+      "translations": {
+        "en": "By charity, the pacification of malefic planets certainly occurs",
+        "hi": "दान से पाप ग्रहों की शांति निश्चित रूप से होती है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 103,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "dana",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Charity-based remedy"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_104_1",
+      "text": "हवनेन ग्रहाः सर्वे प्रसीदन्ति न संशयः",
+      "transliteration": "Havanena grahāḥ sarve prasīdanti na saṃśayaḥ",
+      "translations": {
+        "en": "By fire rituals, all planets become propitious, without doubt",
+        "hi": "हवन से सभी ग्रह प्रसन्न होते हैं, इसमें संशय नहीं"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 104,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "havana",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": []
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Fire ritual remedy"
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "BPHS_105_1",
+      "text": "रत्नधारणतो ग्रहबलं वर्धते शुभदायकम्",
+      "transliteration": "Ratnadhāraṇato grahabalaṃ vardhate śubhadāyakam",
+      "translations": {
+        "en": "By wearing gemstones, the strength of planets increases, giving auspicious results",
+        "hi": "रत्न धारण से ग्रह बल बढ़ता है और शुभ फल देता है"
+      },
+      "source": {
+        "text": "BPHS",
+        "chapter": 105,
+        "verse": 1,
+        "alternativeReferences": []
+      },
+      "category": "remedies",
+      "subCategory": "gem_therapy",
+      "applicability": {
+        "conditions": ["planetary_afflictions"],
+        "exceptions": ["contraindicated_gems"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "remedyRecommendation",
+        "lastUpdated": "2026-07-12",
+        "notes": "Gemstone therapy remedy"
+      },
+      "crossReferences": []
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "id": "phaladeepika",
+    "name": "Phaladeepika",
+    "author": "Mantreshwara",
+    "period": "13th Century",
+    "edition": "V.S. Sharma",
+    "lastUpdated": "2026-07-11",
+    "implementationStats": {
+      "totalVerses": 2,
+      "implemented": 2,
+      "partial": 0,
+      "notImplemented": 0
+    }
+  },
+  "chapters": {
+    "6": {
+      "title": "योग (Yogas)",
+      "verseCount": 28,
+      "keyTopics": ["gajakesari", "budhaditya", "raja_yogas", "dhana_yogas"]
+    },
+    "7": {
+      "title": "ग्रह युति (Planet Conjunctions)",
+      "verseCount": 22,
+      "keyTopics": ["planetary_combinations", "conjunction_effects", "mutual_aspects"]
+    },
+    "15": {
+      "title": "विवाह (Marriage)",
+      "verseCount": 18,
+      "keyTopics": ["marriage_indicators", "spouse_characteristics", "timing"]
+    },
+    "20": {
+      "title": "रोग (Disease)",
+      "verseCount": 15,
+      "keyTopics": ["health_indicators", "disease_prediction", "remedies"]
+    }
+  },
+  "verses": [
+    {
+      "id": "PHALA_6_15",
+      "text": "गुरुचन्द्रयोः केन्द्रगते गजकेसरी योगो भवति",
+      "transliteration": "Gurucandrayoḥ kendragate gajakesarī yogo bhavati",
+      "translations": {
+        "en": "When Jupiter and Moon are in kendras, Gajakesari Yoga is formed",
+        "hi": "गुरु और चंद्र के केंद्र में होने पर गजकेसरी योग बनता है"
+      },
+      "source": {
+        "text": "Phaladeepika",
+        "chapter": 6,
+        "verse": 15,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "raja_yoga",
+      "applicability": {
+        "conditions": ["jupiter_moon_kendra"],
+        "exceptions": ["jupiter_debilitated", "moon_debilitated"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-11",
+        "notes": "Implemented in detectYogas() function"
+      },
+      "crossReferences": [
+        {
+          "text": "BPHS",
+          "chapter": 39,
+          "verse": 12,
+          "relationship": "similar"
+        }
+      ]
+    },
+    {
+      "id": "PHALA_6_10",
+      "text": "बुधादित्ययोगो बुधसूर्ययोरेकराशिगते",
+      "transliteration": "Budhādityayogo budhasūryayor ekarāśigate",
+      "translations": {
+        "en": "Budhaditya Yoga is formed when Mercury and Sun are in the same sign",
+        "hi": "बुध और सूर्य के एक राशि में होने पर बुधादित्य योग बनता है"
+      },
+      "source": {
+        "text": "Phaladeepika",
+        "chapter": 6,
+        "verse": 10,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "intellectual_yoga",
+      "applicability": {
+        "conditions": ["mercury_sun_conjunction"],
+        "exceptions": ["mercury_combust"]
+      },
+      "implementation": {
+        "status": "implemented",
+        "functionName": "detectYogas",
+        "lastUpdated": "2026-07-11",
+        "notes": "Implemented in detectYogas() with combustion check"
+      },
+      "crossReferences": []
+    }
+  ]
+}
