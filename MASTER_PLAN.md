@@ -126,7 +126,7 @@ Priority = chapters that drive the most predictions.
 - Exit: every domain prediction is a transparent weighted fusion with full audit.
 
 ### Phase E — Precision, breadth & other systems
-- [ ] E1 Argala (L11) + Arudha (L12) as full rule-driven layers.
+- [x] E1 Argala (L11) + Arudha (L12) as full rule-driven layers (computed factors wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores; dedicated BPHS JSON can be added later). ✅
 - [ ] E2 Jaimini (L13): Chara Karakas + Chara Dasha.
 - [ ] E3 KP (L15): Star Lord / Sub Lord + sub-lord timing.
 - [ ] E4 Ashtakavarga weighted interpretation (L14).
