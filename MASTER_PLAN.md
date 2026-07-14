@@ -9,7 +9,7 @@
 >
 > Legend: `[x]` done · `[~]` in progress · `[ ]` not started · 🔴 blocker
 
-Last updated: 2026-07-13
+Last updated: 2026-07-14
 
 ---
 
@@ -31,7 +31,7 @@ database — not hand-tuned JS heuristics.
 
 ## 1. CURRENT FOCUS  ← work happens here
 
-**Now doing:** _Phases A-D complete. Core XAI engine, rule DB (house-lords, planet-in-house/sign, yogas, dasha-phala, nakshatra, core), and domain fusion (Career/Marriage/Wealth/Health/Children/Education/Foreign) are unified and auditable. DB-7 (aspect/dignity/strength rules) complete. Next: Phase E precision layers or additional DBs._
+**Now doing:** _Phases A-D complete. E1–E4 (Argala/Arudha, Chara Karaka/Dasha, KP Star/Sub-Lord, Ashtakavarga) are wired into `collectEvidence`/`domainFusion` as rule-driven layers. Next: E5 (replace remaining `pstrength` usage with the six-fold `finalStrength`/`shadParts`), E6 (Swiss Ephemeris precision), E7 (other texts), and Phase F polish._
 
 Order of execution (do top-down, one at a time):
 
@@ -45,6 +45,7 @@ Order of execution (do top-down, one at a time):
 8. [x] **S6 / DB-5 — Implement dasha-phala rule layer** — create `bphs_dasha_effects.json` (20 rules for all 9 Mahadashas + sample Antardashas), implement `dashaEvidence()` bridging live dasha, add `dasha_rule` layer to `collectEvidence()`/`domainFusion()`/`FUSION_WEIGHTS`, update UI to render dasha evidence. ✅
 9. [x] **S6 / DB-6 — Implement nakshatra rule layer** — create `bphs_nakshatra.json` (20 rules for key nakshatras across all 9 planets), implement `nakshatraEvidence()` bridging live nakshatra positions, add `nakshatra_rule` layer to `collectEvidence()`/`domainFusion()`/`FUSION_WEIGHTS`, update UI to render nakshatra evidence. ✅
 10. [x] **S6 / DB-7 — Implement core aspect/dignity/strength rule layer** — create `bphs_core.json` (25 rules for planetary aspects, dignities, and strengths from BPHS Ch 3-7, 26-27), implement `coreEvidence()` bridging live aspect/dignity/strength data, add `core_rule` layer to `collectEvidence()`/`domainFusion()`/`FUSION_WEIGHTS`, update UI to render core evidence. ✅
+11. [x] **E4 — Ashtakavarga as rule-driven layer** — `ashtakavargaEvidence()` computes per-house SAV + lord BAV factors and is wired into `collectEvidence()`, `domainFusion()` weights/labels, and `ruleScores`; verified by `/tmp/test_ashtakavarga_e4.js`. ✅
 
 > When S1 is done: tick it, write a note under §6 Log, then move "Now doing" to S2.
 
@@ -86,7 +87,7 @@ Priority = chapters that drive the most predictions.
 - [ ] **DB-8 Fuller verse text** for existing `bphs.json` entries (sanskrit + en + hi where known).
 - [ ] **DB-9 Other texts** — expand Phaladeepika, Saravali; fill Jataka Parijata, Hora Sara,
       Uttara Kalamrita (currently empty shells).
-- [ ] **DB-10 Update `verse_database/index.json`** counts after each file is added.
+- [~] **DB-10 `verse_database/index.json`** removed during cleanup; rebuild only if a new index/catalog is needed.
 
 > Every new rule uses **schema v2** (see IMPLEMENTATION_ROADMAP §"Actionable rule schema").
 > Verse numbers are **approximate until Pandit-verified** → set `confidence` accordingly
@@ -129,7 +130,7 @@ Priority = chapters that drive the most predictions.
 - [x] E1 Argala (L11) + Arudha (L12) as full rule-driven layers (computed factors wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores; dedicated BPHS JSON can be added later). ✅
 - [x] E2 Jaimini (L13): Chara Karakas + Chara Dasha as full rule-driven layers (computed factors for all 7 chara karakas and active chara dasha sign wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores). ✅
 - [x] E3 KP (L15): Star Lord / Sub Lord + sub-lord timing as full rule-driven layer (per-domain cusp/house mapping, `kpEvidence()` uses existing `kpEngine()` to emit cited `kp_rule` factors wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores). ✅
-- [ ] E4 Ashtakavarga weighted interpretation (L14).
+- [x] E4 Ashtakavarga (L14): Sarva/Medini/Vaiseshikamsa bindus as rule-driven evidence with `ashtakavargaEvidence()` wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores. ✅
 - [ ] E5 Full Shadbala (six-fold) replacing simplified `pstrength`.
 - [ ] E6 Swiss Ephemeris precision (WASM/backend) + ayanamsha selection.
 - [ ] E7 Expand other texts (see DB-9).
@@ -149,13 +150,13 @@ Priority = chapters that drive the most predictions.
 | Chart / compute core | [x] working (JS precision) |
 | Dasha / transit / sadesati | [x] |
 | Yogas (curated) | [x] |
-| Domain panels | [~] 7 of 14 on rule-engine fusion (Career/Marriage/Wealth/Health/Children/Education/Foreign); others heuristic |
+| Domain panels | [~] 7 of 15 on rule-engine fusion (Career/Marriage/Wealth/Health/Children/Education/Foreign); Personality, Business, Longevity, Litigation, Spirituality, Property, Match Making, and Muhurat are still heuristic |
 | Verse DB — BPHS Ch 13-14 house-lord rules | [x] 144 rules |
 | Verse DB — BPHS Ch 11 planet-in-house rules | [x] 84 rules |
 | Verse DB — BPHS Ch 11 planet-in-sign rules | [x] 84 rules |
 | Verse DB — other BPHS chapters | [~] 105 chapters represented in `bphs.json`; plus 7 actionable rule files |
 | Verse DB — actionable rules | [~] 397 rules across 7 BPHS rule files (house, planet-in-house/sign, yogas, dasha, nakshatra, core) |
-| Explainable engine | [x] all 7 rule layers fire via collectEvidence(); domainFusion() cited for 7 life areas |
+| Explainable engine | [x] 13 rule layers fire via collectEvidence() (house_lord, planet_in_house, planet_in_sign, yoga_rule, dasha_rule, nakshatra_rule, core_rule, argala, arudha, chara_karaka, chara_dasha, kp_rule, ashtakavarga_rule); domainFusion() cited for 7 life areas |
 | Provenance system | [x] computation_sources.json + explain()/explainHTML() live |
 | Final fusion (L16) | [~] generic engine live; 7 domains fused, rest pending |
 | Full Shadbala / Swiss Eph | [ ] |
@@ -257,3 +258,8 @@ Priority = chapters that drive the most predictions.
   `daiv-ai-main/` Python project folder. Removed stale `temp_js_check.js`. Edited `jyotish_calculator.html`
   References page and Career bibliography to list only texts with actual verse DB content or live computed
   modules: BPHS, Saravali, Phaladeepika, Jaimini Sutra, KP. Confirmed JS syntax still valid.
+- 2026-07-14 — E4 ASHTAKAVARGA COMPLETE. Wired `ashtakavargaEvidence()` into the rule-driven fusion engine: added
+  `ashtakavarga_rule` to `FUSION_WEIGHTS` enrichment, `collectEvidence()` default layers + handler,
+  `domainFusion()` ruleLayers bucket/label/`ruleScores`. Updated `MASTER_PLAN.md` status and added
+  `/tmp/test_ashtakavarga_e4.js` which extracts live functions from `jyotish_calculator.html` and verifies
+  factors are emitted and the fused score changes when the layer is disabled.
