@@ -127,8 +127,8 @@ Priority = chapters that drive the most predictions.
 
 ### Phase E — Precision, breadth & other systems
 - [x] E1 Argala (L11) + Arudha (L12) as full rule-driven layers (computed factors wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores; dedicated BPHS JSON can be added later). ✅
-- [ ] E2 Jaimini (L13): Chara Karakas + Chara Dasha.
-- [ ] E3 KP (L15): Star Lord / Sub Lord + sub-lord timing.
+- [x] E2 Jaimini (L13): Chara Karakas + Chara Dasha as full rule-driven layers (computed factors for all 7 chara karakas and active chara dasha sign wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores). ✅
+- [x] E3 KP (L15): Star Lord / Sub Lord + sub-lord timing as full rule-driven layer (per-domain cusp/house mapping, `kpEvidence()` uses existing `kpEngine()` to emit cited `kp_rule` factors wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores). ✅
 - [ ] E4 Ashtakavarga weighted interpretation (L14).
 - [ ] E5 Full Shadbala (six-fold) replacing simplified `pstrength`.
 - [ ] E6 Swiss Ephemeris precision (WASM/backend) + ayanamsha selection.

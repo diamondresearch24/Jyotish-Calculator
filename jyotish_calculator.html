@@ -3750,6 +3750,81 @@ function charaLord(s){if(s===7)return finalStrength(2)>=finalStrength(8)?2:8;if(
 function charaDur(s){const lord=charaLord(s);const ls=signOf(CH.sid[lord]);if(ls===s)return 12;let d;if(SAVYA.includes(s))d=((ls-s+12)%12)+1;else d=((s-ls+12)%12)+1;return d-1;}
 function charaDasha(){const asc=signOf(CH.asc),dir=SAVYA.includes(asc)?1:-1;const seq=[];let y=birthYearFloat;
   for(let k=0;k<12;k++){const s=((asc+dir*k)%12+12)%12;const dur=charaDur(s);seq.push({s,dur,from:y,to:y+dur});y+=dur;}return seq;}
+
+/* ---- Jaimini Chara Karaka + Chara Dasha rule evidence (E2) ---- */
+const KARAKA_DOMAINS=[
+  ['personality','status','health','spiritual'],      // AK
+  ['career','profession','status','authority'],       // AmK
+  ['siblings','courage','communication'],             // BK
+  ['mother','home','comfort','property','health'],    // MK
+  ['children','intelligence','fortune','education'],  // PK
+  ['enemies','obstacles','litigation','service','health'], // GK
+  ['marriage','partnership']                          // DK
+];
+const SIGN_DOMAINS=ARGALA_HOUSE_DOMAINS; // Aries=1 … Pisces=12 natural areas
+
+function charaKarakaEvidence(){
+  if(typeof CH==='undefined'||!CH||!CH.sid)return{loaded:false,factors:[]};
+  const K=charaKarakas();
+  const factors=[];
+  for(let idx=0;idx<7;idx++){
+    const [p,deg]=K[idx];
+    const domains=KARAKA_DOMAINS[idx]||['general'];
+    const st=finalStrength(p);
+    let w=Math.round((st-50)/6);
+    const dgn=dignity(p,signOf(CH.sid[p]))||'';
+    if(dgn.includes('उच्च'))w+=2;else if(dgn.includes('नीच'))w-=2;else if(dgn.includes('स्वगृही')||dgn.includes('मूलत्रिकोण'))w+=1;
+    if(combust(p))w-=1;
+    w=Math.max(-8,Math.min(8,w));
+    if(Math.abs(w)<0.4)continue;
+    factors.push({
+      layer:'chara_karaka',
+      ruleId:'JAIMINI_CHARA_KARAKA_'+(idx+1),
+      text:`${KNAMES[idx]} = ${PL[p]} (${deg.toFixed(2)}°) · बल ${st}%`,
+      source:{text:'Jaimini Sutras',chapter:1,verse:11+idx},
+      planet:p,
+      pos:KNAMES[idx],
+      w:w,
+      domains,
+      notes:[dgn?`दिग्बल/दशा स्थिति: ${dgn}`:'',combust(p)?'ग्रह अस्त':'','इस कारक का संबंधित क्षेत्र में प्रभाव']
+    });
+  }
+  return {loaded:true,factors};
+}
+
+function charaDashaEvidence(){
+  if(typeof CH==='undefined'||!CH||!CH.sid)return{loaded:false,factors:[]};
+  if(typeof DASHA==='undefined'||!DASHA||!DASHA.nowJD)return{loaded:false,factors:[]};
+  const cd=charaDasha();
+  const factors=[];
+  const nowY=jdYear(DASHA.nowJD);
+  const active=cd.find(p=>nowY>=p.from&&nowY<p.to);
+  if(!active)return{loaded:false,factors:[]};
+  const s=active.s;
+  const lord=charaLord(s);
+  const lordSt=finalStrength(lord);
+  const occ=inSign(s);
+  const ben=occ.filter(i=>[1,3,4,5].includes(i));
+  const mal=occ.filter(i=>[0,2,6,7,8].includes(i));
+  let w=Math.round((lordSt-50)/7);
+  w+=ben.length*1.5-mal.length*1.5;
+  if([1,4,7,10].includes(((s-signOf(CH.asc)+12)%12)+1))w+=1;
+  if([5,9].includes(((s-signOf(CH.asc)+12)%12)+1))w+=1;
+  w=Math.max(-8,Math.min(8,w));
+  factors.push({
+    layer:'chara_dasha',
+    ruleId:'JAIMINI_CHARA_DASHA_'+SIGNS[s],
+    text:`चर दशा: ${SIGNS[s]} (${active.dur} वर्ष, ${Math.round(active.from)}–${Math.round(active.to)}) · स्वामी ${PL[lord]}`,
+    source:{text:'Jaimini Sutras',chapter:2,verse:1},
+    planet:lord,
+    pos:SIGNS[s],
+    w:w,
+    domains:SIGN_DOMAINS[s+1]||['general'],
+    notes:[`स्वामी बल: ${lordSt}%`,`उपस्थित शुभ: ${ben.map(i=>PL[i]).join(', ')||'—'}`,`उपस्थित पाप: ${mal.map(i=>PL[i]).join(', ')||'—'}`]
+  });
+  return {loaded:true,factors};
+}
+
 function buildNavJaimini(){document.getElementById('nav').innerHTML='<div class="grp">🪔 LEVEL 12 — जैमिनी / Jaimini</div>'+
   JMLIST.map(s=>`<button id="jnav-${s[0]}" onclick="showJaimini('${s[0]}')" class="${curJaimini===s[0]?'active':''}">▸ ${s[1]}</button>`).join('');}
 function showJaimini(sub){curJaimini=sub;JMLIST.forEach(s=>{const b=document.getElementById('jnav-'+s[0]);if(b)b.classList.toggle('active',s[0]===sub);});
@@ -3929,6 +4004,53 @@ function kpEngine(cuspH,houses){const sl=subLordOf(cuspLon(cuspH));const hits=ho
   const conf=Math.max(35,Math.min(94,50+(promised?18:-8)+G.strong.length*4+(win?6:0)));
   const delay=kpSignifies(6,cuspH)?'शनि (विलंब-कारक सक्रिय)':null;
   return{sl,hits,promised,G,win,conf,delay};}
+
+/* ---- KP Star/Sub-Lord + timing rule evidence (E3) ---- */
+const KP_DOMAIN_MAP={
+  career:   {cusp:10,houses:[2,6,10,11],domains:['career','profession','status','authority','work','tenth']},
+  marriage: {cusp:7, houses:[2,7,11],     domains:['marriage','partnership']},
+  wealth:   {cusp:11,houses:[2,5,9,11],  domains:['wealth','money','gains','income']},
+  health:   {cusp:6, houses:[6,8,12],    domains:['health','disease','service','enemies']},
+  education:{cusp:9, houses:[4,9,11],     domains:['education','learning','knowledge','intelligence']},
+  child:    {cusp:5, houses:[2,5,11],     domains:['children','childbirth','progeny']},
+  foreign:  {cusp:12,houses:[3,9,12],     domains:['foreign','travel','abroad']},
+  property: {cusp:4, houses:[4,11],       domains:['property','home','land','real estate','comfort']},
+  business: {cusp:10,houses:[2,6,10,11], domains:['business','career','profession','status','work']},
+  longevity:{cusp:8, houses:[1,3,8,12],   domains:['longevity','life span','health']},
+  litigation:{cusp:6,houses:[3,6,11],    domains:['litigation','court','dispute','enemies']}
+};
+function kpEvidence(){
+  if(typeof CH==='undefined'||!CH||!CH.sid)return{loaded:false,factors:[]};
+  if(typeof kpEngine!=='function'||typeof subLordOf!=='function'||typeof cuspLon!=='function'||typeof kpSignifies!=='function')return{loaded:false,factors:[]};
+  const factors=[];
+  const nowJD=(typeof DASHAKP!=='undefined'&&DASHAKP&&DASHAKP.nowJD)?DASHAKP.nowJD:(typeof DASHA!=='undefined'&&DASHA&&DASHA.nowJD?DASHA.nowJD:null);
+  Object.entries(KP_DOMAIN_MAP).forEach(([domain,m])=>{
+    try{
+      const E=kpEngine(m.cusp,m.houses);
+      if(!E||typeof E.conf!=='number')return;
+      let w=Math.round((E.conf-50)/8);
+      if(E.delay)w-=1;
+      if(E.win)w+=2;
+      w=Math.max(-7,Math.min(7,w));
+      if(Math.abs(w)<0.4)return;
+      const hitsStr=E.hits.length?E.hits.join(', '):m.houses.join('/');
+      const winTxt=E.win?` · अगला window ${jdToDate(E.win.startJD).y}–${jdToDate(E.win.endJD).y} (${PL[E.win.mdLord]}/${PL[E.win.adLord]})`:'';
+      factors.push({
+        layer:'kp_rule',
+        ruleId:'KP_SUB_LORD_'+domain.toUpperCase(),
+        text:`KP ${domain}: ${m.cusp}वें cusp का Sub Lord ${PL[E.sl]} → ${hitsStr} भाव कारक (${E.promised?'वादा YES':'वादा दुर्बल'} · confidence ${E.conf}%)${winTxt}`,
+        source:{text:'KP Reader VI',chapter:1,verse:1},
+        planet:E.sl,
+        pos:`${m.cusp}वें cusp Sub Lord`,
+        w:w,
+        domains:m.domains,
+        notes:E.delay?[E.delay]:['Star Lord → Sub Lord → Sub-Sub Lord श्रृंखला से सूक्ष्म timing','कारक-दशा/अंतर्दशा में घटना सक्रिय']
+      });
+    }catch(e){}
+  });
+  return {loaded:true,factors};
+}
+
 function kpRulingPlanets(){if(!CH||CH.lat===undefined)return '';
   const now=new Date();
   const jn=julianDay(now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate(),now.getUTCHours()+now.getUTCMinutes()/60+now.getUTCSeconds()/3600);
@@ -4173,18 +4295,22 @@ const FUSION_WEIGHTS={
   muhurat:{tithi:16,vara:16,nakshatra:28,yoga:14,paksha:10,chandra_tara:10,hora:6},
   match:{varna:3,vashya:6,tara:8,yoni:11,gmaitri:14,gana:17,bhakut:20,nadi:21}
 };
-/* Inject Jaimini Argala/Arudha as explicit weighted layers for all predictive domains. */
+/* Inject Jaimini Argala/Arudha/Chara-Karaka/Chara-Dasha as explicit weighted layers
+   for all predictive domains so they participate in every domain verdict. */
 (function enrichFusionWeights(){
   Object.keys(FUSION_WEIGHTS).forEach(k=>{
     if(k==='muhurat'||k==='match'||k==='argala_default')return;
     FUSION_WEIGHTS[k].argala=FUSION_WEIGHTS[k].argala||3;
     FUSION_WEIGHTS[k].arudha=FUSION_WEIGHTS[k].arudha||3;
+    FUSION_WEIGHTS[k].chara_karaka=FUSION_WEIGHTS[k].chara_karaka||3;
+    FUSION_WEIGHTS[k].chara_dasha=FUSION_WEIGHTS[k].chara_dasha||3;
+    FUSION_WEIGHTS[k].kp_rule=FUSION_WEIGHTS[k].kp_rule||3;
   });
 })();
 
 /* Collect cited rule evidence from one or more actionable rule layers, filtered to the
    requested life-area keywords. Returns a unified array of factors plus net contribution. */
-function collectEvidence(keywords,layers=['house_lord','planet_in_house','planet_in_sign','yoga_rule','dasha_rule','nakshatra_rule','core_rule','argala','arudha']){
+function collectEvidence(keywords,layers=['house_lord','planet_in_house','planet_in_sign','yoga_rule','dasha_rule','nakshatra_rule','core_rule','argala','arudha','chara_karaka','chara_dasha','kp_rule']){
   const factors=[];
   const kw=(keywords||[]).map(k=>k.toLowerCase());
   const matches=(domains)=>domains.some(d=>kw.some(k=>d.toLowerCase().includes(k)));
@@ -4278,6 +4404,36 @@ function collectEvidence(keywords,layers=['house_lord','planet_in_house','planet
       });
     });
   }
+  if(layers.includes('chara_karaka')){
+    const evd=(typeof charaKarakaEvidence==='function')?charaKarakaEvidence():{loaded:false,factors:[]};
+    if(evd.loaded) evd.factors.forEach(f=>{
+      if(matches(f.domains)) factors.push({
+        layer:'chara_karaka', planet:f.planet, pos:f.pos, w:f.w, domains:f.domains,
+        ruleId:f.ruleId, source:f.source, confidence:'medium',
+        text:f.text, notes:f.notes
+      });
+    });
+  }
+  if(layers.includes('chara_dasha')){
+    const evd=(typeof charaDashaEvidence==='function')?charaDashaEvidence():{loaded:false,factors:[]};
+    if(evd.loaded) evd.factors.forEach(f=>{
+      if(matches(f.domains)) factors.push({
+        layer:'chara_dasha', planet:f.planet, pos:f.pos, w:f.w, domains:f.domains,
+        ruleId:f.ruleId, source:f.source, confidence:'medium',
+        text:f.text, notes:f.notes
+      });
+    });
+  }
+  if(layers.includes('kp_rule')){
+    const evd=(typeof kpEvidence==='function')?kpEvidence():{loaded:false,factors:[]};
+    if(evd.loaded) evd.factors.forEach(f=>{
+      if(matches(f.domains)) factors.push({
+        layer:'kp_rule', planet:f.planet, pos:f.pos, w:f.w, domains:f.domains,
+        ruleId:f.ruleId, source:f.source, confidence:'medium',
+        text:f.text, notes:f.notes
+      });
+    });
+  }
   const supporting=factors.filter(f=>f.w>0), contradicting=factors.filter(f=>f.w<0);
   return {
     factors,
@@ -4309,7 +4465,7 @@ function evidenceScore(factors,maxAmp=8){
    supporting, contradicting, factors}. */
 function domainFusion(domainName,keywords,scores,cfg){
   const evd=collectEvidence(keywords);
-  const ruleLayers={house_lord:[],planet_in_house:[],planet_in_sign:[],yoga_rule:[],dasha_rule:[],nakshatra_rule:[],core_rule:[],argala:[],arudha:[]};
+  const ruleLayers={house_lord:[],planet_in_house:[],planet_in_sign:[],yoga_rule:[],dasha_rule:[],nakshatra_rule:[],core_rule:[],argala:[],arudha:[],chara_karaka:[],chara_dasha:[],kp_rule:[]};
   evd.factors.forEach(f=>{if(ruleLayers[f.layer])ruleLayers[f.layer].push(f);});
   const layerScores={};
   Object.keys(cfg).forEach(k=>{
@@ -4319,12 +4475,12 @@ function domainFusion(domainName,keywords,scores,cfg){
   // filter active layers and re-normalize weights
   const active=Object.entries(cfg).filter(([k])=>layerScores[k]!=null);
   const totalW=active.reduce((a,[k,v])=>a+v,0)||1;
-  const W=active.map(([k,v])=>{const label={house_lord:'भावेश (BPHS 13-14)',planet_in_house:'ग्रह-भाव (BPHS 11)',planet_in_sign:'ग्रह-राशि (BPHS 11)',yoga_rule:'योग-नियम (BPHS 15-16)',dasha_rule:'दशा-फल (BPHS 46-50,73)',nakshatra_rule:'नक्षत्र-नियम (BPHS 71-77)',core_rule:'दृष्टि/गौरव/शक्ति (BPHS 3-7,26-27)',argala:'जैमिनी अर्गला (BPHS 11,31)',arudha:'जैमिनी आरूढ़ (BPHS 29-30)',d1:'D1 (भाव-तंत्र)',d2:'D2',d4:'D4',d6:'D6',d7:'D7',d9:'D9',d10:'D10',d12:'D12',d24:'D24',d30:'D30',yoga:'योग (गणना)',dasha:'दशा',shadbala:'षड्बल/शक्ति',nakshatra:'नक्षत्र',jaimini:'Jaimini',kp:'KP'}[k]||k; return [label,layerScores[k],v*100/totalW];});
+  const W=active.map(([k,v])=>{const label={house_lord:'भावेश (BPHS 13-14)',planet_in_house:'ग्रह-भाव (BPHS 11)',planet_in_sign:'ग्रह-राशि (BPHS 11)',yoga_rule:'योग-नियम (BPHS 15-16)',dasha_rule:'दशा-फल (BPHS 46-50,73)',nakshatra_rule:'नक्षत्र-नियम (BPHS 71-77)',core_rule:'दृष्टि/गौरव/शक्ति (BPHS 3-7,26-27)',argala:'जैमिनी अर्गला (BPHS 11,31)',arudha:'जैमिनी आरूढ़ (BPHS 29-30)',chara_karaka:'जैमिनी चर कारक',chara_dasha:'जैमिनी चर दशा',kp_rule:'KP Star/Sub-Lord (Reader VI)',d1:'D1 (भाव-तंत्र)',d2:'D2',d4:'D4',d6:'D6',d7:'D7',d9:'D9',d10:'D10',d12:'D12',d24:'D24',d30:'D30',yoga:'योग (गणना)',dasha:'दशा',shadbala:'षड्बल/शक्ति',nakshatra:'नक्षत्र',jaimini:'Jaimini',kp:'KP'}[k]||k; return [label,layerScores[k],v*100/totalW];});
   const score=Math.round(W.reduce((a,x)=>a+x[1]*x[2]/100,0));
   // confidence is a blend of evidence confidence and number of active layers
   const layerConf=Math.min(90,Math.round(active.length*7));
   const finalConf=evd.hits?Math.round((evd.confidence+layerConf)/2):layerConf;
-  return {score,confidence:finalConf,W,evidence:evd, supporting:evd.supporting, contradicting:evd.contradicting, factors:evd.factors, ruleScores:{house_lord:layerScores.house_lord,planet_in_house:layerScores.planet_in_house,planet_in_sign:layerScores.planet_in_sign,yoga_rule:layerScores.yoga_rule,dasha_rule:layerScores.dasha_rule,nakshatra_rule:layerScores.nakshatra_rule,core_rule:layerScores.core_rule,argala:layerScores.argala,arudha:layerScores.arudha}};
+  return {score,confidence:finalConf,W,evidence:evd, supporting:evd.supporting, contradicting:evd.contradicting, factors:evd.factors, ruleScores:{house_lord:layerScores.house_lord,planet_in_house:layerScores.planet_in_house,planet_in_sign:layerScores.planet_in_sign,yoga_rule:layerScores.yoga_rule,dasha_rule:layerScores.dasha_rule,nakshatra_rule:layerScores.nakshatra_rule,core_rule:layerScores.core_rule,argala:layerScores.argala,arudha:layerScores.arudha,chara_karaka:layerScores.chara_karaka,chara_dasha:layerScores.chara_dasha,kp_rule:layerScores.kp_rule}};
 }
 
 /* Render a generic fusion evidence block for any domain verdict. */
