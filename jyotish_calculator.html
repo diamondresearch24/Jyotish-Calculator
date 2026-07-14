@@ -192,7 +192,18 @@
       <div><label>Latitude °N (edit)</label><input type="number" step="0.0001" id="lat" value="27.5530"></div>
       <div><label>Longitude °E (edit)</label><input type="number" step="0.0001" id="lon" value="76.6346"></div>
       <div><label>Time Zone (UTC±)</label><input type="number" step="0.25" id="tz" value="5.5"></div>
-      <div><label>Ayanamsa</label><select id="ayan"><option value="lahiri">Lahiri (Vedic) + KP-New (KP मॉड्यूल)</option></select></div>
+      <div><label>Precision</label><select id="precision" onchange="updateSwissStatus()"><option value="js">Built-in JS ephemeris</option><option value="swiss">Swiss Ephemeris (WASM)</option></select></div>
+      <div><label>Ayanamsa</label><select id="ayan">
+        <option value="lahiri">Lahiri (Chitrapaksha)</option>
+        <option value="kpsk">KP-New (K.S.Krishnamurti)</option>
+        <option value="raman">Raman</option>
+        <option value="yukteshwar">Yukteshwar</option>
+        <option value="jnbhasin">J.N. Bhasin</option>
+        <option value="fagan">Fagan/Bradley</option>
+        <option value="deluce">De Luce</option>
+        <option value="krishnamurti">Krishnamurti</option>
+      </select></div>
+      <div><span id="swissStatus" class="tag">Swiss Ephemeris: loading…</span></div>
     </div>
     <div class="btn-row"><button class="btn" onclick="run()">Generate Report</button>
             <span class="tag">City suggestions appear as you type · Everything stays on your device</span></div>
@@ -223,7 +234,7 @@
   <div id="app-matchmaking" class="app-hidden"><div class="card"><h3 class="sh">💑 Match Making / गुण मिलान</h3><p class="lead">दो कुंडलियों का अष्टकूट-गुण मिलान (36 गुण), मांगलिक-दोष व दांपत्य-अनुकूलता विश्लेषण।</p><p class="tag" style="color:var(--gold-soft);font-size:14px">🔜 यह सुविधा जल्द आ रही है — विकासाधीन।</p></div></div>
   <div id="app-muhurat" class="app-hidden"><div class="card"><h3 class="sh">🕉 Muhurat / शुभ मुहूर्त</h3><p class="lead">विवाह से contract तक 30 कार्यों हेतु पंचांग-आधारित (तिथि·वार·नक्षत्र·योग) शुभ-मुहूर्त — मुहूर्त चिंतामणि नियमों पर। ऊपर 📅 Check Date बदलकर किसी भी आरंभ-तिथि से 45-दिन स्कैन करें। कुंडली बनी हो तो आपके जन्म-चंद्र का ताराबल भी जुड़ता है।</p></div><div id="muhContent"></div></div>
 </div>
-<footer>गणना: Meeus/ELP-2000 (सूर्य-चंद्र) + Keplerian+perturbations (ग्रह) · Lahiri व KP-New अयनांश · Placidus/श्रीपति भाव (सटीकता ≈ ≤2′ चाप-मिनट) · फल: Vedic Master Workbook नियम<br>
+<footer>गणना: Meeus/ELP-2000 (सूर्य-चंद्र) + Keplerian+perturbations (ग्रह) · अतिरिक्त Swiss Ephemeris (WASM) सटीकता विकल्प · 8 अयनांश (Lahiri, KP-New, Raman, Yukteshwar, J.N. Bhasin, Fagan/Bradley, De Luce, Krishnamurti) · Placidus/श्रीपति भाव · फल: Vedic Master Workbook नियम<br>
   ⚠️ शैक्षिक उपकरण; समय-windows सांकेतिक। professional software से मिलान करें; निर्णय हेतु योग्य ज्योतिषी से परामर्श लें।</footer>
 
 <script>
@@ -412,17 +423,109 @@ function computeSid(jd){const d=jd-2451543.5,ayan=lahiriAyanamsa(jd),sid=[],retr
     if(i<2)retro[i]=false;else if(i>6)retro[i]=true;
     else{let a=tlon(i,d),b=tlon(i,d+0.5),diff=b-a;if(diff>180)diff-=360;if(diff<-180)diff+=360;retro[i]=diff<0;}}
   return{sid,retro,ayan};}
-function computeChart(jd,lat,lonE){const c=computeSid(jd);
-  const A=anglesTropical(jd,lat,lonE);
-  c.asc=rev(A.asc-c.ayan);c.mc=rev(A.mc-c.ayan);c.ic=rev(c.mc+180);c.dsc=rev(c.asc+180);
-  try{c.cusps=placidusCusps(jd,lat,lonE).map(x=>rev(x-c.ayan));
-    const sb=sripatiBhava(jd,lat,lonE);c.bhavaMid=sb.madhya.map(x=>rev(x-c.ayan));c.bhavaBegin=sb.sandhi.map(x=>rev(x-c.ayan));}catch(e){}
-  return c;}
+function computeChart(jd,lat,lonE,opts){
+  opts=opts||{};
+  const mode=opts.ayanamsha || (typeof USER_SETTINGS!=='undefined'?USER_SETTINGS.ayanamsha:null) || 'lahiri';
+  return computeChartFallback(jd,lat,lonE,mode);
+}
 /* --- KP chart: KP-New (K.S.K.) ayanamsa + Placidus cusps --- */
 function computeChartKP(jd,lat,lonE){const c=computeSid(jd),ay=kpAyanamsa(jd);
   const sid=c.sid.map(x=>rev(x+c.ayan-ay));
   const cusps=placidusCusps(jd,lat,lonE).map(x=>rev(x-ay));
   return{sid,retro:c.retro,ayan:ay,asc:cusps[0],cusps};}
+
+/* ---- Swiss Ephemeris precision + ayanamsha selection (E6) ---- */
+const AYANAMSHA_MODES={
+  lahiri:{name:'Lahiri (Chitrapaksha)', swissSidm:'SE_SIDM_LAHIRI'},
+  kpsk:{name:'KP-New (K.S.Krishnamurti)', swissSidm:'SE_SIDM_KRISHNAMURTI'},
+  raman:{name:'Raman', swissSidm:'SE_SIDM_RAMAN'},
+  yukteshwar:{name:'Yukteshwar', swissSidm:'SE_SIDM_YUKTESHWAR'},
+  jnbhasin:{name:'J.N. Bhasin', swissSidm:'SE_SIDM_JN_BHASIN'},
+  fagan:{name:'Fagan/Bradley', swissSidm:'SE_SIDM_FAGAN_BRADLEY'},
+  deluce:{name:'De Luce', swissSidm:'SE_SIDM_DE_LUCE'},
+  krishnamurti:{name:'Krishnamurti', swissSidm:'SE_SIDM_KRISHNAMURTI'}
+};
+const SWISS_PLANET=[0,1,2,3,4,5,6,11,11]; // Sun,Moon,Mars,Mercury,Jupiter,Venus,Saturn,MeanNode(Ketu opposite)
+
+function swissSwe(){return (typeof window!=='undefined' && window.SWISS_EPH_AVAILABLE && window.SWISS_EPH)?window.SWISS_EPH:null;}
+
+function swissPlanetTropical(jd,i){
+  const swe=swissSwe(); if(!swe) return null;
+  const body=SWISS_PLANET[i];
+  const flags=(typeof swe.SEFLG_SWIEPH!=='undefined'?swe.SEFLG_SWIEPH:0) |
+              (typeof swe.SEFLG_SPEED!=='undefined'?swe.SEFLG_SPEED:0);
+  try{ const res=swe.calc_ut(jd,body,flags); return (res&&typeof res[0]==='number')?res[0]:null; }catch(e){return null;}
+}
+
+function swissPlanetSpeed(jd,i){
+  const swe=swissSwe(); if(!swe) return null;
+  const body=SWISS_PLANET[i];
+  const flags=(typeof swe.SEFLG_SWIEPH!=='undefined'?swe.SEFLG_SWIEPH:0) |
+              (typeof swe.SEFLG_SPEED!=='undefined'?swe.SEFLG_SPEED:0);
+  try{ const res=swe.calc_ut(jd,body,flags); return (res&&typeof res[3]==='number')?res[3]:null; }catch(e){return null;}
+}
+
+function swissAyanamsa(jd,sidmName){
+  const swe=swissSwe(); if(!swe) return null;
+  const code=swe[sidmName];
+  if(code==null) return null;
+  try{
+    if(typeof swe.set_sid_mode==='function') swe.set_sid_mode(code,0,0);
+    if(typeof swe.get_ayanamsa_ut==='function') return rev(swe.get_ayanamsa_ut(jd));
+  }catch(e){}
+  return null;
+}
+
+function ayanamsaValue(jd,mode){
+  if(mode==='kpsk') return kpAyanamsa(jd);
+  const cfg=AYANAMSHA_MODES[mode];
+  if(!cfg) return lahiriAyanamsa(jd);
+  const sa=swissAyanamsa(jd,cfg.swissSidm);
+  if(sa!=null) return sa;
+  return lahiriAyanamsa(jd);
+}
+
+function computeChartFallback(jd,lat,lonE,mode){
+  const ayan=ayanamsaValue(jd,mode);
+  const sid0=computeSid(jd);
+  const sid=sid0.sid.map(x=>rev(x+sid0.ayan-ayan));
+  const A=anglesTropical(jd,lat,lonE);
+  const c={sid,retro:sid0.retro.slice(),ayan,asc:rev(A.asc-ayan),mc:rev(A.mc-ayan),ic:rev(A.mc-ayan+180),dsc:rev(A.asc-ayan+180),jd,lat,lonE,ayanMode:mode,precision:'js'};
+  try{ c.cusps=placidusCusps(jd,lat,lonE).map(x=>rev(x-ayan)); }catch(e){}
+  try{ const sb=sripatiBhava(jd,lat,lonE); c.bhavaMid=sb.madhya.map(x=>rev(x-ayan)); c.bhavaBegin=sb.sandhi.map(x=>rev(x-ayan)); }catch(e){}
+  return c;
+}
+
+async function computeChartAsync(jd,lat,lonE,opts){
+  opts=opts||{};
+  const mode=(opts.ayanamsha && AYANAMSHA_MODES[opts.ayanamsha])?opts.ayanamsha:'lahiri';
+  const wantSwiss=(opts.precisionSource==='swiss' || USER_SETTINGS.precisionSource==='swiss');
+  if(wantSwiss && typeof swissEphReady!=='undefined') await swissEphReady;
+  const swe=swissSwe();
+  if(wantSwiss && swe){
+    const cfg=AYANAMSHA_MODES[mode];
+    const sidmName=(cfg&&cfg.swissSidm)||'SE_SIDM_LAHIRI';
+    const ayan=swissAyanamsa(jd,sidmName);
+    if(ayan!=null){
+      const sid=[],retro=[];
+      for(let i=0;i<9;i++){
+        let trop=swissPlanetTropical(jd,i);
+        if(trop==null) return computeChartFallback(jd,lat,lonE,mode);
+        if(i===8) trop=rev(trop+180); // Ketu is opposite Rahu/MeanNode
+        sid[i]=rev(trop-ayan);
+        const speed=swissPlanetSpeed(jd,i);
+        retro[i]= speed!=null ? (speed<0) : false;
+      }
+      const A=anglesTropical(jd,lat,lonE);
+      const c={sid,retro,ayan,asc:rev(A.asc-ayan),mc:rev(A.mc-ayan),ic:rev(A.mc-ayan+180),dsc:rev(A.asc-ayan+180),jd,lat,lonE,ayanMode:mode,precision:'swiss'};
+      try{ c.cusps=placidusCusps(jd,lat,lonE).map(x=>rev(x-ayan)); }catch(e){}
+      try{ const sb=sripatiBhava(jd,lat,lonE); c.bhavaMid=sb.madhya.map(x=>rev(x-ayan)); c.bhavaBegin=sb.sandhi.map(x=>rev(x-ayan)); }catch(e){}
+      return c;
+    }
+  }
+  return computeChartFallback(jd,lat,lonE,mode);
+}
+
 /* --- Birth Panchanga --- */
 function birthPanchanga(jd,lat,lonE,tz){const c=computeSid(jd);
   const sun=c.sid[0],moon=c.sid[1];
@@ -971,7 +1074,8 @@ const USER_SETTINGS={
   weightTransits:0.3,
   weightDasha:0.5,
   weightYogas:0.2,
-  useFullShadbala:true,
+  precisionSource:'js', // 'js' or 'swiss'
+  ayanamsha:'lahiri',
   useAshtakavarga:true,
   tradition:'traditional'
 };
@@ -982,7 +1086,7 @@ function updateUserSettings(settings){
 }
 
 function getAdjustedStrength(planet){
-  let base=USER_SETTINGS.useFullShadbala?shadbala(planet).score:pscore(planet);
+  let base=shadbala(planet);
   base=applyContextualWeight(base);
   if(USER_SETTINGS.strictness==='strict')base=Math.round(base*0.9);
   else if(USER_SETTINGS.strictness==='lenient')base=Math.round(base*1.1);
@@ -1249,132 +1353,10 @@ function renderAlternativePredictions(karakas,houses){
   
   return html;
 }
-function shadbala(i){
-  const sg=signOf(CH.sid[i]),h=houseFromAsc(sg,signOf(CH.asc));
-  let total=0,parts=[];
-  
-  // 1. STHANBALA (Positional Strength)
-  let sthanbala=0;
-  // Uccha Bala (Exaltation strength)
-  const ucchaDeg=EXALT[i]!==undefined?((EXALT[i]*30-CH.sid[i]+360)%360):0;
-  const ucchaBala=Math.round(ucchaDeg/3.6); // 0-60 virupas
-  sthanbala+=ucchaBala;
-  if(ucchaBala>30)parts.push(['उच्च बल (Sthanbala)','+'+ucchaBala]);
-  
-  // Saptavargaja Bala (7-division strength) - simplified
-  const dg=dignity(i,sg,CH.sid[i]);
-  let saptavargaja=0;
-  if(dg==='उच्च')saptavargaja=45;
-  else if(dg==='स्वगृही')saptavargaja=30;
-  else if(dg==='मित्र')saptavargaja=20;
-  else if(dg==='नीच')saptavargaja=10;
-  sthanbala+=saptavargaja;
-  if(saptavargaja>0)parts.push(['सप्तवर्ग बल','+'+saptavargaja]);
-  
-  // Kendradi Bala (Kendra/Trikona strength)
-  let kendraBala=0;
-  if([1,4,7,10].includes(h))kendraBala=60;
-  else if([5,9].includes(h))kendraBala=45;
-  else if(CH.retro[i]&&i>1&&i<7)kendraBala=30; // Retrograde in dusthana
-  sthanbala+=kendraBala;
-  if(kendraBala>0)parts.push(['केंद्रादि बल','+'+kendraBala]);
-  
-  total+=sthanbala;
-  
-  // 2. DIGBALA (Directional Strength)
-  const digBala=[60,30,60,30,60,30,60,30,30][i]; // Standard digbala values
-  total+=digBala;
-  parts.push(['दिग्बल','+'+digBala]);
-  
-  // 3. KALABALA (Temporal Strength) - simplified
-  let kalabala=0;
-  // Natonnata Bala (Day/Night strength)
-  const isDayPlanet=[0,3,4].includes(i); // Sun, Mercury, Jupiter
-  const isNightPlanet=[1,2,5,6].includes(i); // Moon, Mars, Venus, Saturn
-  const isNightTime=CH.sid[0]>180; // Sun below horizon
-  if((isDayPlanet&&!isNightTime)||(isNightPlanet&&isNightTime)){
-    kalabala+=60;
-    parts.push(['नाटोन्नत बल (कालबल)','+60']);
-  }
-  
-  // Tribhaga Bala (3-part day strength)
-  const birthTime=CH.sid[0]; // Sun's position
-  let tribhaga=0;
-  if(birthTime<120)tribhaga=[0,60,60,60,30,30,30,60,60][i];
-  else if(birthTime<240)tribhaga=[60,30,30,30,60,60,60,30,30][i];
-  else tribhaga=[30,60,60,60,30,30,30,60,60][i];
-  kalabala+=tribhaga;
-  if(tribhaga>0)parts.push(['त्रिभाग बल','+'+tribhaga]);
-  
-  total+=kalabala;
-  
-  // 4. CHESHTABALA (Motional Strength)
-  let cheshtabala=0;
-  if(CH.retro[i]&&i>1&&i<7){
-    cheshtabala=60;
-    parts.push(['चेष्टाबल (वक्री)','+60']);
-  }else if(!CH.retro[i]&&i>1&&i<7){
-    cheshtabala=30;
-    parts.push(['चेष्टाबल (मार्गी)','+30']);
-  }
-  // Combustion reduces cheshtabala
-  if(combust(i)){
-    cheshtabala=Math.max(0,cheshtabala-30);
-    parts.push(['अस्त (चेष्टाबल कमी)','−30']);
-  }
-  total+=cheshtabala;
-  
-  // 5. NAISARGIKABALA (Natural Strength)
-  const naisargikaBala=[60,51,39,42,51,57,42,42,42][i]; // Standard natural strength
-  total+=naisargikaBala;
-  parts.push(['नैसर्गिक बल','+'+naisargikaBala]);
-  
-  // 6. DRIKBALA (Aspectual Strength) - simplified
-  let drikbala=0;
-  // Calculate aspects received
-  for(let j=0;j<9;j++){
-    if(i===j)continue;
-    const aspect=getAspect(j,i); // Does planet j aspect planet i?
-    if(aspect>0){
-      drikbala+=aspect;
-    }
-  }
-  if(drikbala>0)parts.push(['दृक्बल','+'+drikbala]);
-  total+=drikbala;
-  
-  // Convert to 0-96 scale (approximate)
-  const finalScore=Math.round((total/450)*96);
-  return{score:Math.max(8,Math.min(96,finalScore)),parts,total};
-}
-
-// Helper: Get aspect strength
-function getAspect(fromPlanet,toPlanet){
-  const fromSign=signOf(CH.sid[fromPlanet]),toSign=signOf(CH.sid[toPlanet]);
-  const diff=((toSign-fromSign+12)%12);
-  // Full aspect (7th house)
-  if(diff===6)return 60;
-  // Special aspects
-  if(fromPlanet===2||fromPlanet===6||fromPlanet===8){ // Mars, Saturn, Nodes
-    if(diff===4||diff===8)return 60; // 4th and 8th house aspects
-  }
-  if(fromPlanet===4||fromPlanet===5){ // Jupiter
-    if(diff===5||diff===9)return 60; // 5th and 9th house aspects
-  }
-  return 0;
-}
-
-// Simplified strength for backward compatibility
-function pstrength(i){const sg=signOf(CH.sid[i]);let s=50;const parts=[['आधार','50']];const dg=dignity(i,sg,CH.sid[i]);
-  if(dg==='उच्च'){s+=25;parts.push(['उच्च राशि','+25']);}else if(dg==='नीच'){s-=22;parts.push(['नीच राशि','−22']);}
-  else if(dg==='स्वगृही'||dg==='मूलत्रिकोण'){s+=14;parts.push([dg,'+14']);}
-  const h=houseFromAsc(sg,signOf(CH.asc));
-  if([1,4,7,10].includes(h)){s+=10;parts.push(['केंद्र (दिग्बल)','+10']);}
-  else if([5,9].includes(h)){s+=8;parts.push(['त्रिकोण','+8']);}
-  else if([6,8,12].includes(h)){s-=8;parts.push(['त्रिक भाव','−8']);}
-  if(combust(i)){s-=12;parts.push(['अस्त','−12']);}
-  if(CH.retro[i]&&i>1&&i<7){s+=6;parts.push(['वक्री (चेष्टा)','+6']);}
-  s=Math.max(8,Math.min(96,Math.round(s)));return{score:s,parts};}
-const pscore=i=>pstrength(i).score;
+/* pstrength now delegates to the six-fold shadbala system.
+   It returns the same {score,parts} shape for all existing render/print call sites. */
+function pstrength(i){return{score:finalStrength(i),parts:shadParts(i)};}
+const pscore=i=>finalStrength(i);
 
 /* ===== ASHTAKAVARGA CALCULATION ===== */
 // Ashtakavarga: 8-planet strength system (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Ascendant)
@@ -1509,11 +1491,11 @@ const PKEY='jyotish_profiles_v1';
 function loadProfiles(){try{return JSON.parse(localStorage.getItem(PKEY)||'[]');}catch(e){return[];}}
 function saveProfiles(a){try{localStorage.setItem(PKEY,JSON.stringify(a));}catch(e){}}
 function pgv(id){const el=document.getElementById(id);return el?el.value:'';}
-function saveCurrentProfile(){try{const p={name:pgv('name')||'जातक',dob:pgv('dob'),tob:pgv('tob'),city:pgv('citySearch'),lat:pgv('lat'),lon:pgv('lon'),tz:pgv('tz'),ayan:pgv('ayan')};
+function saveCurrentProfile(){try{const p={name:pgv('name')||'जातक',dob:pgv('dob'),tob:pgv('tob'),city:pgv('citySearch'),lat:pgv('lat'),lon:pgv('lon'),tz:pgv('tz'),ayan:pgv('ayan'),precision:pgv('precision')};
   if(!p.dob||!p.tob)return;const arr=loadProfiles();const i=arr.findIndex(x=>(x.name||'').toLowerCase()===p.name.toLowerCase()&&x.dob===p.dob&&x.tob===p.tob);
   if(i>=0)arr[i]=p;else arr.unshift(p);saveProfiles(arr.slice(0,40));renderProfiles();}catch(e){}}
 function fillProfile(i){const p=loadProfiles()[i];if(!p)return;const set=(id,v)=>{const el=document.getElementById(id);if(el&&v!=null)el.value=v;};
-  set('name',p.name);set('dob',p.dob);set('tob',p.tob);set('citySearch',p.city);set('lat',p.lat);set('lon',p.lon);set('tz',p.tz);set('ayan',p.ayan);
+  set('name',p.name);set('dob',p.dob);set('tob',p.tob);set('citySearch',p.city);set('lat',p.lat);set('lon',p.lon);set('tz',p.tz);set('ayan',p.ayan);set('precision',p.precision);
   try{run();}catch(e){}window.scrollTo({top:0,behavior:'smooth'});}
 function deleteProfile(i,ev){if(ev)ev.stopPropagation();const arr=loadProfiles();arr.splice(i,1);saveProfiles(arr);renderProfiles();}
 function renderProfiles(){const wrap=document.getElementById('savedProfiles');if(!wrap)return;const arr=loadProfiles();
@@ -1521,19 +1503,35 @@ function renderProfiles(){const wrap=document.getElementById('savedProfiles');if
   wrap.innerHTML='<div class="tag" style="margin-bottom:6px">💾 Saved Profiles (click to auto-fill · × to remove):</div>'+
     '<div style="display:flex;flex-wrap:wrap;gap:8px">'+arr.map((p,i)=>`<span onclick="fillProfile(${i})" style="cursor:pointer;background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:6px 12px;display:inline-flex;align-items:center;gap:8px;font-size:13px"><b>${(p.name||'जातक')}</b> <span style="opacity:.55">${p.dob||''}${p.city?' · '+String(p.city).split(',')[0]:''}</span> <span onclick="deleteProfile(${i},event)" style="opacity:.55;font-weight:700;font-size:16px" title="हटाएँ">×</span></span>`).join('')+'</div>';}
 // Note: renderProfiles is called after sample data is loaded
-function run(){const err=document.getElementById('err');err.textContent='';try{
+async function run(){const err=document.getElementById('err');err.textContent='';try{
   const dob=document.getElementById('dob').value,tob=document.getElementById('tob').value;
   if(!dob||!tob){err.textContent='कृपया जन्म तिथि व समय भरें।';return;}
   saveCurrentProfile();
   const[Y,M,D]=dob.split('-').map(Number),[hh,mm]=tob.split(':').map(Number);
   const lat=parseFloat(document.getElementById('lat').value),lonE=parseFloat(document.getElementById('lon').value),tz=parseFloat(document.getElementById('tz').value);
   if(isNaN(lat)||isNaN(lonE)||isNaN(tz)){err.textContent='अक्षांश/देशांतर/TZ सही भरें।';return;}
+  const precisionSource=(document.getElementById('precision')?.value)||USER_SETTINGS.precisionSource||'js';
+  const ayanamsha=(document.getElementById('ayan')?.value)||USER_SETTINGS.ayanamsha||'lahiri';
+  USER_SETTINGS.precisionSource=precisionSource;
+  USER_SETTINGS.ayanamsha=ayanamsha;
+  updateSwissStatus();
   birthYearFloat=Y+(M-1)/12+(D-1)/365;
-  const jd=julianDay(Y,M,D,(hh+mm/60)-tz);CH=computeChart(jd,lat,lonE);CH.jd=jd;CH.lat=lat;CH.lonE=lonE;CH.tz=tz;
+  const jd=julianDay(Y,M,D,(hh+mm/60)-tz);
+  CH=await computeChartAsync(jd,lat,lonE,{ayanamsha,precisionSource});
+  CH.jd=jd;CH.lat=lat;CH.lonE=lonE;CH.tz=tz;
   CHKP=computeChartKP(jd,lat,lonE);PANCH=birthPanchanga(jd,lat,lonE,tz);
   buildDasha(jd);buildTransit();buildNav();show('summary');
   document.getElementById('report').style.display='block';document.getElementById('report').scrollIntoView({behavior:'smooth'});
 }catch(e){err.textContent='त्रुटि: '+e.message;console.error(e);}}
+
+function updateSwissStatus(){
+  const el=document.getElementById('swissStatus'); if(!el) return;
+  const wantSwiss=(document.getElementById('precision')?.value)==='swiss';
+  if(typeof window==='undefined' || window.SWISS_EPH_AVAILABLE===undefined){el.textContent='Swiss Ephemeris: loading…';return;}
+  el.textContent=window.SWISS_EPH_AVAILABLE
+    ?('Swiss Ephemeris: ready'+(wantSwiss?' (active)':' (available)'))
+    :('Swiss Ephemeris: unavailable — using built-in JS ephemeris'+(wantSwiss?' (fallback)':''));
+}
 
 /* ===== DASHA (JD-based + full nested + pratyantar) ===== */
 const YEAR=365.25;
@@ -1892,7 +1890,7 @@ RENDER.verseLookup=()=>`<div class="card"><h3 class="sh">🔍 श्लोक �
    <div class="disclaimer">⚠️ यह श्लोक डेटाबेस विकासाधीन है। अधिक श्लोक जोड़े जा रहे है।</div></div>`;
 
 /* ---- Verse DB loader: loads real data from verse_database/ (falls back to samples on file://) ---- */
-const VERSE_DB={loaded:false,tried:false,verses:[],houseLords:[],planetsInHouses:[],planetsInSigns:[],yogas:[],dashaEffects:[],nakshatras:[],coreEffects:[],computations:[]};
+const VERSE_DB={loaded:false,tried:false,verses:[],houseLords:[],planetsInHouses:[],planetsInSigns:[],yogas:[],dashaEffects:[],nakshatras:[],coreEffects:[],phalaRules:[],saravaliRules:[],computations:[]};
 const SAMPLE_VERSES=[
   {id:'BPHS_27_1',text:'षड्बलं षट्कालानां ग्रहाणां बलमुच्यते',transliteration:'Ṣaḍbalaṃ ṣaṭkālānāṃ grahāṇāṃ balamucyate',translations:{en:'Shadbala is the six-fold strength of planets',hi:'षड्बल ग्रहों की छह गुना बल है'},source:{text:'BPHS',chapter:27,verse:1},category:'shadbala',implementation:{status:'implemented',functionName:'shadbala'}},
   {id:'BPHS_46_1',text:'विम्शोत्तरी दशा चन्द्रनक्षत्राणां ध्रुवा',transliteration:'Viṃśottarī daśa candranakṣatrāṇāṃ dhruvā',translations:{en:'Vimshottari Dasha is based on Moon\'s nakshatras',hi:'विम्शोत्तरी दशा चंद्र नक्षत्रों पर आधारित है'},source:{text:'BPHS',chapter:46,verse:1},category:'dasha',implementation:{status:'implemented',functionName:'buildDasha'}},
@@ -1916,7 +1914,9 @@ async function loadVerseDB(){
     try{const r=await fetch('verse_database/bphs_dasha_effects.json');if(r.ok){const j=await r.json();if(Array.isArray(j.rules))VERSE_DB.dashaEffects=j.rules;}}catch(e){}
     try{const r=await fetch('verse_database/bphs_nakshatra.json');if(r.ok){const j=await r.json();if(Array.isArray(j.rules))VERSE_DB.nakshatras=j.rules;}}catch(e){}
     try{const r=await fetch('verse_database/bphs_core.json');if(r.ok){const j=await r.json();if(Array.isArray(j.rules))VERSE_DB.coreEffects=j.rules;}}catch(e){}
-  if(VERSE_DB.verses.length||VERSE_DB.houseLords.length||VERSE_DB.planetsInHouses.length||VERSE_DB.planetsInSigns.length||VERSE_DB.yogas.length||VERSE_DB.dashaEffects.length||VERSE_DB.nakshatras.length||VERSE_DB.coreEffects.length||VERSE_DB.computations.length)VERSE_DB.loaded=true;
+    try{const r=await fetch('verse_database/phaladeepika_rules.json');if(r.ok){const j=await r.json();if(Array.isArray(j.rules))VERSE_DB.phalaRules=j.rules;}}catch(e){}
+    try{const r=await fetch('verse_database/saravali_rules.json');if(r.ok){const j=await r.json();if(Array.isArray(j.rules))VERSE_DB.saravaliRules=j.rules;}}catch(e){}
+  if(VERSE_DB.verses.length||VERSE_DB.houseLords.length||VERSE_DB.planetsInHouses.length||VERSE_DB.planetsInSigns.length||VERSE_DB.yogas.length||VERSE_DB.dashaEffects.length||VERSE_DB.nakshatras.length||VERSE_DB.coreEffects.length||VERSE_DB.phalaRules.length||VERSE_DB.saravaliRules.length||VERSE_DB.computations.length)VERSE_DB.loaded=true;
   }catch(e){}
   if(!VERSE_DB.verses.length)VERSE_DB.verses=SAMPLE_VERSES; // file:// fallback
   return VERSE_DB;
@@ -2465,6 +2465,12 @@ function drawChart(){const svg=document.getElementById('chartSvg');if(!svg)retur
     <p class="tag" style="margin-top:8px">मार्कर / Markers: <b>*</b> वक्री/Retrograde · <b>^</b> अस्त/Combust · <b>□</b> वर्गोत्तम/Vargottama · <b>↑</b> उच्च/Exalted · <b>↓</b> नीच/Debilitated</p>
     <p class="tag">${curVarga} — ${{D1:'राशि (मुख्य)',D9:'नवांश: विवाह-भाग्य-बल',D10:'दशांश: करियर',D2:'होरा: धन',D7:'सप्तांश: संतान',D12:'द्वादशांश: माता-पिता',D24:'चतुर्विंशांश: शिक्षा',D30:'त्रिंशांश: रोग/कष्ट',D60:'षष्ट्यांश: पूर्वजन्म कर्म'}[curVarga]||''}</p>`;
   const rEl=document.getElementById('chartReason');if(rEl)rEl.innerHTML=statusReasons();}
+/* small status poller for Swiss Ephemeris load state */
+(function pollSwiss(){
+  if(typeof window==='undefined')return;
+  updateSwissStatus();
+  if(window.SWISS_EPH_AVAILABLE===undefined) setTimeout(pollSwiss,300);
+})();
 </script>
 <script>
 /* ============ MODE TOGGLE + LEARNING ENGINE (Level 1 expanded) ============ */
@@ -4090,6 +4096,92 @@ function ashtakavargaEvidence(){
   }
 }
 
+const TEXT_RULE_PKEY=['sun','moon','mars','mercury','jupiter','venus','saturn','rahu','ketu'];
+const TEXT_RULE_DIGNITY={exalted:'उच्च',debilitated:'नीच',own:'स्वगृही',moolatrikona:'मूलत्रिकोण'};
+function evalTextRuleCondition(rule){
+  const c=rule.conditions;
+  if(!c)return false;
+  if(rule.rule_type==='yoga'&&c.yoga_key){
+    const yogas=(typeof detectYogas==='function')?detectYogas():[];
+    return yogas.some(y=>y.key===c.yoga_key);
+  }
+  if(rule.rule_type==='lord_placement'&&c.houseLordOf!==undefined&&c.inHouse!==undefined){
+    const lordIdx=lordOfHouse(c.houseLordOf);
+    const ph=planetHouse(lordIdx);
+    return Array.isArray(c.inHouse)?c.inHouse.includes(ph):ph===c.inHouse;
+  }
+  if(rule.rule_type==='planet_in_house'&&c.planet!==undefined&&c.inHouse!==undefined){
+    const ph=planetHouse(c.planet);
+    if(Array.isArray(c.inHouse)?!c.inHouse.includes(ph):ph!==c.inHouse)return false;
+    if(c.combust===false&&combust(c.planet))return false;
+    if(c.combust===true&&!combust(c.planet))return false;
+    return true;
+  }
+  if(rule.rule_type==='conjunction'&&Array.isArray(c.conjunctWith)&&c.conjunctWith.length>=2){
+    const p1=c.conjunctWith[0],p2=c.conjunctWith[1];
+    return signOf(CH.sid[p1])===signOf(CH.sid[p2]);
+  }
+  if(rule.rule_type==='dignity'&&c.planet!==undefined&&c.dignity){
+    const sg=signOf(CH.sid[c.planet]);
+    const deg=(((CH.sid[c.planet]%360)+360)%360)%30;
+    const dg=dignity(c.planet,sg,deg);
+    return dg===TEXT_RULE_DIGNITY[c.dignity];
+  }
+  return false;
+}
+function evalTextRuleExceptions(rule,planetIdx){
+  const exc=rule.exceptions||[];
+  const notes=[];
+  let wAdj=0;
+  const sg=signOf(CH.sid[planetIdx]);
+  const deg=(((CH.sid[planetIdx]%360)+360)%360)%30;
+  const dg=dignity(planetIdx,sg,deg);
+  const pKey=TEXT_RULE_PKEY[planetIdx];
+  exc.forEach(e=>{
+    if(e==='lord_debilitated'||e==='planet_debilitated'||(pKey&&e===pKey+'_debilitated')){if(dg==='नीच'){wAdj-=2;notes.push(PL[planetIdx]+' नीच में');}}
+    else if(e==='lord_exalted'||e==='planet_exalted'||(pKey&&e===pKey+'_exalted')){if(dg==='उच्च'){wAdj+=2;notes.push(PL[planetIdx]+' उच्च में');}}
+    else if(e==='lord_own'||e==='planet_own'||(pKey&&e===pKey+'_own')){if(dg==='स्वगृही'){wAdj+=1;notes.push(PL[planetIdx]+' स्वगृही');}}
+    else if(e==='lord_combust'||e==='planet_combust'||(pKey&&e===pKey+'_combust')){if(combust(planetIdx)){wAdj-=1;notes.push(PL[planetIdx]+' अस्त');}}
+    else if(e==='vipareeta_raja_yoga'||e==='vipareeta'){
+      const vry=viparitaRajyoga();
+      if(vry.some(y=>PL.indexOf(y.lord)===planetIdx&&[6,8,12].includes(y.house))){wAdj+=3;notes.push('विपरीत राजयोग — नकारात्मक फल कम');}
+    }
+    else if(e==='neechabhanga'){const nb=neechabhanga(planetIdx);if(nb.cancelled){wAdj+=2;notes.push('नीचभंग योग');}}
+    else if(e==='malefic_aspect'){const malefics=[0,2,6,7,8];if(malefics.some(m=>m!==planetIdx&&aspectFromTo(m,planetIdx))){wAdj-=1;notes.push('पाप-ग्रह दृष्टि');}}
+    else if(pKey&&e===pKey+'_yoga_karaka'){wAdj+=1;notes.push(PL[planetIdx]+' योगकारक');}
+  });
+  return {wAdj,notes};
+}
+function textRuleEvidence(rules,layerName){
+  try{
+    if(typeof CH==='undefined'||!CH||!CH.sid||!Array.isArray(rules)||!rules.length)return{loaded:false,factors:[]};
+    const factors=[];
+    for(const rule of rules){
+      if(!evalTextRuleCondition(rule))continue;
+      let planetIdx=null;
+      if(rule.conditions.planet!==undefined)planetIdx=rule.conditions.planet;
+      else if(rule.conditions.houseLordOf!==undefined)planetIdx=lordOfHouse(rule.conditions.houseLordOf);
+      else if(rule.conditions.conjunctWith&&rule.conditions.conjunctWith.length)planetIdx=rule.conditions.conjunctWith[0];
+      if(planetIdx==null||planetIdx<0||planetIdx>=9)continue;
+      const pos=planetHouse(planetIdx);
+      const exc=evalTextRuleExceptions(rule,planetIdx);
+      const base=rule.effect?(rule.effect.weight||0):0;
+      const w=base+exc.wAdj;
+      if(w===0)continue;
+      const text=(rule.translations&&rule.translations.hi?rule.translations.hi:'')+' / '+(rule.translations&&rule.translations.en?rule.translations.en:'');
+      factors.push({
+        layer:layerName||'text_rule',planet:planetIdx,pos:pos,w:w,domains:(rule.effect&&rule.effect.domains)?rule.effect.domains:['general'],
+        ruleId:rule.id,source:rule.source,confidence:rule.confidence||'low',
+        text:text,notes:exc.notes
+      });
+    }
+    return{loaded:true,factors};
+  }catch(e){return{loaded:false,factors:[]};
+  }
+}
+function phalaEvidence(){return textRuleEvidence((typeof VERSE_DB!=='undefined'&&VERSE_DB.phalaRules)?VERSE_DB.phalaRules:[],'phaladeepika_rule');}
+function saravaliEvidence(){return textRuleEvidence((typeof VERSE_DB!=='undefined'&&VERSE_DB.saravaliRules)?VERSE_DB.saravaliRules:[],'saravali_rule');}
+
 function kpRulingPlanets(){if(!CH||CH.lat===undefined)return '';
   const now=new Date();
   const jn=julianDay(now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate(),now.getUTCHours()+now.getUTCMinutes()/60+now.getUTCSeconds()/3600);
@@ -4205,6 +4297,92 @@ function coreEvidence(){
   });
   return {loaded:true,factors};
 }
+
+/* ---- Phaladeepika & Saravali actionable rule layers (E7) ---- */
+function ruleConditionMatch(conds){
+  if(!CH||!CH.sid) return false;
+  if(!conds) return false;
+  // yoga_key path: rely on live detectYogas() keys
+  if(conds.yoga_key){
+    if(typeof detectYogas!=='function') return false;
+    const yogas=detectYogas();
+    return yogas.some(y=>y.key===conds.yoga_key);
+  }
+  const psign=CH.sid.map(signOf);
+  const ph=psign.map(sg=>houseFromAsc(sg,signOf(CH.asc)));
+  const dignMap={exalted:'उच्च',debilitated:'नीच',own:'स्वगृही',moolatrikona:'मूलत्रिकोण'};
+  function checkPlanet(p){
+    if(p<0||p>8) return false;
+    if(conds.inHouse!==undefined){
+      const target=Array.isArray(conds.inHouse)?conds.inHouse:[conds.inHouse];
+      if(!target.includes(ph[p])) return false;
+    }
+    if(conds.inSign!==undefined){
+      const target=Array.isArray(conds.inSign)?conds.inSign:[conds.inSign];
+      if(!target.includes(psign[p])) return false;
+    }
+    if(conds.dignity){
+      const dval=dignity(p,psign[p],CH.sid[p]);
+      if(dval!==dignMap[conds.dignity]) return false;
+    }
+    if(conds.combust===false && combust(p)) return false;
+    if(conds.combust===true && !combust(p)) return false;
+    return true;
+  }
+  if(conds.planet!==undefined){
+    if(!checkPlanet(conds.planet)) return false;
+  }
+  if(conds.houseLordOf!==undefined){
+    const l=lordOfHouse(conds.houseLordOf);
+    if(l<0||l>8) return false;
+    if(conds.inHouse!==undefined){
+      const target=Array.isArray(conds.inHouse)?conds.inHouse:[conds.inHouse];
+      if(!target.includes(ph[l])) return false;
+    }
+    if(conds.dignity){
+      const dval=dignity(l,psign[l],CH.sid[l]);
+      if(dval!==dignMap[conds.dignity]) return false;
+    }
+  }
+  if(Array.isArray(conds.conjunctWith) && conds.conjunctWith.length>=2){
+    const firstSign=psign[conds.conjunctWith[0]];
+    if(!conds.conjunctWith.every(p=>p>=0&&p<=8 && psign[p]===firstSign)) return false;
+  }
+  if(Array.isArray(conds.aspectedBy) && conds.aspectedBy.length>=1 && conds.planet!==undefined){
+    const target=conds.planet;
+    if(!conds.aspectedBy.some(src=>src>=0&&src<=8 && aspectFromTo(src,target))) return false;
+  }
+  if(conds.kendra===true && conds.planet!==undefined){
+    if(![1,4,7,10].includes(ph[conds.planet])) return false;
+  }
+  if(conds.trikona===true && conds.planet!==undefined){
+    if(![5,9].includes(ph[conds.planet])) return false;
+  }
+  return true;
+}
+function evaluateOtherTextRules(rules,layerName){
+  const factors=[];
+  if(!Array.isArray(rules)||!rules.length||typeof CH==='undefined'||!CH||!CH.sid)return {loaded:false,factors};
+  rules.forEach(rule=>{
+    if(!rule.conditions || !rule.effect) return;
+    if(ruleConditionMatch(rule.conditions)){
+      const w=rule.effect.polarity==='malefic'?-(rule.effect.weight||0):(rule.effect.weight||0);
+      let planet=null,pos='—';
+      if(rule.conditions.planet!==undefined) planet=rule.conditions.planet;
+      else if(rule.conditions.houseLordOf!==undefined) planet=lordOfHouse(rule.conditions.houseLordOf);
+      factors.push({
+        layer:layerName, planet:planet, pos:pos, w:w, domains:rule.effect.domains||['general'],
+        ruleId:rule.id, source:rule.source, confidence:rule.confidence||'low',
+        text:(rule.translations&&(rule.translations.en||rule.translations.hi))||'',
+        notes:[]
+      });
+    }
+  });
+  return {loaded:true,factors};
+}
+function phalaEvidence(){return evaluateOtherTextRules((typeof VERSE_DB!=='undefined'&&VERSE_DB.phalaRules)?VERSE_DB.phalaRules:[],'phaladeepika_rule');}
+function saravaliEvidence(){return evaluateOtherTextRules((typeof VERSE_DB!=='undefined'&&VERSE_DB.saravaliRules)?VERSE_DB.saravaliRules:[],'saravali_rule');}
+
 function kpChartHTML(){let prow='';for(let i=0;i<9;i++){const nk=nakInfo(kpP(i));prow+=`<tr><td>${PL[i]}</td><td>${SIGNS[signOf(kpP(i))]} ${fmtDeg(kpP(i))}</td><td>${NAK[nk.n]}</td><td>${PL[nk.lord]}</td><td><b>${PL[subLordOf(kpP(i))]}</b></td></tr>`;}
   let crow='';for(let H=1;H<=12;H++){const L=cuspLon(H);crow+=`<tr><td>${H}</td><td>${SIGNS[signOf(L)]} ${fmtDeg(L)}</td><td>${PL[nakInfo(L).lord]}</td><td><b>${PL[subLordOf(L)]}</b></td></tr>`;}
   return `<div style="text-align:center;margin:14px 0"><div class="lhd" style="margin-bottom:6px">🎯 KP कुंडली (ग्रह·उप-स्वामी)</div>${kpSVG()}</div>
@@ -4345,12 +4523,14 @@ const FUSION_WEIGHTS={
     FUSION_WEIGHTS[k].chara_dasha=FUSION_WEIGHTS[k].chara_dasha||3;
     FUSION_WEIGHTS[k].kp_rule=FUSION_WEIGHTS[k].kp_rule||3;
     FUSION_WEIGHTS[k].ashtakavarga_rule=FUSION_WEIGHTS[k].ashtakavarga_rule||3;
+    FUSION_WEIGHTS[k].phaladeepika_rule=FUSION_WEIGHTS[k].phaladeepika_rule||3;
+    FUSION_WEIGHTS[k].saravali_rule=FUSION_WEIGHTS[k].saravali_rule||3;
   });
 })();
 
 /* Collect cited rule evidence from one or more actionable rule layers, filtered to the
    requested life-area keywords. Returns a unified array of factors plus net contribution. */
-function collectEvidence(keywords,layers=['house_lord','planet_in_house','planet_in_sign','yoga_rule','dasha_rule','nakshatra_rule','core_rule','argala','arudha','chara_karaka','chara_dasha','kp_rule','ashtakavarga_rule']){
+function collectEvidence(keywords,layers=['house_lord','planet_in_house','planet_in_sign','yoga_rule','dasha_rule','nakshatra_rule','core_rule','argala','arudha','chara_karaka','chara_dasha','kp_rule','ashtakavarga_rule','phaladeepika_rule','saravali_rule']){
   const factors=[];
   const kw=(keywords||[]).map(k=>k.toLowerCase());
   const matches=(domains)=>domains.some(d=>kw.some(k=>d.toLowerCase().includes(k)));
@@ -4484,6 +4664,26 @@ function collectEvidence(keywords,layers=['house_lord','planet_in_house','planet
       });
     });
   }
+  if(layers.includes('phaladeepika_rule')){
+    const evd=(typeof phalaEvidence==='function')?phalaEvidence():{loaded:false,factors:[]};
+    if(evd.loaded) evd.factors.forEach(f=>{
+      if(matches(f.domains)) factors.push({
+        layer:'phaladeepika_rule', planet:f.planet, pos:f.pos, w:f.w, domains:f.domains,
+        ruleId:f.ruleId, source:f.source, confidence:f.confidence,
+        text:f.text, notes:f.notes
+      });
+    });
+  }
+  if(layers.includes('saravali_rule')){
+    const evd=(typeof saravaliEvidence==='function')?saravaliEvidence():{loaded:false,factors:[]};
+    if(evd.loaded) evd.factors.forEach(f=>{
+      if(matches(f.domains)) factors.push({
+        layer:'saravali_rule', planet:f.planet, pos:f.pos, w:f.w, domains:f.domains,
+        ruleId:f.ruleId, source:f.source, confidence:f.confidence,
+        text:f.text, notes:f.notes
+      });
+    });
+  }
   const supporting=factors.filter(f=>f.w>0), contradicting=factors.filter(f=>f.w<0);
   return {
     factors,
@@ -4515,7 +4715,7 @@ function evidenceScore(factors,maxAmp=8){
    supporting, contradicting, factors}. */
 function domainFusion(domainName,keywords,scores,cfg){
   const evd=collectEvidence(keywords);
-  const ruleLayers={house_lord:[],planet_in_house:[],planet_in_sign:[],yoga_rule:[],dasha_rule:[],nakshatra_rule:[],core_rule:[],argala:[],arudha:[],chara_karaka:[],chara_dasha:[],kp_rule:[],ashtakavarga_rule:[]};
+  const ruleLayers={house_lord:[],planet_in_house:[],planet_in_sign:[],yoga_rule:[],dasha_rule:[],nakshatra_rule:[],core_rule:[],argala:[],arudha:[],chara_karaka:[],chara_dasha:[],kp_rule:[],ashtakavarga_rule:[],phaladeepika_rule:[],saravali_rule:[]};
   evd.factors.forEach(f=>{if(ruleLayers[f.layer])ruleLayers[f.layer].push(f);});
   const layerScores={};
   Object.keys(cfg).forEach(k=>{
@@ -4525,12 +4725,12 @@ function domainFusion(domainName,keywords,scores,cfg){
   // filter active layers and re-normalize weights
   const active=Object.entries(cfg).filter(([k])=>layerScores[k]!=null);
   const totalW=active.reduce((a,[k,v])=>a+v,0)||1;
-  const W=active.map(([k,v])=>{const label={house_lord:'भावेश (BPHS 13-14)',planet_in_house:'ग्रह-भाव (BPHS 11)',planet_in_sign:'ग्रह-राशि (BPHS 11)',yoga_rule:'योग-नियम (BPHS 15-16)',dasha_rule:'दशा-फल (BPHS 46-50,73)',nakshatra_rule:'नक्षत्र-नियम (BPHS 71-77)',core_rule:'दृष्टि/गौरव/शक्ति (BPHS 3-7,26-27)',argala:'जैमिनी अर्गला (BPHS 11,31)',arudha:'जैमिनी आरूढ़ (BPHS 29-30)',chara_karaka:'जैमिनी चर कारक',chara_dasha:'जैमिनी चर दशा',kp_rule:'KP Star/Sub-Lord (Reader VI)',ashtakavarga_rule:'अष्टकवर्ग (BPHS)',d1:'D1 (भाव-तंत्र)',d2:'D2',d4:'D4',d6:'D6',d7:'D7',d9:'D9',d10:'D10',d12:'D12',d24:'D24',d30:'D30',yoga:'योग (गणना)',dasha:'दशा',shadbala:'षड्बल/शक्ति',nakshatra:'नक्षत्र',jaimini:'Jaimini',kp:'KP'}[k]||k; return [label,layerScores[k],v*100/totalW];});
+  const W=active.map(([k,v])=>{const label={house_lord:'भावेश (BPHS 13-14)',planet_in_house:'ग्रह-भाव (BPHS 11)',planet_in_sign:'ग्रह-राशि (BPHS 11)',yoga_rule:'योग-नियम (BPHS 15-16)',dasha_rule:'दशा-फल (BPHS 46-50,73)',nakshatra_rule:'नक्षत्र-नियम (BPHS 71-77)',core_rule:'दृष्टि/गौरव/शक्ति (BPHS 3-7,26-27)',argala:'जैमिनी अर्गला (BPHS 11,31)',arudha:'जैमिनी आरूढ़ (BPHS 29-30)',chara_karaka:'जैमिनी चर कारक',chara_dasha:'जैमिनी चर दशा',kp_rule:'KP Star/Sub-Lord (Reader VI)',ashtakavarga_rule:'अष्टकवर्ग (BPHS)',phaladeepika_rule:'फलदीपिका (Phaladeepika)',saravali_rule:'सारावली (Saravali)',d1:'D1 (भाव-तंत्र)',d2:'D2',d4:'D4',d6:'D6',d7:'D7',d9:'D9',d10:'D10',d12:'D12',d24:'D24',d30:'D30',yoga:'योग (गणना)',dasha:'दशा',shadbala:'षड्बल/शक्ति',nakshatra:'नक्षत्र',jaimini:'Jaimini',kp:'KP'}[k]||k; return [label,layerScores[k],v*100/totalW];});
   const score=Math.round(W.reduce((a,x)=>a+x[1]*x[2]/100,0));
   // confidence is a blend of evidence confidence and number of active layers
   const layerConf=Math.min(90,Math.round(active.length*7));
   const finalConf=evd.hits?Math.round((evd.confidence+layerConf)/2):layerConf;
-  return {score,confidence:finalConf,W,evidence:evd, supporting:evd.supporting, contradicting:evd.contradicting, factors:evd.factors, ruleScores:{house_lord:layerScores.house_lord,planet_in_house:layerScores.planet_in_house,planet_in_sign:layerScores.planet_in_sign,yoga_rule:layerScores.yoga_rule,dasha_rule:layerScores.dasha_rule,nakshatra_rule:layerScores.nakshatra_rule,core_rule:layerScores.core_rule,argala:layerScores.argala,arudha:layerScores.arudha,chara_karaka:layerScores.chara_karaka,chara_dasha:layerScores.chara_dasha,kp_rule:layerScores.kp_rule,ashtakavarga_rule:layerScores.ashtakavarga_rule}};
+  return {score,confidence:finalConf,W,evidence:evd, supporting:evd.supporting, contradicting:evd.contradicting, factors:evd.factors, ruleScores:{house_lord:layerScores.house_lord,planet_in_house:layerScores.planet_in_house,planet_in_sign:layerScores.planet_in_sign,yoga_rule:layerScores.yoga_rule,dasha_rule:layerScores.dasha_rule,nakshatra_rule:layerScores.nakshatra_rule,core_rule:layerScores.core_rule,argala:layerScores.argala,arudha:layerScores.arudha,chara_karaka:layerScores.chara_karaka,chara_dasha:layerScores.chara_dasha,kp_rule:layerScores.kp_rule,ashtakavarga_rule:layerScores.ashtakavarga_rule,phaladeepika_rule:layerScores.phaladeepika_rule,saravali_rule:layerScores.saravali_rule}};
 }
 
 /* Render a generic fusion evidence block for any domain verdict. */
@@ -8296,6 +8496,30 @@ function showApp(id){['personal','matchmaking','muhurat'].forEach(function(a){va
 }else if(id==='muhurat'){try{showMuhurat(curMuh||'marriage');}catch(e){}}try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){}}
 function refreshView(){try{setMode(typeof MODE!=='undefined'&&MODE?MODE:'prediction');}catch(e){}var rd=document.getElementById('refDate');if(rd){rd.style.borderColor=REFJD?'var(--good)':'var(--line)';}}
 try{var _rd0=document.getElementById('refDate');if(_rd0&&!_rd0.value)_rd0.value=new Date().toISOString().slice(0,10);}catch(e){}
+</script>
+
+<!-- Optional Swiss Ephemeris precision layer (loads from CDN; app falls back to built-in JS ephemeris if unavailable) -->
+<script type="module">
+(function(){
+  window.SWISS_EPH_AVAILABLE=false;
+  window.swissEphReady=new Promise((resolve)=>{ window._resolveSwissReady=resolve; });
+})();
+(async()=>{
+  try{
+    const mod=await import('https://cdn.jsdelivr.net/gh/prolaxu/swisseph-wasm@main/src/swisseph.js');
+    const SwissEph=(mod&&mod.default)?mod.default:(mod&&mod.SwissEph?mod.SwissEph:mod);
+    if(!SwissEph) throw new Error('SwissEph export not found');
+    const swe=new SwissEph();
+    await swe.initSwissEph();
+    window.SWISS_EPH=swe;
+    window.SWISS_EPH_AVAILABLE=true;
+    console.log('Swiss Ephemeris WASM loaded');
+  }catch(e){
+    console.warn('Swiss Ephemeris unavailable; using built-in JS ephemeris',e);
+    window.SWISS_EPH_AVAILABLE=false;
+  }
+  if(typeof window._resolveSwissReady==='function') window._resolveSwissReady(window.SWISS_EPH_AVAILABLE);
+})();
 </script>
 </body>
 </html>

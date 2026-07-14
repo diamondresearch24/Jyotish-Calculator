@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "id": "jataka_parijata",
+    "name": "Jataka Parijata",
+    "author": "Vaidyanatha Dikshita",
+    "period": "14th-15th Century",
+    "edition": "Standard",
+    "lastUpdated": "2026-07-14",
+    "implementationStats": {
+      "totalVerses": 3,
+      "implemented": 0,
+      "partial": 0,
+      "notImplemented": 3
+    }
+  },
+  "chapters": {
+    "6": {
+      "title": "ग्रह युति फल (Conjunction Results)",
+      "verseCount": 30,
+      "keyTopics": ["conjunctions", "yogas", "combined_effects"]
+    },
+    "12": {
+      "title": "विवाह फल (Marriage Results)",
+      "verseCount": 25,
+      "keyTopics": ["marriage", "spouse", "marriage_timing"]
+    },
+    "16": {
+      "title": "रोग फल (Disease Results)",
+      "verseCount": 20,
+      "keyTopics": ["disease", "health", "longevity"]
+    }
+  },
+  "verses": [
+    {
+      "id": "JP_12_5",
+      "text": "सप्तमाधिपतिर्लग्ने स्त्रीजनकृतसंयोगः",
+      "transliteration": "Saptamādhipatir lagne strījanakṛtasaṃyogaḥ",
+      "translations": {
+        "en": "When the lord of the 7th house occupies the Lagna, the native is closely linked with the spouse.",
+        "hi": "सप्तमेश लग्न में हो तो जातक जीवनसाथी से गहरा संबंध रखता है।"
+      },
+      "source": {
+        "text": "Jataka Parijata",
+        "chapter": 12,
+        "verse": 5,
+        "alternativeReferences": []
+      },
+      "category": "marriage",
+      "subCategory": "lord_placement",
+      "applicability": {
+        "conditions": ["7th_lord_in_lagna"],
+        "exceptions": ["lord_debilitated"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "JP_16_3",
+      "text": "षष्ठाष्टमेशलग्नस्थौ रोगदायकौ मतौ",
+      "transliteration": "ṣaṣṭhāṣṭameśalagnasthau rogadāyakau matau",
+      "translations": {
+        "en": "Lords of the 6th or 8th in Lagna are considered disease-giving.",
+        "hi": "षष्ठ या अष्टमेश लग्न में हो तो रोगदायक माने जाते हैं।"
+      },
+      "source": {
+        "text": "Jataka Parijata",
+        "chapter": 16,
+        "verse": 3,
+        "alternativeReferences": []
+      },
+      "category": "health",
+      "subCategory": "lord_placement",
+      "applicability": {
+        "conditions": ["6th_or_8th_lord_in_lagna"],
+        "exceptions": ["vipareeta_raja_yoga"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "JP_6_10",
+      "text": "चन्द्रः स्वोच्चस्वराशिस्थो बुद्धिमान् सुखसंयुतः",
+      "transliteration": "Candraḥ svoccasvarāśistho buddhimān sukhasaṃyutaḥ",
+      "translations": {
+        "en": "Moon in own or exaltation sign makes one intelligent and happy.",
+        "hi": "चंद्र स्व-अथवा उच्च राशि में हो तो बुद्धिमान और सुखी।"
+      },
+      "source": {
+        "text": "Jataka Parijata",
+        "chapter": 6,
+        "verse": 10,
+        "alternativeReferences": []
+      },
+      "category": "dignity",
+      "subCategory": "moon_strength",
+      "applicability": {
+        "conditions": ["moon_in_cancer_or_taurus"],
+        "exceptions": ["moon_combust"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    }
+  ]
+}

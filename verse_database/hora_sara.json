@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "id": "hora_sara",
+    "name": "Hora Sara",
+    "author": "Prithuyasas (son of Varahamihira)",
+    "period": "6th-7th Century",
+    "edition": "Standard",
+    "lastUpdated": "2026-07-14",
+    "implementationStats": {
+      "totalVerses": 3,
+      "implemented": 0,
+      "partial": 0,
+      "notImplemented": 3
+    }
+  },
+  "chapters": {
+    "10": {
+      "title": "दशा फल (Dasha Results)",
+      "verseCount": 30,
+      "keyTopics": ["mahadasha", "antardasha", "timing"]
+    },
+    "11": {
+      "title": "विवाह फल (Marriage Results)",
+      "verseCount": 22,
+      "keyTopics": ["marriage", "spouse", "marriage_timing"]
+    },
+    "12": {
+      "title": "राजयोग (Raja Yogas)",
+      "verseCount": 20,
+      "keyTopics": ["raja_yoga", "wealth", "power"]
+    }
+  },
+  "verses": [
+    {
+      "id": "HS_10_5",
+      "text": "स्वोच्चे स्वराशौ वा ग्रहो दशायां शुभं फलं दद्यात्",
+      "transliteration": "Svocce svarāśau vā graho daśāyāṃ śubhaṃ phalaṃ dadhyāt",
+      "translations": {
+        "en": "A planet gives auspicious results during its dasha when placed in exaltation or own sign.",
+        "hi": "दशा में स्वराशि या उच्च का ग्रह शुभ फल देता है।"
+      },
+      "source": {
+        "text": "Hora Sara",
+        "chapter": 10,
+        "verse": 5,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "dignity_dasha",
+      "applicability": {
+        "conditions": ["lord_in_exaltation_or_own_sign"],
+        "exceptions": ["combust", "debilitated_navamsa"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "HS_11_3",
+      "text": "सप्तमे शुक्रे जीवसाथिनि सौख्यम्",
+      "transliteration": "Saptame śukre jīvasāthini saukhyam",
+      "translations": {
+        "en": "Venus in the 7th house bestows marital happiness.",
+        "hi": "सप्तम भाव में शुक्र से वैवाहिक सुख मिलता है।"
+      },
+      "source": {
+        "text": "Hora Sara",
+        "chapter": 11,
+        "verse": 3,
+        "alternativeReferences": []
+      },
+      "category": "marriage",
+      "subCategory": "planet_in_house",
+      "applicability": {
+        "conditions": ["venus_in_7th"],
+        "exceptions": ["venus_debilitated", "venus_combust"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "HS_12_7",
+      "text": "नवमदशमयोः स्वामिनोः संयोगे राजयोगः स्यात्",
+      "transliteration": "Navamadaśamayoḥ svāminoḥ saṃyoge rājayogaḥ syāt",
+      "translations": {
+        "en": "Yoga between the lords of the 9th and 10th houses produces a Raja Yoga.",
+        "hi": "नवम और दशम भाव स्वामियों के संयोग से राजयोग बनता है।"
+      },
+      "source": {
+        "text": "Hora Sara",
+        "chapter": 12,
+        "verse": 7,
+        "alternativeReferences": []
+      },
+      "category": "yogas",
+      "subCategory": "raja_yoga",
+      "applicability": {
+        "conditions": ["9th_lord_with_10th_lord"],
+        "exceptions": ["both_debilitated"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    }
+  ]
+}

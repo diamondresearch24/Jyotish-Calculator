@@ -279,6 +279,28 @@
       "invalidation": "Weights are configurable approximations; final interpretation must consider the full chart, dasha and current circumstances (Desh-Kaal-Patra).",
       "confidence": "low",
       "depends_on": [ "house_lord_rules", "planet_in_house_rules", "planet_in_sign_rules", "shadbala", "divisional_charts", "vimshottari_dasha", "yogas", "charaKarakas", "kp_cusps" ]
+    },
+    {
+      "name": "phaladeepika_rules",
+      "label": { "en": "Phaladeepika actionable rules", "hi": "फलदीपिका कार्यान्वयन-योग्य नियम" },
+      "type": "rule_fusion",
+      "description": { "en": "Selected predictive rules from Phaladeepika (yogas, conjunctions, marriage, disease) evaluated against the live chart with exceptions and citations.", "hi": "फलदीपिका से चयनित भविष्यवाणी-नियम (योग, युति, विवाह, रोग) — जीवंत कुंडली पर अपवाद और स्रोत सहित।" },
+      "source": { "text": "Phaladeepika", "chapter": 6, "verse": 1 },
+      "alternatives": [ "BPHS planet-in-house rules", "Saravali graha-phala", "Jataka Parijata effects" ],
+      "invalidation": "Verse numbers are approximate until Pandit-verified; rules are selected, not exhaustive.",
+      "confidence": "medium",
+      "depends_on": [ "detectYogas", "lordOfHouse", "planetHouse", "dignity", "combust" ]
+    },
+    {
+      "name": "saravali_rules",
+      "label": { "en": "Saravali actionable rules", "hi": "सारावली कार्यान्वयन-योग्य नियम" },
+      "type": "rule_fusion",
+      "description": { "en": "Selected predictive rules from Saravali (Panchamahapurusha yogas and planet results) evaluated against the live chart with exceptions and citations.", "hi": "सारावली से चयनित नियम (पंचमहापुरुष योग और ग्रह-फल) — जीवंत कुंडली पर अपवाद और स्रोत सहित।" },
+      "source": { "text": "Saravali", "chapter": 9, "verse": 1 },
+      "alternatives": [ "BPHS Ch11 planet-in-house rules", "Phaladeepika graha-phala", "Hora Sara effects" ],
+      "invalidation": "Verse numbers are approximate until Pandit-verified; rules are selected, not exhaustive.",
+      "confidence": "medium",
+      "depends_on": [ "detectYogas", "lordOfHouse", "planetHouse", "dignity", "combust" ]
     }
   ]
 }

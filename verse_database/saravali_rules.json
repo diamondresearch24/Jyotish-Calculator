@@ -1,0 +1,271 @@
+{
+  "metadata": {
+    "id": "saravali_rules",
+    "name": "Saravali — actionable rules",
+    "sourceText": "Saravali",
+    "lastUpdated": "2026-07-14",
+    "description": "Selected predictive rules from Saravali Ch 9 (Panchamahapurusha Yogas) and Ch 13 (Planet Results). Verse numbers are approximate until Pandit-verified."
+  },
+  "rules": [
+    {
+      "id": "SARA_9_5_RUCHAKA",
+      "source": { "text": "Saravali", "chapter": 9, "verse": 5 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "pmp_ruchaka", "planet": 2 },
+      "exceptions": ["mars_debilitated", "mars_combust"],
+      "effect": { "domains": ["career", "health", "vitality"], "polarity": "benefic", "weight": 6 },
+      "translations": { "en": "Ruchaka Yoga: Mars in kendra/trikona in own/exaltation/moolatrikona gives courage, leadership and landed property.", "hi": "रुचक योग — मंगल केंद्र/त्रिकोण में स्व/उच्च/मूलत्रिकोण में — पराक्रम, नेतृत्व, भूमि-लाभ।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_9_5_BHADRA",
+      "source": { "text": "Saravali", "chapter": 9, "verse": 6 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "pmp_bhadra", "planet": 3 },
+      "exceptions": ["mercury_debilitated", "mercury_combust"],
+      "effect": { "domains": ["education", "career", "wealth"], "polarity": "benefic", "weight": 6 },
+      "translations": { "en": "Bhadra Yoga: Mercury in kendra/trikona in own/exaltation/moolatrikona gives intellect and communication skill.", "hi": "भद्र योग — बुध केंद्र/त्रिकोण में स्व/उच्च/मूलत्रिकोण में — बुद्धि और वाक्-कौशल।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_9_5_HAMSA",
+      "source": { "text": "Saravali", "chapter": 9, "verse": 7 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "pmp_hansa", "planet": 4 },
+      "exceptions": ["jupiter_debilitated", "jupiter_combust"],
+      "effect": { "domains": ["wealth", "spirituality", "career"], "polarity": "benefic", "weight": 6 },
+      "translations": { "en": "Hamsa Yoga: Jupiter in kendra/trikona in own/exaltation/moolatrikona gives wisdom, wealth and righteousness.", "hi": "हंस योग — गुरु केंद्र/त्रिकोण में स्व/उच्च/मूलत्रिकोण में — ज्ञान, धन, धर्म।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_9_5_MALAVYA",
+      "source": { "text": "Saravali", "chapter": 9, "verse": 8 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "pmp_malavya", "planet": 5 },
+      "exceptions": ["venus_debilitated", "venus_combust"],
+      "effect": { "domains": ["wealth", "marriage", "career"], "polarity": "benefic", "weight": 6 },
+      "translations": { "en": "Malavya Yoga: Venus in kendra/trikona in own/exaltation/moolatrikona gives luxuries, vehicles and marital happiness.", "hi": "मालव्य योग — शुक्र केंद्र/त्रिकोण में स्व/उच्च/मूलत्रिकोण में — भोग, वाहन, दांपत्य सुख।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_9_5_SHASHA",
+      "source": { "text": "Saravali", "chapter": 9, "verse": 9 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "pmp_sasa", "planet": 6 },
+      "exceptions": ["saturn_debilitated", "saturn_combust"],
+      "effect": { "domains": ["career", "health", "longevity"], "polarity": "benefic", "weight": 6 },
+      "translations": { "en": "Shasha Yoga: Saturn in kendra/trikona in own/exaltation/moolatrikona gives discipline, authority and lands.", "hi": "शश योग — शनि केंद्र/त्रिकोण में स्व/उच्च/मूलत्रिकोण में — अनुशासन, सत्ता, भूमि।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_1_SUN_10",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 1 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 0, "inHouse": 10 },
+      "exceptions": ["sun_debilitated", "sun_combust"],
+      "effect": { "domains": ["career", "authority", "vitality"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Sun in 10th: governmental honour, leadership and public recognition.", "hi": "सूर्य दशम में — सरकारी सम्मान, नेतृत्व, प्रतिष्ठा।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_2_MOON_1",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 2 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 1, "inHouse": 1 },
+      "exceptions": ["moon_debilitated", "moon_combust"],
+      "effect": { "domains": ["personality", "marriage", "health"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Moon in Lagna: attractive personality, gentle mind and social popularity.", "hi": "चंद्र लग्न में — आकर्षक व्यक्तित्व, मृदु मन।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_3_MARS_1",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 3 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 2, "inHouse": 1 },
+      "exceptions": ["mars_exalted", "mars_own"],
+      "effect": { "domains": ["health", "career", "personality"], "polarity": "malefic", "weight": -2 },
+      "translations": { "en": "Mars in Lagna: courageous but rash, accident-prone and hot-tempered.", "hi": "मंगल लग्न में — साहसी पर उग्र, अपघात की संभावना।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_4_MERCURY_1",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 4 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 3, "inHouse": 1 },
+      "exceptions": ["mercury_debilitated", "mercury_combust"],
+      "effect": { "domains": ["education", "career", "wealth"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Mercury in Lagna: quick intelligence, eloquence and business acumen.", "hi": "बुध लग्न में — तीव्र बुद्धि, वाक्-कौशल, व्यापार-दृष्टि।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_5_JUPITER_9",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 5 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 4, "inHouse": 9 },
+      "exceptions": ["jupiter_debilitated", "jupiter_combust"],
+      "effect": { "domains": ["wealth", "spirituality", "education", "father"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "Jupiter in 9th: fortune, righteousness, higher learning and paternal blessings.", "hi": "गुरु नवम में — भाग्य, धर्म, उच्च शिक्षा, पितृ-कृपा।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_6_VENUS_5",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 6 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 5, "inHouse": 5 },
+      "exceptions": ["venus_debilitated", "venus_combust"],
+      "effect": { "domains": ["child", "education", "wealth"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Venus in 5th: artistic children, creativity, pleasures and speculative gains.", "hi": "शुक्र पंचम में — कलात्मक संतान, रचनात्मकता, सुख।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_7_SATURN_10",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 7 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 6, "inHouse": 10 },
+      "exceptions": ["saturn_debilitated", "saturn_combust"],
+      "effect": { "domains": ["career", "authority", "longevity"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Saturn in 10th: slow but solid rise, hard-earned authority and lasting name.", "hi": "शनि दशम में — धीमी पर मजबूत उन्नति, कठिन परिश्रम से सत्ता।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_8_SATURN_1",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 8 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 6, "inHouse": 1 },
+      "exceptions": ["saturn_exalted", "saturn_own"],
+      "effect": { "domains": ["health", "career", "personality"], "polarity": "malefic", "weight": -2 },
+      "translations": { "en": "Saturn in Lagna: serious, reserved disposition; delays and chronic health risks.", "hi": "शनि लग्न में — गंभीर स्वभाव, विलंब, दीर्घ रोग-संभावना।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_9_RAHU_10",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 9 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 7, "inHouse": 10 },
+      "exceptions": [],
+      "effect": { "domains": ["career", "foreign", "authority"], "polarity": "mixed", "weight": 3 },
+      "translations": { "en": "Rahu in 10th: unconventional career, foreign contacts and sudden rises/falls.", "hi": "राहु दशम में — अपरंपरागत करियर, विदेशी संपर्क, आकस्मिक उत्थान-पतन।" },
+      "confidence": "low"
+    },
+    {
+      "id": "SARA_13_10_KETU_12",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 10 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 8, "inHouse": 12 },
+      "exceptions": [],
+      "effect": { "domains": ["spirituality", "foreign", "health"], "polarity": "mixed", "weight": 2 },
+      "translations": { "en": "Ketu in 12th: spiritual detachment, foreign settlement and expenses on liberation.", "hi": "केतु द्वादश में — आध्यात्मिक वैराग्य, विदेशी वास, मोक्ष-व्यय।" },
+      "confidence": "low"
+    },
+    {
+      "id": "SARA_13_11_JUPITER_EXALTED",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 11 },
+      "rule_type": "dignity",
+      "conditions": { "planet": 4, "dignity": "exalted" },
+      "exceptions": ["jupiter_combust", "jupiter_retrograde"],
+      "effect": { "domains": ["wealth", "education", "spirituality", "health"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "Exalted Jupiter (Cancer) bestows wisdom, wealth and spiritual guidance.", "hi": "उच्च गुरु (कर्क) — ज्ञान, धन और आध्यात्मिक मार्गदर्शन।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_12_VENUS_DEBILITATED",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 12 },
+      "rule_type": "dignity",
+      "conditions": { "planet": 5, "dignity": "debilitated" },
+      "exceptions": ["neechabhanga"],
+      "effect": { "domains": ["marriage", "wealth", "relationship"], "polarity": "malefic", "weight": -4 },
+      "translations": { "en": "Debilitated Venus (Virgo) strains relationships and luxurious comforts.", "hi": "नीच शुक्र (कन्या) — संबंधों और भोग-विलास में कमी।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_13_MERCURY_OWN",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 13 },
+      "rule_type": "dignity",
+      "conditions": { "planet": 3, "dignity": "own" },
+      "exceptions": ["mercury_combust"],
+      "effect": { "domains": ["education", "career", "wealth"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Mercury in own sign (Gemini/Virgo) sharpens intellect and negotiation skill.", "hi": "बुध स्वराशि (मिथुन/कन्या) में — बुद्धि और वार्तालाप-कौशल तीव्र।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_14_MARS_OWN",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 14 },
+      "rule_type": "dignity",
+      "conditions": { "planet": 2, "dignity": "own" },
+      "exceptions": ["mars_combust"],
+      "effect": { "domains": ["career", "health", "vitality"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Mars in own sign (Aries/Scorpio) gives controlled courage and technical skill.", "hi": "मंगल स्वराशि (मेष/वृश्चिक) में — संयमित साहस और तकनीकी कौशल।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_15_SUN_5",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 15 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 0, "inHouse": 5 },
+      "exceptions": ["sun_debilitated"],
+      "effect": { "domains": ["child", "education", "authority"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Sun in 5th: progeny with honour, interest in politics/authority and strong will.", "hi": "सूर्य पंचम में — सम्मानजनक संतान, सत्ता-रुचि, दृढ़ इच्छाशक्ति।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_16_10TH_LORD_IN_10TH",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 16 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 10, "inHouse": 10 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["career", "status", "wealth"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "10th lord in 10th: stable career, recognition and authority in one's field.", "hi": "दशमेश दशम में — स्थिर पेशा, पहचान और क्षेत्र में अधिकार।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_17_2ND_LORD_IN_11TH",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 17 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 2, "inHouse": 11 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["wealth", "career"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "2nd lord in 11th: gains through networks, elder siblings and multiple income sources.", "hi": "द्वितीयेश लाभ भाव में — नेटवर्क, बड़े भाई-बहन और विविध आय-स्रोत।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_18_JUPITER_IN_1ST",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 18 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 4, "inHouse": 1 },
+      "exceptions": ["jupiter_debilitated", "jupiter_combust"],
+      "effect": { "domains": ["health", "education", "spirituality"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Jupiter in Lagna: wisdom, good health, moral strength and a dignified bearing.", "hi": "गुरु लग्न में — ज्ञान, स्वास्थ्य, नैतिक बल और गरिमापूर्ण व्यवहार।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_19_VENUS_IN_7TH",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 19 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 5, "inHouse": 7, "combust": false },
+      "exceptions": ["venus_debilitated"],
+      "effect": { "domains": ["marriage", "relationship", "wealth"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "Venus in 7th: happy marriage, attractive spouse and conjugal comforts.", "hi": "शुक्र सप्तम में — सुखद विवाह, आकर्षक साथी और दांपत्य सुख।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_20_SATURN_IN_6TH",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 20 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 6, "inHouse": 6 },
+      "exceptions": ["saturn_debilitated"],
+      "effect": { "domains": ["health", "career", "enemies"], "polarity": "mixed", "weight": 3 },
+      "translations": { "en": "Saturn in 6th: endurance, victory over enemies, but chronic health issues if weak.", "hi": "शनि षष्ठ में — धैर्य, शत्रु पर विजय, परंतु कमजोरी पर दीर्घ रोग।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "SARA_13_21_1ST_LORD_IN_10TH",
+      "source": { "text": "Saravali", "chapter": 13, "verse": 21 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 1, "inHouse": 10 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["career", "status", "wealth"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Lagna lord in 10th: self-effort brings career success and public recognition.", "hi": "लग्नेश दशम में — पुरुषार्थ से करियर सफलता और सार्वजनिक पहचान।" },
+      "confidence": "medium"
+    }
+  ]
+}

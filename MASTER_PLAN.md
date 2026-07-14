@@ -31,7 +31,15 @@ database — not hand-tuned JS heuristics.
 
 ## 1. CURRENT FOCUS  ← work happens here
 
-**Now doing:** _Phases A-D complete. E1–E4 (Argala/Arudha, Chara Karaka/Dasha, KP Star/Sub-Lord, Ashtakavarga) are wired into `collectEvidence`/`domainFusion` as rule-driven layers. Next: E5 (replace remaining `pstrength` usage with the six-fold `finalStrength`/`shadParts`), E6 (Swiss Ephemeris precision), E7 (other texts), and Phase F polish._
+**Now doing:** _Phases A-D complete; E1–E7 complete. Next: Phase F polish (PDF/printable report, saved charts, UX refinement)._
+
+10. [x] **E7 — Expand other texts (Phaladeepika + Saravali rule layers)** ✅
+    - Expand `phaladeepika_rules.json` (29 actionable rules) and `saravali_rules.json` (26 actionable rules).
+    - Recreate representative generic verse JSONs for `phaladeepika.json`, `saravali.json`, `jataka_parijata.json`, `hora_sara.json`, `uttara_kalamrita.json`.
+    - Implement `textRuleEvidence()` evaluator and `phalaEvidence()` / `saravaliEvidence()` bridge functions.
+    - Wire `phaladeepika_rule` and `saravali_rule` layers into `collectEvidence()`, `domainFusion()` labels/scoring, and `FUSION_WEIGHTS` enrichment.
+    - Add provenance records in `computation_sources.json`.
+    - Verified by `/tmp/test_e7_text_rules.js` and `/tmp/test_e7_wiring.js`.
 
 Order of execution (do top-down, one at a time):
 
@@ -85,8 +93,10 @@ Priority = chapters that drive the most predictions.
 - [x] **DB-6 BPHS Ch 71-77 nakshatra** rules → `bphs_nakshatra.json`. ✅
 - [x] **DB-7 BPHS aspect / dignity / strength** rules (Ch 3-7, 26-27) → `bphs_core.json`. ✅
 - [ ] **DB-8 Fuller verse text** for existing `bphs.json` entries (sanskrit + en + hi where known).
-- [ ] **DB-9 Other texts** — expand Phaladeepika, Saravali; fill Jataka Parijata, Hora Sara,
-      Uttara Kalamrita (currently empty shells).
+- [x] **DB-9 Other texts** — expand Phaladeepika, Saravali; fill Jataka Parijata, Hora Sara,
+      Uttara Kalamrita with representative verses. ✅
+    - Actionable rules: `phaladeepika_rules.json` (29 rules), `saravali_rules.json` (26 rules).
+    - Generic verse files: `phaladeepika.json` (6 verses), `saravali.json` (6 verses), `jataka_parijata.json` (3), `hora_sara.json` (3), `uttara_kalamrita.json` (3).
 - [~] **DB-10 `verse_database/index.json`** removed during cleanup; rebuild only if a new index/catalog is needed.
 
 > Every new rule uses **schema v2** (see IMPLEMENTATION_ROADMAP §"Actionable rule schema").
@@ -131,9 +141,9 @@ Priority = chapters that drive the most predictions.
 - [x] E2 Jaimini (L13): Chara Karakas + Chara Dasha as full rule-driven layers (computed factors for all 7 chara karakas and active chara dasha sign wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores). ✅
 - [x] E3 KP (L15): Star Lord / Sub Lord + sub-lord timing as full rule-driven layer (per-domain cusp/house mapping, `kpEvidence()` uses existing `kpEngine()` to emit cited `kp_rule` factors wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores). ✅
 - [x] E4 Ashtakavarga (L14): Sarva/Medini/Vaiseshikamsa bindus as rule-driven evidence with `ashtakavargaEvidence()` wired into `collectEvidence`/`domainFusion` with weights, labels, and rule scores. ✅
-- [ ] E5 Full Shadbala (six-fold) replacing simplified `pstrength`.
-- [ ] E6 Swiss Ephemeris precision (WASM/backend) + ayanamsha selection.
-- [ ] E7 Expand other texts (see DB-9).
+- [x] E5 Full Shadbala (six-fold): simplified `pstrength()` removed; new `pstrength()` delegates to `finalStrength()` + `shadParts()`, and `pscore()` returns `finalStrength()`. `getAdjustedStrength()` fixed to call `shadbala(planet)` directly. ✅
+- [x] E6 Swiss Ephemeris precision (WASM/backend) + ayanamsha selection. ✅
+- [x] E7 Expand other texts (see DB-9). ✅
 
 ### Phase F — Product polish & delivery
 - [ ] F1 PDF/printable report; saved & family charts.
@@ -147,7 +157,7 @@ Priority = chapters that drive the most predictions.
 
 | Area | Status |
 |------|--------|
-| Chart / compute core | [x] working (JS precision) |
+| Chart / compute core | [x] working (JS precision + optional Swiss Ephemeris WASM) · 8 ayanamsas selectable |
 | Dasha / transit / sadesati | [x] |
 | Yogas (curated) | [x] |
 | Domain panels | [~] 7 of 15 on rule-engine fusion (Career/Marriage/Wealth/Health/Children/Education/Foreign); Personality, Business, Longevity, Litigation, Spirituality, Property, Match Making, and Muhurat are still heuristic |
@@ -155,15 +165,18 @@ Priority = chapters that drive the most predictions.
 | Verse DB — BPHS Ch 11 planet-in-house rules | [x] 84 rules |
 | Verse DB — BPHS Ch 11 planet-in-sign rules | [x] 84 rules |
 | Verse DB — other BPHS chapters | [~] 105 chapters represented in `bphs.json`; plus 7 actionable rule files |
-| Verse DB — actionable rules | [~] 397 rules across 7 BPHS rule files (house, planet-in-house/sign, yogas, dasha, nakshatra, core) |
-| Explainable engine | [x] 13 rule layers fire via collectEvidence() (house_lord, planet_in_house, planet_in_sign, yoga_rule, dasha_rule, nakshatra_rule, core_rule, argala, arudha, chara_karaka, chara_dasha, kp_rule, ashtakavarga_rule); domainFusion() cited for 7 life areas |
+| Verse DB — actionable rules | [~] 452 rules across 9 rule files (7 BPHS + Phaladeepika 29 + Saravali 26) |
+| Explainable engine | [x] 15 rule layers fire via collectEvidence() (house_lord, planet_in_house, planet_in_sign, yoga_rule, dasha_rule, nakshatra_rule, core_rule, argala, arudha, chara_karaka, chara_dasha, kp_rule, ashtakavarga_rule, phaladeepika_rule, saravali_rule); domainFusion() cited for 7 life areas |
 | Provenance system | [x] computation_sources.json + explain()/explainHTML() live |
 | Final fusion (L16) | [~] generic engine live; 7 domains fused, rest pending |
-| Full Shadbala / Swiss Eph | [ ] |
+| Full Shadbala | [x] simplified pstrength replaced by finalStrength/shadParts |
+| Swiss Eph | [x] WASM loader integrated; `computeChartAsync` uses it when available and falls back to built-in JS; 8 ayanamsas selectable via UI |
 
 ---
 
 ## 6. LOG (append dated notes as we complete tasks)
+
+- 2026-07-14 — E7 COMPLETE. Expanded Phaladeepika and Saravali as actionable rule layers: `phaladeepika_rules.json` (29 rules) and `saravali_rules.json` (26 rules). Added a generic `textRuleEvidence()` evaluator plus `phalaEvidence()` and `saravaliEvidence()` bridge functions, and wired the `phaladeepika_rule` and `saravali_rule` layers into `collectEvidence()`, `domainFusion()` labels/scoring, and `FUSION_WEIGHTS` enrichment. Added provenance records in `computation_sources.json` and representative generic verses for Phaladeepika, Saravali, Jataka Parijata, Hora Sara, and Uttara Kalamrita. Verified by `/tmp/test_e7_text_rules.js`, `/tmp/test_e7_wiring.js`, and HTML script-block syntax check.
 
 - 2026-07-12 — Created this MASTER_PLAN.md as the single tracking file. Consolidated
   PROJECT_STATUS + IMPLEMENTATION_ROADMAP. Next action: S1 (bridge house-lord rules into
@@ -263,3 +276,18 @@ Priority = chapters that drive the most predictions.
   `domainFusion()` ruleLayers bucket/label/`ruleScores`. Updated `MASTER_PLAN.md` status and added
   `/tmp/test_ashtakavarga_e4.js` which extracts live functions from `jyotish_calculator.html` and verifies
   factors are emitted and the fused score changes when the layer is disabled.
+- 2026-07-14 — E5 FULL SHADBALA CLEANUP COMPLETE. Removed the old simplified/object-returning `shadbala()` and its
+  `getAspect()` helper; rewrote `pstrength()` as a thin wrapper returning `{score:finalStrength(i), parts:shadParts(i)}`
+  and `pscore()` as `finalStrength(i)`. Fixed `getAdjustedStrength()` to call `shadbala(planet)` directly instead of
+  `shadbala(planet).score`. All existing render/print call sites now display the six-fold score automatically.
+  JS script-block syntax check passes; `/tmp/test_shadbala_e5_v2.js` verifies the removal and delegation.
+- 2026-07-14 — E6 SWISS EPHEMERIS + AYANAMSHA SELECTION COMPLETE. Added `computeChartAsync()` with optional Swiss
+  Ephemeris (WASM) precision and automatic built-in JS fallback. Supports eight ayanamsas (Lahiri, KP-New, Raman,
+  Yukteshwar, J.N. Bhasin, Fagan/Bradley, De Luce, Krishnamurti) mapped to `prolaxu/swisseph-wasm` sidereal modes.
+  Added a Precision selector (`Built-in JS` / `Swiss Ephemeris WASM`) and a status label. Made `run()` async and
+  persisted precision/ayanamsa in saved profiles. Swiss loader (module script) already present at end of HTML; test
+  `/tmp/test_swiss_e6.js` verifies UI wiring, fallback parity, Swiss stub path, and ayanamsa selection.
+- 2026-07-14 — E6 FOLLOW-UP. Replaced the body of the legacy synchronous `computeChart()` with a thin wrapper that
+  routes to `computeChartFallback()` using the active `USER_SETTINGS.ayanamsha`. This lets existing synchronous callers
+  (match-making, garbhadhana helpers, etc.) automatically inherit the selected ayanamsha without async rewrites.
+  JS syntax and `/tmp/test_swiss_e6.js` still pass.

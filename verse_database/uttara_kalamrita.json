@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "id": "uttara_kalamrita",
+    "name": "Uttara Kalamrita",
+    "author": "Kalidasa (Medieval)",
+    "period": "17th-18th Century",
+    "edition": "Standard",
+    "lastUpdated": "2026-07-14",
+    "implementationStats": {
+      "totalVerses": 3,
+      "implemented": 0,
+      "partial": 0,
+      "notImplemented": 3
+    }
+  },
+  "chapters": {
+    "4": {
+      "title": "ग्रह फल (Planetary Results)",
+      "verseCount": 40,
+      "keyTopics": ["planets", "houses", "dignity"]
+    },
+    "6": {
+      "title": "राजयोग (Raja Yogas)",
+      "verseCount": 15,
+      "keyTopics": ["raja_yoga", "wealth", "status"]
+    },
+    "8": {
+      "title": "दशा फल (Dasha Results)",
+      "verseCount": 25,
+      "keyTopics": ["dasha", "antardasha", "timing"]
+    }
+  },
+  "verses": [
+    {
+      "id": "UK_4_5",
+      "text": "लग्ने चन्द्रे शुभदृष्टौ सौम्यत्वं बुद्धिवर्धनम्",
+      "transliteration": "Lagne candre śubhadṛṣṭau saumyatvaṃ buddhivardhanam",
+      "translations": {
+        "en": "Moon in Lagna with benefic aspects gives gentleness and enhanced intellect.",
+        "hi": "लग्न में चंद्र शुभ दृष्टि में हो तो सौम्यता और बुद्धि-वृद्धि।"
+      },
+      "source": {
+        "text": "Uttara Kalamrita",
+        "chapter": 4,
+        "verse": 5,
+        "alternativeReferences": []
+      },
+      "category": "placement",
+      "subCategory": "moon_lagna",
+      "applicability": {
+        "conditions": ["moon_in_lagna"],
+        "exceptions": ["moon_debilitated", "moon_combust"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "UK_6_3",
+      "text": "लाभभावे गुरौ स्थिते धनलाभो विशेषतः",
+      "transliteration": "Lābhabhāve gurau sthite dhanalābho viśeṣataḥ",
+      "translations": {
+        "en": "Jupiter placed in the 11th house especially gives gains of wealth.",
+        "hi": "लाभ भाव में गुरु हो तो विशेष धन-लाभ।"
+      },
+      "source": {
+        "text": "Uttara Kalamrita",
+        "chapter": 6,
+        "verse": 3,
+        "alternativeReferences": []
+      },
+      "category": "wealth",
+      "subCategory": "planet_in_house",
+      "applicability": {
+        "conditions": ["jupiter_in_11th"],
+        "exceptions": ["jupiter_debilitated", "jupiter_combust"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    },
+    {
+      "id": "UK_8_10",
+      "text": "पंचमेशे दशायां संतानसौख्यं प्रदृश्यते",
+      "transliteration": "Pañcameśe daśāyāṃ santānasaukhyṃ pradṛśyate",
+      "translations": {
+        "en": "During the dasha of the 5th lord, happiness from progeny is indicated.",
+        "hi": "पंचमेश की दशा में संतान-सुख प्रदर्शित होता है।"
+      },
+      "source": {
+        "text": "Uttara Kalamrita",
+        "chapter": 8,
+        "verse": 10,
+        "alternativeReferences": []
+      },
+      "category": "dasha",
+      "subCategory": "progeny_dasha",
+      "applicability": {
+        "conditions": ["5th_lord_dasha"],
+        "exceptions": ["5th_lord_debilitated"]
+      },
+      "implementation": {
+        "status": "notImplemented",
+        "functionName": "",
+        "lastUpdated": "2026-07-14",
+        "notes": "Representative verse; actionable layer pending."
+      },
+      "crossReferences": []
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "metadata": {
+    "id": "phaladeepika_rules",
+    "name": "Phaladeepika — actionable rules",
+    "sourceText": "Phaladeepika",
+    "lastUpdated": "2026-07-14",
+    "description": "Selected predictive rules from Phaladeepika Ch 6 (Yogas), Ch 7 (Conjunctions), Ch 15 (Marriage) and Ch 20 (Disease). Verse numbers are approximate until Pandit-verified."
+  },
+  "rules": [
+    {
+      "id": "PHALA_6_15_GAJAKESARI",
+      "source": { "text": "Phaladeepika", "chapter": 6, "verse": 15 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "gajakesari", "planet": 4 },
+      "exceptions": ["jupiter_debilitated", "moon_debilitated"],
+      "effect": { "domains": ["career", "wealth", "marriage", "health"], "polarity": "benefic", "weight": 6 },
+      "translations": { "en": "When Jupiter and Moon are in kendras Gajakesari Yoga is formed: honour, intelligence, prosperity.", "hi": "गुरु और चंद्र के केंद्र में होने पर गजकेसरी योग — यश, बुद्धि, समृद्धि।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_6_10_BUDHADITYA",
+      "source": { "text": "Phaladeepika", "chapter": 6, "verse": 10 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "budhaditya", "planet": 3 },
+      "exceptions": ["mercury_combust"],
+      "effect": { "domains": ["education", "career", "wealth"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "Budhaditya Yoga when Mercury and Sun are in the same sign (Mercury not combust): sharp intellect and speech.", "hi": "सूर्य-बुध एक राशि में (बुध अनस्त) — बुधादित्य योग, तीव्र बुद्धि व वाक्पटुता।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_6_10_BUDHADITYA_COMBUST",
+      "source": { "text": "Phaladeepika", "chapter": 6, "verse": 10 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "budhaditya_combust", "planet": 3 },
+      "exceptions": [],
+      "effect": { "domains": ["education", "career"], "polarity": "mixed", "weight": 2 },
+      "translations": { "en": "Sun-Mercury conjunction with Mercury combust: intelligence exists but results are diluted.", "hi": "सूर्य-बुध युति पर बुध अस्त — बुद्धि अच्छी पर फल कम।" },
+      "confidence": "low"
+    },
+    {
+      "id": "PHALA_6_12_CHANDRA_MANGALA",
+      "source": { "text": "Phaladeepika", "chapter": 6, "verse": 12 },
+      "rule_type": "yoga",
+      "conditions": { "yoga_key": "chandra_mangala", "planet": 1 },
+      "exceptions": ["mars_debilitated"],
+      "effect": { "domains": ["wealth", "career"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Chandra-Mangala Yoga: Moon and Mars conjoined gives enterprise and wealth-earning skill.", "hi": "चंद्र-मंगल योग — उद्यमिता और धनार्जन की कला।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_1_L7_IN_LAGNA",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 1 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 7, "inHouse": 1 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "mixed", "weight": 3 },
+      "translations": { "en": "7th lord in Lagna: spouse strongly influences the native; partnership shapes personality.", "hi": "सप्तमेश लग्न में — जीवनसाथी का प्रभाव अधिक।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_2_L7_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 2 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 7, "inHouse": 7 },
+      "exceptions": ["lord_debilitated", "malefic_aspect"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "7th lord in own house: stable marriage and a competent spouse.", "hi": "सप्तमेश सप्तम भाव में — स्थिर विवाह और गुणी साथी।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_3_L7_IN_DUSTHANA",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 3 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 7, "inHouse": [6, 8, 12] },
+      "exceptions": ["vipareeta_raja_yoga"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "malefic", "weight": -4 },
+      "translations": { "en": "7th lord in 6th/8th/12th: marital friction, separation risk or health issues through spouse.", "hi": "सप्तमेश दुस्थान में — वैवाहिक कष्ट, अलगाव का भय।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_4_VENUS_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 5 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 5, "inHouse": 7, "combust": false },
+      "exceptions": ["venus_debilitated"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "Venus in 7th (not debilitated/combust): marital happiness, beauty and conjugal bliss.", "hi": "शुक्र सप्तम में — सुखद वैवाहिक जीवन।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_5_JUPITER_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 6 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 4, "inHouse": 7 },
+      "exceptions": ["jupiter_debilitated", "jupiter_combust"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Jupiter in 7th: noble, wise and fortunate spouse (especially for female charts).", "hi": "गुरु सप्तम में — गुणी, धर्मात्मा जीवनसाथी।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_6_SATURN_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 8 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 6, "inHouse": 7 },
+      "exceptions": ["saturn_exalted", "saturn_own"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "malefic", "weight": -4 },
+      "translations": { "en": "Saturn in 7th: delay in marriage, mature or reserved spouse.", "hi": "शनि सप्तम में — विवाह में विलंब, गंभीर साथी।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_7_MARS_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 9 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 2, "inHouse": 7 },
+      "exceptions": ["mars_yoga_karaka"],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "malefic", "weight": -4 },
+      "translations": { "en": "Mars in 7th: Manglik intensity, conflict and hot-tempered spouse.", "hi": "मंगल सप्तम में — मांगलिक तनाव और कलह।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_8_RAHU_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 11 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 7, "inHouse": 7 },
+      "exceptions": [],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "mixed", "weight": -2 },
+      "translations": { "en": "Rahu in 7th: unconventional, foreign or status-different spouse; desires run high.", "hi": "राहु सप्तम में — अपरंपरागत या विदेशी जीवनसाथी।" },
+      "confidence": "low"
+    },
+    {
+      "id": "PHALA_15_9_KETU_IN_7TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 12 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 8, "inHouse": 7 },
+      "exceptions": [],
+      "effect": { "domains": ["marriage", "relationship", "spouse"], "polarity": "malefic", "weight": -3 },
+      "translations": { "en": "Ketu in 7th: detachment in marriage, spiritual or unconventional union.", "hi": "केतु सप्तम में — वैवाहिक वैराग्य, असामान्य संबंध।" },
+      "confidence": "low"
+    },
+    {
+      "id": "PHALA_20_1_L6_IN_LAGNA",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 1 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 6, "inHouse": 1 },
+      "exceptions": ["vipareeta_raja_yoga"],
+      "effect": { "domains": ["health", "disease", "vitality"], "polarity": "malefic", "weight": -4 },
+      "translations": { "en": "6th lord in Lagna: disease-prone constitution, conflicts affect body.", "hi": "षष्ठमेश लग्न में — रोग-प्रवण काया।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_20_2_SATURN_IN_6TH",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 4 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 6, "inHouse": 6 },
+      "exceptions": ["saturn_exalted", "saturn_own"],
+      "effect": { "domains": ["health", "disease", "vitality"], "polarity": "malefic", "weight": -3 },
+      "translations": { "en": "Saturn in 6th: chronic, long-lasting ailments but eventual victory.", "hi": "शनि षष्ठ में — दीर्घ रोग, परंतु अंततः जीत।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_20_3_RAHU_IN_6TH",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 5 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 7, "inHouse": 6 },
+      "exceptions": [],
+      "effect": { "domains": ["health", "disease", "vitality"], "polarity": "malefic", "weight": -3 },
+      "translations": { "en": "Rahu in 6th: mysterious, hard-to-diagnose diseases and enemies.", "hi": "राहु षष्ठ में — गूढ़ रोग और शत्रु।" },
+      "confidence": "low"
+    },
+    {
+      "id": "PHALA_20_4_MARS_IN_6TH",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 6 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 2, "inHouse": 6 },
+      "exceptions": ["mars_debilitated"],
+      "effect": { "domains": ["health", "disease", "vitality"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Mars in 6th: strength to overcome disease and enemies.", "hi": "मंगल षष्ठ में — रोग और शत्रु पर विजय।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_20_5_SUN_IN_6TH",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 7 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 0, "inHouse": 6 },
+      "exceptions": ["sun_debilitated"],
+      "effect": { "domains": ["health", "disease", "vitality"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Sun in 6th: robust immunity and victory over rivals.", "hi": "सूर्य षष्ठ में — रोग-प्रतिरोधक क्षमता।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_7_1_SUN_SATURN_CONJ",
+      "source": { "text": "Phaladeepika", "chapter": 7, "verse": 1 },
+      "rule_type": "conjunction",
+      "conditions": { "conjunctWith": [0, 6] },
+      "exceptions": [],
+      "effect": { "domains": ["career", "health", "father"], "polarity": "malefic", "weight": -3 },
+      "translations": { "en": "Sun and Saturn conjoined: struggle for authority, strained father/authority relations.", "hi": "सूर्य-शनि युति — सत्ता संघर्ष, पिता से तनाव।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_7_2_MOON_SATURN_CONJ",
+      "source": { "text": "Phaladeepika", "chapter": 7, "verse": 2 },
+      "rule_type": "conjunction",
+      "conditions": { "conjunctWith": [1, 6] },
+      "exceptions": ["saturn_exalted", "saturn_own"],
+      "effect": { "domains": ["health", "marriage", "career"], "polarity": "malefic", "weight": -4 },
+      "translations": { "en": "Moon-Saturn conjunction (Vish Yoga): melancholy, delays and emotional heaviness.", "hi": "चंद्र-शनि युति (विष योग) — उदासी, विलंभ, मानसिक भार।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_7_3_JUPITER_VENUS_CONJ",
+      "source": { "text": "Phaladeepika", "chapter": 7, "verse": 8 },
+      "rule_type": "conjunction",
+      "conditions": { "conjunctWith": [4, 5] },
+      "exceptions": ["jupiter_debilitated", "venus_debilitated"],
+      "effect": { "domains": ["wealth", "marriage", "spirituality"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Jupiter and Venus conjoined: wealth, luxuries and spiritual inclinations.", "hi": "गुरु-शुक्र युति — धन, भोग और आध्यात्मिक रुचि।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_7_4_MERCURY_VENUS_CONJ",
+      "source": { "text": "Phaladeepika", "chapter": 7, "verse": 9 },
+      "rule_type": "conjunction",
+      "conditions": { "conjunctWith": [3, 5] },
+      "exceptions": ["mercury_debilitated", "venus_debilitated"],
+      "effect": { "domains": ["career", "wealth", "education"], "polarity": "benefic", "weight": 3 },
+      "translations": { "en": "Mercury and Venus conjoined: skill in arts, commerce, communication and finance.", "hi": "बुध-शुक्र युति — कला, व्यापार, वाणी और वित्त में कौशल।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_13_1_2ND_LORD_IN_11TH",
+      "source": { "text": "Phaladeepika", "chapter": 13, "verse": 1 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 2, "inHouse": 11 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["wealth", "career"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "2nd lord in 11th: income multiplies through gains, friends and elder siblings.", "hi": "द्वितीयेश लाभ भाव में — आय, मित्र और बड़े भाई-बहन से लाभ।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_13_2_10TH_LORD_IN_10TH",
+      "source": { "text": "Phaladeepika", "chapter": 13, "verse": 2 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 10, "inHouse": 10 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["career", "status"], "polarity": "benefic", "weight": 5 },
+      "translations": { "en": "10th lord in 10th: career stability, honour and command over one's profession.", "hi": "दशमेश दशम भाव में — स्थिर करियर, सम्मान और पेशे पर अधिकार।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_13_3_5TH_LORD_IN_5TH",
+      "source": { "text": "Phaladeepika", "chapter": 13, "verse": 3 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 5, "inHouse": 5 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["education", "child", "intelligence"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "5th lord in 5th: intelligence, progeny happiness and merit from past deeds.", "hi": "पंचमेश पंचम भाव में — बुद्धि, संतान-सुख और पूर्वजन्म-पुण्य।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_10_L7_IN_5TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 10 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 7, "inHouse": 5 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["marriage", "relationship", "romance"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "7th lord in 5th: romantic marriage, spouse from a respectable family, happiness through children.", "hi": "सप्तमेश पंचम में — प्रेम-विवाह, गुणी कुल का साथी, संतान-सुख।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_15_11_L7_IN_10TH",
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 11 },
+      "rule_type": "lord_placement",
+      "conditions": { "houseLordOf": 7, "inHouse": 10 },
+      "exceptions": ["lord_debilitated", "lord_combust"],
+      "effect": { "domains": ["marriage", "career", "status"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "7th lord in 10th: spouse supports profession and public status.", "hi": "सप्तमेश दशम में — जीवनसाथी पेशे और प्रतिष्ठा में सहायक।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_20_6_JUPITER_IN_1ST",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 6 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 4, "inHouse": 1 },
+      "exceptions": ["jupiter_debilitated", "jupiter_combust"],
+      "effect": { "domains": ["health", "vitality", "longevity"], "polarity": "benefic", "weight": 4 },
+      "translations": { "en": "Jupiter in Lagna: sound constitution, vitality and protection from serious disease.", "hi": "गुरु लग्न में — स्वस्थ काया, जीवन-शक्ति और गंभीर रोगों से रक्षा।" },
+      "confidence": "medium"
+    },
+    {
+      "id": "PHALA_20_7_MARS_IN_1ST",
+      "source": { "text": "Phaladeepika", "chapter": 20, "verse": 7 },
+      "rule_type": "planet_in_house",
+      "conditions": { "planet": 2, "inHouse": 1 },
+      "exceptions": ["mars_debilitated", "mars_yoga_karaka"],
+      "effect": { "domains": ["health", "vitality", "career"], "polarity": "mixed", "weight": 3 },
+      "translations": { "en": "Mars in Lagna: energy and robustness, but prone to cuts, fevers and impulsive injuries.", "hi": "मंगल लग्न में — ऊर्जा और मजबूती, परंतु चोट, ज्वर और आघात का भय।" },
+      "confidence": "medium"
+    }
+  ]
+}

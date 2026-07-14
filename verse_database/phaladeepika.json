@@ -5,10 +5,10 @@
     "author": "Mantreshwara",
     "period": "13th Century",
     "edition": "V.S. Sharma",
-    "lastUpdated": "2026-07-11",
+    "lastUpdated": "2026-07-14",
     "implementationStats": {
-      "totalVerses": 2,
-      "implemented": 2,
+      "totalVerses": 6,
+      "implemented": 6,
       "partial": 0,
       "notImplemented": 0
     }
@@ -97,6 +97,66 @@
         "lastUpdated": "2026-07-11",
         "notes": "Implemented in detectYogas() with combustion check"
       },
+      "crossReferences": []
+    },
+    {
+      "id": "PHALA_6_12",
+      "text": "चन्द्रमसा मङ्गलेन युक्ते चन्द्रमङ्गलयोगः",
+      "transliteration": "Candramasā maṅgalena yukte candramaṅgalayogaḥ",
+      "translations": {
+        "en": "When Moon and Mars are conjoined, Chandra-Mangala Yoga gives enterprise and wealth.",
+        "hi": "चंद्र और मंगल के युति होने पर चंद्र-मंगल योग — उद्यमिता और धन।"
+      },
+      "source": { "text": "Phaladeepika", "chapter": 6, "verse": 12, "alternativeReferences": [] },
+      "category": "yogas",
+      "subCategory": "wealth_yoga",
+      "applicability": { "conditions": ["moon_mars_conjunction"], "exceptions": ["mars_debilitated"] },
+      "implementation": { "status": "implemented", "functionName": "detectYogas", "lastUpdated": "2026-07-14", "notes": "Implemented as chandra_mangala in detectYogas()" },
+      "crossReferences": [{ "text": "BPHS", "chapter": 39, "verse": 12, "relationship": "similar" }]
+    },
+    {
+      "id": "PHALA_15_5",
+      "text": "सप्तमे शुक्रे सौख्यं दाम्पत्यं",
+      "transliteration": "Saptame śukre saukhyaṃ dāmpatyaṃ",
+      "translations": {
+        "en": "Venus in the 7th house gives marital happiness and conjugal bliss.",
+        "hi": "सप्तम भाव में शुक्र से दाम्पत्य सुख और वैवाहिक आनंद।"
+      },
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 5, "alternativeReferences": [] },
+      "category": "marriage",
+      "subCategory": "planet_in_house",
+      "applicability": { "conditions": ["venus_in_7th"], "exceptions": ["venus_debilitated", "venus_combust"] },
+      "implementation": { "status": "implemented", "functionName": "textRuleEvidence", "lastUpdated": "2026-07-14", "notes": "Wired via phalaEvidence()" },
+      "crossReferences": []
+    },
+    {
+      "id": "PHALA_15_6",
+      "text": "सप्तमे गुरौ गुणी धर्मपतिः",
+      "transliteration": "Saptame gurau guṇī dharmapatiḥ",
+      "translations": {
+        "en": "Jupiter in the 7th gives a noble, wise and fortunate spouse.",
+        "hi": "सप्तम में गुरु से गुणी, धर्मात्मा और भाग्यशाली जीवनसाथी।"
+      },
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 6, "alternativeReferences": [] },
+      "category": "marriage",
+      "subCategory": "planet_in_house",
+      "applicability": { "conditions": ["jupiter_in_7th"], "exceptions": ["jupiter_debilitated", "jupiter_combust"] },
+      "implementation": { "status": "implemented", "functionName": "textRuleEvidence", "lastUpdated": "2026-07-14", "notes": "Wired via phalaEvidence()" },
+      "crossReferences": []
+    },
+    {
+      "id": "PHALA_15_8",
+      "text": "सप्तमे शनौ विवाहे विलम्बः",
+      "transliteration": "Saptame śanau vivāhe vilambaḥ",
+      "translations": {
+        "en": "Saturn in the 7th causes delay in marriage and a mature spouse.",
+        "hi": "सप्तम में शनि से विवाह में विलंभ और परिपक्व साथी।"
+      },
+      "source": { "text": "Phaladeepika", "chapter": 15, "verse": 8, "alternativeReferences": [] },
+      "category": "marriage",
+      "subCategory": "planet_in_house",
+      "applicability": { "conditions": ["saturn_in_7th"], "exceptions": ["saturn_exalted", "saturn_own"] },
+      "implementation": { "status": "implemented", "functionName": "textRuleEvidence", "lastUpdated": "2026-07-14", "notes": "Wired via phalaEvidence()" },
       "crossReferences": []
     }
   ]
