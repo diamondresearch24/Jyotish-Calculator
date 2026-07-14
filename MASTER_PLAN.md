@@ -112,8 +112,8 @@ Priority = chapters that drive the most predictions.
 - [x] C1 Ch 11 planet-in-house (DB-2). ✅
 - [x] C2 Ch 11 planet-in-sign (DB-3). ✅
 - [x] C3 Ch 15-16 yogas + cancellations (DB-4). ✅
-- [ ] C4 Ch 46-50/73 dasha-phala (DB-5).
-- [ ] C5 Ch 71-77 nakshatra (DB-6).
+- [x] C4 Ch 46-50/73 dasha-phala (DB-5). ✅
+- [x] C5 Ch 71-77 nakshatra (DB-6). ✅
 - Exit: Levels 1-3, 5, 9, 10 fully rule-driven and cited.
 
 ### Phase D — 16-Level Final Prediction Engine (the flagship) ✅ COMPLETE

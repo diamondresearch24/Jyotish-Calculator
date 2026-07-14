@@ -2207,34 +2207,36 @@ function planetInSignAreaScore(evd,keywords){
 
 /* ---- BPHS Ch 46-50, 73 dasha-phala rules (dasha effects) ---- */
 /* Bridges the app's live dasha system to the cited rule DB (VERSE_DB.dashaEffects) by
-   stable dasha_key, so every active dasha period carries a source, weight, domains and notes. */
-function dashaEvidence(){
+   stable dasha_key, so every active dasha period carries a source, weight, domains and notes.
+   Optional `period` = {mdLord:number, adLord:number} lets timeline engines evaluate any MD/AD. */
+function dashaEvidence(period){
   if(!VERSE_DB.dashaEffects||!VERSE_DB.dashaEffects.length)return{loaded:false,factors:[]};
   const factors=[];
-  if(typeof DASHA!=='undefined'&&DASHA&&DASHA.active){
-    const PLKEY=['sun','moon','mars','mercury','jupiter','venus','saturn','rahu','ketu'];
-    const mdName=PLKEY[DASHA.active.lord];
-    const adName=(DASHA.activeAnta&&DASHA.activeAnta.lord!=null)?PLKEY[DASHA.activeAnta.lord]:mdName;
-    const keys=[mdName+'_md',mdName+'_ad_'+adName];
-    VERSE_DB.dashaEffects.forEach(rule=>{
-      if(keys.includes(rule.dasha_key)){
-        const w=rule.effect.weight||0;
-        const polarity=rule.effect.polarity||'mixed';
-        const adjWeight=(polarity==='positive'?w:(polarity==='negative'?-w:w/2));
-        factors.push({
-          layer:'dasha_rule',
-          ruleId:rule.id,
-          text:rule.translations.en,
-          source:rule.source,
-          planet:mdName,
-          pos:mdName+' '+adName,
-          w:adjWeight,
-          domains:rule.effect.domains||[],
-          notes:rule.cancellation||[]
-        });
-      }
-    });
-  }
+  const PLKEY=['sun','moon','mars','mercury','jupiter','venus','saturn','rahu','ketu'];
+  let mdLord, adLord;
+  if(period&&period.mdLord!=null){mdLord=period.mdLord;adLord=period.adLord!=null?period.adLord:mdLord;}
+  else if(typeof DASHA!=='undefined'&&DASHA&&DASHA.active){mdLord=DASHA.active.lord;adLord=(DASHA.activeAnta&&DASHA.activeAnta.lord!=null)?DASHA.activeAnta.lord:mdLord;}
+  else{return {loaded:true,factors};}
+  const mdName=PLKEY[mdLord], adName=PLKEY[adLord];
+  const keys=[mdName+'_md',mdName+'_ad_'+adName];
+  VERSE_DB.dashaEffects.forEach(rule=>{
+    if(keys.includes(rule.dasha_key)){
+      const w=rule.effect.weight||0;
+      const polarity=rule.effect.polarity||'mixed';
+      const adjWeight=(polarity==='positive'?w:(polarity==='negative'?-w:w/2));
+      factors.push({
+        layer:'dasha_rule',
+        ruleId:rule.id,
+        text:(rule.translations.hi||'')+' / '+(rule.translations.en||''),
+        source:rule.source,
+        planet:mdName,
+        pos:mdName+'-'+adName,
+        w:adjWeight,
+        domains:rule.effect.domains||[],
+        notes:rule.cancellation||[]
+      });
+    }
+  });
   return {loaded:true,factors};
 }
 
@@ -2243,6 +2245,7 @@ function dashaEvidence(){
    stable nakshatra_key, so every planet in nakshatra carries a source, weight, domains and notes. */
 function nakshatraEvidence(){
   if(!VERSE_DB.nakshatras||!VERSE_DB.nakshatras.length)return{loaded:false,factors:[]};
+  if(typeof CH==='undefined'||!CH||!CH.nakshatras)return{loaded:false,factors:[]};
   const factors=[];
   const NAKSHATRA_NAMES=[ 'ashwini','bharani','krittika','rohini','mrigashira','ardra','punarvasu','pushya','ashlesha','magha','purva_phalguni','uttara_phalguni','hasta','chitra','swati','vishakha','anuradha','jyeshtha','moola','purva_ashadha','uttara_ashadha','shravana','dhanishtha','shatabhisha','purva_bhadrapada','uttara_bhadrapada','revati' ];
   for(let i=0;i<9;i++){
@@ -2258,10 +2261,10 @@ function nakshatraEvidence(){
           factors.push({
             layer:'nakshatra_rule',
             ruleId:rule.id,
-            text:rule.translations.en,
+            text:(rule.translations.hi||'')+' / '+(rule.translations.en||''),
             source:rule.source,
             planet:i,
-            pos:nakName+' ('+PL[i]+')',
+            pos:NAKEN[nakIdx]+' ('+PL[i]+')',
             w:adjWeight,
             domains:rule.effect.domains||[],
             notes:rule.cancellation||[]
@@ -2488,7 +2491,7 @@ function buildNavCharts(){let h='<div class="grp">📊 वर्ग कुंड
   document.getElementById('nav').innerHTML=h;}
 /* ============ LEVEL 5 — DASHA / TIMING ENGINE ============ */
 let curDasha='intro';
-const L5LIST=[['intro','परिचय / Introduction'],['vimshottari','विम्शोत्तरी / Vimshottari'],['mahadasha','महादशा / Mahadasha'],['antardasha','अंतर्दशा / Antardasha'],['pratyantar','प्रत्यंतर / Pratyantar'],['sookshma','🆕 सूक्ष्म / Sookshma'],['prana','🆕 प्राण / Prana'],['strength','दशा बल / Strength'],['planetact','ग्रह सक्रियता / Planet Activation'],['houseact','भाव सक्रियता / House Activation'],['d1','D1 सत्यापन'],['d9','D9 सत्यापन'],['d10','D10 सत्यापन'],['yoga','योग सक्रियता'],['marriage','विवाह Timing'],['career','करियर Timing'],['wealth','धन Timing'],['children','संतान Timing'],['property','संपत्ति Timing'],['foreign','विदेश Timing'],['health','स्वास्थ्य Timing'],['trigger','Event Trigger Engine'],['timeline','जीवन Timeline'],['why','क्यों? / Why'],['confidence','Confidence']];
+const L5LIST=[['intro','परिचय / Introduction'],['vimshottari','विम्शोत्तरी / Vimshottari'],['mahadasha','महादशा / Mahadasha'],['antardasha','अंतर्दशा / Antardasha'],['pratyantar','प्रत्यंतर / Pratyantar'],['sookshma','🆕 सूक्ष्म / Sookshma'],['prana','🆕 प्राण / Prana'],['strength','दशा बल / Strength'],['planetact','ग्रह सक्रियता / Planet Activation'],['houseact','भाव सक्रियता / House Activation'],['d1','D1 सत्यापन'],['d9','D9 सत्यापन'],['d10','D10 सत्यापन'],['yoga','योग सक्रियता'],['marriage','विवाह Timing'],['career','करियर Timing'],['wealth','धन Timing'],['children','संतान Timing'],['property','संपत्ति Timing'],['foreign','विदेश Timing'],['health','स्वास्थ्य Timing'],['trigger','Event Trigger Engine'],['timeline','जीवन Timeline'],['why','क्यों? / Why'],['evidence','दशा-फल Evidence'],['confidence','Confidence']];
 function buildNavDasha(){document.getElementById('nav').innerHTML='<div class="grp">⏳ LEVEL 5 — दशा / Timing Engine</div>'+
   L5LIST.map(s=>`<button id="dnav-${s[0]}" onclick="showDasha('${s[0]}')" class="${curDasha===s[0]?'active':''}">▸ ${s[1]}</button>`).join('');}
 function showDasha(sub){curDasha=sub;RERENDER=function(){showDasha(sub);};L5LIST.forEach(s=>{const b=document.getElementById('dnav-'+s[0]);if(b)b.classList.toggle('active',s[0]===sub);});
@@ -2672,6 +2675,12 @@ function pDasha(sub){const md=DASHA.active.lord,ad=DASHA.activeAnta.lord,pd=DASH
     return tcard('📅 गोचर Timeline','आगामी संभावित घटनाएँ + triggering ग्रह (दशा-विंडो आधारित अनुमान)।',
       tlay('यह आने वाले वर्षों की झलक है — हर घटना के लिए अगली अनुकूल दशा-अवधि का वर्ष, उसे ट्रिगर करने वाला बड़ा ग्रह (गुरु/शनि), व अनुमानित Probability।')+
       t+'</table>'+'<p class="tag">⚠️ ट्रिगर-ग्रह सांकेतिक है; वर्ष निकट आने पर वास्तविक गोचर पुनः जाँचें।</p>');}
+  case 'evidence':{
+    const ev=dashaEvidence();
+    const rows=ev.loaded&&ev.factors.length?ev.factors.map(f=>`<tr><td>${f.ruleId}</td><td>${f.pos}</td><td>${f.domains.slice(0,3).join(', ')}</td><td style="color:${f.w>0?'var(--good)':f.w<0?'var(--bad)':'var(--gold-soft)'}">${f.w>0?'Shubh':f.w<0?'Papa':'Mixed'}</td><td>${Math.abs(f.w)}</td><td>${f.text}</td></tr>`).join(''):'';
+    return card('📜 दशा-फल Evidence / BPHS DB',`वर्तमान ${PL[md]} महादशा · ${PL[ad]} अंतर्दशा — नियम-डेटाबेस से मिले स्रोत।`,
+      dLay('BPHS अध्याय 46-50/73 के नियम `dasha_key` से जुड़ते हैं। हर पंक्ति में स्रोत, प्रभाव-क्षेत्र, वज़न और निरस्तीकरण की शर्त है।')+
+      (rows?`<div style="overflow-x:auto"><table class="dt"><tr><th>ID</th><th>दशा-अवधि</th><th>क्षेत्र</th><th>फल</th><th>वज़न</th><th>विवरण</th></tr>${rows}</table></div>`:`<p class="tag">कोई दशा-नियम लोड नहीं हुआ। ऐप को http सर्वर पर खोलें ताकि verse_database/bphs_dasha_effects.json लोड हो।</p>`));}
   case 'confidence':{const e=tFull(7,[lordOfHouse(7),5],5);const f=[['D1 (वादा)',e.d1],['D-चार्ट (D9)',e.d9],['दशा (समय)',e.dasha],['गोचर (ट्रिगर)',e.transit],['योग',e.yoga]];const final=Math.round(f.reduce((a,b)=>a+b[1]*0.2,0));
     return tcard('🎯 Confidence Score','पाँच परतें × 20% भार = अंतिम विश्वास।',
       tlay('अंतिम भरोसा किसी एक कारक से नहीं बनता। पाँच परतें — D1 वादा, D-चार्ट समर्थन, दशा, गोचर, योग — हर एक 20% भार रखती है। सबका भारित योग ही Final Confidence है।')+
@@ -3485,7 +3494,7 @@ function pHouse(sub){const ascS=signOf(CH.asc);
 
 /* ============ LEVEL 10 — नक्षत्र विज्ञान / NAKSHATRA ============ */
 let curNak='intro';
-const L10LIST=[['intro','नक्षत्र क्या है'],['birth','जन्म नक्षत्र'],['all','सभी ग्रह नक्षत्र'],['chain','नक्षत्र स्वामी श्रृंखला'],['pada','पाद विश्लेषण'],['gana','गण'],['nadi','नाड़ी'],['yoni','योनि'],['deity','देवता'],['shakti','शक्ति'],['strength','नक्षत्र से ग्रह बल'],['yogas','नक्षत्र योग'],['dasha','नक्षत्र दशा'],['transit','नक्षत्र गोचर'],['kp','KP ब्रिज'],['element','तत्व वितरण'],['final','Final Nakshatra Engine']];
+const L10LIST=[['intro','नक्षत्र क्या है'],['birth','जन्म नक्षत्र'],['all','सभी ग्रह नक्षत्र'],['chain','नक्षत्र स्वामी श्रृंखला'],['pada','पाद विश्लेषण'],['gana','गण'],['nadi','नाड़ी'],['yoni','योनि'],['deity','देवता'],['shakti','शक्ति'],['strength','नक्षत्र से ग्रह बल'],['yogas','नक्षत्र योग'],['dasha','नक्षत्र दशा'],['transit','नक्षत्र गोचर'],['kp','KP ब्रिज'],['element','तत्व वितरण'],['rule','नक्षत्र Evidence'],['final','Final Nakshatra Engine']];
 const NAKSPAN=13+20/60, NLORD=[8,5,0,1,2,7,4,6,3], NYEARS=[7,20,6,10,7,18,16,19,17];
 const NAKEN=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishtha','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'];
 /* [deity, symbol, yoni, gana, nadi, shakti, [pos], [neg]] */
@@ -3667,6 +3676,12 @@ function pNak(sub){
       lblk('💍 विवाह संकेतक',`${stars(Math.round((pscore(5)+pscore(lordOfHouse(7)))/2))} — कारण: चंद्र→${PL[M.lord]}${mlDg==='उच्च'?' (उच्च)':''}${planetHouse(5)===7?' · शुक्र 7वें में':''} → ${dg(5)==='उच्च'?'विवाह-समर्थन प्रबल':'विवाह-समर्थन उपस्थित'}।`)+
       lblk('🧠 ज्योतिषी की तरह सोचें',`<b>प्रश्न:</b> चंद्र (मन) कितना प्रभावी?<br>चरण 1: चंद्र ${NAK[M.n]} में।<br>चरण 2: स्वामी ${PL[M.lord]}।<br>चरण 3: ${PL[M.lord]} ${SIGNS[signOf(CH.sid[M.lord])]} में ${mlDg}।<br>चरण 4: इसलिए चंद्र ${pers>=65?'प्रबल':pers>=50?'मध्यम':'संवेदनशील'} → <b>${pers>=60?'सशक्त भावनात्मक बुद्धि':'मन हेतु स्थिरता-उपाय सहायक'}</b>।`)+
       lblk('📚 CLASSICAL','BPHS · नक्षत्र-फल ★★★★★'));}
+  case 'rule':{
+    const ev=nakshatraEvidence();
+    const rows=ev.loaded&&ev.factors.length?ev.factors.map(f=>`<tr><td>${f.ruleId}</td><td>${f.pos}</td><td>${f.domains.slice(0,3).join(', ')}</td><td style="color:${f.w>0?'var(--good)':f.w<0?'var(--bad)':'var(--gold-soft)'}">${f.w>0?'Shubh':f.w<0?'Papa':'Mixed'}</td><td>${Math.abs(f.w)}</td><td>${f.text}</td></tr>`).join(''):'';
+    return card('📜 नक्षत्र Evidence / BPHS DB','BPHS अध्याय 71-77 के नक्षत्र-नियम — ग्रह किस नक्षत्र में है, उसका फल, स्रोत सहित।',
+      tlay('हर ग्रह की नक्षत्र-स्थिति `nakshatra_key` से BPHS नक्षत्र-नियमों से जुड़ती है। यहाँ उन नियमों की सूची है जो आपकी कुंडली से मिली।')+
+      (rows?`<div style="overflow-x:auto"><table class="dt"><tr><th>ID</th><th>नक्षत्र (ग्रह)</th><th>क्षेत्र</th><th>फल</th><th>वज़न</th><th>विवरण</th></tr>${rows}</table></div>`:`<p class="tag">कोई नक्षत्र-नियम लोड नहीं हुआ। ऐप को http सर्वर पर खोलें ताकि verse_database/bphs_nakshatra.json लोड हो।</p>`));}
  }}
 
 /* ============ LEVEL 12 — जैमिनी / JAIMINI SYSTEM ============ */

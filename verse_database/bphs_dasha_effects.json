@@ -3,32 +3,3049 @@
     "version": 2,
     "purpose": "BPHS Chapters 46-50, 73 dasha-phala (results of each mahadasha and antardasha). Actionable rule schema with dasha key, effect domains, weight, cancellation conditions, translations and provenance.",
     "source": "Brihat Parashara Hora Shastra",
-    "chapters": [46, 47, 48, 49, 50, 73],
+    "chapters": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      73
+    ],
     "approximate_verses": "shloka-level references are placeholders pending Pandit verification",
     "rule_type": "dasha_effect",
     "note": "Each rule is keyed by `dasha_key`, matched against the app's dasha system via dashaEvidence(). `cancellation` lists classical conditions that modify the dasha result; the app notes them but strength modifiers come from the shared exception engine.",
     "polarity": "positive = beneficial dasha result, negative = adverse dasha effect, mixed = conditional"
   },
   "rules": [
-    {"id":"BPHS_DASHA_001","dasha_key":"sun_md","source":{"text":"BPHS","chapter":46,"verse":1},"rule_type":"dasha_effect","conditions":{"desc":"Sun Mahadasha - 6 years general effects"},"effect":{"domains":["career","status","authority","health","government"],"polarity":"mixed","weight":2},"cancellation":["Sun severely afflicted by Saturn/Rahu/Ketu","Sun in 6/8/12 from lagna without benefic aspect","Sun combust or debilitated without neechabhanga"],"translations":{"en":"Sun Mahadasha (6 years): Authority, government favor, status, but health issues if afflicted. Success through father, leadership roles, and self-employment.","hi":"सूर्य महादशा (6 वर्ष): प्राधिकरण, सरकारी सहयोग, पद, परन्तु पीड़ा यदि कष्टित। पिता से सफलता, नेतृत्व पद, व स्व-रोजगार।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_002","dasha_key":"moon_md","source":{"text":"BPHS","chapter":46,"verse":2},"rule_type":"dasha_effect","conditions":{"desc":"Moon Mahadasha - 10 years general effects"},"effect":{"domains":["family","mother","emotions","home","travel","mental_peace"],"polarity":"mixed","weight":2},"cancellation":["Moon afflicted by malefics in 4th or Moon in 6/8/12","Moon in debilitation without cancellation","Moon with Ketu or in Rahu/Ketu axis"],"translations":{"en":"Moon Mahadasha (10 years): Happiness from mother, home comforts, mental peace, travel, gains through women. Emotional fluctuations if Moon weak.","hi":"चंद्र महादशा (10 वर्ष): माता से सुख, घर की सुविधा, मानसिक शांति, यात्रा, स्त्रियों से लाभ। भावनात्मक उतार-चढ़ाव यदि चंद्र दुर्बल।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_003","dasha_key":"mars_md","source":{"text":"BPHS","chapter":46,"verse":3},"rule_type":"dasha_effect","conditions":{"desc":"Mars Mahadasha - 7 years general effects"},"effect":{"domains":["courage","property","siblings","conflicts","injury","military","engineering"],"polarity":"mixed","weight":2},"cancellation":["Mars combust or debilitated without neechabhanga","Mars in 6/8/12 or afflicted by Saturn/Rahu","Mars in 12th house weakens results"],"translations":{"en":"Mars Mahadasha (7 years): Courage, property acquisition, gains from siblings, but conflicts, injury risk. Success in military, police, engineering, sports.","hi":"मंगल महादशा (7 वर्ष): साहस, संपत्ति, भाई-बहनों से लाभ, परन्तु संघर्ष, चोट का जोखिम। सैन्य, पुलिस, इंजीनियरिंग, खेल में सफलता।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_004","dasha_key":"rahu_md","source":{"text":"BPHS","chapter":47,"verse":1},"rule_type":"dasha_effect","conditions":{"desc":"Rahu Mahadasha - 18 years general effects"},"effect":{"domains":["foreign","unconventional","sudden_changes","technology","addiction","deception"],"polarity":"mixed","weight":3},"cancellation":["Rahu with Jupiter or benefic aspect reduces negativity","Rahu in 3/11 houses gives good results","Rahu exalted or in own sign (Aquarius, Taurus)"],"translations":{"en":"Rahu Mahadasha (18 years): Foreign travel, unconventional success, technology, but confusion, addiction risk, deception. Sudden changes in life direction.","hi":"राहु महादशा (18 वर्ष): विदेश यात्रा, अपरंपरागत सफलता, प्रौद्योगिकी, परन्तु भ्रम, लत का जोखिम, छल। जीवन दिशा में अचानक बदलाव।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_005","dasha_key":"jupiter_md","source":{"text":"BPHS","chapter":48,"verse":1},"rule_type":"dasha_effect","conditions":{"desc":"Jupiter Mahadasha - 16 years general effects"},"effect":{"domains":["wisdom","teaching","children","wealth","spirituality","fortune"],"polarity":"positive","weight":3},"cancellation":["Jupiter combust or in 6/8/12 without benefic aspect","Jupiter debilitated without neechabhanga","Jupiter afflicted by Saturn/Rahu"],"translations":{"en":"Jupiter Mahadasha (16 years): Wisdom, teaching, children's happiness, wealth accumulation, spiritual growth, fortune. Auspicious ceremonies and recognition.","hi":"गुरु महादशा (16 वर्ष): ज्ञान, शिक्षण, संतान सुख, धन संचय, आध्यात्मिक वृद्धि, भाग्य। शुभ समारोह व पहचान।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_006","dasha_key":"saturn_md","source":{"text":"BPHS","chapter":49,"verse":1},"rule_type":"dasha_effect","conditions":{"desc":"Saturn Mahadasha - 19 years general effects"},"effect":{"domains":["discipline","hard_work","delays","obstacles","elderly","land","mining","oil"],"polarity":"mixed","weight":3},"cancellation":["Saturn in own sign (Capricorn, Aquarius) or exalted (Libra)","Saturn with Jupiter or benefic aspect","Saturn in 3/6/11 houses gives good results"],"translations":{"en":"Saturn Mahadasha (19 years): Hard work, discipline, delays, obstacles, but stability, land acquisition, gains from elderly, mining/oil industry. Long-term achievements through persistence.","hi":"शनि महादशा (19 वर्ष): कठिन परिश्रम, अनुशासन, विलंब, बाधाएँ, परन्तु स्थिरता, भूमि अर्जन, बड़ों से लाभ, खनन/तेल उद्योग। दृढ़ता से दीर्घकालिक उपलब्धि।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_007","dasha_key":"mercury_md","source":{"text":"BPHS","chapter":50,"verse":1},"rule_type":"dasha_effect","conditions":{"desc":"Mercury Mahadasha - 17 years general effects"},"effect":{"domains":["communication","business","education","writing","intelligence","trading"],"polarity":"positive","weight":2},"cancellation":["Mercury combust or debilitated without neechabhanga","Mercury afflicted by Saturn/Mars","Mercury in 6/8/12 without benefic aspect"],"translations":{"en":"Mercury Mahadasha (17 years): Communication skills, business success, education, writing, intellectual pursuits, trading. Multiple sources of income through intellect.","hi":"बुध महादशा (17 वर्ष): संचार कौशल, व्यापार सफलता, शिक्षा, लेखन, बौद्धिक गतिविधियाँ, व्यापार। बौद्धिकता से कई आय स्रोत।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_008","dasha_key":"venus_md","source":{"text":"BPHS","chapter":50,"verse":2},"rule_type":"dasha_effect","conditions":{"desc":"Venus Mahadasha - 20 years general effects"},"effect":{"domains":["marriage","love","luxury","arts","vehicles","wealth","pleasure"],"polarity":"positive","weight":2},"cancellation":["Venus combust or debilitated without neechabhanga","Venus afflicted by Saturn/Mars/Sun","Venus in 6/8/12 without benefic aspect"],"translations":{"en":"Venus Mahadasha (20 years): Marriage, love affairs, luxury, artistic pursuits, vehicles, wealth accumulation, sensual pleasures. Success in entertainment, fashion, beauty industry.","hi":"शुक्र महादशा (20 वर्ष): विवाह, प्रेम संबंध, विलासिता, कलात्मक गतिविधियाँ, वाहन, धन संचय, भौतिक सुख। मनोरंजन, फैशन, सौंदर्य उद्योग में सफलता।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_009","dasha_key":"ketu_md","source":{"text":"BPHS","chapter":73,"verse":1},"rule_type":"dasha_effect","conditions":{"desc":"Ketu Mahadasha - 7 years general effects"},"effect":{"domains":["spirituality","detachment","research","occult","sudden_events","loss"],"polarity":"mixed","weight":2},"cancellation":["Ketu with Jupiter or benefic aspect reduces negativity","Ketu in 3/11 houses gives good results","Ketu in own sign (Pisces) or exalted (Scorpio)"],"translations":{"en":"Ketu Mahadasha (7 years): Spiritual pursuits, detachment, research, occult interests, but sudden events, potential losses. Liberation from material attachments through inner realization.","hi":"केतु महादशा (7 वर्ष): आध्यात्मिक गतिविधियाँ, वैराग्य, शोध, रहस्यमयी रुचि, परन्तु अचानक घटनाएँ, संभावित हानि। भौतिक मोह से मुक्ति आंतरिक प्रज्ञान से।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_010","dasha_key":"sun_ad_sun","source":{"text":"BPHS","chapter":46,"verse":4},"rule_type":"dasha_effect","conditions":{"desc":"Sun Mahadasha - Sun Antardasha effects"},"effect":{"domains":["authority","career","recognition","government","father"],"polarity":"positive","weight":1},"cancellation":["Sun severely afflicted in chart","Sun antardasha in difficult planetary periods"],"translations":{"en":"Sun MD - Sun AD: Peak authority, career advancement, government favor, recognition through leadership. Father's health and status important.","hi":"सूर्य महादशा - सूर्य अंतर्दशा: प्राधिकरण चरम, करियर प्रगति, सरकारी सहयोग, नेतृत्व से पहचान। पिता का स्वास्थ्य व पद महत्वपूर्ण।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_011","dasha_key":"sun_ad_moon","source":{"text":"BPHS","chapter":46,"verse":5},"rule_type":"dasha_effect","conditions":{"desc":"Sun Mahadasha - Moon Antardasha effects"},"effect":{"domains":["emotional_balance","mother","home","mental_peace"],"polarity":"mixed","weight":1},"cancellation":["Moon afflicted or weak in chart","Emotional conflicts during authority periods"],"translations":{"en":"Sun MD - Moon AD: Emotional balance needed, mother's influence, home matters, mental peace critical for career success. Authority tempered by emotions.","hi":"सूर्य महादशा - चंद्र अंतर्दशा: भावनात्मक संतुलन आवश्यक, माता का प्रभाव, घर के मामले, करियर सफलता के लिए मानसिक शांति महत्वपूर्ण। प्राधिकरण भावनाओं से नियंत्रित।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_012","dasha_key":"sun_ad_mars","source":{"text":"BPHS","chapter":46,"verse":6},"rule_type":"dasha_effect","conditions":{"desc":"Sun Mahadasha - Mars Antardasha effects"},"effect":{"domains":["conflicts","aggression","injury","courage","competition"],"polarity":"mixed","weight":1},"cancellation":["Mars well-placed or strong reduces negatives","Mars aspect by benefics helps"],"translations":{"en":"Sun MD - Mars AD: Potential conflicts, aggression, injury risk, but also courage and competitive success. Authority exercised forcefully.","hi":"सूर्य महादशा - मंगल अंतर्दशा: संभावित संघर्ष, आक्रमण, चोट का जोखिम, परन्तु साहस व प्रतिस्पर्धी सफलता। प्राधिकरण बलपूर्वक प्रयोग।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_013","dasha_key":"moon_ad_jupiter","source":{"text":"BPHS","chapter":46,"verse":7},"rule_type":"dasha_effect","conditions":{"desc":"Moon Mahadasha - Jupiter Antardasha effects"},"effect":{"domains":["wisdom","children","wealth","spirituality","fortune"],"polarity":"positive","weight":1},"cancellation":["Jupiter afflicted reduces benefits","Emotional conflicts with wisdom"],"translations":{"en":"Moon MD - Jupiter AD: Wisdom, children's happiness, wealth accumulation, spiritual growth, fortune. Emotional stability supports intellectual pursuits.","hi":"चंद्र महादशा - गुरु अंतर्दशा: ज्ञान, संतान सुख, धन संचय, आध्यात्मिक वृद्धि, भाग्य। भावनात्मक स्थिरता बौद्धिक गतिविधियों का समर्थन करती है।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_014","dasha_key":"mars_ad_saturn","source":{"text":"BPHS","chapter":47,"verse":2},"rule_type":"dasha_effect","conditions":{"desc":"Mars Mahadasha - Saturn Antardasha effects"},"effect":{"domains":["delays","obstacles","hard_work","discipline","conflicts"],"polarity":"negative","weight":1},"cancellation":["Saturn well-placed reduces severity","Mutual aspect or yoga between Mars and Saturn modifies results"],"translations":{"en":"Mars MD - Saturn AD: Significant delays, obstacles, hard work required, discipline needed. Potential conflicts with authority. Frustration in aggressive pursuits.","hi":"मंगल महादशा - शनि अंतर्दशा: महत्वपूर्ण विलंब, बाधाएँ, कठिन परिश्रम आवश्यक, अनुशासन आवश्यक। प्राधिकरण के साथ संघर्ष की संभावना। आक्रामक गतिविधियों में निराशा।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_015","dasha_key":"rahu_ad_jupiter","source":{"text":"BPHS","chapter":47,"verse":3},"rule_type":"dasha_effect","conditions":{"desc":"Rahu Mahadasha - Jupiter Antardasha effects"},"effect":{"domains":["spiritual_material_conflict","foreign_opportunities","unconventional_wisdom"],"polarity":"mixed","weight":1},"cancellation":["Jupiter strong reduces Rahu's negativity","Good placement of both planets modifies results"],"translations":{"en":"Rahu MD - Jupiter AD: Conflict between spiritual values and material desires, foreign opportunities, unconventional wisdom. Jupiter tempers Rahu's extremes.","hi":"राहु महादशा - गुरु अंतर्दशा: आध्यात्मिक मूल्यों और भौतिक इच्छाओं के बीच संघर्ष, विदेशी अवसर, अपरंपरागत ज्ञान। गुरु राहु के चरमपंथों को नियंत्रित करता है।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_016","dasha_key":"jupiter_ad_saturn","source":{"text":"BPHS","chapter":48,"verse":2},"rule_type":"dasha_effect","conditions":{"desc":"Jupiter Mahadasha - Saturn Antardasha effects"},"effect":{"domains":["wisdom_with_discipline","long_term_goals","stability_through_hard_work"],"polarity":"positive","weight":1},"cancellation":["Saturn afflicted reduces benefits","Jupiter-Saturn conflict if poorly placed"],"translations":{"en":"Jupiter MD - Saturn AD: Wisdom combined with discipline, long-term goal achievement, stability through hard work. Jupiter's optimism tempers Saturn's delays.","hi":"गुरु महादशा - शनि अंतर्दशा: ज्ञान का अनुशासन के साथ मेल, दीर्घकालिक लक्ष्य प्राप्ति, कठिन परिश्रम से स्थिरता। गुरु का आशावादी शनि के विलंब को नियंत्रित करता है।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_017","dasha_key":"saturn_ad_venus","source":{"text":"BPHS","chapter":49,"verse":2},"rule_type":"dasha_effect","conditions":{"desc":"Saturn Mahadasha - Venus Antardasha effects"},"effect":{"domains":["stability_in_luxury","delayed_gratification","mature_relationships"],"polarity":"mixed","weight":1},"cancellation":["Venus strong reduces Saturn's harshness","Good relationship between Saturn and Venus helps"],"translations":{"en":"Saturn MD - Venus AD: Stability in luxury and comfort, delayed gratification in pleasures, mature relationships. Venus softens Saturn's austerity.","hi":"शनि महादशा - शुक्र अंतर्दशा: विलास व सुख में स्थिरता, आनंद में विलंबित संतुष्टि, परिपक्व संबंध। शुक्र शनि की कठोरता को नरम करता है।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_018","dasha_key":"venus_ad_mars","source":{"text":"BPHS","chapter":50,"verse":3},"rule_type":"dasha_effect","conditions":{"desc":"Venus Mahadasha - Mars Antardasha effects"},"effect":{"domains":["passion_conflict","relationship_challenges","competitive_romance"],"polarity":"mixed","weight":1},"cancellation":["Good placement of both planets reduces conflicts","Benefic aspects help balance energies"],"translations":{"en":"Venus MD - Mars AD: Passion conflicts with harmony, relationship challenges, competitive romance. Mars' aggression disrupts Venus' peace.","hi":"शुक्र महादशा - मंगल अंतर्दशा: जुनून और सामंजस्य में संघर्ष, रिश्तों में चुनौतियाँ, प्रतिस्पर्धी रोमांस। मंगल की आक्रामकता शुक्र की शांति को भंग करती है।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_019","dasha_key":"ketu_ad_mercury","source":{"text":"BPHS","chapter":73,"verse":2},"rule_type":"dasha_effect","conditions":{"desc":"Ketu Mahadasha - Mercury Antardasha effects"},"effect":{"domains":["spiritual_intellect","analytical_detachment","research_wisdom"],"polarity":"positive","weight":1},"cancellation":["Mercury afflicted reduces benefits","Ketu's detachment may conflict with Mercury's communication"],"translations":{"en":"Ketu MD - Mercury AD: Spiritual intellect, analytical detachment, research combining wisdom and logic. Mercury grounds Ketu's abstract tendencies.","hi":"केतु महादशा - बुध अंतर्दशा: आध्यात्मिक बौद्धिकता, विश्लेषणात्मक वैराग्य, ज्ञान और तर्क का संयोजित शोध। बुध केतु के अमूर्त झुकाव को स्थिर करता है।"},"confidence":"medium"},
-    {"id":"BPHS_DASHA_020","dasha_key":"rahu_ad_saturn","source":{"text":"BPHS","chapter":47,"verse":4},"rule_type":"dasha_effect","conditions":{"desc":"Rahu Mahadasha - Saturn Antardasha effects"},"effect":{"domains":["extreme_delays","foreign_obstacles","material_spiritual_crisis"],"polarity":"negative","weight":2},"cancellation":["Both planets well-placed reduces severity","Jupiter's aspect or association helps"],"translations":{"en":"Rahu MD - Saturn AD: Extreme delays and obstacles, especially in foreign matters, material-spiritual crisis. Double malefic effect requires patience and remedial measures.","hi":"राहु महादशा - शनि अंतर्दशा: चरम विलंब और बाधाएँ, विशेष रूप से विदेशी मामलों में, भौतिक-आध्यात्मिक संकट। दोगुना दुष्प्रभाव के लिए धैर्य और उपाय आवश्यक।"},"confidence":"medium"}
+    {
+      "id": "BPHS_DASHA_001",
+      "dasha_key": "sun_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 1
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - 6 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government"
+        ],
+        "polarity": "mixed",
+        "weight": 2
+      },
+      "cancellation": [
+        "Sun severely afflicted by Saturn/Rahu/Ketu",
+        "Sun in 6/8/12 from lagna without benefic aspect",
+        "Sun combust or debilitated without neechabhanga"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha (6 years): Authority, government favor, status, but health issues if afflicted. Success through father, leadership roles, and self-employment.",
+        "hi": "सूर्य महादशा (6 वर्ष): प्राधिकरण, सरकारी सहयोग, पद, परन्तु पीड़ा यदि कष्टित। पिता से सफलता, नेतृत्व पद, व स्व-रोजगार।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_002",
+      "dasha_key": "moon_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 2
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - 10 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "mixed",
+        "weight": 2
+      },
+      "cancellation": [
+        "Moon afflicted by malefics in 4th or Moon in 6/8/12",
+        "Moon in debilitation without cancellation",
+        "Moon with Ketu or in Rahu/Ketu axis"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha (10 years): Happiness from mother, home comforts, mental peace, travel, gains through women. Emotional fluctuations if Moon weak.",
+        "hi": "चंद्र महादशा (10 वर्ष): माता से सुख, घर की सुविधा, मानसिक शांति, यात्रा, स्त्रियों से लाभ। भावनात्मक उतार-चढ़ाव यदि चंद्र दुर्बल।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_003",
+      "dasha_key": "mars_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 3
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - 7 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military",
+          "engineering"
+        ],
+        "polarity": "mixed",
+        "weight": 2
+      },
+      "cancellation": [
+        "Mars combust or debilitated without neechabhanga",
+        "Mars in 6/8/12 or afflicted by Saturn/Rahu",
+        "Mars in 12th house weakens results"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha (7 years): Courage, property acquisition, gains from siblings, but conflicts, injury risk. Success in military, police, engineering, sports.",
+        "hi": "मंगल महादशा (7 वर्ष): साहस, संपत्ति, भाई-बहनों से लाभ, परन्तु संघर्ष, चोट का जोखिम। सैन्य, पुलिस, इंजीनियरिंग, खेल में सफलता।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_004",
+      "dasha_key": "rahu_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 47,
+        "verse": 1
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - 18 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "mixed",
+        "weight": 3
+      },
+      "cancellation": [
+        "Rahu with Jupiter or benefic aspect reduces negativity",
+        "Rahu in 3/11 houses gives good results",
+        "Rahu exalted or in own sign (Aquarius, Taurus)"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha (18 years): Foreign travel, unconventional success, technology, but confusion, addiction risk, deception. Sudden changes in life direction.",
+        "hi": "राहु महादशा (18 वर्ष): विदेश यात्रा, अपरंपरागत सफलता, प्रौद्योगिकी, परन्तु भ्रम, लत का जोखिम, छल। जीवन दिशा में अचानक बदलाव।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_005",
+      "dasha_key": "jupiter_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 48,
+        "verse": 1
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - 16 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 3
+      },
+      "cancellation": [
+        "Jupiter combust or in 6/8/12 without benefic aspect",
+        "Jupiter debilitated without neechabhanga",
+        "Jupiter afflicted by Saturn/Rahu"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha (16 years): Wisdom, teaching, children's happiness, wealth accumulation, spiritual growth, fortune. Auspicious ceremonies and recognition.",
+        "hi": "गुरु महादशा (16 वर्ष): ज्ञान, शिक्षण, संतान सुख, धन संचय, आध्यात्मिक वृद्धि, भाग्य। शुभ समारोह व पहचान।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_006",
+      "dasha_key": "saturn_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 49,
+        "verse": 1
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - 19 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land",
+          "mining",
+          "oil"
+        ],
+        "polarity": "mixed",
+        "weight": 3
+      },
+      "cancellation": [
+        "Saturn in own sign (Capricorn, Aquarius) or exalted (Libra)",
+        "Saturn with Jupiter or benefic aspect",
+        "Saturn in 3/6/11 houses gives good results"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha (19 years): Hard work, discipline, delays, obstacles, but stability, land acquisition, gains from elderly, mining/oil industry. Long-term achievements through persistence.",
+        "hi": "शनि महादशा (19 वर्ष): कठिन परिश्रम, अनुशासन, विलंब, बाधाएँ, परन्तु स्थिरता, भूमि अर्जन, बड़ों से लाभ, खनन/तेल उद्योग। दृढ़ता से दीर्घकालिक उपलब्धि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_007",
+      "dasha_key": "mercury_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 50,
+        "verse": 1
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - 17 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 2
+      },
+      "cancellation": [
+        "Mercury combust or debilitated without neechabhanga",
+        "Mercury afflicted by Saturn/Mars",
+        "Mercury in 6/8/12 without benefic aspect"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha (17 years): Communication skills, business success, education, writing, intellectual pursuits, trading. Multiple sources of income through intellect.",
+        "hi": "बुध महादशा (17 वर्ष): संचार कौशल, व्यापार सफलता, शिक्षा, लेखन, बौद्धिक गतिविधियाँ, व्यापार। बौद्धिकता से कई आय स्रोत।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_008",
+      "dasha_key": "venus_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 50,
+        "verse": 2
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - 20 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth",
+          "pleasure"
+        ],
+        "polarity": "positive",
+        "weight": 2
+      },
+      "cancellation": [
+        "Venus combust or debilitated without neechabhanga",
+        "Venus afflicted by Saturn/Mars/Sun",
+        "Venus in 6/8/12 without benefic aspect"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha (20 years): Marriage, love affairs, luxury, artistic pursuits, vehicles, wealth accumulation, sensual pleasures. Success in entertainment, fashion, beauty industry.",
+        "hi": "शुक्र महादशा (20 वर्ष): विवाह, प्रेम संबंध, विलासिता, कलात्मक गतिविधियाँ, वाहन, धन संचय, भौतिक सुख। मनोरंजन, फैशन, सौंदर्य उद्योग में सफलता।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_009",
+      "dasha_key": "ketu_md",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 1
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - 7 years general effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "mixed",
+        "weight": 2
+      },
+      "cancellation": [
+        "Ketu with Jupiter or benefic aspect reduces negativity",
+        "Ketu in 3/11 houses gives good results",
+        "Ketu in own sign (Pisces) or exalted (Scorpio)"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha (7 years): Spiritual pursuits, detachment, research, occult interests, but sudden events, potential losses. Liberation from material attachments through inner realization.",
+        "hi": "केतु महादशा (7 वर्ष): आध्यात्मिक गतिविधियाँ, वैराग्य, शोध, रहस्यमयी रुचि, परन्तु अचानक घटनाएँ, संभावित हानि। भौतिक मोह से मुक्ति आंतरिक प्रज्ञान से।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_010",
+      "dasha_key": "sun_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 4
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "authority",
+          "career",
+          "recognition",
+          "government",
+          "father"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun severely afflicted in chart",
+        "Sun antardasha in difficult planetary periods"
+      ],
+      "translations": {
+        "en": "Sun MD - Sun AD: Peak authority, career advancement, government favor, recognition through leadership. Father's health and status important.",
+        "hi": "सूर्य महादशा - सूर्य अंतर्दशा: प्राधिकरण चरम, करियर प्रगति, सरकारी सहयोग, नेतृत्व से पहचान। पिता का स्वास्थ्य व पद महत्वपूर्ण।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_011",
+      "dasha_key": "sun_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 5
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "emotional_balance",
+          "mother",
+          "home",
+          "mental_peace"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon afflicted or weak in chart",
+        "Emotional conflicts during authority periods"
+      ],
+      "translations": {
+        "en": "Sun MD - Moon AD: Emotional balance needed, mother's influence, home matters, mental peace critical for career success. Authority tempered by emotions.",
+        "hi": "सूर्य महादशा - चंद्र अंतर्दशा: भावनात्मक संतुलन आवश्यक, माता का प्रभाव, घर के मामले, करियर सफलता के लिए मानसिक शांति महत्वपूर्ण। प्राधिकरण भावनाओं से नियंत्रित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_012",
+      "dasha_key": "sun_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 6
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "conflicts",
+          "aggression",
+          "injury",
+          "courage",
+          "competition"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars well-placed or strong reduces negatives",
+        "Mars aspect by benefics helps"
+      ],
+      "translations": {
+        "en": "Sun MD - Mars AD: Potential conflicts, aggression, injury risk, but also courage and competitive success. Authority exercised forcefully.",
+        "hi": "सूर्य महादशा - मंगल अंतर्दशा: संभावित संघर्ष, आक्रमण, चोट का जोखिम, परन्तु साहस व प्रतिस्पर्धी सफलता। प्राधिकरण बलपूर्वक प्रयोग।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_013",
+      "dasha_key": "moon_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 7
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter afflicted reduces benefits",
+        "Emotional conflicts with wisdom"
+      ],
+      "translations": {
+        "en": "Moon MD - Jupiter AD: Wisdom, children's happiness, wealth accumulation, spiritual growth, fortune. Emotional stability supports intellectual pursuits.",
+        "hi": "चंद्र महादशा - गुरु अंतर्दशा: ज्ञान, संतान सुख, धन संचय, आध्यात्मिक वृद्धि, भाग्य। भावनात्मक स्थिरता बौद्धिक गतिविधियों का समर्थन करती है।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_014",
+      "dasha_key": "mars_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 47,
+        "verse": 2
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "delays",
+          "obstacles",
+          "hard_work",
+          "discipline",
+          "conflicts"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn well-placed reduces severity",
+        "Mutual aspect or yoga between Mars and Saturn modifies results"
+      ],
+      "translations": {
+        "en": "Mars MD - Saturn AD: Significant delays, obstacles, hard work required, discipline needed. Potential conflicts with authority. Frustration in aggressive pursuits.",
+        "hi": "मंगल महादशा - शनि अंतर्दशा: महत्वपूर्ण विलंब, बाधाएँ, कठिन परिश्रम आवश्यक, अनुशासन आवश्यक। प्राधिकरण के साथ संघर्ष की संभावना। आक्रामक गतिविधियों में निराशा।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_015",
+      "dasha_key": "rahu_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 47,
+        "verse": 3
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spiritual_material_conflict",
+          "foreign_opportunities",
+          "unconventional_wisdom"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strong reduces Rahu's negativity",
+        "Good placement of both planets modifies results"
+      ],
+      "translations": {
+        "en": "Rahu MD - Jupiter AD: Conflict between spiritual values and material desires, foreign opportunities, unconventional wisdom. Jupiter tempers Rahu's extremes.",
+        "hi": "राहु महादशा - गुरु अंतर्दशा: आध्यात्मिक मूल्यों और भौतिक इच्छाओं के बीच संघर्ष, विदेशी अवसर, अपरंपरागत ज्ञान। गुरु राहु के चरमपंथों को नियंत्रित करता है।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_016",
+      "dasha_key": "jupiter_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 48,
+        "verse": 2
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom_with_discipline",
+          "long_term_goals",
+          "stability_through_hard_work"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn afflicted reduces benefits",
+        "Jupiter-Saturn conflict if poorly placed"
+      ],
+      "translations": {
+        "en": "Jupiter MD - Saturn AD: Wisdom combined with discipline, long-term goal achievement, stability through hard work. Jupiter's optimism tempers Saturn's delays.",
+        "hi": "गुरु महादशा - शनि अंतर्दशा: ज्ञान का अनुशासन के साथ मेल, दीर्घकालिक लक्ष्य प्राप्ति, कठिन परिश्रम से स्थिरता। गुरु का आशावादी शनि के विलंब को नियंत्रित करता है।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_017",
+      "dasha_key": "saturn_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 49,
+        "verse": 2
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "stability_in_luxury",
+          "delayed_gratification",
+          "mature_relationships"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strong reduces Saturn's harshness",
+        "Good relationship between Saturn and Venus helps"
+      ],
+      "translations": {
+        "en": "Saturn MD - Venus AD: Stability in luxury and comfort, delayed gratification in pleasures, mature relationships. Venus softens Saturn's austerity.",
+        "hi": "शनि महादशा - शुक्र अंतर्दशा: विलास व सुख में स्थिरता, आनंद में विलंबित संतुष्टि, परिपक्व संबंध। शुक्र शनि की कठोरता को नरम करता है।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_018",
+      "dasha_key": "venus_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 50,
+        "verse": 3
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "passion_conflict",
+          "relationship_challenges",
+          "competitive_romance"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Good placement of both planets reduces conflicts",
+        "Benefic aspects help balance energies"
+      ],
+      "translations": {
+        "en": "Venus MD - Mars AD: Passion conflicts with harmony, relationship challenges, competitive romance. Mars' aggression disrupts Venus' peace.",
+        "hi": "शुक्र महादशा - मंगल अंतर्दशा: जुनून और सामंजस्य में संघर्ष, रिश्तों में चुनौतियाँ, प्रतिस्पर्धी रोमांस। मंगल की आक्रामकता शुक्र की शांति को भंग करती है।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_019",
+      "dasha_key": "ketu_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 2
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spiritual_intellect",
+          "analytical_detachment",
+          "research_wisdom"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury afflicted reduces benefits",
+        "Ketu's detachment may conflict with Mercury's communication"
+      ],
+      "translations": {
+        "en": "Ketu MD - Mercury AD: Spiritual intellect, analytical detachment, research combining wisdom and logic. Mercury grounds Ketu's abstract tendencies.",
+        "hi": "केतु महादशा - बुध अंतर्दशा: आध्यात्मिक बौद्धिकता, विश्लेषणात्मक वैराग्य, ज्ञान और तर्क का संयोजित शोध। बुध केतु के अमूर्त झुकाव को स्थिर करता है।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_020",
+      "dasha_key": "rahu_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 47,
+        "verse": 4
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "extreme_delays",
+          "foreign_obstacles",
+          "material_spiritual_crisis"
+        ],
+        "polarity": "negative",
+        "weight": 2
+      },
+      "cancellation": [
+        "Both planets well-placed reduces severity",
+        "Jupiter's aspect or association helps"
+      ],
+      "translations": {
+        "en": "Rahu MD - Saturn AD: Extreme delays and obstacles, especially in foreign matters, material-spiritual crisis. Double malefic effect requires patience and remedial measures.",
+        "hi": "राहु महादशा - शनि अंतर्दशा: चरम विलंब और बाधाएँ, विशेष रूप से विदेशी मामलों में, भौतिक-आध्यात्मिक संकट। दोगुना दुष्प्रभाव के लिए धैर्य और उपाय आवश्यक।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_021",
+      "dasha_key": "sun_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 21
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government",
+          "father"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha - Mercury Antardasha: A mixed influence period with mixed results in career, status, authority and communication, business, education. Both opportunities and challenges appear.",
+        "hi": "सूर्य महादशा - बुध अंतर्दशा: career, status, authority और communication, business, education में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_022",
+      "dasha_key": "sun_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 22
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government",
+          "father"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha - Jupiter Antardasha: A harmonious blend period favoring career, status, authority and wisdom, teaching, children. Results are generally supportive and growth-oriented.",
+        "hi": "सूर्य महादशा - गुरु अंतर्दशा: career, status, authority और wisdom, teaching, children के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_023",
+      "dasha_key": "sun_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 23
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government",
+          "father"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus afflicted or poorly placed increases difficulties",
+        "Sun strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha - Venus Antardasha: A challenging combination period with mixed results in career, status, authority and marriage, love, luxury. Both opportunities and challenges appear.",
+        "hi": "सूर्य महादशा - शुक्र अंतर्दशा: career, status, authority और marriage, love, luxury में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_024",
+      "dasha_key": "sun_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 24
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government",
+          "father"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn afflicted or poorly placed increases difficulties",
+        "Sun strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha - Saturn Antardasha: A challenging combination period bringing obstacles in career, status, authority and discipline, hard_work, delays. Caution and remedial measures are advisable.",
+        "hi": "सूर्य महादशा - शनि अंतर्दशा: career, status, authority और discipline, hard_work, delays में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_025",
+      "dasha_key": "sun_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 25
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government",
+          "father"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu afflicted or poorly placed increases difficulties",
+        "Sun strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha - Rahu Antardasha: A challenging combination period bringing obstacles in career, status, authority and foreign, unconventional, sudden_changes. Caution and remedial measures are advisable.",
+        "hi": "सूर्य महादशा - राहु अंतर्दशा: career, status, authority और foreign, unconventional, sudden_changes में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_026",
+      "dasha_key": "sun_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 26
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Sun Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "career",
+          "status",
+          "authority",
+          "health",
+          "government",
+          "father"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Sun Mahadasha - Ketu Antardasha: A mixed influence period with mixed results in career, status, authority and spirituality, detachment, research. Both opportunities and challenges appear.",
+        "hi": "सूर्य महादशा - केतु अंतर्दशा: career, status, authority और spirituality, detachment, research में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_027",
+      "dasha_key": "moon_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 27
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Sun Antardasha: A harmonious blend period with mixed results in family, mother, emotions and career, status, authority. Both opportunities and challenges appear.",
+        "hi": "चंद्र महादशा - सूर्य अंतर्दशा: family, mother, emotions और career, status, authority में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_028",
+      "dasha_key": "moon_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 28
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Moon Antardasha: A intensified period favoring family, mother, emotions and family, mother, emotions. Results are generally supportive and growth-oriented.",
+        "hi": "चंद्र महादशा - चंद्र अंतर्दशा: family, mother, emotions और family, mother, emotions के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_029",
+      "dasha_key": "moon_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 29
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Mars Antardasha: A mixed influence period with mixed results in family, mother, emotions and courage, property, siblings. Both opportunities and challenges appear.",
+        "hi": "चंद्र महादशा - मंगल अंतर्दशा: family, mother, emotions और courage, property, siblings में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_030",
+      "dasha_key": "moon_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 30
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Mercury Antardasha: A harmonious blend period favoring family, mother, emotions and communication, business, education. Results are generally supportive and growth-oriented.",
+        "hi": "चंद्र महादशा - बुध अंतर्दशा: family, mother, emotions और communication, business, education के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_031",
+      "dasha_key": "moon_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 31
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Venus Antardasha: A mixed influence period with mixed results in family, mother, emotions and marriage, love, luxury. Both opportunities and challenges appear.",
+        "hi": "चंद्र महादशा - शुक्र अंतर्दशा: family, mother, emotions और marriage, love, luxury में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_032",
+      "dasha_key": "moon_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 32
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn afflicted or poorly placed increases difficulties",
+        "Moon strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Saturn Antardasha: A challenging combination period bringing obstacles in family, mother, emotions and discipline, hard_work, delays. Caution and remedial measures are advisable.",
+        "hi": "चंद्र महादशा - शनि अंतर्दशा: family, mother, emotions और discipline, hard_work, delays में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_033",
+      "dasha_key": "moon_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 33
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu afflicted or poorly placed increases difficulties",
+        "Moon strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Rahu Antardasha: A challenging combination period bringing obstacles in family, mother, emotions and foreign, unconventional, sudden_changes. Caution and remedial measures are advisable.",
+        "hi": "चंद्र महादशा - राहु अंतर्दशा: family, mother, emotions और foreign, unconventional, sudden_changes में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_034",
+      "dasha_key": "moon_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 34
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Moon Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "family",
+          "mother",
+          "emotions",
+          "home",
+          "travel",
+          "mental_peace"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu afflicted or poorly placed increases difficulties",
+        "Moon strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Moon Mahadasha - Ketu Antardasha: A challenging combination period bringing obstacles in family, mother, emotions and spirituality, detachment, research. Caution and remedial measures are advisable.",
+        "hi": "चंद्र महादशा - केतु अंतर्दशा: family, mother, emotions और spirituality, detachment, research में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_035",
+      "dasha_key": "mars_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 35
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Sun Antardasha: A harmonious blend period with mixed results in courage, property, siblings and career, status, authority. Both opportunities and challenges appear.",
+        "hi": "मंगल महादशा - सूर्य अंतर्दशा: courage, property, siblings और career, status, authority में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_036",
+      "dasha_key": "mars_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 36
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Moon Antardasha: A harmonious blend period with mixed results in courage, property, siblings and family, mother, emotions. Both opportunities and challenges appear.",
+        "hi": "मंगल महादशा - चंद्र अंतर्दशा: courage, property, siblings और family, mother, emotions में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_037",
+      "dasha_key": "mars_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 37
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Mars Antardasha: A intensified period favoring courage, property, siblings and courage, property, siblings. Results are generally supportive and growth-oriented.",
+        "hi": "मंगल महादशा - मंगल अंतर्दशा: courage, property, siblings और courage, property, siblings के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_038",
+      "dasha_key": "mars_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 38
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury afflicted or poorly placed increases difficulties",
+        "Mars strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Mercury Antardasha: A challenging combination period with mixed results in courage, property, siblings and communication, business, education. Both opportunities and challenges appear.",
+        "hi": "मंगल महादशा - बुध अंतर्दशा: courage, property, siblings और communication, business, education में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_039",
+      "dasha_key": "mars_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 39
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Jupiter Antardasha: A harmonious blend period favoring courage, property, siblings and wisdom, teaching, children. Results are generally supportive and growth-oriented.",
+        "hi": "मंगल महादशा - गुरु अंतर्दशा: courage, property, siblings और wisdom, teaching, children के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_040",
+      "dasha_key": "mars_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 40
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Venus Antardasha: A mixed influence period with mixed results in courage, property, siblings and marriage, love, luxury. Both opportunities and challenges appear.",
+        "hi": "मंगल महादशा - शुक्र अंतर्दशा: courage, property, siblings और marriage, love, luxury में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_041",
+      "dasha_key": "mars_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 41
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu afflicted or poorly placed increases difficulties",
+        "Mars strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Rahu Antardasha: A challenging combination period bringing obstacles in courage, property, siblings and foreign, unconventional, sudden_changes. Caution and remedial measures are advisable.",
+        "hi": "मंगल महादशा - राहु अंतर्दशा: courage, property, siblings और foreign, unconventional, sudden_changes में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_042",
+      "dasha_key": "mars_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 42
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mars Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "courage",
+          "property",
+          "siblings",
+          "conflicts",
+          "injury",
+          "military"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu afflicted or poorly placed increases difficulties",
+        "Mars strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Mars Mahadasha - Ketu Antardasha: A challenging combination period bringing obstacles in courage, property, siblings and spirituality, detachment, research. Caution and remedial measures are advisable.",
+        "hi": "मंगल महादशा - केतु अंतर्दशा: courage, property, siblings और spirituality, detachment, research में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_043",
+      "dasha_key": "mercury_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 43
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Sun Antardasha: A harmonious blend period favoring communication, business, education and career, status, authority. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - सूर्य अंतर्दशा: communication, business, education और career, status, authority के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_044",
+      "dasha_key": "mercury_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 44
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon afflicted or poorly placed increases difficulties",
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Moon Antardasha: A challenging combination period with mixed results in communication, business, education and family, mother, emotions. Both opportunities and challenges appear.",
+        "hi": "बुध महादशा - चंद्र अंतर्दशा: communication, business, education और family, mother, emotions में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_045",
+      "dasha_key": "mercury_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 45
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars afflicted or poorly placed increases difficulties",
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Mars Antardasha: A challenging combination period with mixed results in communication, business, education and courage, property, siblings. Both opportunities and challenges appear.",
+        "hi": "बुध महादशा - मंगल अंतर्दशा: communication, business, education और courage, property, siblings में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_046",
+      "dasha_key": "mercury_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 46
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Mercury Antardasha: A intensified period favoring communication, business, education and communication, business, education. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - बुध अंतर्दशा: communication, business, education और communication, business, education के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_047",
+      "dasha_key": "mercury_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 47
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Jupiter Antardasha: A mixed influence period favoring communication, business, education and wisdom, teaching, children. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - गुरु अंतर्दशा: communication, business, education और wisdom, teaching, children के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_048",
+      "dasha_key": "mercury_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 48
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Venus Antardasha: A harmonious blend period favoring communication, business, education and marriage, love, luxury. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - शुक्र अंतर्दशा: communication, business, education और marriage, love, luxury के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_049",
+      "dasha_key": "mercury_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 49
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Saturn Antardasha: A mixed influence period favoring communication, business, education and discipline, hard_work, delays. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - शनि अंतर्दशा: communication, business, education और discipline, hard_work, delays के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_050",
+      "dasha_key": "mercury_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 50
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Rahu Antardasha: A mixed influence period favoring communication, business, education and foreign, unconventional, sudden_changes. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - राहु अंतर्दशा: communication, business, education और foreign, unconventional, sudden_changes के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_051",
+      "dasha_key": "mercury_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 51
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Mercury Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "communication",
+          "business",
+          "education",
+          "writing",
+          "intelligence",
+          "trading"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Mercury Mahadasha - Ketu Antardasha: A mixed influence period favoring communication, business, education and spirituality, detachment, research. Results are generally supportive and growth-oriented.",
+        "hi": "बुध महादशा - केतु अंतर्दशा: communication, business, education और spirituality, detachment, research के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_052",
+      "dasha_key": "jupiter_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 52
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Sun Antardasha: A harmonious blend period favoring wisdom, teaching, children and career, status, authority. Results are generally supportive and growth-oriented.",
+        "hi": "गुरु महादशा - सूर्य अंतर्दशा: wisdom, teaching, children और career, status, authority के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_053",
+      "dasha_key": "jupiter_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 53
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Moon Antardasha: A harmonious blend period favoring wisdom, teaching, children and family, mother, emotions. Results are generally supportive and growth-oriented.",
+        "hi": "गुरु महादशा - चंद्र अंतर्दशा: wisdom, teaching, children और family, mother, emotions के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_054",
+      "dasha_key": "jupiter_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 54
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Mars Antardasha: A harmonious blend period favoring wisdom, teaching, children and courage, property, siblings. Results are generally supportive and growth-oriented.",
+        "hi": "गुरु महादशा - मंगल अंतर्दशा: wisdom, teaching, children और courage, property, siblings के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_055",
+      "dasha_key": "jupiter_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 55
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mercury afflicted or poorly placed increases difficulties",
+        "Jupiter strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Mercury Antardasha: A challenging combination period with mixed results in wisdom, teaching, children and communication, business, education. Both opportunities and challenges appear.",
+        "hi": "गुरु महादशा - बुध अंतर्दशा: wisdom, teaching, children और communication, business, education में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_056",
+      "dasha_key": "jupiter_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 56
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Jupiter Antardasha: A intensified period favoring wisdom, teaching, children and wisdom, teaching, children. Results are generally supportive and growth-oriented.",
+        "hi": "गुरु महादशा - गुरु अंतर्दशा: wisdom, teaching, children और wisdom, teaching, children के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_057",
+      "dasha_key": "jupiter_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 57
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus afflicted or poorly placed increases difficulties",
+        "Jupiter strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Venus Antardasha: A challenging combination period with mixed results in wisdom, teaching, children and marriage, love, luxury. Both opportunities and challenges appear.",
+        "hi": "गुरु महादशा - शुक्र अंतर्दशा: wisdom, teaching, children और marriage, love, luxury में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_058",
+      "dasha_key": "jupiter_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 58
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Rahu Antardasha: A mixed influence period favoring wisdom, teaching, children and foreign, unconventional, sudden_changes. Results are generally supportive and growth-oriented.",
+        "hi": "गुरु महादशा - राहु अंतर्दशा: wisdom, teaching, children और foreign, unconventional, sudden_changes के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_059",
+      "dasha_key": "jupiter_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 59
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Jupiter Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "wisdom",
+          "teaching",
+          "children",
+          "wealth",
+          "spirituality",
+          "fortune"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Jupiter strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Jupiter Mahadasha - Ketu Antardasha: A mixed influence period favoring wisdom, teaching, children and spirituality, detachment, research. Results are generally supportive and growth-oriented.",
+        "hi": "गुरु महादशा - केतु अंतर्दशा: wisdom, teaching, children और spirituality, detachment, research के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_060",
+      "dasha_key": "venus_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 60
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun afflicted or poorly placed increases difficulties",
+        "Venus strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Sun Antardasha: A challenging combination period with mixed results in marriage, love, luxury and career, status, authority. Both opportunities and challenges appear.",
+        "hi": "शुक्र महादशा - सूर्य अंतर्दशा: marriage, love, luxury और career, status, authority में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_061",
+      "dasha_key": "venus_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 61
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon afflicted or poorly placed increases difficulties",
+        "Venus strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Moon Antardasha: A challenging combination period with mixed results in marriage, love, luxury and family, mother, emotions. Both opportunities and challenges appear.",
+        "hi": "शुक्र महादशा - चंद्र अंतर्दशा: marriage, love, luxury और family, mother, emotions में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_062",
+      "dasha_key": "venus_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 62
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Mercury Antardasha: A harmonious blend period favoring marriage, love, luxury and communication, business, education. Results are generally supportive and growth-oriented.",
+        "hi": "शुक्र महादशा - बुध अंतर्दशा: marriage, love, luxury और communication, business, education के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_063",
+      "dasha_key": "venus_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 63
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Jupiter Antardasha: A mixed influence period favoring marriage, love, luxury and wisdom, teaching, children. Results are generally supportive and growth-oriented.",
+        "hi": "शुक्र महादशा - गुरु अंतर्दशा: marriage, love, luxury और wisdom, teaching, children के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_064",
+      "dasha_key": "venus_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 64
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Venus Antardasha: A intensified period favoring marriage, love, luxury and marriage, love, luxury. Results are generally supportive and growth-oriented.",
+        "hi": "शुक्र महादशा - शुक्र अंतर्दशा: marriage, love, luxury और marriage, love, luxury के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_065",
+      "dasha_key": "venus_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 65
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Saturn Antardasha: A harmonious blend period favoring marriage, love, luxury and discipline, hard_work, delays. Results are generally supportive and growth-oriented.",
+        "hi": "शुक्र महादशा - शनि अंतर्दशा: marriage, love, luxury और discipline, hard_work, delays के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_066",
+      "dasha_key": "venus_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 66
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Rahu Antardasha: A harmonious blend period favoring marriage, love, luxury and foreign, unconventional, sudden_changes. Results are generally supportive and growth-oriented.",
+        "hi": "शुक्र महादशा - राहु अंतर्दशा: marriage, love, luxury और foreign, unconventional, sudden_changes के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_067",
+      "dasha_key": "venus_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 67
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Venus Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "marriage",
+          "love",
+          "luxury",
+          "arts",
+          "vehicles",
+          "wealth"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Venus Mahadasha - Ketu Antardasha: A mixed influence period favoring marriage, love, luxury and spirituality, detachment, research. Results are generally supportive and growth-oriented.",
+        "hi": "शुक्र महादशा - केतु अंतर्दशा: marriage, love, luxury और spirituality, detachment, research के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_068",
+      "dasha_key": "saturn_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 68
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun afflicted or poorly placed increases difficulties",
+        "Saturn strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Sun Antardasha: A challenging combination period bringing obstacles in discipline, hard_work, delays and career, status, authority. Caution and remedial measures are advisable.",
+        "hi": "शनि महादशा - सूर्य अंतर्दशा: discipline, hard_work, delays और career, status, authority में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_069",
+      "dasha_key": "saturn_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 69
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon afflicted or poorly placed increases difficulties",
+        "Saturn strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Moon Antardasha: A challenging combination period bringing obstacles in discipline, hard_work, delays and family, mother, emotions. Caution and remedial measures are advisable.",
+        "hi": "शनि महादशा - चंद्र अंतर्दशा: discipline, hard_work, delays और family, mother, emotions में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_070",
+      "dasha_key": "saturn_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 70
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars afflicted or poorly placed increases difficulties",
+        "Saturn strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Mars Antardasha: A challenging combination period bringing obstacles in discipline, hard_work, delays and courage, property, siblings. Caution and remedial measures are advisable.",
+        "hi": "शनि महादशा - मंगल अंतर्दशा: discipline, hard_work, delays और courage, property, siblings में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_071",
+      "dasha_key": "saturn_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 71
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Mercury Antardasha: A harmonious blend period favoring discipline, hard_work, delays and communication, business, education. Results are generally supportive and growth-oriented.",
+        "hi": "शनि महादशा - बुध अंतर्दशा: discipline, hard_work, delays और communication, business, education के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_072",
+      "dasha_key": "saturn_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 72
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Jupiter Antardasha: A mixed influence period with mixed results in discipline, hard_work, delays and wisdom, teaching, children. Both opportunities and challenges appear.",
+        "hi": "शनि महादशा - गुरु अंतर्दशा: discipline, hard_work, delays और wisdom, teaching, children में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_073",
+      "dasha_key": "saturn_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 73
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn strength and dignity modifies overall result"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Saturn Antardasha: A intensified period favoring discipline, hard_work, delays and discipline, hard_work, delays. Results are generally supportive and growth-oriented.",
+        "hi": "शनि महादशा - शनि अंतर्दशा: discipline, hard_work, delays और discipline, hard_work, delays के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_074",
+      "dasha_key": "saturn_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 74
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "mixed",
+        "weight": 2
+      },
+      "cancellation": [
+        "Saturn strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Rahu Antardasha: A harmonious blend period with mixed results in discipline, hard_work, delays and foreign, unconventional, sudden_changes. Both opportunities and challenges appear.",
+        "hi": "शनि महादशा - राहु अंतर्दशा: discipline, hard_work, delays और foreign, unconventional, sudden_changes में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_075",
+      "dasha_key": "saturn_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 75
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Saturn Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "discipline",
+          "hard_work",
+          "delays",
+          "obstacles",
+          "elderly",
+          "land"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Saturn strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Saturn Mahadasha - Ketu Antardasha: A mixed influence period with mixed results in discipline, hard_work, delays and spirituality, detachment, research. Both opportunities and challenges appear.",
+        "hi": "शनि महादशा - केतु अंतर्दशा: discipline, hard_work, delays और spirituality, detachment, research में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_076",
+      "dasha_key": "rahu_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 76
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Sun afflicted or poorly placed increases difficulties",
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Sun Antardasha: A challenging combination period bringing obstacles in foreign, unconventional, sudden_changes and career, status, authority. Caution and remedial measures are advisable.",
+        "hi": "राहु महादशा - सूर्य अंतर्दशा: foreign, unconventional, sudden_changes और career, status, authority में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_077",
+      "dasha_key": "rahu_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 77
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon afflicted or poorly placed increases difficulties",
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Moon Antardasha: A challenging combination period bringing obstacles in foreign, unconventional, sudden_changes and family, mother, emotions. Caution and remedial measures are advisable.",
+        "hi": "राहु महादशा - चंद्र अंतर्दशा: foreign, unconventional, sudden_changes और family, mother, emotions में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_078",
+      "dasha_key": "rahu_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 78
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Mars afflicted or poorly placed increases difficulties",
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Mars Antardasha: A challenging combination period bringing obstacles in foreign, unconventional, sudden_changes and courage, property, siblings. Caution and remedial measures are advisable.",
+        "hi": "राहु महादशा - मंगल अंतर्दशा: foreign, unconventional, sudden_changes और courage, property, siblings में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_079",
+      "dasha_key": "rahu_ad_mercury",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 79
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Mercury Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Mercury Antardasha: A harmonious blend period favoring foreign, unconventional, sudden_changes and communication, business, education. Results are generally supportive and growth-oriented.",
+        "hi": "राहु महादशा - बुध अंतर्दशा: foreign, unconventional, sudden_changes और communication, business, education के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_080",
+      "dasha_key": "rahu_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 80
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Venus Antardasha: A harmonious blend period favoring foreign, unconventional, sudden_changes and marriage, love, luxury. Results are generally supportive and growth-oriented.",
+        "hi": "राहु महादशा - शुक्र अंतर्दशा: foreign, unconventional, sudden_changes और marriage, love, luxury के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_081",
+      "dasha_key": "rahu_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 81
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Rahu Antardasha: A intensified period favoring foreign, unconventional, sudden_changes and foreign, unconventional, sudden_changes. Results are generally supportive and growth-oriented.",
+        "hi": "राहु महादशा - राहु अंतर्दशा: foreign, unconventional, sudden_changes और foreign, unconventional, sudden_changes के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_082",
+      "dasha_key": "rahu_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 46,
+        "verse": 82
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Rahu Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "foreign",
+          "unconventional",
+          "sudden_changes",
+          "technology",
+          "addiction",
+          "deception"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Rahu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Rahu Mahadasha - Ketu Antardasha: A mixed influence period with mixed results in foreign, unconventional, sudden_changes and spirituality, detachment, research. Both opportunities and challenges appear.",
+        "hi": "राहु महादशा - केतु अंतर्दशा: foreign, unconventional, sudden_changes और spirituality, detachment, research में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_083",
+      "dasha_key": "ketu_ad_sun",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 83
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Sun Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Sun Antardasha: A harmonious blend period with mixed results in spirituality, detachment, research and career, status, authority. Both opportunities and challenges appear.",
+        "hi": "केतु महादशा - सूर्य अंतर्दशा: spirituality, detachment, research और career, status, authority में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_084",
+      "dasha_key": "ketu_ad_moon",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 84
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Moon Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "negative",
+        "weight": 1
+      },
+      "cancellation": [
+        "Moon afflicted or poorly placed increases difficulties",
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Moon Antardasha: A challenging combination period bringing obstacles in spirituality, detachment, research and family, mother, emotions. Caution and remedial measures are advisable.",
+        "hi": "केतु महादशा - चंद्र अंतर्दशा: spirituality, detachment, research और family, mother, emotions में बाधाएँ लाने वाली विरोधी अवधि। सावधानी और उपाय उचित।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_085",
+      "dasha_key": "ketu_ad_mars",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 85
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Mars Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Mars Antardasha: A harmonious blend period with mixed results in spirituality, detachment, research and courage, property, siblings. Both opportunities and challenges appear.",
+        "hi": "केतु महादशा - मंगल अंतर्दशा: spirituality, detachment, research और courage, property, siblings में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_086",
+      "dasha_key": "ketu_ad_jupiter",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 86
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Jupiter Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Jupiter Antardasha: A harmonious blend period favoring spirituality, detachment, research and wisdom, teaching, children. Results are generally supportive and growth-oriented.",
+        "hi": "केतु महादशा - गुरु अंतर्दशा: spirituality, detachment, research और wisdom, teaching, children के लिए अनुकूल सामंजस्यपूर्ण अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_087",
+      "dasha_key": "ketu_ad_venus",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 87
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Venus Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Venus afflicted or poorly placed increases difficulties",
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Venus Antardasha: A challenging combination period with mixed results in spirituality, detachment, research and marriage, love, luxury. Both opportunities and challenges appear.",
+        "hi": "केतु महादशा - शुक्र अंतर्दशा: spirituality, detachment, research और marriage, love, luxury में मिश्रित फल देने वाली द्वैध अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_088",
+      "dasha_key": "ketu_ad_saturn",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 88
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Saturn Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Saturn Antardasha: A mixed influence period with mixed results in spirituality, detachment, research and discipline, hard_work, delays. Both opportunities and challenges appear.",
+        "hi": "केतु महादशा - शनि अंतर्दशा: spirituality, detachment, research और discipline, hard_work, delays में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_089",
+      "dasha_key": "ketu_ad_rahu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 89
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Rahu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "mixed",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Rahu Antardasha: A mixed influence period with mixed results in spirituality, detachment, research and foreign, unconventional, sudden_changes. Both opportunities and challenges appear.",
+        "hi": "केतु महादशा - राहु अंतर्दशा: spirituality, detachment, research और foreign, unconventional, sudden_changes में मिश्रित फल देने वाली सामान्य अवधि।"
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "BPHS_DASHA_090",
+      "dasha_key": "ketu_ad_ketu",
+      "source": {
+        "text": "BPHS",
+        "chapter": 73,
+        "verse": 90
+      },
+      "rule_type": "dasha_effect",
+      "conditions": {
+        "desc": "Ketu Mahadasha - Ketu Antardasha effects"
+      },
+      "effect": {
+        "domains": [
+          "spirituality",
+          "detachment",
+          "research",
+          "occult",
+          "sudden_events",
+          "loss"
+        ],
+        "polarity": "positive",
+        "weight": 1
+      },
+      "cancellation": [
+        "Ketu strength and dignity modifies overall result",
+        "Benefic aspect or association of Jupiter reduces nodal extremes"
+      ],
+      "translations": {
+        "en": "Ketu Mahadasha - Ketu Antardasha: A intensified period favoring spirituality, detachment, research and spirituality, detachment, research. Results are generally supportive and growth-oriented.",
+        "hi": "केतु महादशा - केतु अंतर्दशा: spirituality, detachment, research और spirituality, detachment, research के लिए अनुकूल सकारात्मक अवधि।"
+      },
+      "confidence": "medium"
+    }
   ]
 }
