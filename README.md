@@ -11,6 +11,17 @@ Jyotish Calculator/
 ├── README.md                           # This documentation file
 ├── index.html                          # Landing page with app launcher
 ├── jyotish_calculator.html             # Main application (single-page app)
+├── verse_database/                     # Classical rule & verse DB (JSON)
+│   ├── bphs.json                       # BPHS verse collection (92 verses, DB-8 enriched)
+│   ├── bphs_house_lords.json          # 144 Ch 13-14 actionable rules
+│   ├── bphs_planet_in_house.json      # 108 Ch 11 planet-in-house rules
+│   ├── bphs_planet_in_sign.json       # Planet-in-sign rules
+│   ├── bphs_yogas.json                # Raja/Dhana yogas with cancellations
+│   ├── bphs_dasha_effects.json        # Dasha-phala rules
+│   ├── bphs_nakshatra.json            # Nakshatra rules
+│   ├── bphs_core.json                 # Aspect / dignity / strength rules
+│   ├── phaladeepika_rules.json        # Phaladeepika actionable rules
+│   └── saravali_rules.json            # Saravali actionable rules
 ├── .git/                              # Version control
 ├── .gitattributes                      # Git configuration
 ├── CNAME                              # Custom domain (if deployed)
@@ -138,6 +149,12 @@ python3 -m http.server 8000
 - **Yogas** (योग) - Planetary combinations and their effects
 - **Dasha** (दशा) - Timing and predictive periods
 - **Remedies** (उपाय) - Traditional astrological remedies
+
+### **Classical Verse Database**
+- **Brihat Parashara Hora Shastra (BPHS)** — 92 representative verses in `verse_database/bphs.json`, each with Sanskrit, IAST transliteration, English, and Hindi translations.
+- **DB-8 (Completed)** — Flagship verses expanded to full ślokas (Ch 1–2 opening, Ch 3 planetary descriptions, Ch 27 Shadbala, Ch 31 Raja-Yoga, Ch 46 Vimshottari, Ch 71 Nakshatra enumeration). Factual error in `BPHS_71_1` corrected (27 nakshatras, not 21).
+- **Confidence Flags** — Every verse has a `confidence` field: `medium` = classically attested wording; `low` = representative/approximate text; `high` reserved for Pandit-verified verses only.
+- **Actionable Rule Sets** — Separate JSON files for house-lord (144 rules), planet-in-house (108), planet-in-sign, yogas, dasha-phala, nakshatra, core dignity/aspect rules, plus Phaladeepika and Saravali rules. Rules cite source chapter/verse and carry weights, exceptions, and Hindi/English translations.
 
 ### **Vargas (Divisional Charts)**
 - **D1 (Rashi)** - Main birth chart
@@ -302,6 +319,11 @@ This project is provided for **educational purposes only**. The astrological cal
 - **Check JavaScript is enabled** in your browser settings
 
 ## 📋 Version History
+
+### **Version 2.0.x** (Latest)
+- ✨ **DB-8 Verse Enrichment** — `bphs.json` verses expanded to full ślokas; confidence flags added to all 92 verses; corrected nakshatra count in `BPHS_71_1`.
+- ✨ **Career PDF Generation Fix** — Per-section `html2canvas` capture with fault-tolerant stitching, progress indicator, and overlay state restoration; resolves blank / clipped / 30-page blank PDFs.
+- ✨ **Project Documentation** — README updated with `verse_database` structure and classical rule set inventory.
 
 ### **Version 2.0** (Current)
 - ✨ **Multi-Module Architecture** - Personal, Muhurat, and Match modules
