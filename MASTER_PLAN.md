@@ -92,7 +92,13 @@ Priority = chapters that drive the most predictions.
 - [x] **DB-5 BPHS Ch 46-50, 73 dasha-phala** (result of each MD/AD) → `bphs_dasha_effects.json`. ✅
 - [x] **DB-6 BPHS Ch 71-77 nakshatra** rules → `bphs_nakshatra.json`. ✅
 - [x] **DB-7 BPHS aspect / dignity / strength** rules (Ch 3-7, 26-27) → `bphs_core.json`. ✅
-- [ ] **DB-8 Fuller verse text** for existing `bphs.json` entries (sanskrit + en + hi where known).
+- [x] **DB-8 Fuller verse text** for existing `bphs.json` entries (sanskrit + en + hi where known). ✅
+    - 14 flagship verses expanded to full ślokas (classically attested wording): Ch 1 opening (1.1-1.2),
+      Ch 2 graha-avatara (2.1-2.2), Ch 3 planet descriptions (Sun/Moon/Mercury/Jupiter/Venus/Saturn),
+      Ch 27 shadbala enumeration, Ch 31 kendra-trikona yogakaraka, Ch 46 vimshottari, Ch 71 nakshatra count.
+    - All 92 verses now carry a `confidence` flag (`medium` = attested wording, `low` = representative text);
+      `high` reserved for Pandit-verified verses per policy (see `metadata.textConfidencePolicy`).
+    - Fixed factual error in `BPHS_71_1` (said "twenty-one" nakshatras → corrected to twenty-seven).
 - [x] **DB-9 Other texts** — expand Phaladeepika, Saravali; fill Jataka Parijata, Hora Sara,
       Uttara Kalamrita with representative verses. ✅
     - Actionable rules: `phaladeepika_rules.json` (29 rules), `saravali_rules.json` (26 rules).

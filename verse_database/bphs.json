@@ -5,7 +5,7 @@
     "author": "Maharishi Parashara",
     "period": "Ancient",
     "edition": "Girish Chand Sharma",
-    "lastUpdated": "2026-07-12",
+    "lastUpdated": "2026-07-20",
     "chapterCount": 105,
     "coverage": "All 105 chapters have at least one representative verse",
     "implementationStats": {
@@ -14,543 +14,970 @@
       "partial": 8,
       "notImplemented": 11,
       "estimatedTotalInText": 3240
+    },
+    "textConfidencePolicy": "Every verse carries a confidence flag: 'medium' = wording classically attested in standard BPHS editions but not yet Pandit-verified; 'low' = representative/approximate text pending verification. 'high' is reserved for Pandit-verified verses only.",
+    "db8": {
+      "status": "done",
+      "date": "2026-07-20",
+      "summary": "DB-8 fuller-verse-text pass: 14 flagship verses expanded to full slokas (sanskrit+translit+en+hi); all 92 verses now carry a confidence flag; corrected factual error in BPHS_71_1 (27 nakshatras, not 21)."
     }
   },
   "chapters": {
     "1": {
       "title": "उपोद्घात (Introduction)",
       "verseCount": 25,
-      "keyTopics": ["introduction", "purpose", "methodology"]
+      "keyTopics": [
+        "introduction",
+        "purpose",
+        "methodology"
+      ]
     },
     "2": {
       "title": "ग्रह स्वरूप (Planetary Forms)",
       "verseCount": 45,
-      "keyTopics": ["planetary_forms", "deities", "characteristics"]
+      "keyTopics": [
+        "planetary_forms",
+        "deities",
+        "characteristics"
+      ]
     },
     "3": {
       "title": "ग्रह स्वभाव (Planet Nature)",
       "verseCount": 52,
-      "keyTopics": ["planet_characteristics", "dignity", "friendship"]
+      "keyTopics": [
+        "planet_characteristics",
+        "dignity",
+        "friendship"
+      ]
     },
     "4": {
       "title": "भाव फल (House Results)",
       "verseCount": 48,
-      "keyTopics": ["house_significance", "house_lords", "lagna_analysis"]
+      "keyTopics": [
+        "house_significance",
+        "house_lords",
+        "lagna_analysis"
+      ]
     },
     "5": {
       "title": "ग्रह योग (Planetary Combinations)",
       "verseCount": 38,
-      "keyTopics": ["planetary_combinations", "conjunctions", "aspects"]
+      "keyTopics": [
+        "planetary_combinations",
+        "conjunctions",
+        "aspects"
+      ]
     },
     "6": {
       "title": "ग्रह दृष्टि (Planetary Aspects)",
       "verseCount": 42,
-      "keyTopics": ["aspects", "vision", "influence"]
+      "keyTopics": [
+        "aspects",
+        "vision",
+        "influence"
+      ]
     },
     "7": {
       "title": "राशि फल (Sign Results)",
       "verseCount": 35,
-      "keyTopics": ["sign_characteristics", "sign_effects", "nature"]
+      "keyTopics": [
+        "sign_characteristics",
+        "sign_effects",
+        "nature"
+      ]
     },
     "8": {
       "title": "लग्न फल (Ascendant Results)",
       "verseCount": 40,
-      "keyTopics": ["ascendant_types", "lagna_effects", "personality"]
+      "keyTopics": [
+        "ascendant_types",
+        "lagna_effects",
+        "personality"
+      ]
     },
     "9": {
       "title": "नवमांश फल (Navamsa Results)",
       "verseCount": 32,
-      "keyTopics": ["navamsa", "marriage", "spouse", "destiny"]
+      "keyTopics": [
+        "navamsa",
+        "marriage",
+        "spouse",
+        "destiny"
+      ]
     },
     "10": {
       "title": "दशमांश फल (Dasamsa Results)",
       "verseCount": 28,
-      "keyTopics": ["dasamsa", "career", "profession", "status"]
+      "keyTopics": [
+        "dasamsa",
+        "career",
+        "profession",
+        "status"
+      ]
     },
     "11": {
       "title": "द्वादशांश फल (Dwadashamsa Results)",
       "verseCount": 25,
-      "keyTopics": ["dwadashamsa", "parents", "ancestors", "past_life"]
+      "keyTopics": [
+        "dwadashamsa",
+        "parents",
+        "ancestors",
+        "past_life"
+      ]
     },
     "12": {
       "title": "त्रिशंशांश फल (Trishamsa Results)",
       "verseCount": 22,
-      "keyTopics": ["trishamsa", "misfortunes", "suffering", "remedies"]
+      "keyTopics": [
+        "trishamsa",
+        "misfortunes",
+        "suffering",
+        "remedies"
+      ]
     },
     "13": {
       "title": "षष्ठांश फल (Shashtiamsa Results)",
       "verseCount": 30,
-      "keyTopics": ["shashtiamsa", "detailed_analysis", "subtle_effects"]
+      "keyTopics": [
+        "shashtiamsa",
+        "detailed_analysis",
+        "subtle_effects"
+      ]
     },
     "14": {
       "title": "अष्टांश फल (Ashtamsa Results)",
       "verseCount": 18,
-      "keyTopics": ["ashtamsa", "strength", "longevity"]
+      "keyTopics": [
+        "ashtamsa",
+        "strength",
+        "longevity"
+      ]
     },
     "15": {
       "title": "विंशांश फल (Vimsamsa Results)",
       "verseCount": 20,
-      "keyTopics": ["vimsamsa", "spiritual", "knowledge", "moksha"]
+      "keyTopics": [
+        "vimsamsa",
+        "spiritual",
+        "knowledge",
+        "moksha"
+      ]
     },
     "16": {
       "title": "स्थान बल (Positional Strength)",
       "verseCount": 35,
-      "keyTopics": ["sthana_bala", "position_strength", "house_placement"]
+      "keyTopics": [
+        "sthana_bala",
+        "position_strength",
+        "house_placement"
+      ]
     },
     "17": {
       "title": "दिक बल (Directional Strength)",
       "verseCount": 28,
-      "keyTopics": ["dig_bala", "directional_strength", "cardinal_points"]
+      "keyTopics": [
+        "dig_bala",
+        "directional_strength",
+        "cardinal_points"
+      ]
     },
     "18": {
       "title": "काल बल (Temporal Strength)",
       "verseCount": 32,
-      "keyTopics": ["kala_bala", "temporal_strength", "time_factors"]
+      "keyTopics": [
+        "kala_bala",
+        "temporal_strength",
+        "time_factors"
+      ]
     },
     "19": {
       "title": "चेष्टा बल (Motional Strength)",
       "verseCount": 25,
-      "keyTopics": ["chesta_bala", "motional_strength", "retrogradation"]
+      "keyTopics": [
+        "chesta_bala",
+        "motional_strength",
+        "retrogradation"
+      ]
     },
     "20": {
       "title": "नैसर्गिक बल (Natural Strength)",
       "verseCount": 20,
-      "keyTopics": ["naisargika_bala", "natural_strength", "inherent_power"]
+      "keyTopics": [
+        "naisargika_bala",
+        "natural_strength",
+        "inherent_power"
+      ]
     },
     "21": {
       "title": "दृक बल (Aspect Strength)",
       "verseCount": 18,
-      "keyTopics": ["drik_bala", "aspect_strength", "aspectual_power"]
+      "keyTopics": [
+        "drik_bala",
+        "aspect_strength",
+        "aspectual_power"
+      ]
     },
     "22": {
       "title": "षड्बल फल (Shadbala Results)",
       "verseCount": 30,
-      "keyTopics": ["shadbala_results", "strength_evaluation", "effectiveness"]
+      "keyTopics": [
+        "shadbala_results",
+        "strength_evaluation",
+        "effectiveness"
+      ]
     },
     "23": {
       "title": "विंशोपक बल (Vimsopaka Strength)",
       "verseCount": 25,
-      "keyTopics": ["vimsopaka", "divisional_strength", "overall_assessment"]
+      "keyTopics": [
+        "vimsopaka",
+        "divisional_strength",
+        "overall_assessment"
+      ]
     },
     "24": {
       "title": "ग्रह अवस्था (Planetary States)",
       "verseCount": 40,
-      "keyTopics": ["avasthas", "planetary_states", "age_conditions"]
+      "keyTopics": [
+        "avasthas",
+        "planetary_states",
+        "age_conditions"
+      ]
     },
     "25": {
       "title": "बाल अवस्था (Childhood State)",
       "verseCount": 22,
-      "keyTopics": ["bala_avastha", "childhood_state", "immaturity"]
+      "keyTopics": [
+        "bala_avastha",
+        "childhood_state",
+        "immaturity"
+      ]
     },
     "26": {
       "title": "कुमार अवस्था (Youth State)",
       "verseCount": 20,
-      "keyTopics": ["kumara_avastha", "youth_state", "vigor"]
+      "keyTopics": [
+        "kumara_avastha",
+        "youth_state",
+        "vigor"
+      ]
     },
     "27": {
       "title": "षड्बल (Shadbala)",
       "verseCount": 45,
-      "keyTopics": ["six_strengths", "planetary_strength", "strength_calculation"]
+      "keyTopics": [
+        "six_strengths",
+        "planetary_strength",
+        "strength_calculation"
+      ]
     },
     "28": {
       "title": "वृद्ध अवस्था (Old Age State)",
       "verseCount": 18,
-      "keyTopics": ["vriddha_avastha", "old_age_state", "maturity"]
+      "keyTopics": [
+        "vriddha_avastha",
+        "old_age_state",
+        "maturity"
+      ]
     },
     "29": {
       "title": "मृत अवस्था (Dead State)",
       "verseCount": 15,
-      "keyTopics": ["mrityu_avastha", "death_state", "ineffectiveness"]
+      "keyTopics": [
+        "mrityu_avastha",
+        "death_state",
+        "ineffectiveness"
+      ]
     },
     "30": {
       "title": "सुप्त अवस्था (Sleeping State)",
       "verseCount": 12,
-      "keyTopics": ["supta_avastha", "sleeping_state", "dormancy"]
+      "keyTopics": [
+        "supta_avastha",
+        "sleeping_state",
+        "dormancy"
+      ]
     },
     "31": {
       "title": "राजयोग (Raja Yoga)",
       "verseCount": 55,
-      "keyTopics": ["royal_combinations", "power_yogas", "success_indicators"]
+      "keyTopics": [
+        "royal_combinations",
+        "power_yogas",
+        "success_indicators"
+      ]
     },
     "32": {
       "title": "धन योग (Dhana Yoga)",
       "verseCount": 48,
-      "keyTopics": ["wealth_combinations", "prosperity", "financial_success"]
+      "keyTopics": [
+        "wealth_combinations",
+        "prosperity",
+        "financial_success"
+      ]
     },
     "33": {
       "title": "आरिष्ट योग (Arista Yoga)",
       "verseCount": 35,
-      "keyTopics": ["danger_yogas", "obstacles", "hardships"]
+      "keyTopics": [
+        "danger_yogas",
+        "obstacles",
+        "hardships"
+      ]
     },
     "34": {
       "title": "दरिद्र योग (Daridra Yoga)",
       "verseCount": 30,
-      "keyTopics": ["poverty_yogas", "financial_struggles", "loss"]
+      "keyTopics": [
+        "poverty_yogas",
+        "financial_struggles",
+        "loss"
+      ]
     },
     "35": {
       "title": "निर्बल योग (Weakness Yoga)",
       "verseCount": 25,
-      "keyTopics": ["weakness_yogas", "debility", "lack_of_strength"]
+      "keyTopics": [
+        "weakness_yogas",
+        "debility",
+        "lack_of_strength"
+      ]
     },
     "36": {
       "title": "पाप योग (Sin Yoga)",
       "verseCount": 28,
-      "keyTopics": ["sin_yogas", "negative_combinations", "evil_effects"]
+      "keyTopics": [
+        "sin_yogas",
+        "negative_combinations",
+        "evil_effects"
+      ]
     },
     "37": {
       "title": "सौभाग्य योग (Auspicious Yoga)",
       "verseCount": 40,
-      "keyTopics": ["auspicious_yogas", "good_fortune", "blessings"]
+      "keyTopics": [
+        "auspicious_yogas",
+        "good_fortune",
+        "blessings"
+      ]
     },
     "38": {
       "title": "विवाह योग (Marriage Yoga)",
       "verseCount": 32,
-      "keyTopics": ["marriage_yogas", "relationships", "marital_happiness"]
+      "keyTopics": [
+        "marriage_yogas",
+        "relationships",
+        "marital_happiness"
+      ]
     },
     "39": {
       "title": "राजयोग (Raja Yoga - Advanced)",
       "verseCount": 45,
-      "keyTopics": ["advanced_royal_yogas", "kingship", "high_status"]
+      "keyTopics": [
+        "advanced_royal_yogas",
+        "kingship",
+        "high_status"
+      ]
     },
     "40": {
       "title": "धन योग (Dhana Yoga - Advanced)",
       "verseCount": 38,
-      "keyTopics": ["advanced_wealth_yogas", "riches", "abundance"]
+      "keyTopics": [
+        "advanced_wealth_yogas",
+        "riches",
+        "abundance"
+      ]
     },
     "41": {
       "title": "संतान योग (Progeny Yoga)",
       "verseCount": 28,
-      "keyTopics": ["progeny_yogas", "children", "parenthood"]
+      "keyTopics": [
+        "progeny_yogas",
+        "children",
+        "parenthood"
+      ]
     },
     "42": {
       "title": "विद्या योग (Education Yoga)",
       "verseCount": 25,
-      "keyTopics": ["education_yogas", "learning", "intelligence"]
+      "keyTopics": [
+        "education_yogas",
+        "learning",
+        "intelligence"
+      ]
     },
     "43": {
       "title": "स्वास्थ्य योग (Health Yoga)",
       "verseCount": 30,
-      "keyTopics": ["health_yogas", "longevity", "wellness"]
+      "keyTopics": [
+        "health_yogas",
+        "longevity",
+        "wellness"
+      ]
     },
     "44": {
       "title": "व्यापार योग (Business Yoga)",
       "verseCount": 22,
-      "keyTopics": ["business_yogas", "commerce", "trade"]
+      "keyTopics": [
+        "business_yogas",
+        "commerce",
+        "trade"
+      ]
     },
     "45": {
       "title": "कर्म योग (Karma Yoga)",
       "verseCount": 20,
-      "keyTopics": ["karma_yogas", "actions", "destiny"]
+      "keyTopics": [
+        "karma_yogas",
+        "actions",
+        "destiny"
+      ]
     },
     "46": {
       "title": "विम्शोत्तरी दशा (Vimshottari Dasha)",
       "verseCount": 65,
-      "keyTopics": ["dasha_system", "timing", "period_calculation"]
+      "keyTopics": [
+        "dasha_system",
+        "timing",
+        "period_calculation"
+      ]
     },
     "47": {
       "title": "अष्टोत्तरी दशा (Ashtottari Dasha)",
       "verseCount": 25,
-      "keyTopics": ["ashtottari_dasha", "alternative_system", "special_conditions"]
+      "keyTopics": [
+        "ashtottari_dasha",
+        "alternative_system",
+        "special_conditions"
+      ]
     },
     "48": {
       "title": "द्वादशोत्तरी दशा (Dwadashottari Dasha)",
       "verseCount": 20,
-      "keyTopics": ["dwadashottari_dasha", "special_applications"]
+      "keyTopics": [
+        "dwadashottari_dasha",
+        "special_applications"
+      ]
     },
     "49": {
       "title": "पंचोत्तरी दशा (Panchottari Dasha)",
       "verseCount": 18,
-      "keyTopics": ["panchottari_dasha", "specific_conditions"]
+      "keyTopics": [
+        "panchottari_dasha",
+        "specific_conditions"
+      ]
     },
     "50": {
       "title": "शष्टियुती दशा (Shashtihayani Dasha)",
       "verseCount": 15,
-      "keyTopics": ["shashtihayani_dasha", "special_timing"]
+      "keyTopics": [
+        "shashtihayani_dasha",
+        "special_timing"
+      ]
     },
     "51": {
       "title": "द्विदशोत्तरी दशा (Dwimshottari Dasha)",
       "verseCount": 12,
-      "keyTopics": ["dwimshottari_dasha", "rare_system"]
+      "keyTopics": [
+        "dwimshottari_dasha",
+        "rare_system"
+      ]
     },
     "52": {
       "title": "लग्न दशा (Lagna Dasha)",
       "verseCount": 22,
-      "keyTopics": ["lagna_dasha", "ascendant_based", "personal_timing"]
+      "keyTopics": [
+        "lagna_dasha",
+        "ascendant_based",
+        "personal_timing"
+      ]
     },
     "53": {
       "title": "सूर्य दशा (Surya Dasha)",
       "verseCount": 18,
-      "keyTopics": ["surya_dasha", "sun_based", "spiritual_timing"]
+      "keyTopics": [
+        "surya_dasha",
+        "sun_based",
+        "spiritual_timing"
+      ]
     },
     "54": {
       "title": "चंद्र दशा (Chandra Dasha)",
       "verseCount": 20,
-      "keyTopics": ["chandra_dasha", "moon_based", "emotional_timing"]
+      "keyTopics": [
+        "chandra_dasha",
+        "moon_based",
+        "emotional_timing"
+      ]
     },
     "55": {
       "title": "नक्षत्र दशा (Nakshatra Dasha)",
       "verseCount": 25,
-      "keyTopics": ["nakshatra_dasha", "stellar_timing", "karmic_periods"]
+      "keyTopics": [
+        "nakshatra_dasha",
+        "stellar_timing",
+        "karmic_periods"
+      ]
     },
     "56": {
       "title": "गोचर फल (Transit Results)",
       "verseCount": 45,
-      "keyTopics": ["transits", "gochara", "planetary_movements"]
+      "keyTopics": [
+        "transits",
+        "gochara",
+        "planetary_movements"
+      ]
     },
     "57": {
       "title": "साढ़ेसाती (Sade Sati)",
       "verseCount": 30,
-      "keyTopics": ["sade_sati", "saturn_transit", "challenges"]
+      "keyTopics": [
+        "sade_sati",
+        "saturn_transit",
+        "challenges"
+      ]
     },
     "58": {
       "title": "कंटक शनि (Kantak Shani)",
       "verseCount": 18,
-      "keyTopics": ["kantak_shani", "saturn_quarter", "obstacles"]
+      "keyTopics": [
+        "kantak_shani",
+        "saturn_quarter",
+        "obstacles"
+      ]
     },
     "59": {
       "title": "मंगल दोष (Mangal Dosha)",
       "verseCount": 25,
-      "keyTopics": ["mangal_dosha", "mars_affliction", "marriage_issues"]
+      "keyTopics": [
+        "mangal_dosha",
+        "mars_affliction",
+        "marriage_issues"
+      ]
     },
     "60": {
       "title": "काल सर्प दोष (Kaal Sarp Dosha)",
       "verseCount": 20,
-      "keyTopics": ["kaal_sarp_dosha", "serpent_affliction", "karmic_bondage"]
+      "keyTopics": [
+        "kaal_sarp_dosha",
+        "serpent_affliction",
+        "karmic_bondage"
+      ]
     },
     "61": {
       "title": "पितृ दोष (Pitru Dosha)",
       "verseCount": 15,
-      "keyTopics": ["pitru_dosha", "ancestral_affliction", "family_issues"]
+      "keyTopics": [
+        "pitru_dosha",
+        "ancestral_affliction",
+        "family_issues"
+      ]
     },
     "62": {
       "title": "ग्रह युति (Planetary Conjunctions)",
       "verseCount": 35,
-      "keyTopics": ["conjunctions", "planetary_combinations", "combined_effects"]
+      "keyTopics": [
+        "conjunctions",
+        "planetary_combinations",
+        "combined_effects"
+      ]
     },
     "63": {
       "title": "ग्रह युद्ध (Planetary War)",
       "verseCount": 20,
-      "keyTopics": ["graha_yuddha", "planetary_war", "strength_conflict"]
+      "keyTopics": [
+        "graha_yuddha",
+        "planetary_war",
+        "strength_conflict"
+      ]
     },
     "64": {
       "title": "ग्रह संबंध (Planetary Relationships)",
       "verseCount": 25,
-      "keyTopics": ["planetary_relationships", "friendship", "enmity"]
+      "keyTopics": [
+        "planetary_relationships",
+        "friendship",
+        "enmity"
+      ]
     },
     "65": {
       "title": "अष्टकवर्ग (Ashtakavarga)",
       "verseCount": 55,
-      "keyTopics": ["bindu_system", "planetary_strength", "sign_strength"]
+      "keyTopics": [
+        "bindu_system",
+        "planetary_strength",
+        "sign_strength"
+      ]
     },
     "66": {
       "title": "अष्टकवर्ग फल (Ashtakavarga Results)",
       "verseCount": 40,
-      "keyTopics": ["ashtakavarga_results", "bindu_interpretation", "strength_analysis"]
+      "keyTopics": [
+        "ashtakavarga_results",
+        "bindu_interpretation",
+        "strength_analysis"
+      ]
     },
     "67": {
       "title": "सर्वाष्टक वर्ग (Sarvashtakavarga)",
       "verseCount": 30,
-      "keyTopics": ["sarvashtakavarga", "total_bindus", "overall_assessment"]
+      "keyTopics": [
+        "sarvashtakavarga",
+        "total_bindus",
+        "overall_assessment"
+      ]
     },
     "68": {
       "title": "प्रस्थार अष्टकवर्ग (Prastar Ashtakavarga)",
       "verseCount": 25,
-      "keyTopics": ["prastar_ashtakavarga", "expanded_view", "detailed_analysis"]
+      "keyTopics": [
+        "prastar_ashtakavarga",
+        "expanded_view",
+        "detailed_analysis"
+      ]
     },
     "69": {
       "title": "काकष्य अष्टकवर्ग (Kaksha Ashtakavarga)",
       "verseCount": 20,
-      "keyTopics": ["kaksha_ashtakavarga", "degree_analysis", "precision_timing"]
+      "keyTopics": [
+        "kaksha_ashtakavarga",
+        "degree_analysis",
+        "precision_timing"
+      ]
     },
     "70": {
       "title": "गोचर अष्टकवर्ग (Gochar Ashtakavarga)",
       "verseCount": 22,
-      "keyTopics": ["gochar_ashtakavarga", "transit_strength", "timing_analysis"]
+      "keyTopics": [
+        "gochar_ashtakavarga",
+        "transit_strength",
+        "timing_analysis"
+      ]
     },
     "71": {
       "title": "नक्षत्र फल (Nakshatra Results)",
       "verseCount": 65,
-      "keyTopics": ["nakshatra_characteristics", "stellar_effects", "personality_traits"]
+      "keyTopics": [
+        "nakshatra_characteristics",
+        "stellar_effects",
+        "personality_traits"
+      ]
     },
     "72": {
       "title": "नक्षत्र प्रभाव (Nakshatra Effects)",
       "verseCount": 45,
-      "keyTopics": ["nakshatra_effects", "stellar_influence", "karmic_patterns"]
+      "keyTopics": [
+        "nakshatra_effects",
+        "stellar_influence",
+        "karmic_patterns"
+      ]
     },
     "73": {
       "title": "नक्षत्र दशा (Nakshatra Dasha)",
       "verseCount": 35,
-      "keyTopics": ["nakshatra_dasha_system", "stellar_periods", "karmic_timing"]
+      "keyTopics": [
+        "nakshatra_dasha_system",
+        "stellar_periods",
+        "karmic_timing"
+      ]
     },
     "74": {
       "title": "अभुक्त नक्षत्र (Abhukta Nakshatra)",
       "verseCount": 18,
-      "keyTopics": ["abhukta_nakshatra", "unconsumed_stars", "special_effects"]
+      "keyTopics": [
+        "abhukta_nakshatra",
+        "unconsumed_stars",
+        "special_effects"
+      ]
     },
     "75": {
       "title": "गण नक्षत्र (Gana Nakshatra)",
       "verseCount": 20,
-      "keyTopics": ["gana_nakshatra", "stellar_groups", "compatibility"]
+      "keyTopics": [
+        "gana_nakshatra",
+        "stellar_groups",
+        "compatibility"
+      ]
     },
     "76": {
       "title": "कलापुरुष (Kalapurusha)",
       "verseCount": 30,
-      "keyTopics": ["kalapurusha", "cosmic_man", "zodiacal_correspondence"]
+      "keyTopics": [
+        "kalapurusha",
+        "cosmic_man",
+        "zodiacal_correspondence"
+      ]
     },
     "77": {
       "title": "कलापुरुष फल (Kalapurusha Results)",
       "verseCount": 25,
-      "keyTopics": ["kalapurusha_analysis", "cosmic_significance", "universal_patterns"]
+      "keyTopics": [
+        "kalapurusha_analysis",
+        "cosmic_significance",
+        "universal_patterns"
+      ]
     },
     "78": {
       "title": "उपग्रह (Upagraha)",
       "verseCount": 35,
-      "keyTopics": ["upagraha", "sub_planets", "shadow_bodies"]
+      "keyTopics": [
+        "upagraha",
+        "sub_planets",
+        "shadow_bodies"
+      ]
     },
     "79": {
       "title": "उपग्रह फल (Upagraha Results)",
       "verseCount": 28,
-      "keyTopics": ["upagraha_effects", "sub_planetary_influence", "subtle_forces"]
+      "keyTopics": [
+        "upagraha_effects",
+        "sub_planetary_influence",
+        "subtle_forces"
+      ]
     },
     "80": {
       "title": "धूम धूम (Dhuma Dhuma)",
       "verseCount": 15,
-      "keyTopics": ["dhuma_dhuma", "shadow_points", "karmic_indicators"]
+      "keyTopics": [
+        "dhuma_dhuma",
+        "shadow_points",
+        "karmic_indicators"
+      ]
     },
     "81": {
       "title": "प्रणश धूम (Pranasha Dhuma)",
       "verseCount": 12,
-      "keyTopics": ["pranasha_dhuma", "destruction_points", "transformative_forces"]
+      "keyTopics": [
+        "pranasha_dhuma",
+        "destruction_points",
+        "transformative_forces"
+      ]
     },
     "82": {
       "title": "अर्धप्रणश (Ardhapranasha)",
       "verseCount": 10,
-      "keyTopics": ["ardhapranasha", "partial_destruction", "moderate_challenges"]
+      "keyTopics": [
+        "ardhapranasha",
+        "partial_destruction",
+        "moderate_challenges"
+      ]
     },
     "83": {
       "title": "यमगण्ड (Yamaganda)",
       "verseCount": 8,
-      "keyTopics": ["yamaganda", "death_points", "inauspicious_periods"]
+      "keyTopics": [
+        "yamaganda",
+        "death_points",
+        "inauspicious_periods"
+      ]
     },
     "84": {
       "title": "गुलिक (Gulika)",
       "verseCount": 12,
-      "keyTopics": ["gulika", "saturn_son", "malefic_influence"]
+      "keyTopics": [
+        "gulika",
+        "saturn_son",
+        "malefic_influence"
+      ]
     },
     "85": {
       "title": "मंडल (Mandi)",
       "verseCount": 15,
-      "keyTopics": ["mandi", "ascending_node", "karmic_significator"]
+      "keyTopics": [
+        "mandi",
+        "ascending_node",
+        "karmic_significator"
+      ]
     },
     "86": {
       "title": "प्रश्न क्रम (Query Sequence)",
       "verseCount": 40,
-      "keyTopics": ["prashna_methodology", "horary_techniques", "query_procedures"]
+      "keyTopics": [
+        "prashna_methodology",
+        "horary_techniques",
+        "query_procedures"
+      ]
     },
     "87": {
       "title": "प्रश्न फल (Query Results)",
       "verseCount": 35,
-      "keyTopics": ["prashna_results", "horary_interpretation", "answer_techniques"]
+      "keyTopics": [
+        "prashna_results",
+        "horary_interpretation",
+        "answer_techniques"
+      ]
     },
     "88": {
       "title": "ताजिक शास्त्र (Tajika Shastra)",
       "verseCount": 30,
-      "keyTopics": ["tajika", "annual_charts", "solar_return"]
+      "keyTopics": [
+        "tajika",
+        "annual_charts",
+        "solar_return"
+      ]
     },
     "89": {
       "title": "ताजिक योग (Tajika Yogas)",
       "verseCount": 25,
-      "keyTopics": ["tajika_yogas", "annual_combinations", "yearly_predictions"]
+      "keyTopics": [
+        "tajika_yogas",
+        "annual_combinations",
+        "yearly_predictions"
+      ]
     },
     "90": {
       "title": "आरुढ (Arudha)",
       "verseCount": 35,
-      "keyTopics": ["arudha_padas", "manifested_reality", "perception"]
+      "keyTopics": [
+        "arudha_padas",
+        "manifested_reality",
+        "perception"
+      ]
     },
     "91": {
       "title": "आरुढ फल (Arudha Results)",
       "verseCount": 30,
-      "keyTopics": ["arudha_interpretation", "manifested_effects", "worldly_status"]
+      "keyTopics": [
+        "arudha_interpretation",
+        "manifested_effects",
+        "worldly_status"
+      ]
     },
     "92": {
       "title": "अर्गल (Argala)",
       "verseCount": 28,
-      "keyTopics": ["argala", "intervention", "planetary_obstruction"]
+      "keyTopics": [
+        "argala",
+        "intervention",
+        "planetary_obstruction"
+      ]
     },
     "93": {
       "title": "अर्गल फल (Argala Results)",
       "verseCount": 22,
-      "keyTopics": ["argala_effects", "intervention_results", "obstruction_analysis"]
+      "keyTopics": [
+        "argala_effects",
+        "intervention_results",
+        "obstruction_analysis"
+      ]
     },
     "94": {
       "title": "वास्तु शास्त्र (Vastu Shastra)",
       "verseCount": 25,
-      "keyTopics": ["vastu", "architecture", "spatial_arrangement"]
+      "keyTopics": [
+        "vastu",
+        "architecture",
+        "spatial_arrangement"
+      ]
     },
     "95": {
       "title": "मुहूर्त शास्त्र (Muhurta Shastra)",
       "verseCount": 45,
-      "keyTopics": ["muhurta", "auspicious_timing", "electional_astrology"]
+      "keyTopics": [
+        "muhurta",
+        "auspicious_timing",
+        "electional_astrology"
+      ]
     },
     "96": {
       "title": "मुहूर्त फल (Muhurta Results)",
       "verseCount": 35,
-      "keyTopics": ["muhurta_results", "timing_effects", "auspicious_outcomes"]
+      "keyTopics": [
+        "muhurta_results",
+        "timing_effects",
+        "auspicious_outcomes"
+      ]
     },
     "97": {
       "title": "चिकित्सा ज्योतिष (Medical Astrology)",
       "verseCount": 40,
-      "keyTopics": ["medical_astrology", "health_diagnosis", "disease_prediction"]
+      "keyTopics": [
+        "medical_astrology",
+        "health_diagnosis",
+        "disease_prediction"
+      ]
     },
     "98": {
       "title": "चिकित्सा फल (Medical Results)",
       "verseCount": 30,
-      "keyTopics": ["medical_results", "health_outcomes", "treatment_timing"]
+      "keyTopics": [
+        "medical_results",
+        "health_outcomes",
+        "treatment_timing"
+      ]
     },
     "99": {
       "title": "उपाय (Remedies)",
       "verseCount": 35,
-      "keyTopics": ["remedies", "upaya", "mitigation_techniques"]
+      "keyTopics": [
+        "remedies",
+        "upaya",
+        "mitigation_techniques"
+      ]
     },
     "100": {
       "title": "उपाय फल (Remedy Results)",
       "verseCount": 25,
-      "keyTopics": ["remedy_effectiveness", "upaya_results", "mitigation_outcomes"]
+      "keyTopics": [
+        "remedy_effectiveness",
+        "upaya_results",
+        "mitigation_outcomes"
+      ]
     },
     "101": {
       "title": "जप (Mantra Recitation)",
       "verseCount": 20,
-      "keyTopics": ["japa", "mantra_therapy", "sound_healing"]
+      "keyTopics": [
+        "japa",
+        "mantra_therapy",
+        "sound_healing"
+      ]
     },
     "102": {
       "title": "तप (Austerities)",
       "verseCount": 18,
-      "keyTopics": ["tapa", "spiritual_discipline", "purification"]
+      "keyTopics": [
+        "tapa",
+        "spiritual_discipline",
+        "purification"
+      ]
     },
     "103": {
       "title": "दान (Charity)",
       "verseCount": 15,
-      "keyTopics": ["dana", "charitable_acts", "karmic_balance"]
+      "keyTopics": [
+        "dana",
+        "charitable_acts",
+        "karmic_balance"
+      ]
     },
     "104": {
       "title": "हवन (Fire Rituals)",
       "verseCount": 12,
-      "keyTopics": ["havana", "fire_ceremony", "elemental_purification"]
+      "keyTopics": [
+        "havana",
+        "fire_ceremony",
+        "elemental_purification"
+      ]
     },
     "105": {
       "title": "पुष्कर (Gem Therapy)",
       "verseCount": 10,
-      "keyTopics": ["pushkara", "gemstone_therapy", "crystal_healing"]
+      "keyTopics": [
+        "pushkara",
+        "gemstone_therapy",
+        "crystal_healing"
+      ]
     }
   },
   "verses": [
     {
       "id": "BPHS_1_1",
-      "text": "श्रीपराशरमुनेः प्रश्नमुवाच मैत्रेयो ब्रह्मवादिनः",
-      "transliteration": "Śrīparāśaramuneḥ praśnamuvāca maitreyo brahmavādinaḥ",
+      "text": "अथैकदा मुनिश्रेष्ठं त्रिकालज्ञं पराशरम्। पप्रच्छोपेत्य मैत्रेयः प्रणिपत्य कृताञ्जलिः॥",
+      "transliteration": "Athaikadā muniśreṣṭhaṃ trikālajñaṃ parāśaram | papracchopetya maitreyaḥ praṇipatya kṛtāñjaliḥ ||",
       "translations": {
-        "en": "Maitreya, the Brahmana scholar, asked questions to Sage Parashara",
-        "hi": "ब्रह्मवादी मैत्रेय ने महर्षि पराशर से प्रश्न पूछे"
+        "en": "Once, Maitreya — bowing with folded hands — approached Parashara, best of sages and knower of past, present and future, and asked him questions.",
+        "hi": "एक बार मैत्रेय ने हाथ जोड़कर, त्रिकालज्ञ मुनिश्रेष्ठ पराशर के समीप जाकर, प्रणाम करके प्रश्न पूछे।"
       },
       "source": {
         "text": "BPHS",
@@ -570,15 +997,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Opening verse establishing the teaching tradition"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_1_2",
-      "text": "ज्योतिषशास्त्रं प्रवक्ष्यामि भूतिभविष्यजातिषु",
-      "transliteration": "Jyotiḥśāstraṃ pravakṣyāmi bhūtibhaviṣyajātiṣu",
+      "text": "भगवन् परमं पुण्यं गुह्यं वेदाङ्गमुत्तमम्। त्रिस्कन्धं ज्यौतिषं होरा गणितं संहितेति च॥",
+      "transliteration": "Bhagavan paramaṃ puṇyaṃ guhyaṃ vedāṅgam-uttamam | triskandhaṃ jyautiṣaṃ horā gaṇitaṃ saṃhiteti ca ||",
       "translations": {
-        "en": "I shall expound the science of astrology concerning past, present, and future",
-        "hi": "मैं भूतकाल, वर्तमान और भविष्य से संबंधित ज्योतिष शास्त्र का उपदेश दूंगा"
+        "en": "O Lord! Jyotisha — supremely holy, secret, and the foremost limb of the Vedas — has three branches: Hora, Ganita and Samhita.",
+        "hi": "हे भगवन्! ज्योतिष परम पुण्य, गुह्य और वेदों का उत्तम अंग है; उसके तीन स्कन्ध हैं — होरा, गणित और संहिता।"
       },
       "source": {
         "text": "BPHS",
@@ -598,15 +1026,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines the scope and purpose of astrological study"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_2_1",
-      "text": "सूर्यादयः ग्रहाः सप्त स्वर्गनरकगतिकारकाः",
-      "transliteration": "Sūryādayaḥ grahāḥ sapta svarganarakagatikārakāḥ",
+      "text": "अवताराण्यनेकानि ह्यजस्य परमात्मनः। जीवानां कर्मफलदो ग्रहरूपी जनार्दनः॥",
+      "transliteration": "Avatārāṇy-anekāni hy-ajasya paramātmanaḥ | jīvānāṃ karmaphalado graharūpī janārdanaḥ ||",
       "translations": {
-        "en": "The seven planets beginning with Sun are the causes of motion to heaven and hell",
-        "hi": "सूर्य से प्रारंभ होने वाले सात ग्रह स्वर्ग और नरक की गति के कारक हैं"
+        "en": "Many are the incarnations of the unborn Supreme Soul; as the bestower of the fruits of beings’ karma, Janardana assumes the form of the grahas (planets).",
+        "hi": "अजन्मा परमात्मा के अनेक अवतार हैं; जीवों के कर्मफल देने हेतु जनार्दन ग्रह-रूप धारण करते हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -626,15 +1055,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Fundamental definition of planets and their significance"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_2_2",
-      "text": "रविः सोमः मंगलः बुधः गुरुः शुक्रः शनैश्चरः",
-      "transliteration": "Raviḥ somaḥ maṅgalaḥ budhaḥ guruḥ śukraḥ śanaīścaraḥ",
+      "text": "रामोऽवतारः सूर्यस्य चन्द्रस्य यदुनायकः। नृसिंहो भूमिपुत्रस्य बुधः सोमसुतस्य च॥",
+      "transliteration": "Rāmo’vatāraḥ sūryasya candrasya yadunāyakaḥ | nṛsiṃho bhūmiputrasya buddhaḥ somasutasya ca ||",
       "translations": {
-        "en": "Sun, Moon, Mars, Mercury, Jupiter, Venus, and Saturn are the seven planets",
-        "hi": "सूर्य, चंद्र, मंगल, बुध, गुरु, शुक्र और शनि सात ग्रह हैं"
+        "en": "Rama is the incarnation of the Sun, Krishna (leader of the Yadus) of the Moon, Narasimha of Mars, and Buddha of Mercury.",
+        "hi": "राम सूर्य के अवतार हैं, यदुनायक कृष्ण चन्द्रमा के, नृसिंह मंगल के और बुद्ध बुध के अवतार हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -654,15 +1084,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Lists the seven main planets in Jyotish"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_1",
-      "text": "सूर्यो राज्ञां राजा पिता चात्मा तेजः प्रज्वलः",
-      "transliteration": "Sūryo rājñāṃ rājā pitrā cātmā tejaḥ prajvalaḥ",
+      "text": "मधुपिङ्गलदृक् चतुरस्रतनुः पित्तप्रकृतिः सविताऽल्पकचः॥",
+      "transliteration": "Madhupiṅgala-dṛk caturasra-tanuḥ pitta-prakṛtiḥ savitā’lpakacaḥ ||",
       "translations": {
-        "en": "Sun is the king of kings, father, soul, and blazing fire",
-        "hi": "सूर्य राजाओं का राजा, पिता, आत्मा और जलती हुई अग्नि है"
+        "en": "The Sun has honey-brown eyes, a square build, a bilious (pitta) constitution, and sparse hair.",
+        "hi": "सूर्य के नेत्र मधु के समान पिंगल वर्ण के हैं, शरीर चौकोर, प्रकृति पित्तमय तथा केश अल्प हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -673,7 +1104,9 @@
       "category": "planets",
       "subCategory": "sun_nature",
       "applicability": {
-        "conditions": ["sun_analysis"],
+        "conditions": [
+          "sun_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -682,15 +1115,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Sun's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_2",
-      "text": "चंद्रः कांताः स्निग्धः सौम्यो राजा वर्णश्चतुर्भुजः",
-      "transliteration": "Caṃdraḥ kāntāḥ snigdhaḥ saumyo rājā varṇaścaturbhujaḥ",
+      "text": "बहुवातकफः प्राज्ञश्चन्द्रो वृत्ततनुर्द्विजः। शुभदृङ् मधुवाक्यश्च चञ्चलो मदनातुरः॥",
+      "transliteration": "Bahuvāta-kaphaḥ prājñaś-candro vṛtta-tanur-dvijaḥ | śubhadṛṅ madhuvākyaś-ca cañcalo madanāturaḥ ||",
       "translations": {
-        "en": "Moon is beautiful, unctuous, gentle, king, fair-complexioned, and four-armed",
-        "hi": "चंद्र सुंदर, चिकना, मृदु, राजा, गोरा वर्ण का और चार भुजाओं वाला है"
+        "en": "The Moon is windy-phlegmatic in constitution, wise, round-bodied, with an auspicious glance, sweet of speech, fickle, and love-lorn.",
+        "hi": "चन्द्रमा वात-कफ प्रकृति के, बुद्धिमान, गोल शरीर वाले, शुभ दृष्टि व मधुर वाणी वाले, चंचल और कामातुर हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -701,7 +1135,9 @@
       "category": "planets",
       "subCategory": "moon_nature",
       "applicability": {
-        "conditions": ["moon_analysis"],
+        "conditions": [
+          "moon_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -710,7 +1146,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Moon's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_3",
@@ -729,7 +1166,9 @@
       "category": "planets",
       "subCategory": "mars_nature",
       "applicability": {
-        "conditions": ["mars_analysis"],
+        "conditions": [
+          "mars_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -738,15 +1177,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Mars's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_3_4",
-      "text": "बुधिः पात्रलोहवर्णः रूक्षः वाग्मी द्विरसः",
-      "transliteration": "Budhiḥ pātralohavarṇaḥ rūkṣaḥ vāgmī dvirasaḥ",
+      "text": "वपुःश्रेष्ठः श्लिष्टवाक् च अतिहास्यरुचिर्बुधः। पित्तवान् कफवान् चैव मारुतप्रकृतिस्तथा॥",
+      "transliteration": "Vapuḥ-śreṣṭhaḥ śliṣṭavāk ca atihāsya-rucir-budhaḥ | pittavān kaphavān caiva māruta-prakṛtis-tathā ||",
       "translations": {
-        "en": "Mercury is green like grass, rough, eloquent, and of mixed taste",
-        "hi": "बुध घास के समान हरा, रूखा, वाग्मी और मिश्रित रस वाला है"
+        "en": "Mercury has an excellent body, speaks with double meanings, is fond of humour, and combines bilious, phlegmatic and windy humours.",
+        "hi": "बुध का शरीर सुन्दर है, वाणी श्लेषयुक्त है, हास्यप्रिय हैं तथा पित्त, कफ और वात — तीनों प्रकृतियों से युक्त हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -757,7 +1197,9 @@
       "category": "planets",
       "subCategory": "mercury_nature",
       "applicability": {
-        "conditions": ["mercury_analysis"],
+        "conditions": [
+          "mercury_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -766,15 +1208,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Mercury's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_5",
-      "text": "गुरुः पीतवर्णः स्निग्धः शांतिः प्रज्ञावान् गुरुः",
-      "transliteration": "Guruḥ pītavarṇaḥ snigdhaḥ śāntiḥ prajñavān guruḥ",
+      "text": "बृहद्गात्रो गुरुश्चैव पिङ्गमूर्धजलोचनः। कफप्रकृतिको धीमान् सर्वशास्त्रविशारदः॥",
+      "transliteration": "Bṛhad-gātro guruś-caiva piṅga-mūrdhaja-locanaḥ | kapha-prakṛtiko dhīmān sarvaśāstra-viśāradaḥ ||",
       "translations": {
-        "en": "Jupiter is yellow-complexioned, unctuous, peaceful, wise, and preceptor",
-        "hi": "गुरु पीले वर्ण का, चिकना, शांत, ज्ञानी और गुरु है"
+        "en": "Jupiter has a large body, tawny hair and eyes, a phlegmatic constitution, is intelligent, and is learned in all the shastras.",
+        "hi": "गुरु का शरीर स्थूल है, केश और नेत्र पिंगल वर्ण के हैं, कफ प्रकृति के, बुद्धिमान तथा समस्त शास्त्रों में निपुण हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -785,7 +1228,9 @@
       "category": "planets",
       "subCategory": "jupiter_nature",
       "applicability": {
-        "conditions": ["jupiter_analysis"],
+        "conditions": [
+          "jupiter_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -794,15 +1239,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Jupiter's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_6",
-      "text": "शुक्रः श्वेतवर्णः स्निग्धः सौम्यः कांतः स्त्रियां रतिः",
-      "transliteration": "Śukraḥ śvetavarṇaḥ snigdhaḥ saumyaḥ kāntaḥ striyāṃ ratiḥ",
+      "text": "सुखी कान्तवपुः श्रेष्ठः सुलोचनो भृगोः सुतः। काव्यकर्ता कफाधिक्योऽनिलात्मा वक्रमूर्धजः॥",
+      "transliteration": "Sukhī kānta-vapuḥ śreṣṭhaḥ sulocano bhṛgoḥ sutaḥ | kāvyakartā kaphādhikyo’nilātmā vakra-mūrdhajaḥ ||",
       "translations": {
-        "en": "Venus is white-complexioned, unctuous, gentle, beautiful, and beloved of women",
-        "hi": "शुक्र श्वेत वर्ण का, चिकना, मृदु, सुंदर और स्त्रियों का प्रिय है"
+        "en": "Venus, son of Bhrigu, is happy, of charming and excellent body, with beautiful eyes, a composer of poetry, of phlegmatic-windy constitution, and curly-haired.",
+        "hi": "भृगुपुत्र शुक्र सुखी, मनोहर व श्रेष्ठ शरीर वाले, सुन्दर नेत्रों वाले, काव्यकर्ता, कफ-वात प्रकृति के तथा घुँघराले केश वाले हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -813,7 +1259,9 @@
       "category": "planets",
       "subCategory": "venus_nature",
       "applicability": {
-        "conditions": ["venus_analysis"],
+        "conditions": [
+          "venus_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -822,15 +1270,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Venus's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_7",
-      "text": "शनैश्चरः कृष्णवर्णः लंगली दीर्घश्च मंदगाः",
-      "transliteration": "Śanaiścaraḥ kṛṣṇavarṇaḥ laṅgalī dīrghaśca mandagāḥ",
+      "text": "कृशदीर्घतनुः शौरिः पिङ्गदृष्टिरनिलात्मकः। स्थूलदन्तोऽलसः पङ्गुः खररोमकचोऽप्ययम्॥",
+      "transliteration": "Kṛśa-dīrgha-tanuḥ śauriḥ piṅga-dṛṣṭir-anilātmakaḥ | sthūla-danto’lasaḥ paṅguḥ khara-roma-kaco’py-ayam ||",
       "translations": {
-        "en": "Saturn is black-complexioned, lame, long-bodied, and slow-moving",
-        "hi": "शनि काले वर्ण का, लंगड़ा, लंबे शरीर वाला और मंद गामी है"
+        "en": "Saturn is lean and tall of body, with tawny eyes, of windy constitution, large-toothed, indolent, lame, and with coarse hair.",
+        "hi": "शनि का शरीर कृश और लम्बा है, नेत्र पिंगल वर्ण के, वात प्रकृति के, स्थूल दाँत वाले, आलसी, पंगु तथा कठोर केश वाले हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -841,7 +1290,9 @@
       "category": "planets",
       "subCategory": "saturn_nature",
       "applicability": {
-        "conditions": ["saturn_analysis"],
+        "conditions": [
+          "saturn_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -850,7 +1301,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Defines Saturn's fundamental characteristics and rulerships"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_3_45",
@@ -869,8 +1321,13 @@
       "category": "planets",
       "subCategory": "dignity",
       "applicability": {
-        "conditions": ["planet_dignity"],
-        "exceptions": ["combustion", "debilitation_cancellation"]
+        "conditions": [
+          "planet_dignity"
+        ],
+        "exceptions": [
+          "combustion",
+          "debilitation_cancellation"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -878,7 +1335,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Implemented in dignity() function"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_4_1",
@@ -897,7 +1355,9 @@
       "category": "houses",
       "subCategory": "body_types",
       "applicability": {
-        "conditions": ["lagna_analysis"],
+        "conditions": [
+          "lagna_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -906,7 +1366,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Physical characteristics based on ascendant"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_4_23",
@@ -925,8 +1386,14 @@
       "category": "houses",
       "subCategory": "lagna_analysis",
       "applicability": {
-        "conditions": ["lagna_lord_strength", "moon_position"],
-        "exceptions": ["combust_moon", "weak_lagna_lord"]
+        "conditions": [
+          "lagna_lord_strength",
+          "moon_position"
+        ],
+        "exceptions": [
+          "combust_moon",
+          "weak_lagna_lord"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -941,7 +1408,8 @@
           "verse": 15,
           "relationship": "similar"
         }
-      ]
+      ],
+      "confidence": "low"
     },
     {
       "id": "BPHS_16_1",
@@ -960,7 +1428,9 @@
       "category": "strengths",
       "subCategory": "sthana_bala",
       "applicability": {
-        "conditions": ["house_placement"],
+        "conditions": [
+          "house_placement"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -969,7 +1439,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Positional strength calculation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_17_1",
@@ -988,7 +1459,9 @@
       "category": "strengths",
       "subCategory": "dig_bala",
       "applicability": {
-        "conditions": ["directional_positions"],
+        "conditions": [
+          "directional_positions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -997,15 +1470,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Directional strength based on house positions"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_27_1",
-      "text": "षड्बलं षट्कालानां ग्रहाणां बलमुच्यते",
-      "transliteration": "Ṣaḍbalaṃ ṣaṭkālānāṃ grahāṇāṃ balamucyate",
+      "text": "स्थानदिक्कालचेष्टाख्यं नैसर्गिकबलं तथा। दृग्बलं च ग्रहाणां स्यात् षड्विधं बलमुच्यते॥",
+      "transliteration": "Sthāna-dik-kāla-ceṣṭākhyaṃ naisargika-balaṃ tathā | dṛg-balaṃ ca grahāṇāṃ syāt ṣaḍvidhaṃ balam-ucyate ||",
       "translations": {
-        "en": "Shadbala is the six-fold strength of planets",
-        "hi": "षड्बल ग्रहों की छह गुना बल है"
+        "en": "Positional (sthana), directional (dik), temporal (kala), motional (cheshta), natural (naisargika) and aspectual (drik) — thus the strength of planets is said to be six-fold.",
+        "hi": "स्थान, दिक्, काल, चेष्टा, नैसर्गिक तथा दृक् — इस प्रकार ग्रहों का बल छह प्रकार का कहा गया है।"
       },
       "source": {
         "text": "BPHS",
@@ -1025,15 +1499,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Full 6-strength implementation: Sthanbala, Digbala, Kalabala, Cheshtabala, Naisargikabala, Drikbala"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_31_1",
-      "text": "केन्द्रे त्रिकोणे चैव राजयोगः प्रदीयते",
-      "transliteration": "Kendre trikoṇe caiva rājayogaḥ pradīyate",
+      "text": "केन्द्रत्रिकोणनेतारौ दोषयुक्तावपि स्वयम्। सम्बन्धमात्राद्बलिनौ भवेतां योगकारकौ॥",
+      "transliteration": "Kendra-trikoṇa-netārau doṣayuktāv-api svayam | sambandha-mātrād balinau bhavetāṃ yogakārakau ||",
       "translations": {
-        "en": "Raja Yoga is formed by planets in kendras and trines",
-        "hi": "केंद्र और त्रिकोण में ग्रहों से राजयोग बनता है"
+        "en": "Even if the lords of a kendra and a trikona are themselves blemished, by their mutual connection alone they become powerful yoga-karakas (givers of Raja Yoga).",
+        "hi": "केन्द्र और त्रिकोण के स्वामी स्वयं दोषयुक्त हों तो भी परस्पर सम्बन्ध मात्र से बलवान होकर योगकारक (राजयोगकारक) बन जाते हैं।"
       },
       "source": {
         "text": "BPHS",
@@ -1044,8 +1519,13 @@
       "category": "yogas",
       "subCategory": "raja_yoga",
       "applicability": {
-        "conditions": ["kendras_trikonas_planets"],
-        "exceptions": ["planets_debilitated", "planets_combust"]
+        "conditions": [
+          "kendras_trikonas_planets"
+        ],
+        "exceptions": [
+          "planets_debilitated",
+          "planets_combust"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1060,7 +1540,8 @@
           "verse": 15,
           "relationship": "similar"
         }
-      ]
+      ],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_32_1",
@@ -1079,8 +1560,12 @@
       "category": "yogas",
       "subCategory": "dhana_yoga",
       "applicability": {
-        "conditions": ["second_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "second_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1088,15 +1573,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Wealth combination detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_46_1",
-      "text": "विम्शोत्तरी दशा चन्द्रनक्षत्राणां ध्रुवा",
-      "transliteration": "Viṃśottarī daśa candranakṣatrāṇāṃ dhruvā",
+      "text": "विंशोत्तरशतं पूर्णमायुः पूर्वमुदाहृतम्। कलौ तस्माद् दशा मान्या विंशोत्तरी बुधैः स्मृता॥",
+      "transliteration": "Viṃśottara-śataṃ pūrṇam-āyuḥ pūrvam-udāhṛtam | kalau tasmād daśā mānyā viṃśottarī budhaiḥ smṛtā ||",
       "translations": {
-        "en": "Vimshottari Dasha is based on Moon's nakshatras",
-        "hi": "विम्शोत्तरी दशा चंद्र नक्षत्रों पर आधारित है"
+        "en": "The full span of life was declared of old to be one hundred and twenty years; hence in the Kali age the wise honour the Vimshottari dasha (totalling 120 years).",
+        "hi": "पूर्ण आयु पूर्वकाल में एक सौ बीस वर्ष कही गई है; अतः कलियुग में विद्वानों ने विंशोत्तरी दशा (कुल 120 वर्ष) को मान्य किया है।"
       },
       "source": {
         "text": "BPHS",
@@ -1116,7 +1602,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Full 5-level implementation: Mahadasha to Prana Dasha"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "medium"
     },
     {
       "id": "BPHS_65_1",
@@ -1135,7 +1622,9 @@
       "category": "ashtakavarga",
       "subCategory": "bindu_strength",
       "applicability": {
-        "conditions": ["ashtakavarga_bindu"],
+        "conditions": [
+          "ashtakavarga_bindu"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1144,15 +1633,16 @@
         "lastUpdated": "2026-07-12",
         "notes": "Implemented in Ashtakavarga system"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_71_1",
-      "text": "अश्विन्यादयः नक्षत्राणि एकविंशतिः स्मृताः",
-      "transliteration": "Aśvinyādayaḥ nakṣatrāṇi ekaviṃśatiḥ smṛtāḥ",
+      "text": "अश्विन्यादीनि ऋक्षाणि सप्तविंशतिसंख्यया। नक्षत्रपुरुषे ज्ञेयं फलं तेषां पृथक् पृथक्॥",
+      "transliteration": "Aśvinyādīni ṛkṣāṇi saptaviṃśati-saṃkhyayā | nakṣatra-puruṣe jñeyaṃ phalaṃ teṣāṃ pṛthak pṛthak ||",
       "translations": {
-        "en": "The nakshatras beginning with Ashwini are twenty-one in number",
-        "hi": "अश्विनी से प्रारंभ होने वाले नक्षत्र इक्कीस हैं"
+        "en": "The nakshatras beginning with Ashwini are twenty-seven in number; their results should be known severally in the Nakshatra-Purusha.",
+        "hi": "अश्विनी आदि नक्षत्र सत्ताईस संख्या में हैं; नक्षत्र-पुरुष में उनके फल पृथक्-पृथक् जानने चाहिए।"
       },
       "source": {
         "text": "BPHS",
@@ -1163,7 +1653,9 @@
       "category": "nakshatra",
       "subCategory": "enumeration",
       "applicability": {
-        "conditions": ["nakshatra_analysis"],
+        "conditions": [
+          "nakshatra_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1172,7 +1664,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Nakshatra enumeration and characteristics"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_95_1",
@@ -1191,7 +1684,9 @@
       "category": "muhurta",
       "subCategory": "business_timing",
       "applicability": {
-        "conditions": ["auspicious_timing"],
+        "conditions": [
+          "auspicious_timing"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1200,7 +1695,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Muhurta timing for business success"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_99_1",
@@ -1219,7 +1715,9 @@
       "category": "remedies",
       "subCategory": "definition",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
+        "conditions": [
+          "planetary_afflictions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1228,7 +1726,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Remedial measures for planetary problems"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_33_1",
@@ -1247,8 +1746,12 @@
       "category": "yogas",
       "subCategory": "putra_yoga",
       "applicability": {
-        "conditions": ["fifth_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "fifth_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1256,7 +1759,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Progeny combination detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_34_1",
@@ -1275,8 +1779,12 @@
       "category": "yogas",
       "subCategory": "vivaha_yoga",
       "applicability": {
-        "conditions": ["seventh_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "seventh_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1284,7 +1792,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Marriage combination detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_35_1",
@@ -1303,8 +1812,12 @@
       "category": "yogas",
       "subCategory": "vyapara_yoga",
       "applicability": {
-        "conditions": ["tenth_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "tenth_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1312,7 +1825,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Business combination detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_36_1",
@@ -1331,8 +1845,12 @@
       "category": "yogas",
       "subCategory": "arogya_yoga",
       "applicability": {
-        "conditions": ["first_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "first_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1340,7 +1858,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Health combination detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_37_1",
@@ -1359,7 +1878,9 @@
       "category": "yogas",
       "subCategory": "graha_yuddha",
       "applicability": {
-        "conditions": ["planetary_war"],
+        "conditions": [
+          "planetary_war"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1368,7 +1889,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary war detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_38_1",
@@ -1387,8 +1909,12 @@
       "category": "yogas",
       "subCategory": "labha_yoga",
       "applicability": {
-        "conditions": ["eleventh_house_benefics"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "eleventh_house_benefics"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1396,7 +1922,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Gain combination detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_39_1",
@@ -1415,7 +1942,9 @@
       "category": "yogas",
       "subCategory": "vipareeta_yoga",
       "applicability": {
-        "conditions": ["opposite_signs"],
+        "conditions": [
+          "opposite_signs"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1424,7 +1953,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Opposition yoga detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_40_1",
@@ -1443,8 +1973,12 @@
       "category": "yogas",
       "subCategory": "trikona_yoga",
       "applicability": {
-        "conditions": ["trine_conjunction"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "trine_conjunction"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1452,7 +1986,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Trine yoga detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_41_1",
@@ -1471,8 +2006,12 @@
       "category": "yogas",
       "subCategory": "kendara_yoga",
       "applicability": {
-        "conditions": ["kendra_conjunction"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "kendra_conjunction"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1480,7 +2019,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Kendra yoga detection"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_42_1",
@@ -1499,8 +2039,12 @@
       "category": "yogas",
       "subCategory": "dhana_bhava",
       "applicability": {
-        "conditions": ["second_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "second_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1508,7 +2052,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Second house wealth combinations"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_43_1",
@@ -1527,8 +2072,12 @@
       "category": "yogas",
       "subCategory": "sukha_bhava",
       "applicability": {
-        "conditions": ["fourth_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "fourth_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1536,7 +2085,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Fourth house happiness combinations"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_44_1",
@@ -1555,8 +2105,12 @@
       "category": "yogas",
       "subCategory": "putra_bhava",
       "applicability": {
-        "conditions": ["fifth_house_planets"],
-        "exceptions": ["planets_afflicted"]
+        "conditions": [
+          "fifth_house_planets"
+        ],
+        "exceptions": [
+          "planets_afflicted"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -1564,7 +2118,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Fifth house progeny combinations"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_45_1",
@@ -1583,7 +2138,9 @@
       "category": "yogas",
       "subCategory": "shashtha_bhava",
       "applicability": {
-        "conditions": ["sixth_house_planets"],
+        "conditions": [
+          "sixth_house_planets"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1592,7 +2149,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Sixth house affliction combinations"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_47_1",
@@ -1620,7 +2178,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Yogini Dasha system implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_48_1",
@@ -1648,7 +2207,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Ashtottari Dasha system implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_49_1",
@@ -1676,7 +2236,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Chaturdashi Dasha system implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_50_1",
@@ -1704,7 +2265,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Dwadashottari Dasha system implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_51_1",
@@ -1723,7 +2285,9 @@
       "category": "divisional",
       "subCategory": "navamsa",
       "applicability": {
-        "conditions": ["navamsa_analysis"],
+        "conditions": [
+          "navamsa_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1732,7 +2296,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Navamsa chart analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_52_1",
@@ -1751,7 +2316,9 @@
       "category": "divisional",
       "subCategory": "dasamsa",
       "applicability": {
-        "conditions": ["dasamsa_analysis"],
+        "conditions": [
+          "dasamsa_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1760,7 +2327,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Dasamsa chart analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_53_1",
@@ -1779,7 +2347,9 @@
       "category": "divisional",
       "subCategory": "dwadashamsa",
       "applicability": {
-        "conditions": ["dwadashamsa_analysis"],
+        "conditions": [
+          "dwadashamsa_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1788,7 +2358,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Dwadashamsa chart analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_54_1",
@@ -1807,7 +2378,9 @@
       "category": "divisional",
       "subCategory": "trimshamsa",
       "applicability": {
-        "conditions": ["trimshamsa_analysis"],
+        "conditions": [
+          "trimshamsa_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1816,7 +2389,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Trimshamsa chart analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_55_1",
@@ -1835,7 +2409,9 @@
       "category": "houses",
       "subCategory": "house_strength",
       "applicability": {
-        "conditions": ["house_analysis"],
+        "conditions": [
+          "house_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1844,7 +2420,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "House strength calculation implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_56_1",
@@ -1863,7 +2440,9 @@
       "category": "houses",
       "subCategory": "house_results",
       "applicability": {
-        "conditions": ["house_analysis"],
+        "conditions": [
+          "house_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1872,7 +2451,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "House results analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_57_1",
@@ -1891,7 +2471,9 @@
       "category": "planets",
       "subCategory": "conjunctions",
       "applicability": {
-        "conditions": ["planetary_conjunction"],
+        "conditions": [
+          "planetary_conjunction"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1900,7 +2482,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary conjunction analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_58_1",
@@ -1919,7 +2502,9 @@
       "category": "planets",
       "subCategory": "aspects",
       "applicability": {
-        "conditions": ["planetary_aspects"],
+        "conditions": [
+          "planetary_aspects"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1928,7 +2513,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary aspect analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_59_1",
@@ -1947,7 +2533,9 @@
       "category": "planets",
       "subCategory": "retrogression",
       "applicability": {
-        "conditions": ["planetary_retrogression"],
+        "conditions": [
+          "planetary_retrogression"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1956,7 +2544,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary retrogression analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_60_1",
@@ -1975,7 +2564,9 @@
       "category": "planets",
       "subCategory": "planetary_order",
       "applicability": {
-        "conditions": ["planetary_order"],
+        "conditions": [
+          "planetary_order"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -1984,7 +2575,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary order analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_61_1",
@@ -2003,7 +2595,9 @@
       "category": "planets",
       "subCategory": "friendships",
       "applicability": {
-        "conditions": ["planetary_friendships"],
+        "conditions": [
+          "planetary_friendships"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2012,7 +2606,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary friendship analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_62_1",
@@ -2031,7 +2626,9 @@
       "category": "planets",
       "subCategory": "enmities",
       "applicability": {
-        "conditions": ["planetary_enmities"],
+        "conditions": [
+          "planetary_enmities"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2040,7 +2637,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary enmity analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_63_1",
@@ -2059,7 +2657,9 @@
       "category": "planets",
       "subCategory": "debilitation",
       "applicability": {
-        "conditions": ["planetary_debilitation"],
+        "conditions": [
+          "planetary_debilitation"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2068,7 +2668,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary debilitation analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_64_1",
@@ -2087,7 +2688,9 @@
       "category": "planets",
       "subCategory": "exaltation",
       "applicability": {
-        "conditions": ["planetary_exaltation"],
+        "conditions": [
+          "planetary_exaltation"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2096,7 +2699,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Planetary exaltation analysis implementation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_66_1",
@@ -2115,7 +2719,9 @@
       "category": "ashtakavarga",
       "subCategory": "bindu_interpretation",
       "applicability": {
-        "conditions": ["ashtakavarga_analysis"],
+        "conditions": [
+          "ashtakavarga_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2124,7 +2730,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Ashtakavarga result interpretation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_67_1",
@@ -2143,7 +2750,9 @@
       "category": "ashtakavarga",
       "subCategory": "sarvashtakavarga",
       "applicability": {
-        "conditions": ["sarvashtakavarga_analysis"],
+        "conditions": [
+          "sarvashtakavarga_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2152,7 +2761,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Sarvashtakavarga total bindu calculation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_68_1",
@@ -2171,7 +2781,9 @@
       "category": "ashtakavarga",
       "subCategory": "prastar",
       "applicability": {
-        "conditions": ["prastar_analysis"],
+        "conditions": [
+          "prastar_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2180,7 +2792,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Prastara detailed bindu arrangement"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_69_1",
@@ -2199,7 +2812,9 @@
       "category": "ashtakavarga",
       "subCategory": "kaksha",
       "applicability": {
-        "conditions": ["kaksha_analysis"],
+        "conditions": [
+          "kaksha_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2208,7 +2823,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Kaksha degree-level bindu analysis"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_70_1",
@@ -2227,7 +2843,9 @@
       "category": "ashtakavarga",
       "subCategory": "gochar",
       "applicability": {
-        "conditions": ["transit_analysis"],
+        "conditions": [
+          "transit_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2236,7 +2854,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Transit strength via Ashtakavarga"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_72_1",
@@ -2255,7 +2874,9 @@
       "category": "nakshatra",
       "subCategory": "nakshatra_effects",
       "applicability": {
-        "conditions": ["nakshatra_analysis"],
+        "conditions": [
+          "nakshatra_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2264,7 +2885,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Nakshatra lord combination effects"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_73_1",
@@ -2292,7 +2914,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Nakshatra-based dasha calculation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_74_1",
@@ -2311,7 +2934,9 @@
       "category": "nakshatra",
       "subCategory": "abhukta_nakshatra",
       "applicability": {
-        "conditions": ["abhukta_analysis"],
+        "conditions": [
+          "abhukta_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2320,7 +2945,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Abhukta nakshatra special effects"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_75_1",
@@ -2339,7 +2965,9 @@
       "category": "nakshatra",
       "subCategory": "gana",
       "applicability": {
-        "conditions": ["gana_analysis"],
+        "conditions": [
+          "gana_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2348,7 +2976,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Gana classification for compatibility"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_76_1",
@@ -2376,7 +3005,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Cosmic man to zodiac correspondence"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_77_1",
@@ -2395,7 +3025,9 @@
       "category": "fundamentals",
       "subCategory": "kalapurusha_results",
       "applicability": {
-        "conditions": ["kalapurusha_analysis"],
+        "conditions": [
+          "kalapurusha_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2404,7 +3036,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Body-part disease correlation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_78_1",
@@ -2423,7 +3056,9 @@
       "category": "upagraha",
       "subCategory": "definition",
       "applicability": {
-        "conditions": ["upagraha_analysis"],
+        "conditions": [
+          "upagraha_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2432,7 +3067,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Upagraha (sub-planet) definitions"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_79_1",
@@ -2451,7 +3087,9 @@
       "category": "upagraha",
       "subCategory": "upagraha_results",
       "applicability": {
-        "conditions": ["upagraha_analysis"],
+        "conditions": [
+          "upagraha_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2460,7 +3098,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Upagraha placement effects"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_80_1",
@@ -2479,7 +3118,9 @@
       "category": "upagraha",
       "subCategory": "dhuma",
       "applicability": {
-        "conditions": ["dhuma_analysis"],
+        "conditions": [
+          "dhuma_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2488,7 +3129,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Dhuma shadow point (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_81_1",
@@ -2507,7 +3149,9 @@
       "category": "upagraha",
       "subCategory": "pranasha_dhuma",
       "applicability": {
-        "conditions": ["dhuma_analysis"],
+        "conditions": [
+          "dhuma_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2516,7 +3160,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Vyatipata point (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_82_1",
@@ -2544,7 +3189,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Ardhaprahara point (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_83_1",
@@ -2563,7 +3209,9 @@
       "category": "muhurta",
       "subCategory": "yamaganda",
       "applicability": {
-        "conditions": ["timing_analysis"],
+        "conditions": [
+          "timing_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2572,7 +3220,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Yamaganda inauspicious period"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_84_1",
@@ -2591,7 +3240,9 @@
       "category": "muhurta",
       "subCategory": "gulika",
       "applicability": {
-        "conditions": ["timing_analysis"],
+        "conditions": [
+          "timing_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2600,7 +3251,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Gulika kaal timing"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_85_1",
@@ -2619,7 +3271,9 @@
       "category": "upagraha",
       "subCategory": "mandi",
       "applicability": {
-        "conditions": ["longevity_analysis"],
+        "conditions": [
+          "longevity_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2628,7 +3282,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Mandi position for longevity (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_86_1",
@@ -2647,7 +3302,9 @@
       "category": "prashna",
       "subCategory": "methodology",
       "applicability": {
-        "conditions": ["prashna_analysis"],
+        "conditions": [
+          "prashna_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2656,7 +3313,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Horary query methodology (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_87_1",
@@ -2675,7 +3333,9 @@
       "category": "prashna",
       "subCategory": "prashna_results",
       "applicability": {
-        "conditions": ["prashna_analysis"],
+        "conditions": [
+          "prashna_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2684,7 +3344,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Horary result interpretation (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_88_1",
@@ -2703,7 +3364,9 @@
       "category": "tajika",
       "subCategory": "annual_chart",
       "applicability": {
-        "conditions": ["varshaphala_analysis"],
+        "conditions": [
+          "varshaphala_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2712,7 +3375,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Annual solar return chart (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_89_1",
@@ -2731,7 +3395,9 @@
       "category": "tajika",
       "subCategory": "tajika_yogas",
       "applicability": {
-        "conditions": ["varshaphala_analysis"],
+        "conditions": [
+          "varshaphala_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2740,7 +3406,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Tajika annual yogas (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_90_1",
@@ -2759,7 +3426,9 @@
       "category": "arudha",
       "subCategory": "calculation",
       "applicability": {
-        "conditions": ["arudha_analysis"],
+        "conditions": [
+          "arudha_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2768,7 +3437,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Arudha pada calculation"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_91_1",
@@ -2787,7 +3457,9 @@
       "category": "arudha",
       "subCategory": "arudha_results",
       "applicability": {
-        "conditions": ["arudha_analysis"],
+        "conditions": [
+          "arudha_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2796,7 +3468,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Arudha manifested status effects"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_92_1",
@@ -2815,7 +3488,9 @@
       "category": "arudha",
       "subCategory": "argala",
       "applicability": {
-        "conditions": ["argala_analysis"],
+        "conditions": [
+          "argala_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2824,7 +3499,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Argala intervention (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_93_1",
@@ -2843,7 +3519,9 @@
       "category": "arudha",
       "subCategory": "argala_results",
       "applicability": {
-        "conditions": ["argala_analysis"],
+        "conditions": [
+          "argala_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2852,7 +3530,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Argala obstruction results (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_94_1",
@@ -2880,7 +3559,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Vastu directional principles (planned)"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_96_1",
@@ -2899,7 +3579,9 @@
       "category": "muhurta",
       "subCategory": "muhurta_results",
       "applicability": {
-        "conditions": ["timing_analysis"],
+        "conditions": [
+          "timing_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2908,7 +3590,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Muhurta result via panchanga elements"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_97_1",
@@ -2927,7 +3610,9 @@
       "category": "medical",
       "subCategory": "diagnosis",
       "applicability": {
-        "conditions": ["health_analysis"],
+        "conditions": [
+          "health_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2936,7 +3621,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Disease diagnosis via 6th house"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_98_1",
@@ -2955,7 +3641,9 @@
       "category": "medical",
       "subCategory": "medical_results",
       "applicability": {
-        "conditions": ["health_analysis"],
+        "conditions": [
+          "health_analysis"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2964,7 +3652,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Disease recovery timing via dasha"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_100_1",
@@ -2983,7 +3672,9 @@
       "category": "remedies",
       "subCategory": "remedy_results",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
+        "conditions": [
+          "planetary_afflictions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -2992,7 +3683,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Remedy effectiveness for afflictions"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_101_1",
@@ -3011,7 +3703,9 @@
       "category": "remedies",
       "subCategory": "japa",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
+        "conditions": [
+          "planetary_afflictions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -3020,7 +3714,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Mantra japa remedy"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_102_1",
@@ -3039,7 +3734,9 @@
       "category": "remedies",
       "subCategory": "tapa",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
+        "conditions": [
+          "planetary_afflictions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -3048,7 +3745,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Austerity-based remedy"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_103_1",
@@ -3067,7 +3765,9 @@
       "category": "remedies",
       "subCategory": "dana",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
+        "conditions": [
+          "planetary_afflictions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -3076,7 +3776,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Charity-based remedy"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_104_1",
@@ -3095,7 +3796,9 @@
       "category": "remedies",
       "subCategory": "havana",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
+        "conditions": [
+          "planetary_afflictions"
+        ],
         "exceptions": []
       },
       "implementation": {
@@ -3104,7 +3807,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Fire ritual remedy"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     },
     {
       "id": "BPHS_105_1",
@@ -3123,8 +3827,12 @@
       "category": "remedies",
       "subCategory": "gem_therapy",
       "applicability": {
-        "conditions": ["planetary_afflictions"],
-        "exceptions": ["contraindicated_gems"]
+        "conditions": [
+          "planetary_afflictions"
+        ],
+        "exceptions": [
+          "contraindicated_gems"
+        ]
       },
       "implementation": {
         "status": "implemented",
@@ -3132,7 +3840,8 @@
         "lastUpdated": "2026-07-12",
         "notes": "Gemstone therapy remedy"
       },
-      "crossReferences": []
+      "crossReferences": [],
+      "confidence": "low"
     }
   ]
 }
