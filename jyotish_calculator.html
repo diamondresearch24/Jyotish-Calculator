@@ -8258,9 +8258,11 @@ const MH_RAHU_SEQ=[7,1,6,4,5,3,2];   /* Sun=7th part, Mon=1st, Tue=6th, etc. (0-
 const MH_YAMA_SEQ=[4,3,2,1,0,6,5];
 const MH_GULIKA_SEQ=[6,5,4,3,2,1,0];
 function mhDailyRestrictions(jd,place){
-  if(!place)return{rahukalam:null,yamaganda:null,gulika:null,durmuhurta:null,abhijit:null};
-  const sr=sunriseJD(jd,place.lat,place.lon);
-  const ss=sunsetJD(jd,place.lat,place.lon);
+  if(!place)return{rahukalam:null,yamaganda:null,gulika:null,durmuhurta:null,abhijit:null,sunrise:null,sunset:null};
+  const tz=place.tz||5.5;
+  const sr=sunriseJD(jd,place.lat,place.lon,tz);
+  const ss=sunsetJD(jd,place.lat,place.lon,tz);
+  if(!isFinite(sr)||!isFinite(ss))return{rahukalam:null,yamaganda:null,gulika:null,durmuhurta:null,abhijit:null,sunrise:null,sunset:null};
   const dayLen=ss-sr;
   const part=dayLen/8;
   const vara=Math.floor(jd+0.5)%7;
@@ -8446,8 +8448,9 @@ function mhTimeSlots(dayJD,place,profile,ctx,intervalMin){
   return slots;
 }
 
-/* Helper: Convert JD to Date object */
-function jdToDate(jd,tz){
+/* Helper: Convert JD to JavaScript Date object (for time formatting) */
+function jdToJsDate(jd,tz){
+  tz=tz||0;
   const J=jd+0.5;
   const Z=Math.floor(J);
   const F=J-Z;
@@ -9052,8 +9055,35 @@ function gbhInputForm(){
    <p class="tag" style="margin-top:8px">🔒 Everything stays in your browser — nothing is uploaded. Steps 3 and 4 are optional: without them the score is simply computed across fewer components, never penalised.</p></div>`;}
 /* ---- small formatting helpers -------------------------------------------- */
 const GBH_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-function gbhFmt(F){const d=F.date;return String(d.d).padStart(2,'0')+' '+GBH_MON[d.m-1]+' '+d.y;}
-function gbhFmtShort(F){const d=F.date;return String(d.d).padStart(2,'0')+' '+GBH_MON[d.m-1];}
+function gbhFmt(F){
+  if(!F||!F.date)return '—';
+  const d=F.date;
+  if(d.d==null||d.m==null||d.y==null)return '—';
+  return String(d.d).padStart(2,'0')+' '+GBH_MON[d.m-1]+' '+d.y;
+}
+function gbhFmtShort(F){
+  if(!F||!F.date)return '—';
+  const d=F.date;
+  if(d.d==null||d.m==null)return '—';
+  return String(d.d).padStart(2,'0')+' '+GBH_MON[d.m-1];
+}
+/* Format JD to HH:MM time string */
+function gbhJdToTime(jd,tz){
+  if(jd==null||!isFinite(jd))return '—';
+  tz=tz||5.5;
+  /* Convert JD to local time */
+  const localJd=jd+tz/24;
+  const frac=(localJd+0.5)%1; /* fractional day from midnight */
+  const mins=Math.round(frac*24*60);
+  const h=Math.floor(mins/60)%24,m=mins%60;
+  if(!isFinite(h)||!isFinite(m))return '—';
+  return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+}
+/* Format time interval from two JDs */
+function gbhTimeInterval(start,end,tz){
+  if(start==null||end==null||!isFinite(start)||!isFinite(end))return '—';
+  return gbhJdToTime(start,tz)+' – '+gbhJdToTime(end,tz);
+}
 function gbhTithiName(F){
   if(F.tithi_idx===14)return F.paksha==='shukla'?'Purnima':'Amavasya';
   return (F.paksha==='shukla'?'Shukla':'Krishna')+' '+GBH_TITHI_EN[F.tithi_idx];
@@ -9116,8 +9146,65 @@ function gbhScan(){
 /* ---- expandable per-date detail ------------------------------------------ */
 function gbhDayDetail(r,S){
   const F=r.facts;
+  const place=S.place;
+  const tz=place.tz||5.5;
   const scored=r.factors.filter(f=>f.kind==='scored');
   const infos=r.factors.filter(f=>f.kind==='informational');
+  
+  /* P3: Compute actual time restrictions with intervals */
+  const TR=mhDailyRestrictions(r.jd,place);
+  const trRows=TR?[
+    {name:'Sunrise',interval:gbhJdToTime(TR.sunrise,tz),status:'info',icon:'🌅'},
+    {name:'Sunset',interval:gbhJdToTime(TR.sunset,tz),status:'info',icon:'🌇'},
+    {name:'Rahu Kalam',interval:gbhTimeInterval(TR.rahukalam.start,TR.rahukalam.end,tz),
+      status:'avoid',reason:'Inauspicious for all new beginnings',source:'Muhurta Chintamani'},
+    {name:'Yamaganda',interval:gbhTimeInterval(TR.yamaganda.start,TR.yamaganda.end,tz),
+      status:'avoid',reason:'Death-bringing period, avoid important works',source:'Muhurta Chintamani'},
+    {name:'Gulika Kalam',interval:gbhTimeInterval(TR.gulika.start,TR.gulika.end,tz),
+      status:'caution',reason:'Son of Saturn, generally inauspicious',source:'Muhurta Chintamani'},
+    {name:'Abhijit Muhurta',interval:gbhTimeInterval(TR.abhijit.start,TR.abhijit.end,tz)+(TR.abhijit.excludeWednesday?' <span class="tag">not on Wed</span>':''),
+      status:'excellent',reason:'Victory muhurta, highly auspicious',source:'Muhurta Chintamani'},
+    {name:'Durmuhurta 1',interval:gbhTimeInterval(TR.durmuhurta[0].start,TR.durmuhurta[0].end,tz),
+      status:'avoid',reason:'Inauspicious muhurta of the day',source:'Dharma Sindhu'},
+    {name:'Durmuhurta 2',interval:gbhTimeInterval(TR.durmuhurta[1].start,TR.durmuhurta[1].end,tz),
+      status:'avoid',reason:'Second inauspicious muhurta',source:'Dharma Sindhu'}
+  ]:[];
+  
+  /* P4: Daily Time Selection Windows - comprehensive time slot analysis */
+  const timeWindows=[];
+  if(TR&&!r.vetoed){
+    /* Generate 2-hour time slots from 6 PM to 6 AM (night time for Garbhadhana) */
+    const nightStart=TR.sunset;
+    const nightEnd=TR.sunrise+1; /* next day sunrise */
+    const slotDuration=2/24; /* 2 hours in JD */
+    for(let t=nightStart;t<nightEnd;t+=slotDuration){
+      const slotEnd=Math.min(t+slotDuration,nightEnd);
+      const conflicts=[];
+      const benefits=[];
+      /* Check against Rahu Kalam */
+      if(t<TR.rahukalam.end&&slotEnd>TR.rahukalam.start)
+        conflicts.push({name:'Rahu Kalam',severity:'high',reason:'Overlaps inauspicious Rahu period'});
+      /* Check against Yamaganda */
+      if(t<TR.yamaganda.end&&slotEnd>TR.yamaganda.start)
+        conflicts.push({name:'Yamaganda',severity:'high',reason:'Overlaps death-bringing period'});
+      /* Check against Gulika */
+      if(t<TR.gulika.end&&slotEnd>TR.gulika.start)
+        conflicts.push({name:'Gulika Kalam',severity:'medium',reason:'Overlaps Saturn\'s son period'});
+      /* Check for Abhijit (usually midday, but check anyway) */
+      if(t<TR.abhijit.end&&slotEnd>TR.abhijit.start&&!TR.abhijit.excludeWednesday)
+        benefits.push({name:'Abhijit Muhurta',quality:'excellent',reason:'Victory muhurta active'});
+      /* Determine overall slot quality */
+      let quality='good',verdict='Recommended';
+      if(conflicts.filter(c=>c.severity==='high').length>0){quality='avoid';verdict='Avoid - '+conflicts[0].reason;}
+      else if(conflicts.length>0){quality='caution';verdict='Caution - '+conflicts[0].reason;}
+      else if(benefits.length>0){quality='excellent';verdict='Excellent - '+benefits[0].reason;}
+      timeWindows.push({
+        start:t,end:slotEnd,
+        interval:gbhTimeInterval(t,slotEnd,tz),
+        quality,verdict,conflicts,benefits
+      });
+    }
+  }
   
   /* P2.7: Stage-based scoring display */
   const stageNames={biological:'🧬 Biological',prohibitions:'⛔ Prohibitions',panchanga:'📅 Panchanga',
@@ -9134,39 +9221,112 @@ function gbhDayDetail(r,S){
       <tr style="background:var(--panel)"><td colspan="3"><b>Stage Total</b></td><td style="text-align:right"><b style="font-size:14px">${r.stageTotal!==null?r.stageTotal.toFixed(1):'—'}</b></td><td></td></tr>
     </table>`:''
   
-  /* P2.7: Time restrictions display */
-  const trHtml=(r.timeRestrictions)?`<div class="lhd" style="margin-top:12px">🕐 Daily Time Restrictions</div>
+  /* P3: Enhanced Time restrictions display with actual intervals */
+  const trHtml=TR?`<div class="lhd" style="margin-top:12px">🕐 Daily Time Restrictions</div>
     <table class="dt" style="margin-top:8px">
-      <tr><td>Rahu Kalam</td><td>${r.timeRestrictions.rahukalam||'—'}</td><td>${F.in_rahukalam?'<span style="color:var(--bad)">⛔ Active now</span>':'✅ Clear'}</td></tr>
-      <tr><td>Yamaganda</td><td>${r.timeRestrictions.yamaganda||'—'}</td><td>${F.in_yamaganda?'<span style="color:var(--bad)">⛔ Active now</span>':'✅ Clear'}</td></tr>
-      <tr><td>Gulika Kalam</td><td>${r.timeRestrictions.gulika||'—'}</td><td>${F.in_gulika?'<span style="color:var(--gold-soft)">⚠️ Active now</span>':'✅ Clear'}</td></tr>
-      <tr><td>Abhijit Muhurta</td><td>${r.timeRestrictions.abhijit||'—'}</td><td>${F.in_abhijit?'<span style="color:var(--good)">🌟 Active now</span>':'—'}</td></tr>
-    </table>`:''
+      <tr><th>Restriction</th><th>Time Interval</th><th>Status</th><th>Classical Reason</th></tr>
+      ${trRows.map(t=>`<tr>
+        <td><b>${t.icon||''} ${t.name}</b></td>
+        <td style="font-family:var(--dev)">${t.interval}</td>
+        <td>${t.status==='avoid'?'<span style="color:var(--bad)">⛔ Avoid</span>':
+             t.status==='caution'?'<span style="color:var(--gold-soft)">⚠️ Caution</span>':
+             t.status==='excellent'?'<span style="color:var(--good)">✅ Auspicious</span>':
+             '<span style="color:var(--muted)">—</span>'}</td>
+        <td style="font-size:12px">${t.reason||''} ${t.source?'<br><span class="tag">'+t.source+'</span>':''}</td>
+      </tr>`).join('')}
+    </table>
+    <p class="tag" style="margin-top:6px">Times are for ${gbhEsc(place.name)} (UTC${tz>=0?'+':''}${tz}). Avoid Rahu Kalam, Yamaganda, Durmuhurta for conception. Abhijit is excellent if available.</p>`:''
   
-  /* P2.7: Moon afflictions display */
-  const moonHtml=(r.moonAfflictions)?`<div class="lhd" style="margin-top:12px">🌙 Moon Afflictions Analysis</div>
+  /* P3: Enhanced Moon Analysis with comprehensive evaluation */
+  const moonSign=F.moon_sign;
+  const moonDignity=F.moon_dignity||'neutral';
+  const paksha=F.paksha;
+  const moonStrengthFactors=[];
+  /* Dignity analysis */
+  if(moonDignity==='exalted')moonStrengthFactors.push({factor:'Exalted Moon',status:'excellent',reason:'Moon in Taurus (Vrishabha) — highly auspicious',source:'BPHS'});
+  else if(moonDignity==='own')moonStrengthFactors.push({factor:'Own Sign',status:'good',reason:'Moon in Cancer (Karka) — strong placement',source:'BPHS'});
+  else if(moonDignity==='debilitated')moonStrengthFactors.push({factor:'Debilitated Moon',status:'avoid',reason:'Moon in Scorpio (Vrishchika) — weakened',source:'BPHS'});
+  else if(moonDignity==='friend')moonStrengthFactors.push({factor:'Friendly Sign',status:'good',reason:'Moon in friendly sign — supportive',source:'BPHS'});
+  else if(moonDignity==='enemy')moonStrengthFactors.push({factor:'Enemy Sign',status:'caution',reason:'Moon in inimical sign — strained',source:'BPHS'});
+  /* Paksha Bala */
+  if(paksha==='shukla')moonStrengthFactors.push({factor:'Shukla Paksha',status:'good',reason:'Waxing Moon — increasing strength',source:'Muhurta Chintamani'});
+  else moonStrengthFactors.push({factor:'Krishna Paksha',status:'caution',reason:'Waning Moon — decreasing strength',source:'Muhurta Chintamani'});
+  /* Afflictions */
+  if(r.moonAfflictions){
+    if(r.moonAfflictions.combust)moonStrengthFactors.push({factor:'Combustion',status:'avoid',reason:'Moon within 12° of Sun — weakened by solar rays',source:'Muhurta Chintamani'});
+    if(r.moonAfflictions.rahuConjunct)moonStrengthFactors.push({factor:'Rahu Conjunction',status:'avoid',reason:'Moon with Rahu — eclipse energy, mental disturbance',source:'Muhurta Chintamani'});
+    if(r.moonAfflictions.ketuConjunct)moonStrengthFactors.push({factor:'Ketu Conjunction',status:'avoid',reason:'Moon with Ketu — detachment, spiritual but not material',source:'Muhurta Chintamani'});
+    if(r.moonAfflictions.saturnConjunct)moonStrengthFactors.push({factor:'Saturn Conjunction',status:'caution',reason:'Moon with Saturn — emotional heaviness, delay',source:'Muhurta Chintamani'});
+    if(r.moonAfflictions.marsConjunct)moonStrengthFactors.push({factor:'Mars Conjunction',status:'caution',reason:'Moon with Mars — emotional intensity, impulsiveness',source:'Muhurta Chintamani'});
+    if(r.moonAfflictions.jupiterAspect)moonStrengthFactors.push({factor:'Jupiter Aspect',status:'excellent',reason:'Jupiter blesses Moon — wisdom, protection, auspiciousness',source:'Muhurta Chintamani'});
+    if(r.moonAfflictions.papakartari)moonStrengthFactors.push({factor:'Papakartari Yoga',status:'avoid',reason:'Moon hemmed by malefics — constricted energy',source:'BPHS'});
+  }
+  const moonHtml=`<div class="lhd" style="margin-top:12px">🌙 Moon Analysis (Chandra Shuddhi)</div>
     <table class="dt" style="margin-top:8px">
-      <tr><td>Moon Dignity</td><td><b>${r.moonAfflictions.dignity||'neutral'}</b></td></tr>
-      ${r.moonAfflictions.combust?'<tr><td>Combust</td><td style="color:var(--bad)">⛔ Moon is combust (within 12° of Sun)</td></tr>':''}
-      ${r.moonAfflictions.rahuConjunct?'<tr><td>Rahu Conjunction</td><td style="color:var(--bad)">⛔ Moon conjunct Rahu</td></tr>':''}
-      ${r.moonAfflictions.ketuConjunct?'<tr><td>Ketu Conjunction</td><td style="color:var(--bad)">⛔ Moon conjunct Ketu</td></tr>':''}
-      ${r.moonAfflictions.saturnConjunct?'<tr><td>Saturn Conjunction</td><td style="color:var(--gold-soft)">⚠️ Moon conjunct Saturn</td></tr>':''}
-      ${r.moonAfflictions.marsConjunct?'<tr><td>Mars Conjunction</td><td style="color:var(--gold-soft)">⚠️ Moon conjunct Mars</td></tr>':''}
-      ${r.moonAfflictions.jupiterAspect?'<tr><td>Jupiter Aspect</td><td style="color:var(--good)">✅ Moon receives Jupiter aspect</td></tr>':''}
-      ${r.moonAfflictions.papakartari?'<tr><td>Papakartari</td><td style="color:var(--bad)">⛔ Moon hemmed by malefics</td></tr>':''}
-    </table>`:''
+      <tr><th>Factor</th><th>Status</th><th>Classical Reason</th><th>Source</th></tr>
+      <tr><td><b>Moon Sign</b></td><td>${GBH_SIGN_EN[moonSign]||'—'}</td><td>Current lunar position</td><td>—</td></tr>
+      <tr><td><b>Moon Nakshatra</b></td><td>${GBH_NAK_EN[F.nakshatra]||'—'}</td><td>Lunar mansion</td><td>—</td></tr>
+      <tr><td><b>Sun-Moon Elongation</b></td><td>${Math.round(F.sun_moon_elong)}°</td><td>Tithi determination</td><td>—</td></tr>
+      ${moonStrengthFactors.map(m=>`<tr>
+        <td><b>${m.factor}</b></td>
+        <td>${m.status==='excellent'?'<span style="color:var(--good)">✅ Excellent</span>':
+             m.status==='good'?'<span style="color:var(--good)">🟢 Good</span>':
+             m.status==='caution'?'<span style="color:var(--gold-soft)">⚠️ Caution</span>':
+             '<span style="color:var(--bad)">⛔ Avoid</span>'}</td>
+        <td>${m.reason}</td>
+        <td><span class="tag">${m.source}</span></td>
+      </tr>`).join('')}
+    </table>
+    <p class="tag" style="margin-top:6px">Moon strength is critical for Garbhadhana. Strong, unafflicted Moon in waxing phase ensures emotional stability and nourishment for conception.</p>`
   
-  /* P2.7: Lagna info display */
+  /* P3C: Enhanced Lagna Analysis with house/planetary details */
+  const LAGNA_LORDS=['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+  const lagnaFactors=[];
+  if(r.lagnaInfo){
+    const L=r.lagnaInfo;
+    /* Basic sign analysis */
+    lagnaFactors.push({factor:'Rising Sign',value:L.signName||GBH_SIGN_EN[L.sign]||'—',
+      status:'info',reason:'The ascendant at the moment of conception',source:'Muhurta Chintamani'});
+    /* Lagna Lord position */
+    const lordHouse=L.lordHouse||0;
+    const kendras=[1,4,7,10],trikonas=[1,5,9],dusthanas=[6,8,12];
+    if(kendras.indexOf(lordHouse)>=0)lagnaFactors.push({factor:'Lagna Lord in Kendra',value:'House '+lordHouse,
+      status:'excellent',reason:'Lagna lord in angular house (1,4,7,10) — strong foundation',source:'BPHS Ch.24'});
+    else if(trikonas.indexOf(lordHouse)>=0)lagnaFactors.push({factor:'Lagna Lord in Trikona',value:'House '+lordHouse,
+      status:'good',reason:'Lagna lord in trine (1,5,9) — dharmic support',source:'BPHS Ch.24'});
+    else if(dusthanas.indexOf(lordHouse)>=0)lagnaFactors.push({factor:'Lagna Lord in Dusthana',value:'House '+lordHouse,
+      status:'avoid',reason:'Lagna lord in 6th/8th/12th — weakened vitality',source:'BPHS Ch.24'});
+    /* Malefics/Benefics */
+    if(L.maleficsInLagna)lagnaFactors.push({factor:'Malefics in Lagna',value:'Present',
+      status:'avoid',reason:'Mars/Saturn/Rahu/Ketu in 1st house — inauspicious start',source:'Muhurta Chintamani'});
+    if(L.beneficsInLagna)lagnaFactors.push({factor:'Benefics in Lagna',value:'Present',
+      status:'excellent',reason:'Jupiter/Venus/Mercury/Moon in 1st — auspicious blessing',source:'Muhurta Chintamani'});
+    /* Jupiter aspect */
+    if(L.jupiterAspects)lagnaFactors.push({factor:'Jupiter Aspects Lagna',value:'Yes',
+      status:'excellent',reason:'Guru drishti on Lagna — divine protection and wisdom',source:'Muhurta Chintamani'});
+    /* 5th house (progeny) */
+    if(L.fifthHouseOccupants)lagnaFactors.push({factor:'5th House (Progeny)',value:L.fifthHouseOccupants,
+      status:L.fifthHouseBenefic?'good':'caution',reason:'5th house indicates children and creativity',source:'BPHS Ch.15'});
+    /* 7th house (spouse/union) */
+    if(L.seventhHouseStrong)lagnaFactors.push({factor:'7th House Strong',value:'Yes',
+      status:'good',reason:'7th house indicates union and partnership',source:'BPHS Ch.15'});
+  }
   const lagnaHtml=(r.lagnaInfo)?`<div class="lhd" style="margin-top:12px">⬆️ Lagna (Ascendant) Analysis</div>
     <table class="dt" style="margin-top:8px">
-      <tr><td>Rising Sign</td><td><b>${r.lagnaInfo.signName||GBH_SIGN_EN[r.lagnaInfo.sign]||'—'}</b> (${r.lagnaInfo.sign})</td></tr>
-      <tr><td>Lagna Lord</td><td>${r.lagnaInfo.lord||'—'} in house ${r.lagnaInfo.lordHouse||'—'}</td></tr>
-      ${r.lagnaInfo.lordInKendra?'<tr><td>Lord Position</td><td style="color:var(--good)">✅ Lagna lord in Kendra</td></tr>':''}
-      ${r.lagnaInfo.lordInTrikona?'<tr><td>Lord Position</td><td style="color:var(--good)">✅ Lagna lord in Trikona</td></tr>':''}
-      ${r.lagnaInfo.maleficsInLagna?'<tr><td>Malefics</td><td style="color:var(--bad)">⛔ Malefics in Lagna</td></tr>':''}
-      ${r.lagnaInfo.beneficsInLagna?'<tr><td>Benefics</td><td style="color:var(--good)">✅ Benefics in Lagna</td></tr>':''}
-      ${r.lagnaInfo.jupiterAspects?'<tr><td>Jupiter</td><td style="color:var(--good)">✅ Jupiter aspects Lagna</td></tr>':''}
-    </table>`:''
+      <tr><th>Factor</th><th>Value</th><th>Status</th><th>Classical Reason</th><th>Source</th></tr>
+      ${lagnaFactors.map(l=>`<tr>
+        <td><b>${l.factor}</b></td>
+        <td>${l.value}</td>
+        <td>${l.status==='excellent'?'<span style="color:var(--good)">✅ Excellent</span>':
+             l.status==='good'?'<span style="color:var(--good)">🟢 Good</span>':
+             l.status==='caution'?'<span style="color:var(--gold-soft)">⚠️ Caution</span>':
+             l.status==='avoid'?'<span style="color:var(--bad)">⛔ Avoid</span>':
+             '<span style="color:var(--muted)">ℹ️ Info</span>'}</td>
+        <td style="font-size:11px">${l.reason}</td>
+        <td><span class="tag">${l.source}</span></td>
+      </tr>`).join('')}
+    </table>
+    <p class="tag" style="margin-top:6px">For Garbhadhana, a strong Lagna with benefic influences and Jupiter's aspect is highly desirable. Avoid malefics in Lagna and Lagna lord in dusthanas.</p>`:''
   
   const rowFor=(f)=>{
     const M=GBH_COMP_META[f.key]||['•',f.key];
@@ -9204,8 +9364,127 @@ function gbhDayDetail(r,S){
      <tr><td>Ritukala (night 1–16)</td><td>${r.biological.beyondRitukala?'<span style="color:var(--bad)">past night 16</span>':'<span style="color:var(--good)">within</span>'}</td></tr>
      <tr><td>Estimate confidence</td><td>${r.biological.confidence}${r.biological.projected?' — later cycles are extrapolated from the stated cycle length':''}</td></tr></table>`
    :'<p class="tag" style="margin-top:8px">No LMP entered, so the biological component was left out of the score entirely.</p>';
-  const hora=(!r.vetoed)?(function(){const h=gbhBestHora(r.jd);
-    return h?`<p class="tag" style="margin-top:8px">🕐 <b>Within the day:</b> ${h.text} (${h.planet} hora) — a supplementary hora refinement, not part of the classical date score.</p>`:'';})():'';
+  /* P3: Enhanced Hora Engine display */
+  const HORA_LORDS=['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
+  const HORA_QUALITY={0:'caution',1:'good',2:'caution',3:'good',4:'excellent',5:'excellent',6:'avoid'}; /* Sun,Moon,Mars,Merc,Jup,Venus,Sat */
+  const HORA_REASON={
+    0:'Sun hora — masculine energy, authority. Acceptable for conception.',
+    1:'Moon hora — feminine energy, nourishment. Good for conception.',
+    2:'Mars hora — aggressive energy. Avoid for conception.',
+    3:'Mercury hora — intellectual energy. Acceptable for conception.',
+    4:'Jupiter hora — wisdom, expansion, blessings. Excellent for conception.',
+    5:'Venus hora — love, fertility, pleasure. Excellent for conception.',
+    6:'Saturn hora — restriction, delay. Avoid for conception.'
+  };
+  const horaList=[];
+  if(TR){
+    const dayHoraLen=(TR.sunset-TR.sunrise)/12;
+    const nightHoraLen=(1-dayHoraLen*12)/12;
+    const vara=TR.vara;
+    const HORA_ORDER=[0,5,3,1,6,4,2]; /* Sun→Venus→Mercury→Moon→Saturn→Jupiter→Mars */
+    const dayLordIdx=HORA_ORDER.indexOf(vara);
+    for(let i=0;i<12;i++){
+      const start=TR.sunrise+i*dayHoraLen;
+      const end=start+dayHoraLen;
+      const lordIdx=(dayLordIdx+i)%7;
+      const lord=HORA_ORDER[lordIdx];
+      horaList.push({num:i+1,period:'Day',start,end,lord,name:HORA_LORDS[lord],
+        quality:HORA_QUALITY[lord],reason:HORA_REASON[lord]});
+    }
+    for(let i=0;i<12;i++){
+      const start=TR.sunset+i*nightHoraLen;
+      const end=start+nightHoraLen;
+      const lordIdx=(dayLordIdx+12+i)%7;
+      const lord=HORA_ORDER[lordIdx];
+      horaList.push({num:i+1,period:'Night',start,end,lord,name:HORA_LORDS[lord],
+        quality:HORA_QUALITY[lord],reason:HORA_REASON[lord]});
+    }
+  }
+  const bestHoras=horaList.filter(h=>h.quality==='excellent'||h.quality==='good').slice(0,6);
+  const horaHtml=horaList.length?`<div class="lhd" style="margin-top:12px">🕐 Hora Analysis (Planetary Hours)</div>
+    <table class="dt" style="margin-top:8px">
+      <tr><th>#</th><th>Period</th><th>Time</th><th>Hora Lord</th><th>Quality</th><th>Recommendation</th></tr>
+      ${bestHoras.map(h=>`<tr>
+        <td>${h.num}</td>
+        <td>${h.period}</td>
+        <td style="font-family:var(--dev)">${gbhTimeInterval(h.start,h.end,tz)}</td>
+        <td><b>${h.name}</b></td>
+        <td>${h.quality==='excellent'?'<span style="color:var(--good)">✅ Excellent</span>':
+             h.quality==='good'?'<span style="color:var(--good)">🟢 Good</span>':
+             h.quality==='caution'?'<span style="color:var(--gold-soft)">⚠️ Acceptable</span>':
+             '<span style="color:var(--bad)">⛔ Avoid</span>'}</td>
+        <td style="font-size:11px">${h.reason}</td>
+      </tr>`).join('')}
+    </table>
+    <p class="tag" style="margin-top:6px"><b>Best horas for Garbhadhana:</b> Jupiter (Guru) and Venus (Shukra) horas are most auspicious. Moon hora is also good. Avoid Mars and Saturn horas. Source: Muhurta Chintamani.</p>`:''
+  
+  /* P3: Rule Audit Table - comprehensive view of all rules checked */
+  const auditRows=[];
+  r.factors.forEach(f=>{
+    f.parts.forEach(p=>{
+      if(p.rule){
+        auditRows.push({
+          component:(GBH_COMP_META[f.key]||['',f.key])[1],
+          rule:p.rule.id,
+          name:p.en||p.rule.translations?.en||'—',
+          source:p.source?.text||'—',
+          locator:p.source?.locator||'—',
+          status:p.status,
+          result:p.matched?'Applied':'—',
+          score:p.score||0
+        });
+      }
+    });
+  });
+  r.penaltyGroups.forEach(g=>{
+    g.rules.forEach(x=>{
+      auditRows.push({
+        component:'Prohibition',
+        rule:x.rule.id,
+        name:x.rule.translations?.en||'—',
+        source:x.rule.source?.text||'—',
+        locator:x.rule.source?.locator||'—',
+        status:x.rule.status||'penalty',
+        result:'Applied',
+        score:x.points
+      });
+    });
+  });
+  const auditHtml=auditRows.length?`<div class="lhd" style="margin-top:12px">📋 Rule Audit Table</div>
+    <div style="overflow-x:auto;max-height:300px;overflow-y:auto">
+    <table class="dt" style="margin-top:8px;font-size:11.5px">
+      <tr><th>Component</th><th>Rule ID</th><th>Rule Name</th><th>Source</th><th>Chapter/Verse</th><th>Status</th><th>Result</th></tr>
+      ${auditRows.map(a=>`<tr>
+        <td>${a.component}</td>
+        <td><code>${a.rule}</code></td>
+        <td>${gbhEsc(a.name)}</td>
+        <td>${gbhEsc(a.source)}</td>
+        <td>${gbhEsc(a.locator)}</td>
+        <td>${a.status==='excellent'||a.status==='good'?'<span style="color:var(--good)">✅ Pass</span>':
+             a.status==='caution'||a.status==='neutral'?'<span style="color:var(--gold-soft)">⚠️ Caution</span>':
+             '<span style="color:var(--bad)">⛔ Fail</span>'}</td>
+        <td>${a.result} ${typeof a.score==='number'&&a.score!==0?'<b style="color:'+(a.score>0?'var(--good)':'var(--bad)')+'">'+a.score+'</b>':''}</td>
+      </tr>`).join('')}
+    </table></div>
+    <p class="tag" style="margin-top:6px">This audit table shows every rule that was evaluated for this date. Each rule is traceable to its classical source.</p>`:''
+  
+  /* P4: Time Selection Windows HTML */
+  const timeWindowsHtml=timeWindows.length?`<div class="lhd" style="margin-top:12px">🕐 Time Selection Windows</div>
+    <p class="tag" style="margin-bottom:8px">Best time slots for this night, analyzed against Rahu Kalam, Yamaganda, and Gulika periods.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      ${timeWindows.map(w=>`<div style="flex:1;min-width:140px;max-width:200px;border:1.5px solid ${
+        w.quality==='excellent'?'var(--good)':w.quality==='good'?'var(--good)':w.quality==='caution'?'var(--gold-soft)':'var(--bad)'
+      };border-radius:8px;padding:10px;background:var(--panel)">
+        <div style="font-weight:700;font-size:13px">${w.interval}</div>
+        <div style="margin-top:4px;font-size:11px;color:${
+          w.quality==='excellent'?'var(--good)':w.quality==='good'?'var(--good)':w.quality==='caution'?'var(--gold-soft)':'var(--bad)'
+        }">${w.quality==='excellent'?'✨ Excellent':w.quality==='good'?'✅ Good':w.quality==='caution'?'⚠️ Caution':'⛔ Avoid'}</div>
+        <div style="margin-top:4px;font-size:10.5px;color:var(--muted)">${w.verdict}</div>
+        ${w.conflicts.length?`<div style="margin-top:4px;font-size:10px;color:var(--bad)">❌ ${w.conflicts.map(c=>c.name).join(', ')}</div>`:''}
+      </div>`).join('')}
+    </div>
+    <p class="tag" style="margin-top:8px">For Garbhadhana, nighttime after sunset is traditionally preferred. Green slots are free from inauspicious periods.</p>`:''
+  
   return `<tr id="gbhd-${Math.floor(r.jd)}"><td colspan="6" style="background:var(--panel2);padding:14px">
     <div class="lhd">🧮 How ${gbhFmt(F)} was scored</div>
     <div style="overflow-x:auto"><table class="dt">
@@ -9223,7 +9502,10 @@ function gbhDayDetail(r,S){
     ${trHtml}
     ${moonHtml}
     ${lagnaHtml}
-    <div class="lhd" style="margin-top:12px">🧬 Biological state</div>${bio}${hora}
+    ${horaHtml}
+    ${timeWindowsHtml}
+    <div class="lhd" style="margin-top:12px">🧬 Biological state</div>${bio}
+    ${auditHtml}
     ${why?`<div class="lhd" style="margin-top:12px">💡 What the texts mean by this</div><ul class="lp-list">${why}</ul>`:''}
     <p class="tag" style="margin-top:10px">Audit trail — rules fired: <code style="font-size:10.5px">${r.firedRuleIds.join(', ')}</code>${r.engineVersion?` · Engine v${r.engineVersion}`:''}</p>
   </td></tr>`;
@@ -9248,6 +9530,28 @@ function gbhDayRow(r,S){
     <td style="font-size:12px">${reason}<br>${bio}</td>
     <td style="text-align:right;white-space:nowrap;color:var(--gold-soft)">${open?'▲':'▼'}</td></tr>
     ${open?gbhDayDetail(r,S):''}`;
+}
+
+/* ---- P3: Rejected Dates Section ------------------------------------------- */
+function gbhRejectedDatesHtml(rows){
+  const rejected=rows.filter(r=>r.vetoed||r.band==='avoid').slice(0,10);
+  if(!rejected.length)return '<p class="tag">No dates are rejected in this window.</p>';
+  return `<p class="tag" style="margin-bottom:8px">These dates are marked "Avoid" due to classical prohibitions. Understanding why helps you make informed decisions.</p>
+  <table class="dt" style="font-size:12px">
+    <tr><th>Date</th><th>Weekday</th><th>Score</th><th>Primary Rejection Reason</th><th>Source</th></tr>
+    ${rejected.map(r=>{
+      const reason=r.vetoed&&r.vetoes[0]?r.vetoes[0].reason:(r.headline||'Low score');
+      const source=r.vetoed&&r.vetoes[0]&&r.vetoes[0].source?r.vetoes[0].source.text:'—';
+      return `<tr>
+        <td><b>${gbhFmtShort(r.facts)}</b></td>
+        <td>${GBH_VARA_EN[r.facts.vara]}</td>
+        <td style="color:var(--bad)"><b>${r.total}</b></td>
+        <td style="color:var(--bad)">${gbhEsc(reason)}</td>
+        <td><span class="tag">${gbhEsc(source)}</span></td>
+      </tr>`;
+    }).join('')}
+  </table>
+  <p class="tag" style="margin-top:6px">Click on any date in the calendar below to see the complete breakdown.</p>`;
 }
 
 /* ---- PDF export (Phase 7) ------------------------------------------------- */
@@ -9313,6 +9617,24 @@ function gbhPDFContent(){
       </table>
     </div>`;
   }
+  /* P5: Add rejected dates section to PDF */
+  const rejected=rows.filter(r=>r.vetoed||r.band==='avoid').slice(0,10);
+  if(rejected.length){
+    H+=`<div style="margin-bottom:18px">
+      <h3 style="margin:0 0 10px;font-size:14px;color:#1a1030">⛔ Rejected Dates (Top 10)</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #ddd">
+        <tr style="background:#f8d7da"><th style="padding:6px;text-align:left;border-bottom:1px solid #ddd">Date</th><th style="padding:6px;text-align:left;border-bottom:1px solid #ddd">Score</th><th style="padding:6px;text-align:left;border-bottom:1px solid #ddd">Rejection Reason</th></tr>
+        ${rejected.map(r=>{
+          const reason=r.vetoed&&r.vetoes.length?r.vetoes[0].reason:(r.headline||'Low score');
+          const src=r.vetoed&&r.vetoes.length&&r.vetoes[0].source?r.vetoes[0].source.text:'—';
+          return `<tr>
+            <td style="padding:6px;border-bottom:1px solid #eee"><b>${gbhFmt(r.facts)}</b></td>
+            <td style="padding:6px;border-bottom:1px solid #eee">${r.total}/100</td>
+            <td style="padding:6px;border-bottom:1px solid #eee"><span style="color:#721c24">${gbhEsc(reason)}</span><br><span style="color:#666;font-size:10px">${gbhEsc(src)}</span></td>
+          </tr>`;}).join('')}
+      </table>
+    </div>`;
+  }
   H+=`<div style="margin-bottom:18px">
     <h3 style="margin:0 0 10px;font-size:14px;color:#1a1030">📊 ${S.days}-Day Summary</h3>
     <table style="border-collapse:collapse;font-size:12px">
@@ -9338,6 +9660,22 @@ function gbhPDFContent(){
       ${srcList.map(s=>`<tr><td style="padding:4px 5px;border-bottom:1px solid #eee">${gbhEsc(s.text)}</td><td style="padding:4px 5px;border-bottom:1px solid #eee">${gbhEsc(s.locator||'—')}</td><td style="padding:4px 5px;border-bottom:1px solid #eee;text-align:center">${s.verified===false?'<span style="color:#856404">†</span>':'✓'}</td></tr>`).join('')}
     </table>
     <p style="font-size:10px;color:#666;margin-top:6px">† = chapter/verse pending verification against a printed edition; rule is standard but exact citation not yet confirmed.</p>
+  </div>`;
+  /* P5: Add methodology section */
+  H+=`<div style="margin-bottom:18px">
+    <h3 style="margin:0 0 10px;font-size:14px;color:#1a1030">📖 Methodology</h3>
+    <div style="font-size:11px;color:#333;background:#f8f9fa;border:1px solid #ddd;border-radius:8px;padding:12px">
+      <p style="margin:0 0 8px"><b>Multi-Stage Rule Engine:</b> This report uses a research-grade Muhurta engine that evaluates each date through multiple stages:</p>
+      <ul style="margin:0 0 8px;padding-left:20px">
+        <li><b>Biological Stage:</b> Menstrual cycle analysis based on LMP, estimating fertile window</li>
+        <li><b>Prohibitions Stage:</b> Classical vetoes (Amavasya, eclipses, sankranti, etc.)</li>
+        <li><b>Panchanga Stage:</b> Tithi, Nakshatra, Yoga, Karana, Vara analysis</li>
+        <li><b>Planetary Stage:</b> Moon dignity, afflictions, planetary positions</li>
+        <li><b>Lagna Stage:</b> Ascendant analysis at optimal conception time</li>
+        <li><b>Time Window Stage:</b> Rahu Kalam, Yamaganda, Gulika, Hora analysis</li>
+      </ul>
+      <p style="margin:0"><b>Scoring:</b> Each component is scored 0-100, weighted, and summed. Penalties are applied for prohibitions. Final score determines the band (Excellent/Good/Average/Avoid).</p>
+    </div>
   </div>`;
   H+=`<div style="margin-bottom:18px">
     <h3 style="margin:0 0 10px;font-size:14px;color:#1a1030">🔍 Rules Fired (Appendix)</h3>
@@ -9775,6 +10113,8 @@ function pGarbhadhana(){
        </div>`;}).join('')}
      </div><p class="tag" style="margin-top:8px">Click any date in the calendar below to see, rule by rule, exactly how its number was reached.</p>`
     :`<p class="tag" style="color:var(--gold-soft)">No date in this ${S.days}-day window reaches the “Good” band. That is a real result, not an error — ${count.avoid} of ${rows.length} days are barred or weak here. Move the window forward, or open a barred date to see precisely which rule bars it.</p>`)}
+
+   ${lblk('⛔ Rejected dates with reasons',gbhRejectedDatesHtml(rows))}
 
    ${lblk('🗓 The '+S.days+'-day calendar',`
      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px">
