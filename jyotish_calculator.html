@@ -9345,8 +9345,12 @@ function gbhDayDetail(r,S){
       <td style="text-align:right;white-space:nowrap">${f.quality}%</td>
       <td style="text-align:right;white-space:nowrap">${ptsCell}</td></tr>`;
   };
+  /* P5: Build "What the texts mean" from interpretation field (can be string or {en:...}) */
   const why=r.factors.map(f=>f.parts.filter(p=>p.matched&&p.interpretation)
-      .map(p=>`<li><b>${(GBH_COMP_META[f.key]||['',''])[1]}</b> — ${gbhEsc(p.interpretation.en)}</li>`).join(''))
+      .map(p=>{
+        const interp=typeof p.interpretation==='string'?p.interpretation:(p.interpretation?.en||'');
+        return interp?`<li><b>${(GBH_COMP_META[f.key]||['',''])[1]}</b> — ${gbhEsc(interp)}</li>`:'';
+      }).join(''))
     .join('');
   const pen=r.penaltyGroups.length?`<table class="dt" style="margin-top:8px"><tr><th>Prohibition</th><th style="text-align:right">Points</th></tr>
     ${r.penaltyGroups.map(g=>g.rules.map(x=>`<tr><td>${gbhChip(x.rule.status)} ${gbhEsc(x.rule.translations.en)}<br>${gbhCite(x.rule.source)} <code style="font-size:10.5px;color:var(--muted)">${x.rule.id}</code></td>
@@ -9532,22 +9536,60 @@ function gbhDayRow(r,S){
     ${open?gbhDayDetail(r,S):''}`;
 }
 
-/* ---- P3: Rejected Dates Section ------------------------------------------- */
+/* ---- P3: Rejected Dates Section (enhanced to show multiple reasons) -------- */
 function gbhRejectedDatesHtml(rows){
   const rejected=rows.filter(r=>r.vetoed||r.band==='avoid').slice(0,10);
   if(!rejected.length)return '<p class="tag">No dates are rejected in this window.</p>';
   return `<p class="tag" style="margin-bottom:8px">These dates are marked "Avoid" due to classical prohibitions. Understanding why helps you make informed decisions.</p>
   <table class="dt" style="font-size:12px">
-    <tr><th>Date</th><th>Weekday</th><th>Score</th><th>Primary Rejection Reason</th><th>Source</th></tr>
+    <tr><th>Date</th><th>Weekday</th><th>Score</th><th>Rejection Reasons</th><th>Sources</th></tr>
     ${rejected.map(r=>{
-      const reason=r.vetoed&&r.vetoes[0]?r.vetoes[0].reason:(r.headline||'Low score');
-      const source=r.vetoed&&r.vetoes[0]&&r.vetoes[0].source?r.vetoes[0].source.text:'—';
+      /* Collect all rejection reasons: vetoes + low-scoring factors + penalties */
+      const reasons=[];
+      const sources=new Set();
+      /* Add all vetoes */
+      if(r.vetoed&&r.vetoes){
+        r.vetoes.forEach(v=>{
+          reasons.push(v.reason);
+          if(v.source?.text)sources.add(v.source.text);
+        });
+      }
+      /* Add penalties that contributed to rejection */
+      if(r.penaltyGroups){
+        r.penaltyGroups.forEach(g=>{
+          g.rules.forEach(x=>{
+            if(x.rule?.translations?.en&&reasons.indexOf(x.rule.translations.en)<0){
+              reasons.push(x.rule.translations.en);
+              if(x.rule.source?.text)sources.add(x.rule.source.text);
+            }
+          });
+        });
+      }
+      /* Add weak components (score < 40) */
+      if(r.factors){
+        r.factors.filter(f=>f.kind==='scored'&&f.quality<40).forEach(f=>{
+          const meta=GBH_COMP_META[f.key]||['',f.key];
+          const part=f.parts[0];
+          if(part?.en){
+            const weakReason=meta[1]+': '+part.en;
+            if(reasons.indexOf(weakReason)<0)reasons.push(weakReason);
+            if(part.source?.text)sources.add(part.source.text);
+          }
+        });
+      }
+      /* Fallback */
+      if(!reasons.length)reasons.push(r.headline||'Low overall score');
+      /* Format output */
+      const reasonsHtml=reasons.slice(0,3).map((re,i)=>
+        `<div style="margin-bottom:2px">${i===0?'<b style="color:var(--bad)">':''}${gbhEsc(re)}${i===0?'</b>':''}</div>`
+      ).join('')+(reasons.length>3?`<div class="tag">+${reasons.length-3} more</div>`:'');
+      const sourcesHtml=[...sources].slice(0,2).map(s=>`<span class="tag">${gbhEsc(s)}</span>`).join(' ');
       return `<tr>
         <td><b>${gbhFmtShort(r.facts)}</b></td>
-        <td>${GBH_VARA_EN[r.facts.vara]}</td>
+        <td>${GBH_VARA_EN[r.facts.vara]||'—'}</td>
         <td style="color:var(--bad)"><b>${r.total}</b></td>
-        <td style="color:var(--bad)">${gbhEsc(reason)}</td>
-        <td><span class="tag">${gbhEsc(source)}</span></td>
+        <td style="font-size:11px">${reasonsHtml}</td>
+        <td>${sourcesHtml||'—'}</td>
       </tr>`;
     }).join('')}
   </table>
