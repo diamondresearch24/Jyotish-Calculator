@@ -1,0 +1,96 @@
+<!doctype html><html><body>
+<iframe id="f" src="jyotish_calculator.html" style="width:900px;height:400px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+document.getElementById('f').addEventListener('load',()=>{
+ setTimeout(()=>{
+  const w=document.getElementById('f').contentWindow;
+  const L=[];
+  const JD=(y,m,d)=>w.julianDay(y,m,d,12-5.5); // ~noon IST
+  const fmt=j=>{const o=w.jdToDate(j+5.5/24);return o.y+'-'+String(o.m).padStart(2,'0')+'-'+String(Math.floor(o.d)).padStart(2,'0');};
+  const chk=(label,got,exp)=>{const ok=String(got)===String(exp);L.push((ok?'PASS':'FAIL')+'  '+label+'\n        got='+got+(ok?'':'  expected='+exp));return ok;};
+  let pass=0,fail=0;const T=(l,g,e)=>{chk(l,g,e)?pass++:fail++;};
+
+  try{
+    L.push('=== NEW / FULL MOON (expect within ~1 day of published) ===');
+    // Known: New moon 2024-04-08 (great American eclipse), Full moon 2024-04-23
+    T('new moon before 2024-04-20', fmt(w.mfNewMoonBefore(JD(2024,4,20))), '2024-04-08');
+    T('full moon before 2024-04-30', fmt(w.mfFullMoonBefore(JD(2024,4,30))), '2024-04-23');
+    // Known: New moon 2025-03-29 (partial solar eclipse), Full 2025-03-14 (lunar eclipse)
+    T('new moon before 2025-04-05', fmt(w.mfNewMoonBefore(JD(2025,4,5))),  '2025-03-29');
+    T('full moon before 2025-03-20', fmt(w.mfFullMoonBefore(JD(2025,3,20))),'2025-03-14');
+
+    L.push('\n=== SANKRANTI (Sun sidereal ingress) ===');
+    // Makar Sankranti is Jan 14/15; Mesha ~Apr 13/14
+    let mk=null; for(let d=10;d<=18;d++){const s=w.sankrantiInfo(JD(2025,1,d)); if(s.isSankranti){mk=fmt(JD(2025,1,d))+' -> '+s.signName;break;}}
+    T('Makar Sankranti Jan 2025 found', mk!==null, true);
+    L.push('        detail: '+mk);
+    let me=null; for(let d=10;d<=18;d++){const s=w.sankrantiInfo(JD(2025,4,d)); if(s.isSankranti){me=fmt(JD(2025,4,d))+' -> '+s.signName;break;}}
+    T('Mesha Sankranti Apr 2025 found', me!==null, true);
+    L.push('        detail: '+me);
+
+    L.push('\n=== LUNAR MONTH (amanta) ===');
+    // Gudi Padwa / Chaitra S1 2024 = Apr 9 ; 2025 = Mar 30
+    T('2024-04-15 masa', w.masaAt(JD(2024,4,15)).amanta, 'Chaitra');
+    T('2025-04-05 masa', w.masaAt(JD(2025,4,5)).amanta, 'Chaitra');
+    // Diwali amavasya 2024-11-01 is end of amanta Ashwina
+    T('2024-10-25 masa', w.masaAt(JD(2024,10,25)).amanta, 'Ashwina');
+    // Shravana 2024 = Aug 5 - Sep 2
+    T('2024-08-20 masa', w.masaAt(JD(2024,8,20)).amanta, 'Shravana');
+
+    L.push('\n=== ADHIKA MASA (known: Shravana Adhika, Jul 18 - Aug 16, 2023) ===');
+    const ad=w.masaAt(JD(2023,7,28));
+    T('2023-07-28 isAdhika', ad.isAdhika, true);
+    L.push('        detail: masa='+ad.amanta+' adhika='+ad.isAdhika);
+    T('2024-08-20 not adhika', w.masaAt(JD(2024,8,20)).isAdhika, false);
+
+    L.push('\n=== PITRU PAKSHA (2024: Sep 18 - Oct 2) ===');
+    T('2024-09-25 inPitruPaksha', w.pitruPakshaInfo(JD(2024,9,25)).inPitruPaksha, true);
+    T('2024-09-10 NOT inPitruPaksha', w.pitruPakshaInfo(JD(2024,9,10)).inPitruPaksha, false);
+    T('2024-10-10 NOT inPitruPaksha', w.pitruPakshaInfo(JD(2024,10,10)).inPitruPaksha, false);
+
+    L.push('\n=== CHATURMAS (2024: Jul 17 - Nov 12) ===');
+    T('2024-09-01 inChaturmas', w.chaturmasInfo(JD(2024,9,1)).inChaturmas, true);
+    T('2024-06-01 NOT inChaturmas', w.chaturmasInfo(JD(2024,6,1)).inChaturmas, false);
+    T('2024-12-15 NOT inChaturmas', w.chaturmasInfo(JD(2024,12,15)).inChaturmas, false);
+
+    L.push('\n=== ECLIPSE (approximate) ===');
+    const e1=w.eclipseNear(JD(2024,4,8),2);
+    T('2024-04-08 solar eclipse detected', e1.any&&e1.nearest.type==='solar', true);
+    L.push('        detail: '+JSON.stringify(e1.nearest));
+    const e2=w.eclipseNear(JD(2025,3,14),2);
+    T('2025-03-14 lunar eclipse detected', e2.any&&e2.all.some(x=>x.type==='lunar'), true);
+    L.push('        detail: '+JSON.stringify(e2.all));
+    const e3=w.eclipseNear(JD(2024,7,15),2);
+    T('2024-07-15 no eclipse', e3.any, false);
+
+    L.push('\n=== ASTA (heliacal set) ===');
+    const g=w.astaInfo(JD(2025,1,10),4,11);
+    L.push('        Jupiter 2025-01-10 elong='+g.elongation+' combust='+g.combust);
+    const v=w.astaInfo(JD(2025,3,25),5,10);
+    L.push('        Venus 2025-03-25 elong='+v.elongation+' retro='+v.retro+' combust='+v.combust);
+    T('astaInfo returns null verdict without orb', w.astaInfo(JD(2025,1,10),4).combust, null);
+
+    L.push('\n=== dayFacts aggregator + perf ===');
+    const t0=performance.now();
+    let n=0; for(let d=0;d<45;d++){const F=w.dayFacts(JD(2026,9,1)+d); if(F&&F.masa)n++;}
+    const t1=performance.now();
+    T('45 days of dayFacts built', n, 45);
+    L.push('        cold build: '+(t1-t0).toFixed(0)+' ms');
+    const t2=performance.now();
+    for(let d=0;d<45;d++)w.dayFacts(JD(2026,9,1)+d);
+    L.push('        cached:     '+(performance.now()-t2).toFixed(1)+' ms');
+    const S=w.dayFacts(JD(2026,9,4));
+    L.push('        sample 2026-09-04: masa='+S.masa.amanta+' '+S.pakshaKey+
+           ' tithiIdx='+S.tithiIdx+' nak='+S.nakshatra+' yoga='+S.yoga+
+           ' karana='+S.karana+' vara='+S.vara+' elong='+S.sunMoonElong+
+           ' chaturmas='+S.chaturmas.inChaturmas+' eclipse='+S.eclipse.any);
+    T('sample has sunrise', S.sunrise!==null, true);
+
+    L.push('\n===================================');
+    L.push('PASS '+pass+'   FAIL '+fail);
+  }catch(e){L.push('ERROR: '+e.message+'\n'+(e.stack||'').split('\n').slice(0,5).join('\n'));}
+  document.getElementById('out').textContent=L.join('\n');
+ },3500);
+});
+</script></body></html>

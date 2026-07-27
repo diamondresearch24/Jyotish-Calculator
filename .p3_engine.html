@@ -1,0 +1,247 @@
+<!doctype html><html><body>
+<iframe id="f" src="jyotish_calculator.html" style="width:900px;height:300px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+document.getElementById('f').addEventListener('load',function(){
+ setTimeout(function(){
+  const w=document.getElementById('f').contentWindow;
+  const L=[];let pass=0,fail=0;
+  const T=(label,got,exp)=>{const ok=String(got)===String(exp);
+    L.push((ok?'PASS':'FAIL')+'  '+label+'\n        got='+got+(ok?'':'   expected='+exp));
+    ok?pass++:fail++;};
+  const near=(label,got,exp,tol)=>{const ok=Math.abs(got-exp)<=(tol||0.05);
+    L.push((ok?'PASS':'FAIL')+'  '+label+'\n        got='+got+(ok?'':'   expected≈'+exp));
+    ok?pass++:fail++;};
+
+  w.loadMuhurtaDB().then(function(DB){
+   try{
+    L.push('=== DB LOAD ===');
+    T('db loaded',DB.loaded,true);
+    L.push('        source='+DB.source+'  tables='+Object.keys(DB.tables).length+'  rules='+w.mhRuleCount());
+    T('11 tables',Object.keys(DB.tables).length,11);
+    T('183 rules',w.mhRuleCount(),183);
+    const P=w.mhProfile('garbhadhana');
+    T('profile present',!!P,true);
+
+    L.push('\n=== match grammar ===');
+    T('scalar eq',w.matchRule({a:3},{a:3}),true);
+    T('scalar neq',w.matchRule({a:3},{a:4}),false);
+    T('array in',w.matchRule({a:[1,3,5]},{a:3}),true);
+    T('array out',w.matchRule({a:[1,3,5]},{a:2}),false);
+    T('range min incl',w.matchRule({a:{min:12,max:30}},{a:12}),true);
+    T('range max excl',w.matchRule({a:{min:12,max:30}},{a:30}),false);
+    T('range open min',w.matchRule({a:{min:120}},{a:180}),true);
+    T('bool true',w.matchRule({a:true},{a:1}),true);
+    T('bool false',w.matchRule({a:false},{a:0}),true);
+    T('not',w.matchRule({a:{not:[8,9]}},{a:8}),false);
+    T('any',w.matchRule({a:'any'},{a:'zzz'}),true);
+    T('missing fact never matches',w.matchRule({zzz:1},{a:1}),false);
+    T('AND of two keys',w.matchRule({a:1,b:2},{a:1,b:3}),false);
+
+    L.push('\n=== karana index ===');
+    T('elong 3 -> Kimstughna(10)',w.mhKaranaIndex(3),10);
+    T('elong 9 -> Bava(0)',w.mhKaranaIndex(9),0);
+    T('elong 15 -> Balava(1)',w.mhKaranaIndex(15),1);
+    T('elong 42 -> Vishti(6)',w.mhKaranaIndex(42),6);
+    T('elong 345 -> Shakuni(7)',w.mhKaranaIndex(345),7);
+    T('elong 351 -> Chatushpada(8)',w.mhKaranaIndex(351),8);
+    T('elong 357 -> Naga(9)',w.mhKaranaIndex(357),9);
+
+    /* ---- hand-built fact objects: exact arithmetic, no astronomy involved ---- */
+    const BASE={jd:2460000.5,date:{y:2023,m:2,d:24},
+      tithi_index:4,tithi_idx:4,paksha:'shukla',
+      nakshatra:3,yoga:2,karana_index:2,vara:4,
+      masa_index:1,masa_purnimanta:1,adhika_masa:false,
+      sankranti:false,eclipse:false,eclipse_days:999,
+      chaturmas:false,pitru_paksha:false,
+      sun_moon_elong:50,moon_sign:1,moon_dignity:'exalted',
+      guru_elong:60,guru_retro:false,shukra_elong:40,shukra_retro:false,
+      has_mother_chart:true,has_father_chart:false,
+      lmp:true,cycle_regular:true,
+      bio_phase:'peak',bio_cycle_day:14,beyond_ritukala:false,
+      tara:1,chandrabala:11};
+    const clone=o=>JSON.parse(JSON.stringify(o));
+
+    L.push('\n=== A. perfect day, advanced mode (all 7 components) ===');
+    const A=w.muhurtaEvaluate(clone(BASE),P);
+    const g=(R,k)=>R.factors.filter(f=>f.key===k)[0];
+    near('biological points (25 × 100%)',g(A,'biological').points,25);
+    near('nakshatra points (20 × Rohini 100%)',g(A,'nakshatra').points,20);
+    near('moon quality (.45×100 + .55×65)',g(A,'moon').quality,81,0.6);
+    near('moon points (15 × 80.75%)',g(A,'moon').points,12.1,0.1);
+    near('tarabala points (15 × Sampat 100%)',g(A,'tarabala').points,15);
+    near('tithi points (10 × Sh.Panchami 90%)',g(A,'tithi').points,9);
+    near('yoga points (10 × Ayushman 95%)',g(A,'yoga').points,9.5);
+    near('karana points (5 × Kaulava 90%)',g(A,'karana').points,4.5);
+    T('no penalties',A.penaltyTotal,0);
+    T('total',A.total,95);
+    T('band',A.band,'excellent');
+    T('not vetoed',A.vetoed,false);
+    T('7 of 7 components',A.componentsScored+'/'+A.componentsTotal,'7/7');
+    T('not redistributed',A.redistributed,false);
+    T('vara is informational (0 pts)',g(A,'vara').points,0);
+    T('vara still evaluated',g(A,'vara').quality,95);
+    T('chandrabala informational',g(A,'chandrabala').kind,'informational');
+    T('chandrabala 11th = 100',g(A,'chandrabala').quality,100);
+
+    L.push('\n=== B. same day, BASIC mode (no mother chart) → weight redistribution ===');
+    const b=clone(BASE);b.has_mother_chart=false;b.tara=null;b.chandrabala=null;
+    const B=w.muhurtaEvaluate(b,P);
+    T('6 of 7 components',B.componentsScored+'/'+B.componentsTotal,'6/7');
+    T('redistributed',B.redistributed,true);
+    T('tarabala skipped',B.skipped.map(s=>s.component).join(','),'tarabala');
+    near('biological now 25×100/85 = 29.4',g(B,'biological').points,29.4,0.1);
+    near('nakshatra now 23.5',g(B,'nakshatra').points,23.5,0.1);
+    T('total (not capped at 85)',B.total,94);
+    T('band',B.band,'excellent');
+
+    L.push('\n=== C. no LMP and no chart → 5 of 7, still scored out of 100 ===');
+    const c=clone(BASE);c.has_mother_chart=false;c.tara=null;c.chandrabala=null;
+    c.lmp=false;c.bio_phase='unknown';c.bio_cycle_day=null;
+    const C=w.muhurtaEvaluate(c,P);
+    T('5 of 7 components',C.componentsScored+'/'+C.componentsTotal,'5/7');
+    T('biological absent from factors',!g(C,'biological'),true);
+    T('total in range',C.total>=0&&C.total<=100,true);
+    T('band',C.band,'excellent');
+
+    L.push('\n=== D. Amavasya → veto, band forced to avoid ===');
+    const d=clone(BASE);d.tithi_index=29;d.tithi_idx=14;d.paksha='krishna';
+    const D=w.muhurtaEvaluate(d,P);
+    T('vetoed',D.vetoed,true);
+    T('band forced to avoid',D.band,'avoid');
+    T('headline mentions Amavasya',/Amavasya/.test(D.headline||''),true);
+    T('MC_TITHI_K15 vetoed',D.vetoes.some(v=>v.ruleId==='MC_TITHI_K15'),true);
+    T('MC_PRO_AMAVASYA vetoed',D.vetoes.some(v=>v.ruleId==='MC_PRO_AMAVASYA'),true);
+    T('tithi scores 0',g(D,'tithi').points,0);
+    near('prohibited penalty -25',D.penaltyTotal,-25,0.01);
+    L.push('        headline: '+D.headline);
+
+    L.push('\n=== E. menstruation → veto from the biological table ===');
+    const e=clone(BASE);e.bio_phase='menses';e.bio_cycle_day=2;
+    const E=w.muhurtaEvaluate(e,P);
+    T('vetoed',E.vetoed,true);
+    T('MC_BIO_MENSES fired',E.vetoes.some(v=>v.ruleId==='MC_BIO_MENSES'),true);
+    T('band avoid',E.band,'avoid');
+    T('biological points 0',g(E,'biological').points,0);
+
+    L.push('\n=== F. exceptions actually move the number ===');
+    const f1=clone(BASE);f1.tithi_index=3;f1.tithi_idx=3;f1.nakshatra=13; /* Rikta + Chitra */
+    const F1=w.muhurtaEvaluate(f1,P);
+    T('Rikta Chaturthi alone = 10%',g(F1,'tithi').quality,10);
+    const f2=clone(BASE);f2.tithi_index=3;f2.tithi_idx=3;f2.nakshatra=3;  /* Rikta + Rohini */
+    const F2=w.muhurtaEvaluate(f2,P);
+    T('Rikta + dhruva nakshatra = 20%',g(F2,'tithi').quality,20);
+    T('exception note recorded',g(F2,'tithi').parts[0].notes.length,1);
+
+    L.push('\n=== G. priority: higher-priority row wins its slot ===');
+    const gg=clone(BASE);gg.sun_moon_elong=5;   /* MC_MOON_ELO_ASTA priority 5 */
+    const G=w.muhurtaEvaluate(gg,P);
+    T('elongation slot won by ASTA row',
+      g(G,'moon').parts.filter(p=>p.slot==='elongation')[0].rule.id,'MC_MOON_ELO_ASTA');
+    near('moon quality = .45×100 + .55×5',g(G,'moon').quality,48,0.6);
+
+    L.push('\n=== H. penalty caps ===');
+    const h=clone(BASE);
+    h.eclipse=true;h.eclipse_days=0.2;h.sankranti=true;h.adhika_masa=true;h.pitru_paksha=true;
+    const H=w.muhurtaEvaluate(h,P);
+    const pg=H.penaltyGroups.filter(x=>x.group==='prohibited')[0];
+    T('raw prohibited penalty exceeds cap',pg.raw<-30,true);
+    T('capped at -30',pg.applied,-30);
+    T('cap flagged',pg.capped,true);
+    T('band avoid (vetoed)',H.band,'avoid');
+
+    L.push('\n=== I. Guru Asta bars the day ===');
+    const i1=clone(BASE);i1.guru_elong=6;
+    const I=w.muhurtaEvaluate(i1,P);
+    T('vetoed by MC_GRAHA_GURU_ASTA',I.vetoes.some(v=>v.ruleId==='MC_GRAHA_GURU_ASTA'),true);
+    const i2=clone(BASE);i2.shukra_elong=9;i2.shukra_retro=true;  /* 9 > 8 orb for retro */
+    T('retro Venus at 9° is NOT combust (8° orb)',
+      w.muhurtaEvaluate(i2,P).vetoes.some(v=>/SHUKRA/.test(v.ruleId)),false);
+    const i3=clone(BASE);i3.shukra_elong=9;i3.shukra_retro=false; /* 9 < 10 orb for direct */
+    T('direct Venus at 9° IS combust (10° orb)',
+      w.muhurtaEvaluate(i3,P).vetoes.some(v=>v.ruleId==='MC_GRAHA_SHUKRA_ASTA_D'),true);
+
+    L.push('\n=== J. engine is category-agnostic: swap the profile ===');
+    const alt=JSON.parse(JSON.stringify(P));
+    alt.category='garbhadhana';
+    alt.weights={biological:0,nakshatra:0,moon:0,tarabala:0,tithi:100,yoga:0,karana:0};
+    const J=w.muhurtaEvaluate(clone(BASE),alt);
+    T('total is now purely the tithi score',J.total,90);
+    const alt2=JSON.parse(JSON.stringify(P));
+    alt2.category='marriage';
+    const J2=w.muhurtaEvaluate(clone(BASE),alt2);
+    T('marriage category: garbhadhana-only rows do not fire',
+      J2.factors.filter(f=>f.key==='tithi')[0].parts[0].matched,false);
+    T('marriage category: applies_to "*" rows still fire (vara)',
+      J2.factors.filter(f=>f.key==='vara')[0].parts[0].matched,true);
+
+    L.push('\n=== K. cycleModel ===');
+    const cm=w.cycleModel({lmp:'2026-09-01',cycle:28,bleed:5,regular:true},P.cycle);
+    const at=n=>cm.at(cm.lmpJD+n-1);   /* n = cycle day */
+    T('day 1 menses',at(1).phase,'menses');
+    T('day 5 menses',at(5).phase,'menses');
+    T('day 6 pre_fertile',at(6).phase,'pre_fertile');
+    T('ovulation day = 14',cm.ov,14);
+    T('day 9 fertile_early',at(9).phase,'fertile_early');
+    T('day 11 fertile_mid',at(11).phase,'fertile_mid');
+    T('day 14 peak',at(14).phase,'peak');
+    T('day 16 post_ovulation',at(16).phase,'post_ovulation');
+    T('day 20 luteal',at(20).phase,'luteal');
+    T('day 17 beyond ritukala',at(17).beyondRitukala,true);
+    T('day 16 within ritukala',at(16).beyondRitukala,false);
+    T('day 29 wraps to next cycle day 1',at(29).cycleDay,1);
+    T('next cycle flagged projected',at(29).projected,true);
+    T('current cycle confidence high',at(14).confidence,'high');
+    const cmI=w.cycleModel({lmp:'2026-09-01',cycle:28,bleed:5,regular:false},P.cycle);
+    T('irregular widens the peak window',cmI.at(cmI.lmpJD+15).phase,'peak'); /* day 16 */
+    T('irregular confidence low',cmI.at(cmI.lmpJD+13).confidence,'low');
+    const bi=w.muhurtaEvaluate(Object.assign(clone(BASE),{cycle_regular:false}),P);
+    near('irregular peak scores 88 not 100 (exception −12)',g(bi,'biological').quality,88,0.01);
+
+    L.push('\n=== L. real 45-day scan (Delhi, LMP 2026-09-01) ===');
+    const JD=(y,m,d)=>w.julianDay(y,m,d,12-5.5);
+    const cyc=w.cycleModel({lmp:'2026-09-01',cycle:28,bleed:5,regular:true},P.cycle);
+    const t0=Date.now();const rows=[];
+    for(let k=0;k<45;k++){
+      const jd=JD(2026,9,1)+k;
+      rows.push(w.muhurtaEvaluate(w.muhurtaFacts(jd,{cycle:cyc}),P));
+    }
+    const ms=Date.now()-t0;
+    T('45 evaluations produced',rows.length,45);
+    T('every row has a band',rows.every(r=>r&&r.band),true);
+    T('every total in 0..100',rows.every(r=>r.total>=0&&r.total<=100),true);
+    T('no NaN totals',rows.every(r=>isFinite(r.total)),true);
+    T('every vetoed row has a headline',rows.every(r=>!r.vetoed||!!r.headline),true);
+    T('every vetoed row is band=avoid',rows.every(r=>!r.vetoed||r.band==='avoid'),true);
+    const cnt={};rows.forEach(r=>{cnt[r.band]=(cnt[r.band]||0)+1;});
+    L.push('        bands: '+JSON.stringify(cnt)+'   in '+ms+' ms');
+    L.push('        first 12 days:');
+    rows.slice(0,12).forEach(r=>{
+      const o=w.jdToDate(r.jd+5.5/24);
+      L.push('          '+o.y+'-'+String(o.m).padStart(2,'0')+'-'+String(Math.floor(o.d)).padStart(2,'0')
+        +'  '+String(r.total).padStart(3)+'  '+r.band.padEnd(9)
+        +(r.biological?('bio='+r.biological.phase+' d'+r.biological.cycleDay+'  '):'')
+        +(r.headline?('← '+r.headline):''));
+    });
+    T('menses days are all vetoed',
+      rows.filter(r=>r.biological&&r.biological.phase==='menses').every(r=>r.vetoed),true);
+    T('scan crosses into a projected cycle',
+      rows.some(r=>r.biological&&r.biological.projected),true);
+
+    L.push('\n=== M. audit trail ===');
+    const any=rows.filter(r=>!r.vetoed)[0]||rows[0];
+    T('fired rule ids recorded',any.firedRuleIds.length>0,true);
+    T('every factor part carries a source',
+      any.factors.every(f=>f.parts.every(p=>!p.matched||(p.source&&p.source.text))),true);
+    T('sanskrit fields still null (unverified)',
+      any.factors.every(f=>f.parts.every(p=>p.sanskrit===null)),true);
+    L.push('        sample fired: '+any.firedRuleIds.slice(0,8).join(', '));
+
+    L.push('\n===================================');
+    L.push('PASS '+pass+'   FAIL '+fail);
+   }catch(err){L.push('ERROR: '+err.message+'\n'+(err.stack||'').split('\n').slice(0,6).join('\n'));}
+   document.getElementById('out').textContent=L.join('\n');
+  });
+ },3000);
+});
+</script></body></html>

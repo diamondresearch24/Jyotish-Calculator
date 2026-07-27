@@ -1,0 +1,88 @@
+{
+  "category": "garbhadhana",
+  "version": 1,
+  "label": { "en": "Garbhadhana Sanskara", "hi": "गर्भाधान संस्कार" },
+  "primary_source": "Muhurta Chintamani, supplemented by Dharma Sindhu, Nirnaya Sindhu, Narada Samhita and Brihat Parashara Hora Shastra",
+
+  "tables": [
+    "mc_biological.json",
+    "mc_nakshatra.json",
+    "mc_graha.json",
+    "mc_tarabala.json",
+    "mc_tithi.json",
+    "mc_yoga.json",
+    "mc_karana.json",
+    "mc_vara.json",
+    "mc_chandrabala.json",
+    "mc_prohibited.json",
+    "mc_festival.json"
+  ],
+
+  "weights": {
+    "biological": 25,
+    "nakshatra": 20,
+    "moon": 15,
+    "tarabala": 15,
+    "tithi": 10,
+    "yoga": 10,
+    "karana": 5
+  },
+
+  "requires": {
+    "biological": "lmp",
+    "tarabala": "has_mother_chart"
+  },
+
+  "informational": ["vara", "chandrabala"],
+  "redistribute_missing_weight": true,
+
+  "penalty_caps": {
+    "prohibited": -30,
+    "festival": -30,
+    "graha": -20
+  },
+
+  "bands": [
+    { "key": "excellent", "min": 85, "label": { "en": "Excellent", "hi": "उत्तम" }, "chip": "✅", "stars": 5, "color": "good" },
+    { "key": "good", "min": 70, "label": { "en": "Good", "hi": "शुभ" }, "chip": "🟢", "stars": 4, "color": "good" },
+    { "key": "average", "min": 50, "label": { "en": "Average", "hi": "मध्यम" }, "chip": "🟡", "stars": 3, "color": "warn" },
+    { "key": "avoid", "min": 0, "label": { "en": "Avoid", "hi": "वर्ज्य" }, "chip": "🔴", "stars": 1, "color": "bad" }
+  ],
+  "veto_band": "avoid",
+
+  "cycle": {
+    "luteal_days": 14,
+    "fertile_window": {
+      "peak": [-1, 1],
+      "fertile_mid": [-3, -2],
+      "fertile_early": [-5, -4],
+      "post_ovulation": [2, 2]
+    },
+    "irregular_widen_days": 2,
+    "ritukala_nights": 16,
+    "first_excluded_nights": 4,
+    "min_cycle": 21,
+    "max_cycle": 40,
+    "min_bleed": 2,
+    "max_bleed": 9,
+    "note": "fertile_window offsets are days relative to the estimated ovulation day (cycle_day − ovulation_day). Anything earlier than the earliest listed band and still inside the Ritukala is 'pre_fertile'; anything later is 'luteal'; past the sixteenth night from the onset of menses it is 'beyond_ritukala'."
+  },
+
+  "scan": {
+    "days": 45,
+    "note": "The requirement is a fixed 45-day horizon, so the scan crosses into the next cycle. cycleModel() projects forward by whole cycle lengths and flags projected cycles as lower confidence."
+  },
+
+  "advanced_panel": {
+    "enabled": true,
+    "scored": false,
+    "components": ["progeny_strength_mother", "progeny_strength_father"],
+    "note": "Decision D2 of the master plan: the couple's progeny-chart strength (5th house, 5th lord, Jupiter, Saptamsa D7, Putra-karaka) is shown in its own panel and never moves a date's score or band, so a date scores identically whether or not birth details were supplied."
+  },
+
+  "disclaimers": {
+    "medical": "This module is not medical advice. The fertile window is a calendar estimate; consult a qualified physician for anything concerning conception or fertility.",
+    "pcpndt": "In compliance with the PCPNDT Act, 1994, this tool does not implement, display or support any rule concerning the sex of the offspring.",
+    "approximation": "Eclipse detection is approximate — it is derived from the Sun's distance from the lunar node at syzygy and does not account for visibility from your location. Verify against a published panchanga before relying on it."
+  }
+}

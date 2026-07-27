@@ -1,0 +1,67 @@
+<!doctype html><meta charset="utf-8">
+<iframe id="f" src="jyotish_calculator.html" style="width:1200px;height:800px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];
+function say(s){log.push(s);document.getElementById('out').textContent=log.join('\n');}
+window.onerror=(m)=>{say('WINDOW ERROR: '+m);};
+document.getElementById('f').onload=async function(){
+  const w=this.contentWindow;
+  w.onerror=(m,s,l)=>{say('IFRAME ERROR: '+m+' @'+l);};
+  try{
+    await new Promise(r=>setTimeout(r,1200));
+    await w.loadMuhurtaDB();
+    say('DB source='+w.MUHURTA_DB.source+' loaded='+w.MUHURTA_DB.loaded+' rules='+w.mhRuleCount()+' tables='+Object.keys(w.MUHURTA_DB.tables).length);
+    const G=w.GBH;
+    G.lmp='2025-06-01';G.cycle=28;G.bleed=5;G.reg='reg';
+    G.place={city:'Alwar',lat:'27.5530',lon:'76.6346',tz:5.5};
+    G.w={name:'M',dob:'1995-04-12',tob:'09:30',city:'Alwar',lat:'27.5530',lon:'76.6346',tz:5.5};
+    G.m={name:'F',dob:'1992-11-03',tob:'22:10',city:'Jaipur',lat:'26.9124',lon:'75.7873',tz:5.5};
+    G.startJD=Math.floor(w.julianDay(2025,6,1,12))+0.5;
+
+    let t=performance.now();
+    const S=w.gbhScan();
+    say('scan '+(performance.now()-t).toFixed(0)+'ms rows='+S.rows.length);
+    const c={};S.rows.forEach(r=>c[r.band]=(c[r.band]||0)+1);
+    say('bands '+JSON.stringify(c));
+    const r0=S.rows[0];
+    say('componentsScored='+r0.componentsScored+'/'+r0.componentsTotal+' redistributed='+r0.redistributed+
+        ' sumMax='+r0.factors.filter(f=>f.kind==='scored').reduce((a,f)=>a+f.max,0).toFixed(1));
+    say('first10 totals '+S.rows.slice(0,10).map(r=>r.total).join(','));
+    say('vetoed days='+S.rows.filter(r=>r.vetoed).length);
+
+    const best=S.rows.slice().sort((a,b)=>b.total-a.total)[0];
+    say('best '+w.gbhFmt(best.facts)+' = '+best.total+' '+best.bandLabel);
+    G.open[best.jd]=true;
+    t=performance.now();
+    const html=w.pGarbhadhana();
+    say('render '+(performance.now()-t).toFixed(0)+'ms len='+html.length);
+    say('undefined='+(html.match(/undefined/g)||[]).length+' NaN='+(html.match(/NaN/g)||[]).length+' [object='+(html.match(/\[object/g)||[]).length);
+    const d=w.document.createElement('div');d.innerHTML=html;w.document.body.appendChild(d);
+    say('mounted nodes='+d.querySelectorAll('*').length+' tables='+d.querySelectorAll('table').length+' detailRow='+(d.querySelector('#gbhd-'+Math.floor(best.jd))?1:0));
+    const vc={};S.rows.forEach(r=>r.vetoes.forEach(v=>vc[v.ruleId]=(vc[v.ruleId]||0)+1));
+    say('veto reasons '+JSON.stringify(vc));
+    say('best composition '+best.factors.filter(f=>f.kind==='scored').map(f=>f.key+' '+f.quality+'%='+f.points+'/'+f.max).join(' | '));
+    say('best base='+best.base+' pen='+best.penaltyTotal+' total='+best.total);
+    const nonV=S.rows.filter(r=>!r.vetoed);
+    say('non-vetoed='+nonV.length+' totals '+nonV.map(r=>w.gbhFmtShort(r.facts)+':'+r.total).join(' '));
+
+    G.lmp='';G.open={};
+    const h2=w.pGarbhadhana();const S2=w.gbhScan();
+    say('noLMP len='+h2.length+' undef='+(h2.match(/undefined/g)||[]).length+' NaN='+(h2.match(/NaN/g)||[]).length+
+        ' comp='+S2.rows[0].componentsScored+'/'+S2.rows[0].componentsTotal+
+        ' sumMax='+S2.rows[0].factors.filter(f=>f.kind==='scored').reduce((a,f)=>a+f.max,0).toFixed(1));
+
+    G.w={name:'',dob:'',tob:'',city:'',lat:'',lon:'',tz:5.5};G.m={name:'',dob:'',tob:'',city:'',lat:'',lon:'',tz:5.5};
+    const h3=w.pGarbhadhana();const S3=w.gbhScan();
+    say('bare len='+h3.length+' undef='+(h3.match(/undefined/g)||[]).length+' NaN='+(h3.match(/NaN/g)||[]).length+
+        ' comp='+S3.rows[0].componentsScored+'/'+S3.rows[0].componentsTotal+
+        ' sumMax='+S3.rows[0].factors.filter(f=>f.kind==='scored').reduce((a,f)=>a+f.max,0).toFixed(1));
+
+    G.reg='irr';G.lmp='2025-06-01';
+    const S4=w.gbhScan();
+    say('irregular bands '+JSON.stringify(S4.rows.reduce((a,r)=>{a[r.band]=(a[r.band]||0)+1;return a;},{})));
+    say('DONE');
+  }catch(e){say('THROWN: '+e.message+'\n'+e.stack);}
+};
+</script>

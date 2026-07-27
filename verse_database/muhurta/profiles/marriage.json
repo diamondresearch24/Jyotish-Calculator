@@ -1,0 +1,67 @@
+{
+  "category": "marriage",
+  "version": 1,
+  "label": { "en": "Marriage / Vivah Muhurat", "hi": "विवाह मुहूर्त" },
+  "primary_source": "Muhurta Chintamani (Vivah Prakarana), supplemented by Dharma Sindhu, Nirnaya Sindhu and Kalaprakashika",
+
+  "tables": [
+    "mc_nakshatra.json",
+    "mc_graha.json",
+    "mc_tarabala.json",
+    "mc_tithi.json",
+    "mc_yoga.json",
+    "mc_karana.json",
+    "mc_vara.json",
+    "mc_chandrabala.json",
+    "mc_prohibited.json",
+    "mc_festival.json"
+  ],
+
+  "weights": {
+    "nakshatra": 25,
+    "moon": 15,
+    "tarabala": 15,
+    "tithi": 15,
+    "yoga": 10,
+    "karana": 10,
+    "vara": 10
+  },
+
+  "requires": {
+    "tarabala": "has_bride_chart"
+  },
+
+  "informational": ["chandrabala"],
+  "redistribute_missing_weight": true,
+
+  "penalty_caps": {
+    "prohibited": -30,
+    "festival": -30,
+    "graha": -25
+  },
+
+  "bands": [
+    { "key": "excellent", "min": 85, "label": { "en": "Excellent", "hi": "उत्तम" }, "chip": "✅", "stars": 5, "color": "good", "note": "All major factors align — highly auspicious." },
+    { "key": "good", "min": 70, "label": { "en": "Good", "hi": "शुभ" }, "chip": "🟢", "stars": 4, "color": "good", "note": "Strong date with minor reservations." },
+    { "key": "average", "min": 50, "label": { "en": "Average", "hi": "मध्यम" }, "chip": "🟡", "stars": 3, "color": "warn", "note": "Usable but consult a pandit for specifics." },
+    { "key": "avoid", "min": 0, "label": { "en": "Avoid", "hi": "वर्ज्य" }, "chip": "🔴", "stars": 1, "color": "bad", "note": "Classical prohibitions apply — select another date." }
+  ],
+  "veto_band": "avoid",
+
+  "scan": {
+    "days": 60,
+    "note": "Marriage dates are typically planned further ahead than Garbhadhana; 60-day default."
+  },
+
+  "advanced_panel": {
+    "enabled": true,
+    "scored": false,
+    "components": ["kundali_milan", "manglik_check"],
+    "note": "Kundali Milan (Ashta Kuta) and Manglik analysis are shown in a separate panel if both charts are provided. They do not affect the muhurat date score — muhurat selects a moment, compatibility is a separate question."
+  },
+
+  "disclaimers": {
+    "general": "This module provides a muhurat assessment based on classical texts. Final selection should be made in consultation with a qualified pandit and the families involved.",
+    "approximation": "Eclipse detection is approximate. Verify against a published panchanga."
+  }
+}

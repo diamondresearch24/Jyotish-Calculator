@@ -1,0 +1,74 @@
+<!doctype html><meta charset="utf-8">
+<iframe id="f" src="jyotish_calculator.html" style="width:1300px;height:900px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];
+function say(s){log.push(s);document.getElementById('out').textContent=log.join('\n');}
+document.getElementById('f').onload=async function(){
+  const w=this.contentWindow,D=w.document;
+  const errs=[];w.onerror=(m,s,l)=>{errs.push(m+' @'+l);};
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const txt=()=>D.getElementById('muhPrintArea')?D.getElementById('muhPrintArea').innerText:'(no muhPrintArea)';
+  try{
+    await wait(1200);
+    await w.loadMuhurtaDB();
+    w.showMuhurat('garbhadhana');
+    await wait(400);
+    say('TAB OPENED. body chars='+txt().length);
+    say('has heading: '+/Garbhadhana Sanskara Muhurat/.test(txt()));
+
+    // fill the form exactly as a user would
+    const set=(sel,val)=>{const e=D.querySelector(sel);if(!e){say('MISSING '+sel);return;}
+      e.value=val;e.dispatchEvent(new w.Event('input',{bubbles:true}));e.dispatchEvent(new w.Event('change',{bubbles:true}));};
+    set('#muhPrintArea input[type=date]','2025-06-01');
+    const nums=D.querySelectorAll('#muhPrintArea input[type=number]');
+    say('number inputs='+nums.length);
+    nums[0].value='30';nums[0].dispatchEvent(new w.Event('input',{bubbles:true}));
+    nums[1].value='4';nums[1].dispatchEvent(new w.Event('input',{bubbles:true}));
+    // place
+    const lat=[...D.querySelectorAll('#muhPrintArea input[type=text]')];
+    say('text inputs='+lat.length);
+    w.GBH_TMP['place.lat']='27.5530';w.GBH_TMP['place.lon']='76.6346';w.GBH_TMP['place.tz']='5.5';w.GBH_TMP['place.city']='Alwar';
+
+    // click Generate
+    const gen=[...D.querySelectorAll('#muhPrintArea button')].find(b=>/Generate Muhurat/.test(b.textContent));
+    say('generate button found: '+!!gen);
+    gen.click();await wait(500);
+    const t1=txt();
+    say('after generate chars='+t1.length+' hasCalendar='+/day calendar/.test(t1)+' hasCycleTable='+/Estimated ovulation/.test(t1));
+    say('GBH.lmp='+w.GBH.lmp+' cycle='+w.GBH.cycle+' bleed='+w.GBH.bleed+' place='+JSON.stringify(w.GBH.place));
+
+    // filter chips
+    const chips=[...D.querySelectorAll('#muhPrintArea button')].filter(b=>/Excellent|Good|Average|Avoid/.test(b.textContent));
+    say('filter chips='+chips.length+' labels='+chips.map(c=>c.textContent.trim()).join(' / '));
+    const before=D.querySelectorAll('#muhPrintArea tr[onclick^="gbhToggleDay"]').length;
+    const avoidChip=chips.find(c=>/Avoid/.test(c.textContent));
+    avoidChip.click();await wait(400);
+    const after=D.querySelectorAll('#muhPrintArea tr[onclick^="gbhToggleDay"]').length;
+    say('rows before filter='+before+' after hiding Avoid='+after+' filters='+JSON.stringify(w.GBH.filters));
+
+    // expand a day
+    const row=D.querySelector('#muhPrintArea tr[onclick^="gbhToggleDay"]');
+    row.click();await wait(400);
+    const t2=txt();
+    say('after expand: hasHowScored='+/How .* was scored/.test(t2)+' hasAudit='+/rules fired/.test(t2)+' hasProhib='+/Prohibitions checked/.test(t2)+' chars='+t2.length);
+    say('detail row present='+(D.querySelectorAll('#muhPrintArea tr[id^=gbhd-]').length));
+
+    // collapse again
+    D.querySelector('#muhPrintArea tr[onclick^="gbhToggleDay"]').click();await wait(300);
+    say('after collapse detail rows='+D.querySelectorAll('#muhPrintArea tr[id^=gbhd-]').length);
+
+    // move the window
+    w.gbhSetStart('2025-09-01');await wait(400);
+    say('after window move hasSep='+/Sep/.test(txt()));
+
+    // reset
+    w.gbhReset();await wait(400);
+    say('after reset GBH.lmp="'+w.GBH.lmp+'" chars='+txt().length);
+
+    say('page text NaN='+(txt().match(/NaN/g)||[]).length+' undefined='+(txt().match(/undefined/g)||[]).length);
+    say(errs.length?('JS ERRORS: '+errs.join(' | ')):'no JS errors');
+    say('DONE');
+  }catch(e){say('THROWN: '+e.message+'\n'+e.stack);}
+};
+</script>

@@ -1,0 +1,42 @@
+<!doctype html><meta charset="utf-8">
+<iframe id="f" src="jyotish_calculator.html" style="width:900px;height:600px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];function say(s){log.push(s);document.getElementById('out').textContent=log.join('\n');}
+document.getElementById('f').onload=async function(){
+  const w=this.contentWindow;
+  try{
+    await new Promise(r=>setTimeout(r,1200));
+    await w.loadMuhurtaDB();
+    const P=w.mhProfile('garbhadhana');
+    say('bands '+P.bands.map(b=>b.key+'>='+b.min).join(' '));
+    say('weights '+JSON.stringify(P.weights));
+    const place={lat:27.553,lon:76.6346,tz:5.5};
+    const cyc=w.cycleModel({lmp:'2025-01-06',cycle:28,bleed:5,regular:true},P.cycle);
+    const start=Math.floor(w.julianDay(2025,1,1,12))+0.5;
+    const N=730,hist={},tot=[];let mx=null,best=[];
+    const compAvg={},compN={};
+    for(let i=0;i<N;i++){
+      const r=w.muhurtaEvaluate(w.muhurtaFacts(start+i,{place,cycle:cyc}),P);
+      hist[r.band]=(hist[r.band]||0)+1;tot.push(r.total);
+      if(!mx||r.total>mx.total)mx=r;
+      if(r.total>=80)best.push(w.gbhFmt(r.facts)+':'+r.total);
+      if(!r.vetoed)r.factors.filter(f=>f.kind==='scored').forEach(f=>{compAvg[f.key]=(compAvg[f.key]||0)+f.quality;compN[f.key]=(compN[f.key]||0)+1;});
+    }
+    say('2 years, no charts: '+JSON.stringify(hist));
+    say('max='+mx.total+' on '+w.gbhFmt(mx.facts)+' band='+mx.band);
+    say('days >=80: '+best.length+(best.length?' -> '+best.slice(0,12).join(' '):''));
+    say('mean quality of each component on non-vetoed days: '+Object.keys(compAvg).map(k=>k+'='+(compAvg[k]/compN[k]).toFixed(0)+'%').join(' '));
+    // with charts
+    const CW=w.gbhBuildChart({dob:'1995-04-12',tob:'09:30',lat:'27.5530',lon:'76.6346',tz:5.5});
+    const h2={};let mx2=null;
+    for(let i=0;i<N;i++){
+      const r=w.muhurtaEvaluate(w.muhurtaFacts(start+i,{place,cycle:cyc,motherChart:CW}),P);
+      h2[r.band]=(h2[r.band]||0)+1;if(!mx2||r.total>mx2.total)mx2=r;
+    }
+    say('2 years, with mother chart: '+JSON.stringify(h2)+' max='+mx2.total);
+    say('best-with-chart composition: '+mx2.factors.filter(f=>f.kind==='scored').map(f=>f.key+' '+f.quality+'%').join(' | ')+' base='+mx2.base+' pen='+mx2.penaltyTotal);
+    say('DONE');
+  }catch(e){say('THROWN: '+e.message+'\n'+e.stack);}
+};
+</script>
