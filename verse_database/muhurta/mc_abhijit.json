@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "file": "mc_abhijit.json",
+    "component": "abhijit",
+    "description": "Abhijit Muhurta - the most auspicious ~48 minute window around local noon",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Abhijit is the 8th muhurta of the day, centered around local apparent noon.",
+    "formula": "abhijit_center = (sunrise + sunset) / 2; abhijit_start = abhijit_center - 24min; abhijit_end = abhijit_center + 24min",
+    "duration_minutes": 48,
+    "exceptions": "Abhijit is NOT recommended on Wednesday (ruled by Mercury, conflicts with Abhijit nakshatra lord)"
+  },
+  "rules": [
+    {
+      "id": "MC_ABHIJIT_001",
+      "rule_name": "Abhijit Muhurta bonus",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_bonus",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Abhijit Muhurta",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": "अभिजित् मुहूर्ते कृतं कार्यं सिद्धिं याति निश्चितम्।",
+      "iast": "abhijit muhūrte kṛtaṁ kāryaṁ siddhiṁ yāti niścitam।",
+      "translations": {
+        "en": "Abhijit Muhurta destroys all doshas — the most auspicious window of the day, work started here succeeds.",
+        "hi": "अभिजित् मुहूर्त सभी दोषों का नाश करता है — दिन की सबसे शुभ अवधि, यहां आरंभ किया कार्य सफल होता है।"
+      },
+      "match": { "in_abhijit": true, "vara": {"not": 3} },
+      "status": "excellent",
+      "bonus": 12,
+      "priority": 8,
+      "veto": false,
+      "tags": ["time", "abhijit", "bonus", "muhurta"]
+    },
+    {
+      "id": "MC_ABHIJIT_002",
+      "rule_name": "Abhijit on Wednesday caution",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_restriction",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Abhijit Muhurta",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Abhijit Muhurta on Wednesday is not recommended — Mercury day conflicts with Abhijit nakshatra.",
+        "hi": "बुधवार को अभिजित् मुहूर्त अनुशंसित नहीं — बुध दिवस अभिजित् नक्षत्र से संघर्ष करता है।"
+      },
+      "match": { "in_abhijit": true, "vara": 3 },
+      "status": "neutral",
+      "bonus": 0,
+      "priority": 5,
+      "veto": false,
+      "tags": ["time", "abhijit", "wednesday", "exception"]
+    }
+  ]
+}

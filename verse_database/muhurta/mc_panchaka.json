@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "file": "mc_panchaka.json",
+    "component": "panchaka",
+    "description": "Panchaka - five-fold inauspicious combinations based on nakshatra and weekday",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Panchaka is calculated as (nakshatra_index + weekday_index) % 9. Values 1-5 indicate different types of panchaka.",
+    "formula": "panchaka_type = (nakshatra + weekday) % 9",
+    "types": {
+      "1": { "name": "Mrityu Panchaka", "name_hi": "मृत्यु पंचक", "severity": "high" },
+      "2": { "name": "Agni Panchaka", "name_hi": "अग्नि पंचक", "severity": "high" },
+      "3": { "name": "Raja Panchaka", "name_hi": "राज पंचक", "severity": "medium" },
+      "4": { "name": "Chora Panchaka", "name_hi": "चोर पंचक", "severity": "medium" },
+      "5": { "name": "Roga Panchaka", "name_hi": "रोग पंचक", "severity": "high" }
+    }
+  },
+  "rules": [
+    {
+      "id": "MC_PANCHAKA_MRITYU",
+      "rule_name": "Mrityu Panchaka",
+      "applies_to": ["garbhadhana", "marriage", "griha_pravesh"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "panchaka",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Panchaka Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Mrityu (Death) Panchaka — threatens life and vitality, strictly avoid.",
+        "hi": "मृत्यु पंचक — जीवन और जीवनशक्ति को खतरा, सख्ती से वर्जित।"
+      },
+      "match": { "panchaka_type": 1 },
+      "status": "prohibited",
+      "penalty": -15,
+      "priority": 7,
+      "veto": false,
+      "tags": ["panchaka", "mrityu", "daily_restriction"]
+    },
+    {
+      "id": "MC_PANCHAKA_AGNI",
+      "rule_name": "Agni Panchaka",
+      "applies_to": ["griha_pravesh", "construction"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "panchaka",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Panchaka Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Agni (Fire) Panchaka — risk of fire and destruction, avoid for building-related acts.",
+        "hi": "अग्नि पंचक — अग्नि और विनाश का खतरा, भवन संबंधी कार्यों के लिए वर्जित।"
+      },
+      "match": { "panchaka_type": 2 },
+      "status": "prohibited",
+      "penalty": -12,
+      "priority": 6,
+      "veto": false,
+      "tags": ["panchaka", "agni", "daily_restriction"]
+    },
+    {
+      "id": "MC_PANCHAKA_ROGA",
+      "rule_name": "Roga Panchaka",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "panchaka",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Panchaka Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Roga (Disease) Panchaka — threatens health, avoid for conception.",
+        "hi": "रोग पंचक — स्वास्थ्य को खतरा, गर्भाधान के लिए वर्जित।"
+      },
+      "match": { "panchaka_type": 5 },
+      "status": "avoid",
+      "penalty": -10,
+      "priority": 5,
+      "veto": false,
+      "tags": ["panchaka", "roga", "daily_restriction"]
+    }
+  ]
+}

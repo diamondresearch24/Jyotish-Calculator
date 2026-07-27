@@ -1,0 +1,24 @@
+{
+  "id": "kalaprakashika",
+  "name": "Kalaprakashika",
+  "name_sanskrit": "कालप्रकाशिका",
+  "name_iast": "Kālaprakāśikā",
+  "author": "Unknown (attributed to various)",
+  "author_sanskrit": null,
+  "period": "Medieval period",
+  "tradition": "South Indian (Kerala/Tamil Nadu)",
+  "description": {
+    "en": "A South Indian text on muhurta widely followed in Kerala and Tamil Nadu. Contains regional variations in muhurta rules, particularly for marriages and religious ceremonies.",
+    "hi": "केरल और तमिलनाडु में व्यापक रूप से अनुसरण किया जाने वाला दक्षिण भारतीय मुहूर्त ग्रंथ। विवाह और धार्मिक समारोहों के लिए मुहूर्त नियमों में क्षेत्रीय भिन्नताएं।"
+  },
+  "editions": [
+    {
+      "publisher": "Ranjan Publications",
+      "year": 2000,
+      "language": "Sanskrit with English",
+      "primary": true
+    }
+  ],
+  "default": false,
+  "priority": 4
+}

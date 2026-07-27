@@ -1,8 +1,9 @@
 {
   "category": "marriage",
-  "version": 1,
+  "version": 2,
   "label": { "en": "Marriage / Vivah Muhurat", "hi": "विवाह मुहूर्त" },
   "primary_source": "Muhurta Chintamani (Vivah Prakarana), supplemented by Dharma Sindhu, Nirnaya Sindhu and Kalaprakashika",
+  "authority": "muhurta_chintamani",
 
   "tables": [
     "mc_nakshatra.json",
@@ -14,8 +15,27 @@
     "mc_vara.json",
     "mc_chandrabala.json",
     "mc_prohibited.json",
-    "mc_festival.json"
+    "mc_festival.json",
+    "mc_lagna.json",
+    "mc_hora.json",
+    "mc_moon_affliction.json",
+    "mc_rahukalam.json",
+    "mc_yamaganda.json",
+    "mc_gulika.json",
+    "mc_durmuhurta.json",
+    "mc_varjyam.json",
+    "mc_abhijit.json",
+    "mc_panchaka.json",
+    "mc_bhadra.json"
   ],
+
+  "scoring_stages": {
+    "1_prohibitions": { "components": ["prohibited", "festival", "graha"], "veto_rules": true },
+    "2_panchanga": { "components": ["tithi", "nakshatra", "yoga", "karana", "vara"], "weight": 50 },
+    "3_planetary": { "components": ["moon", "tarabala", "chandrabala", "moon_affliction"], "weight": 25 },
+    "4_lagna": { "components": ["lagna"], "weight": 15, "requires": "time_selection" },
+    "5_time": { "components": ["hora", "rahukalam", "yamaganda", "gulika", "durmuhurta", "varjyam", "abhijit", "panchaka", "bhadra"], "weight": 10, "requires": "time_selection" }
+  },
 
   "weights": {
     "nakshatra": 25,
@@ -28,7 +48,9 @@
   },
 
   "requires": {
-    "tarabala": "has_bride_chart"
+    "tarabala": "has_bride_chart",
+    "lagna": "time_selection",
+    "hora": "time_selection"
   },
 
   "informational": ["chandrabala"],
@@ -37,7 +59,10 @@
   "penalty_caps": {
     "prohibited": -30,
     "festival": -30,
-    "graha": -25
+    "graha": -25,
+    "moon_affliction": -15,
+    "panchaka": -15,
+    "lagna": -10
   },
 
   "bands": [

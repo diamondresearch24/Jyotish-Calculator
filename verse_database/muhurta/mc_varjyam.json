@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "file": "mc_varjyam.json",
+    "component": "varjyam",
+    "description": "Varjyam - nakshatra-based inauspicious period, ~1.5 hours daily",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Varjyam is calculated based on the nakshatra ruling at a given time. Each nakshatra has a specific varjyam portion.",
+    "formula": "For each nakshatra, varjyam starts at specific nadika from nakshatra start",
+    "nadika_per_nakshatra": 60,
+    "varjyam_duration_nadika": 4,
+    "varjyam_start_nadika": {
+      "0": 50, "1": 6, "2": 22, "3": 6, "4": 50, "5": 26, "6": 30,
+      "7": 20, "8": 32, "9": 18, "10": 22, "11": 20, "12": 14, "13": 14,
+      "14": 10, "15": 14, "16": 20, "17": 32, "18": 30, "19": 20, "20": 18,
+      "21": 18, "22": 20, "23": 26, "24": 24, "25": 22, "26": 0
+    }
+  },
+  "rules": [
+    {
+      "id": "MC_VARJYAM_001",
+      "rule_name": "Varjyam prohibition",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_restriction",
+      "restriction_type": "varjyam",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Nakshatra Dosha",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Varjyam is a nakshatra-specific inauspicious period — avoid for all good works.",
+        "hi": "वर्ज्यम नक्षत्र-विशिष्ट अशुभ काल है — सभी शुभ कार्यों के लिए वर्जित।"
+      },
+      "match": { "in_varjyam": true },
+      "status": "prohibited",
+      "penalty": -8,
+      "priority": 6,
+      "veto": false,
+      "tags": ["time", "varjyam", "nakshatra", "daily_restriction"]
+    }
+  ]
+}

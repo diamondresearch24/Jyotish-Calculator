@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "file": "mc_yamaganda.json",
+    "component": "yamaganda",
+    "description": "Yamaganda - inauspicious period ruled by death deity Yama, varies by weekday",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Day divided into 8 equal parts from sunrise to sunset. Yamaganda is one part, position varies by weekday.",
+    "formula": "part_duration = (sunset - sunrise) / 8; yama_start = sunrise + (sequence[weekday] * part_duration)",
+    "sequence": {
+      "0": 4, "1": 3, "2": 2, "3": 1, "4": 0, "5": 6, "6": 5
+    }
+  },
+  "rules": [
+    {
+      "id": "MC_YAMA_001",
+      "rule_name": "Yamaganda prohibition",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_restriction",
+      "restriction_type": "yamaganda",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Kala Dosha Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Yamaganda is ruled by Yama, god of death — highly inauspicious, avoid for all good works.",
+        "hi": "यमगंड यमराज द्वारा शासित है — अत्यंत अशुभ, सभी शुभ कार्यों के लिए वर्जित।"
+      },
+      "match": { "in_yamaganda": true },
+      "status": "prohibited",
+      "penalty": -12,
+      "priority": 7,
+      "veto": false,
+      "tags": ["time", "yamaganda", "daily_restriction"]
+    }
+  ]
+}

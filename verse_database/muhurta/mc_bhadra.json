@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "file": "mc_bhadra.json",
+    "component": "bhadra",
+    "description": "Bhadra (Vishti) Karana - inauspicious half-tithi period",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Bhadra (Vishti) is the 7th karana, occurring 8 times in a lunar month. It moves through the day.",
+    "occurrence": "Bhadra occurs in second half of 3rd, 10th tithis (shukla); first half of 7th, 14th tithis; second half of full/new moon day",
+    "duration_hours": "~6 hours each occurrence"
+  },
+  "rules": [
+    {
+      "id": "MC_BHADRA_001",
+      "rule_name": "Bhadra Karana prohibition",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "bhadra",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Karana Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": "भद्रा विष्टिः सदा त्याज्या शुभकर्मसु सर्वदा।",
+      "iast": "bhadrā viṣṭiḥ sadā tyājyā śubhakarmasu sarvadā।",
+      "translations": {
+        "en": "Bhadra (Vishti) Karana should always be avoided for auspicious works — it brings obstacles.",
+        "hi": "भद्रा (विष्टि) करण शुभ कार्यों के लिए सदैव वर्जित है — यह बाधाएं लाती है।"
+      },
+      "match": { "karana": 7 },
+      "status": "prohibited",
+      "penalty": -12,
+      "priority": 6,
+      "veto": false,
+      "tags": ["karana", "bhadra", "vishti"]
+    },
+    {
+      "id": "MC_BHADRA_TAIL_001",
+      "rule_name": "Bhadra Puccha (tail) relief",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Karana Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Last 2 ghatikas of Bhadra (Bhadra Puccha) are less harmful — relief possible.",
+        "hi": "भद्रा के अंतिम 2 घटिका (भद्रा पुच्छ) कम हानिकारक हैं — राहत संभव।"
+      },
+      "match": { "bhadra_portion": "puccha" },
+      "status": "caution",
+      "penalty": -4,
+      "priority": 4,
+      "veto": false,
+      "tags": ["karana", "bhadra", "puccha", "relief"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "dharma_sindhu",
+  "name": "Dharma Sindhu",
+  "name_sanskrit": "धर्म सिंधु",
+  "name_iast": "Dharma Sindhu",
+  "author": "Kāśīnātha Upādhyāya",
+  "author_sanskrit": "काशीनाथ उपाध्याय",
+  "period": "18th century CE",
+  "tradition": "Pan-Indian (comprehensive)",
+  "description": {
+    "en": "A comprehensive digest of Hindu religious law and practices, including detailed sections on muhurta selection. It synthesizes rules from various earlier texts and is widely consulted in both North and South India.",
+    "hi": "हिंदू धार्मिक नियम और प्रथाओं का व्यापक संग्रह, जिसमें मुहूर्त चयन पर विस्तृत खंड शामिल हैं। यह विभिन्न पूर्ववर्ती ग्रंथों के नियमों को संश्लेषित करता है।"
+  },
+  "editions": [
+    {
+      "publisher": "Chaukhamba Sanskrit Sansthan",
+      "year": 2005,
+      "language": "Sanskrit with Hindi",
+      "primary": true
+    }
+  ],
+  "default": false,
+  "priority": 2
+}

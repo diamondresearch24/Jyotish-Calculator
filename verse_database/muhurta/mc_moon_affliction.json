@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "file": "mc_moon_affliction.json",
+    "component": "moon_affliction",
+    "description": "Moon affliction rules - conjunctions and aspects that weaken the Moon",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "rules": [
+    {
+      "id": "MC_MOON_RAHU_001",
+      "rule_name": "Moon with Rahu",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "moon_affliction",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Chandra Bala",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon conjunct Rahu (within 12°) creates mental disturbance and illusion — avoid for conception.",
+        "hi": "चंद्र राहु युक्त (12° के भीतर) मानसिक अशांति और भ्रम उत्पन्न करता है — गर्भाधान के लिए वर्जित।"
+      },
+      "match": { "moon_rahu_conjunction": { "max": 12 } },
+      "status": "avoid",
+      "penalty": -10,
+      "priority": 6,
+      "veto": false,
+      "tags": ["moon", "rahu", "affliction", "conjunction"]
+    },
+    {
+      "id": "MC_MOON_KETU_001",
+      "rule_name": "Moon with Ketu",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "moon_affliction",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Chandra Bala",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon conjunct Ketu (within 12°) brings detachment and spiritual confusion — avoid for worldly acts.",
+        "hi": "चंद्र केतु युक्त (12° के भीतर) वैराग्य और आध्यात्मिक भ्रम लाता है — सांसारिक कार्यों के लिए वर्जित।"
+      },
+      "match": { "moon_ketu_conjunction": { "max": 12 } },
+      "status": "avoid",
+      "penalty": -8,
+      "priority": 5,
+      "veto": false,
+      "tags": ["moon", "ketu", "affliction", "conjunction"]
+    },
+    {
+      "id": "MC_MOON_SATURN_001",
+      "rule_name": "Moon with Saturn",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "moon_affliction",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Chandra Bala",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon conjunct Saturn (within 10°) causes depression and delays — Visha Yoga, unfavorable.",
+        "hi": "चंद्र शनि युक्त (10° के भीतर) अवसाद और विलंब करता है — विष योग, प्रतिकूल।"
+      },
+      "match": { "moon_saturn_conjunction": { "max": 10 } },
+      "status": "avoid",
+      "penalty": -10,
+      "priority": 6,
+      "veto": false,
+      "tags": ["moon", "saturn", "affliction", "visha_yoga"]
+    },
+    {
+      "id": "MC_MOON_MARS_001",
+      "rule_name": "Moon with Mars",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "moon_affliction",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Chandra Bala",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon conjunct Mars (within 8°) brings aggression and impatience — Chandra-Mangal yoga unfavorable for conception.",
+        "hi": "चंद्र मंगल युक्त (8° के भीतर) आक्रामकता और अधीरता लाता है — गर्भाधान के लिए चंद्र-मंगल योग प्रतिकूल।"
+      },
+      "match": { "moon_mars_conjunction": { "max": 8 } },
+      "status": "caution",
+      "penalty": -6,
+      "priority": 4,
+      "veto": false,
+      "tags": ["moon", "mars", "affliction", "conjunction"]
+    },
+    {
+      "id": "MC_MOON_COMBUST_001",
+      "rule_name": "Moon combust",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "moon_affliction",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Asta Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon within 12° of Sun is combust (asta) — loses strength, avoid for auspicious work.",
+        "hi": "चंद्र सूर्य से 12° के भीतर अस्त है — बल खो देता है, शुभ कार्य के लिए वर्जित।"
+      },
+      "match": { "sun_moon_elong": { "max": 12 } },
+      "status": "avoid",
+      "penalty": -12,
+      "priority": 7,
+      "veto": false,
+      "tags": ["moon", "combust", "asta", "affliction"]
+    },
+    {
+      "id": "MC_MOON_PAPAKARTARI_001",
+      "rule_name": "Moon in Papakartari",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "moon_affliction",
+      "source": {
+        "text": "Brihat Parashara Hora Shastra",
+        "chapter": "Yoga Adhyaya",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon hemmed between malefics (Papakartari Yoga) — squeezed by evil forces, highly unfavorable.",
+        "hi": "चंद्र पापकर्तरी योग में (पापियों के बीच) — बुरी शक्तियों से दबा हुआ, अत्यंत प्रतिकूल।"
+      },
+      "match": { "moon_papakartari": true },
+      "status": "avoid",
+      "penalty": -10,
+      "priority": 6,
+      "veto": false,
+      "tags": ["moon", "papakartari", "affliction", "yoga"]
+    },
+    {
+      "id": "MC_MOON_DEBIL_001",
+      "rule_name": "Moon debilitated",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Chandra Bala",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon in Scorpio is debilitated — weakened emotional strength, unfavorable for conception.",
+        "hi": "वृश्चिक में चंद्र नीच है — भावनात्मक शक्ति कमजोर, गर्भाधान के लिए प्रतिकूल।"
+      },
+      "match": { "moon_sign": 7 },
+      "status": "avoid",
+      "score": 20,
+      "priority": 5,
+      "veto": false,
+      "tags": ["moon", "debilitated", "scorpio"]
+    },
+    {
+      "id": "MC_MOON_EXALT_001",
+      "rule_name": "Moon exalted",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Chandra Bala",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon in Taurus is exalted — maximum emotional strength, highly favorable.",
+        "hi": "वृषभ में चंद्र उच्च है — अधिकतम भावनात्मक शक्ति, अत्यंत अनुकूल।"
+      },
+      "match": { "moon_sign": 1 },
+      "status": "excellent",
+      "score": 100,
+      "priority": 5,
+      "veto": false,
+      "tags": ["moon", "exalted", "taurus"]
+    },
+    {
+      "id": "MC_MOON_JUPITER_001",
+      "rule_name": "Moon with Jupiter (Gaja Kesari)",
+      "applies_to": ["garbhadhana", "marriage", "upanayana"],
+      "authority": "muhurta_chintamani",
+      "kind": "bonus",
+      "source": {
+        "text": "Brihat Parashara Hora Shastra",
+        "chapter": "Yoga Adhyaya",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon conjunct or aspected by Jupiter — Gaja Kesari Yoga, highly auspicious for progeny.",
+        "hi": "चंद्र गुरु युक्त या दृष्ट — गज केसरी योग, संतान के लिए अत्यंत शुभ।"
+      },
+      "match": { "moon_jupiter_aspect": true },
+      "status": "excellent",
+      "bonus": 8,
+      "priority": 5,
+      "veto": false,
+      "tags": ["moon", "jupiter", "gaja_kesari", "bonus"]
+    }
+  ]
+}

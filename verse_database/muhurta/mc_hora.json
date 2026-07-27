@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "file": "mc_hora.json",
+    "component": "hora",
+    "description": "Hora (planetary hour) rules for muhurta selection",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "hora_sequence": {
+    "note": "Hora sequence starts from the day lord and follows Chaldean order: Sun→Venus→Mercury→Moon→Saturn→Jupiter→Mars",
+    "order": [0, 5, 3, 1, 6, 4, 2],
+    "day_start_lord": [0, 1, 2, 3, 4, 5, 6]
+  },
+  "rules": [
+    {
+      "id": "MC_HORA_G01",
+      "rule_name": "Guru Hora for Garbhadhana",
+      "applies_to": ["garbhadhana", "marriage", "upanayana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Jupiter's hora is most auspicious — the guru blesses progeny and dharmic acts.",
+        "hi": "गुरु की होरा सर्वाधिक शुभ — गुरु संतान और धार्मिक कार्यों को आशीर्वाद देते हैं।"
+      },
+      "match": { "hora_lord": 4 },
+      "status": "excellent",
+      "score": 100,
+      "priority": 5,
+      "veto": false,
+      "tags": ["hora", "jupiter", "benefic"]
+    },
+    {
+      "id": "MC_HORA_G02",
+      "rule_name": "Shukra Hora for Garbhadhana",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Venus hora is excellent — Venus governs fertility, conjugal bliss, and creative energy.",
+        "hi": "शुक्र की होरा उत्तम — शुक्र प्रजनन, दांपत्य सुख और सृजनात्मक ऊर्जा का कारक है।"
+      },
+      "match": { "hora_lord": 5 },
+      "status": "excellent",
+      "score": 95,
+      "priority": 5,
+      "veto": false,
+      "tags": ["hora", "venus", "benefic"]
+    },
+    {
+      "id": "MC_HORA_G03",
+      "rule_name": "Chandra Hora for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Moon's hora is good — Moon nurtures, supports conception and motherhood.",
+        "hi": "चंद्र की होरा शुभ — चंद्र पोषण करता है, गर्भधारण और मातृत्व का समर्थन करता है।"
+      },
+      "match": { "hora_lord": 1 },
+      "status": "good",
+      "score": 80,
+      "priority": 4,
+      "veto": false,
+      "tags": ["hora", "moon", "benefic"]
+    },
+    {
+      "id": "MC_HORA_G04",
+      "rule_name": "Budha Hora neutral",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Mercury's hora is neutral — acceptable if benefics aspect or other factors are strong.",
+        "hi": "बुध की होरा सामान्य — शुभ ग्रहों की दृष्टि या अन्य कारक मजबूत हों तो स्वीकार्य।"
+      },
+      "match": { "hora_lord": 3 },
+      "status": "neutral",
+      "score": 55,
+      "priority": 3,
+      "veto": false,
+      "tags": ["hora", "mercury", "neutral"]
+    },
+    {
+      "id": "MC_HORA_G05",
+      "rule_name": "Surya Hora neutral",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Sun's hora is neutral for conception — gives vitality but too hot and masculine.",
+        "hi": "सूर्य की होरा गर्भाधान के लिए सामान्य — जीवन शक्ति देती है पर अत्यधिक उष्ण और पुरुष प्रधान।"
+      },
+      "match": { "hora_lord": 0 },
+      "status": "neutral",
+      "score": 50,
+      "priority": 3,
+      "veto": false,
+      "tags": ["hora", "sun", "neutral"]
+    },
+    {
+      "id": "MC_HORA_G06",
+      "rule_name": "Mangal Hora avoid",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Mars hora should be avoided — aggressive, separative energy unsuitable for conception.",
+        "hi": "मंगल की होरा टालनी चाहिए — आक्रामक, विभाजक ऊर्जा गर्भाधान के लिए अनुपयुक्त।"
+      },
+      "match": { "hora_lord": 2 },
+      "status": "avoid",
+      "score": 20,
+      "priority": 3,
+      "veto": false,
+      "tags": ["hora", "mars", "malefic"]
+    },
+    {
+      "id": "MC_HORA_G07",
+      "rule_name": "Shani Hora avoid",
+      "applies_to": ["garbhadhana", "marriage", "upanayana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Hora Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Saturn's hora should be avoided — cold, restrictive energy causes delays and obstacles.",
+        "hi": "शनि की होरा टालनी चाहिए — शीतल, प्रतिबंधक ऊर्जा विलंब और बाधाएं उत्पन्न करती है।"
+      },
+      "match": { "hora_lord": 6 },
+      "status": "avoid",
+      "score": 15,
+      "priority": 3,
+      "veto": false,
+      "tags": ["hora", "saturn", "malefic"]
+    }
+  ]
+}

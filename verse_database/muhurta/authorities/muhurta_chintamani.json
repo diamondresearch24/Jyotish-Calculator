@@ -1,0 +1,47 @@
+{
+  "id": "muhurta_chintamani",
+  "name": "Muhurta Chintamani",
+  "name_sanskrit": "मुहूर्त चिंतामणि",
+  "name_iast": "Muhūrta Cintāmaṇi",
+  "author": "Daivajña Rāma",
+  "author_sanskrit": "दैवज्ञ राम",
+  "period": "16th century CE",
+  "tradition": "North Indian",
+  "description": {
+    "en": "The most authoritative and widely used text on Muhurta (electional astrology) in the Hindu tradition. It systematically covers all aspects of selecting auspicious times for various activities including marriages, conception, travel, and rituals.",
+    "hi": "मुहूर्त (शुभ समय चयन) पर हिंदू परंपरा में सबसे प्रामाणिक और व्यापक रूप से प्रयुक्त ग्रंथ। यह विवाह, गर्भाधान, यात्रा और अनुष्ठानों सहित विभिन्न गतिविधियों के लिए शुभ समय चयन के सभी पहलुओं को व्यवस्थित रूप से कवर करता है।"
+  },
+  "chapters": [
+    { "number": 1, "name": "Panchanga Prakarana", "name_hi": "पंचांग प्रकरण" },
+    { "number": 2, "name": "Garbhadhana Prakarana", "name_hi": "गर्भाधान प्रकरण" },
+    { "number": 3, "name": "Pumsavana Prakarana", "name_hi": "पुंसवन प्रकरण" },
+    { "number": 4, "name": "Simantonnayana Prakarana", "name_hi": "सीमंतोन्नयन प्रकरण" },
+    { "number": 5, "name": "Jatakarma Prakarana", "name_hi": "जातकर्म प्रकरण" },
+    { "number": 6, "name": "Namakarana Prakarana", "name_hi": "नामकरण प्रकरण" },
+    { "number": 7, "name": "Annapraashana Prakarana", "name_hi": "अन्नप्राशन प्रकरण" },
+    { "number": 8, "name": "Chudakarana Prakarana", "name_hi": "चूड़ाकरण प्रकरण" },
+    { "number": 9, "name": "Upanayana Prakarana", "name_hi": "उपनयन प्रकरण" },
+    { "number": 10, "name": "Vivaha Prakarana", "name_hi": "विवाह प्रकरण" },
+    { "number": 11, "name": "Griha Pravesh Prakarana", "name_hi": "गृह प्रवेश प्रकरण" },
+    { "number": 12, "name": "Yatra Prakarana", "name_hi": "यात्रा प्रकरण" },
+    { "number": 13, "name": "Guru-Shukra Asta Prakarana", "name_hi": "गुरु-शुक्र अस्त प्रकरण" }
+  ],
+  "editions": [
+    {
+      "publisher": "Chaukhamba Sanskrit Pratishthan",
+      "year": 2010,
+      "language": "Sanskrit with Hindi commentary",
+      "isbn": null,
+      "primary": true
+    },
+    {
+      "publisher": "Motilal Banarsidass",
+      "year": 1996,
+      "language": "Sanskrit with English translation",
+      "isbn": "978-8120812055",
+      "primary": false
+    }
+  ],
+  "default": true,
+  "priority": 1
+}

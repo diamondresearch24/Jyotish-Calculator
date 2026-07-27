@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "file": "mc_rahukalam.json",
+    "component": "rahukalam",
+    "description": "Rahu Kalam - inauspicious period ruled by Rahu, varies by weekday",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Day divided into 8 equal parts from sunrise to sunset. Rahu Kalam is one part, position varies by weekday.",
+    "formula": "part_duration = (sunset - sunrise) / 8; rahu_start = sunrise + (sequence[weekday] * part_duration)",
+    "sequence": {
+      "0": 7, "1": 1, "2": 6, "3": 4, "4": 5, "5": 3, "6": 2
+    },
+    "sequence_mnemonic": "Mother Saw Father Wearing The Turban Suddenly (Mon=1, Sat=1, Fri=6, Wed=4, Thu=5, Tue=3, Sun=7)"
+  },
+  "rules": [
+    {
+      "id": "MC_RAHU_001",
+      "rule_name": "Rahu Kalam prohibition",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_restriction",
+      "restriction_type": "rahukalam",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Kala Dosha Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Rahu Kalam is universally inauspicious — no auspicious activity should commence during this period.",
+        "hi": "राहु काल सार्वभौमिक रूप से अशुभ है — इस अवधि में कोई शुभ कार्य आरंभ नहीं करना चाहिए।"
+      },
+      "match": { "in_rahukalam": true },
+      "status": "prohibited",
+      "penalty": -15,
+      "priority": 8,
+      "veto": false,
+      "tags": ["time", "rahukalam", "daily_restriction"]
+    }
+  ]
+}

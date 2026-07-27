@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "file": "mc_durmuhurta.json",
+    "component": "durmuhurta",
+    "description": "Durmuhurta - two inauspicious periods each day, ~48 minutes each",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Day divided into 15 muhurtas (sunrise to sunset). Two are inauspicious, varying by weekday.",
+    "muhurta_duration_minutes": 48,
+    "formula": "muhurta_len = (sunset - sunrise) / 15; dur_start = sunrise + (sequence[weekday][0] * muhurta_len)",
+    "sequence": {
+      "0": [14, 10], "1": [7, 4], "2": [4, 3], "3": [10, 7], "4": [3, 14], "5": [1, 2], "6": [12, 8]
+    }
+  },
+  "rules": [
+    {
+      "id": "MC_DUR_001",
+      "rule_name": "Durmuhurta prohibition",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_restriction",
+      "restriction_type": "durmuhurta",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Muhurta Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Durmuhurta is an inauspicious muhurta period — avoid starting important works.",
+        "hi": "दुर्मुहूर्त अशुभ मुहूर्त काल है — महत्वपूर्ण कार्यों का आरंभ टालें।"
+      },
+      "match": { "in_durmuhurta": true },
+      "status": "prohibited",
+      "penalty": -10,
+      "priority": 6,
+      "veto": false,
+      "tags": ["time", "durmuhurta", "daily_restriction"]
+    }
+  ]
+}

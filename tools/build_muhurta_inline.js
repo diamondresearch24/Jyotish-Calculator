@@ -22,8 +22,11 @@ const END = '/* MUHURTA_DB_INLINE:END */';
 
 const TABLES = ['mc_tithi.json','mc_nakshatra.json','mc_yoga.json','mc_karana.json',
   'mc_vara.json','mc_tarabala.json','mc_chandrabala.json','mc_graha.json',
-  'mc_prohibited.json','mc_festival.json','mc_biological.json'];
-const PROFILES = ['garbhadhana'];
+  'mc_prohibited.json','mc_festival.json','mc_biological.json',
+  'mc_lagna.json','mc_hora.json','mc_rahukalam.json','mc_yamaganda.json','mc_gulika.json',
+  'mc_durmuhurta.json','mc_varjyam.json','mc_abhijit.json','mc_moon_affliction.json',
+  'mc_panchaka.json','mc_bhadra.json'];
+const PROFILES = ['garbhadhana','marriage'];
 
 const bundle = { tables: {}, profiles: {}, builtAt: new Date().toISOString().slice(0, 10) };
 let rules = 0;

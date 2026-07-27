@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "file": "mc_gulika.json",
+    "component": "gulika",
+    "description": "Gulika Kalam - inauspicious period, son of Saturn",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "calculation": {
+    "note": "Day divided into 8 equal parts. Gulika is Saturn's son, follows Saturn-based sequence.",
+    "formula": "part_duration = (sunset - sunrise) / 8; gulika_start = sunrise + (sequence[weekday] * part_duration)",
+    "sequence": {
+      "0": 6, "1": 5, "2": 4, "3": 3, "4": 2, "5": 1, "6": 0
+    }
+  },
+  "rules": [
+    {
+      "id": "MC_GULIKA_001",
+      "rule_name": "Gulika Kalam caution",
+      "applies_to": ["*"],
+      "authority": "muhurta_chintamani",
+      "kind": "time_restriction",
+      "restriction_type": "gulika",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Kala Dosha Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Gulika Kalam carries Saturn's malefic energy — avoid for important initiations.",
+        "hi": "गुलिक काल शनि की पापी ऊर्जा वहन करता है — महत्वपूर्ण आरंभों के लिए टालें।"
+      },
+      "match": { "in_gulika": true },
+      "status": "caution",
+      "penalty": -6,
+      "priority": 5,
+      "veto": false,
+      "tags": ["time", "gulika", "daily_restriction"]
+    }
+  ]
+}

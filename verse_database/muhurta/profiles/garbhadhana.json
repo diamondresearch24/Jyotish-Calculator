@@ -1,8 +1,9 @@
 {
   "category": "garbhadhana",
-  "version": 1,
+  "version": 2,
   "label": { "en": "Garbhadhana Sanskara", "hi": "गर्भाधान संस्कार" },
   "primary_source": "Muhurta Chintamani, supplemented by Dharma Sindhu, Nirnaya Sindhu, Narada Samhita and Brihat Parashara Hora Shastra",
+  "authority": "muhurta_chintamani",
 
   "tables": [
     "mc_biological.json",
@@ -15,8 +16,28 @@
     "mc_vara.json",
     "mc_chandrabala.json",
     "mc_prohibited.json",
-    "mc_festival.json"
+    "mc_festival.json",
+    "mc_lagna.json",
+    "mc_hora.json",
+    "mc_moon_affliction.json",
+    "mc_rahukalam.json",
+    "mc_yamaganda.json",
+    "mc_gulika.json",
+    "mc_durmuhurta.json",
+    "mc_varjyam.json",
+    "mc_abhijit.json",
+    "mc_panchaka.json",
+    "mc_bhadra.json"
   ],
+
+  "scoring_stages": {
+    "1_biological": { "components": ["biological"], "weight": 25, "veto_on_zero": false },
+    "2_prohibitions": { "components": ["prohibited", "festival", "graha"], "veto_rules": true },
+    "3_panchanga": { "components": ["tithi", "nakshatra", "yoga", "karana", "vara"], "weight": 45 },
+    "4_planetary": { "components": ["moon", "tarabala", "chandrabala", "moon_affliction"], "weight": 20 },
+    "5_lagna": { "components": ["lagna"], "weight": 10, "requires": "time_selection" },
+    "6_time": { "components": ["hora", "rahukalam", "yamaganda", "gulika", "durmuhurta", "varjyam", "abhijit", "panchaka", "bhadra"], "requires": "time_selection" }
+  },
 
   "weights": {
     "biological": 25,
@@ -30,7 +51,9 @@
 
   "requires": {
     "biological": "lmp",
-    "tarabala": "has_mother_chart"
+    "tarabala": "has_mother_chart",
+    "lagna": "time_selection",
+    "hora": "time_selection"
   },
 
   "informational": ["vara", "chandrabala"],
@@ -39,7 +62,10 @@
   "penalty_caps": {
     "prohibited": -30,
     "festival": -30,
-    "graha": -20
+    "graha": -20,
+    "moon_affliction": -15,
+    "panchaka": -15,
+    "lagna": -10
   },
 
   "bands": [

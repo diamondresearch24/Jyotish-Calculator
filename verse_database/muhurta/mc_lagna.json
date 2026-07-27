@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "file": "mc_lagna.json",
+    "component": "lagna",
+    "description": "Lagna (Ascendant) rules for muhurta selection",
+    "authority": "muhurta_chintamani",
+    "version": "2.0.0",
+    "last_updated": "2026-07-27"
+  },
+  "rules": [
+    {
+      "id": "MC_LAGNA_G01",
+      "rule_name": "Vrishabha Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false,
+        "verification_note": "Verse number pending"
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Taurus ascendant is excellent for conception — fixed sign ruled by Venus, karaka of fertility.",
+        "hi": "वृषभ लग्न गर्भाधान के लिए उत्तम — शुक्र का स्थिर राशि, प्रजनन का कारक।"
+      },
+      "match": { "lagna": 1 },
+      "status": "excellent",
+      "score": 100,
+      "priority": 5,
+      "veto": false,
+      "tags": ["lagna", "fixed", "venus"]
+    },
+    {
+      "id": "MC_LAGNA_G02",
+      "rule_name": "Karka Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Cancer ascendant is excellent for conception — Moon's own sign, natural 4th house of mother.",
+        "hi": "कर्क लग्न गर्भाधान के लिए उत्तम — चंद्र की स्वराशि, माता का नैसर्गिक चौथा भाव।"
+      },
+      "match": { "lagna": 3 },
+      "status": "excellent",
+      "score": 95,
+      "priority": 5,
+      "veto": false,
+      "tags": ["lagna", "movable", "moon"]
+    },
+    {
+      "id": "MC_LAGNA_G03",
+      "rule_name": "Simha Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Leo ascendant is good for conception — Sun's sign gives vitality, natural 5th house of progeny.",
+        "hi": "सिंह लग्न गर्भाधान के लिए शुभ — सूर्य की राशि जीवन शक्ति देती है, संतान का नैसर्गिक पंचम भाव।"
+      },
+      "match": { "lagna": 4 },
+      "status": "good",
+      "score": 85,
+      "priority": 4,
+      "veto": false,
+      "tags": ["lagna", "fixed", "sun"]
+    },
+    {
+      "id": "MC_LAGNA_G04",
+      "rule_name": "Kanya Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Virgo ascendant is good for conception — Mercury's dual sign, represents growth and nurturing.",
+        "hi": "कन्या लग्न गर्भाधान के लिए शुभ — बुध की द्विस्वभाव राशि, वृद्धि और पोषण का प्रतीक।"
+      },
+      "match": { "lagna": 5 },
+      "status": "good",
+      "score": 80,
+      "priority": 4,
+      "veto": false,
+      "tags": ["lagna", "dual", "mercury"]
+    },
+    {
+      "id": "MC_LAGNA_G05",
+      "rule_name": "Dhanu Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Sagittarius ascendant is good for conception — Jupiter's sign gives divine blessing and dharmic sanction.",
+        "hi": "धनु लग्न गर्भाधान के लिए शुभ — गुरु की राशि दैवीय आशीर्वाद और धार्मिक स्वीकृति देती है।"
+      },
+      "match": { "lagna": 8 },
+      "status": "good",
+      "score": 85,
+      "priority": 4,
+      "veto": false,
+      "tags": ["lagna", "dual", "jupiter"]
+    },
+    {
+      "id": "MC_LAGNA_G06",
+      "rule_name": "Meena Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Pisces ascendant is excellent for conception — Jupiter's water sign, highly fertile and auspicious.",
+        "hi": "मीन लग्न गर्भाधान के लिए उत्तम — गुरु की जल राशि, अत्यधिक उर्वर और शुभ।"
+      },
+      "match": { "lagna": 11 },
+      "status": "excellent",
+      "score": 95,
+      "priority": 5,
+      "veto": false,
+      "tags": ["lagna", "dual", "jupiter", "water"]
+    },
+    {
+      "id": "MC_LAGNA_G07",
+      "rule_name": "Mesha Lagna caution for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Aries ascendant is average — Mars ruled, too aggressive for the gentle act of conception.",
+        "hi": "मेष लग्न सामान्य — मंगल शासित, गर्भाधान के सौम्य कार्य के लिए अत्यधिक आक्रामक।"
+      },
+      "match": { "lagna": 0 },
+      "status": "neutral",
+      "score": 50,
+      "priority": 3,
+      "veto": false,
+      "tags": ["lagna", "movable", "mars"]
+    },
+    {
+      "id": "MC_LAGNA_G08",
+      "rule_name": "Vrishchika Lagna avoid for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Scorpio ascendant should be avoided — Mars' water sign, 8th natural house of obstacles and secrets.",
+        "hi": "वृश्चिक लग्न टालना चाहिए — मंगल की जल राशि, बाधाओं और रहस्यों का नैसर्गिक अष्टम भाव।"
+      },
+      "match": { "lagna": 7 },
+      "status": "avoid",
+      "score": 25,
+      "priority": 3,
+      "veto": false,
+      "tags": ["lagna", "fixed", "mars", "water"]
+    },
+    {
+      "id": "MC_LAGNA_G09",
+      "rule_name": "Makara Lagna caution for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Capricorn ascendant is unfavorable — Saturn's sign brings delay and difficulty in conception.",
+        "hi": "मकर लग्न प्रतिकूल — शनि की राशि गर्भधारण में विलंब और कठिनाई लाती है।"
+      },
+      "match": { "lagna": 9 },
+      "status": "avoid",
+      "score": 30,
+      "priority": 3,
+      "veto": false,
+      "tags": ["lagna", "movable", "saturn"]
+    },
+    {
+      "id": "MC_LAGNA_G10",
+      "rule_name": "Kumbha Lagna caution for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Aquarius ascendant is unfavorable — Saturn's fixed sign, cold and restrictive for fertility.",
+        "hi": "कुंभ लग्न प्रतिकूल — शनि की स्थिर राशि, प्रजनन के लिए शीतल और प्रतिबंधक।"
+      },
+      "match": { "lagna": 10 },
+      "status": "avoid",
+      "score": 30,
+      "priority": 3,
+      "veto": false,
+      "tags": ["lagna", "fixed", "saturn"]
+    },
+    {
+      "id": "MC_LAGNA_G11",
+      "rule_name": "Mithuna Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Gemini ascendant is neutral — Mercury's dual sign, acceptable if other factors are strong.",
+        "hi": "मिथुन लग्न सामान्य — बुध की द्विस्वभाव राशि, अन्य कारक मजबूत हों तो स्वीकार्य।"
+      },
+      "match": { "lagna": 2 },
+      "status": "neutral",
+      "score": 55,
+      "priority": 3,
+      "veto": false,
+      "tags": ["lagna", "dual", "mercury"]
+    },
+    {
+      "id": "MC_LAGNA_G12",
+      "rule_name": "Tula Lagna for Garbhadhana",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "section": "Lagna Vichar",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Libra ascendant is good — Venus ruled, supports conjugal harmony and fertility.",
+        "hi": "तुला लग्न शुभ — शुक्र शासित, वैवाहिक सामंजस्य और प्रजनन का समर्थन करती है।"
+      },
+      "match": { "lagna": 6 },
+      "status": "good",
+      "score": 75,
+      "priority": 4,
+      "veto": false,
+      "tags": ["lagna", "movable", "venus"]
+    },
+    {
+      "id": "MC_LAGNA_MALEFIC_001",
+      "rule_name": "Malefic in Lagna penalty",
+      "applies_to": ["garbhadhana", "marriage"],
+      "authority": "muhurta_chintamani",
+      "kind": "penalty",
+      "penalty_group": "lagna",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Lagna Shuddhi",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Malefic planet (Mars/Saturn/Rahu/Ketu) in Lagna reduces auspiciousness.",
+        "hi": "लग्न में पाप ग्रह (मंगल/शनि/राहु/केतु) शुभता कम करता है।"
+      },
+      "match": { "malefic_in_lagna": true },
+      "status": "caution",
+      "penalty": -8,
+      "priority": 4,
+      "veto": false,
+      "tags": ["lagna", "malefic", "penalty"]
+    },
+    {
+      "id": "MC_LAGNA_JUPITER_001",
+      "rule_name": "Jupiter aspecting Lagna bonus",
+      "applies_to": ["garbhadhana", "marriage", "upanayana"],
+      "authority": "muhurta_chintamani",
+      "kind": "bonus",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Lagna Shuddhi",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "Jupiter's aspect on Lagna greatly enhances auspiciousness — the guru's blessing.",
+        "hi": "लग्न पर गुरु की दृष्टि शुभता में अत्यधिक वृद्धि करती है — गुरु का आशीर्वाद।"
+      },
+      "match": { "jupiter_aspects_lagna": true },
+      "status": "excellent",
+      "bonus": 10,
+      "priority": 5,
+      "veto": false,
+      "tags": ["lagna", "jupiter", "aspect", "bonus"]
+    },
+    {
+      "id": "MC_LAGNA_5LORD_001",
+      "rule_name": "5th Lord strength check",
+      "applies_to": ["garbhadhana"],
+      "authority": "muhurta_chintamani",
+      "source": {
+        "text": "Muhurta Chintamani",
+        "chapter": "Garbhadhana Prakarana",
+        "verse": null,
+        "verified": false
+      },
+      "sanskrit": null,
+      "iast": null,
+      "translations": {
+        "en": "The 5th lord (putra karaka) should be strong and well-placed for conception muhurat.",
+        "hi": "गर्भाधान मुहूर्त के लिए पंचमेश (पुत्र कारक) बलवान और सुस्थित होना चाहिए।"
+      },
+      "match": { "fifth_lord_strong": true },
+      "status": "good",
+      "score": 80,
+      "priority": 4,
+      "veto": false,
+      "tags": ["lagna", "fifth_house", "putra"]
+    }
+  ]
+}
