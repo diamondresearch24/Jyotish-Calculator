@@ -8208,36 +8208,153 @@ function mhMoonDignity(jd){
   return [0,3].indexOf(SIGN_LORD[sg])>=0?'friend':'neutral';
 }
 
-/* ---- Phase 2 helpers: Moon afflictions, daily time restrictions ---- */
+/* ============================================================================
+   PHASE 5: ENHANCED MOON ENGINE - Comprehensive lunar analysis
+   ========================================================================== */
 function mhMoonAfflictions(jd){
   const moonLon=mfSidLon(1,jd),sunLon=mfSidLon(0,jd);
   const satLon=mfSidLon(6,jd),marsLon=mfSidLon(2,jd),jupLon=mfSidLon(4,jd);
+  const venLon=mfSidLon(5,jd),merLon=mfSidLon(3,jd);
   const rahuLon=mfSidLon(7,jd),ketuLon=rev(rahuLon+180);
   const angDist=(a,b)=>{const d=Math.abs(rev(a)-rev(b));return d>180?360-d:d;};
+  
+  /* Angular distances */
   const sunMoon=angDist(moonLon,sunLon);
   const moonRahu=angDist(moonLon,rahuLon);
   const moonKetu=angDist(moonLon,ketuLon);
   const moonSat=angDist(moonLon,satLon);
   const moonMars=angDist(moonLon,marsLon);
   const moonJup=angDist(moonLon,jupLon);
+  const moonVen=angDist(moonLon,venLon);
+  const moonMer=angDist(moonLon,merLon);
+  
+  /* Moon sign and nakshatra */
+  const moonSign=signOf(moonLon);
+  const moonDeg=moonLon%30;
+  const moonNak=nakInfo(moonLon);
+  
+  /* Moon dignity */
+  const moonExalted=moonSign===1&&moonDeg<=3; /* Taurus, especially early degrees */
+  const moonDebilitated=moonSign===7; /* Scorpio */
+  const moonOwnSign=moonSign===3; /* Cancer */
+  const moonFriendSign=[0,1,3,4,5].includes(moonSign); /* Aries,Taurus,Cancer,Leo,Virgo */
+  const moonEnemySign=[9,10,7].includes(moonSign); /* Capricorn,Aquarius,Scorpio */
+  
+  /* Paksha (lunar phase) */
+  const elong=rev(moonLon-sunLon);
+  const paksha=elong<180?'shukla':'krishna';
+  const pakshaDay=Math.floor(elong/12)+1;
+  const waxing=elong<180;
+  const pakshaStrength=waxing?Math.min(100,50+(elong/180)*50):Math.max(0,100-((elong-180)/180)*50);
+  
   /* Papakartari: Moon hemmed by malefics in adjacent signs */
-  const moonSg=signOf(moonLon);
-  const prev=(moonSg+11)%12,next=(moonSg+1)%12;
+  const prev=(moonSign+11)%12,next=(moonSign+1)%12;
   const maleficIn=sg=>{
     const sats=signOf(satLon),mars=signOf(marsLon),rah=signOf(rahuLon),ket=signOf(ketuLon);
     return sats===sg||mars===sg||rah===sg||ket===sg;
   };
   const papakartari=maleficIn(prev)&&maleficIn(next);
+  
+  /* Shubhakartari: Moon hemmed by benefics in adjacent signs */
+  const beneficIn=sg=>{
+    const jup=signOf(jupLon),ven=signOf(venLon),mer=signOf(merLon);
+    return jup===sg||ven===sg||mer===sg;
+  };
+  const shubhakartari=beneficIn(prev)&&beneficIn(next);
+  
+  /* Benefic aspects on Moon */
+  const jupAspectMoon=moonJup<12||(angDist(moonLon,rev(jupLon+120))<10)||(angDist(moonLon,rev(jupLon+240))<10);
+  const venAspectMoon=moonVen<12||(angDist(moonLon,rev(venLon+180))<10);
+  const merAspectMoon=moonMer<12||(angDist(moonLon,rev(merLon+180))<10);
+  
+  /* Malefic aspects on Moon */
+  const satAspectMoon=moonSat<10||(angDist(moonLon,rev(satLon+60))<8)||(angDist(moonLon,rev(satLon+180))<8);
+  const marsAspectMoon=moonMars<8||(angDist(moonLon,rev(marsLon+90))<8)||(angDist(moonLon,rev(marsLon+180))<8)||(angDist(moonLon,rev(marsLon+210))<8);
+  
+  /* Moon in dusthana from natal Moon (if applicable - handled in evaluation) */
+  const moonInDusthana=[5,7,11].includes(moonSign); /* 6th, 8th, 12th signs are traditionally difficult */
+  
+  /* Calculate Moon Score (0-100) */
+  let moonScore=50;
+  if(moonExalted)moonScore+=20;
+  if(moonOwnSign)moonScore+=15;
+  if(moonDebilitated)moonScore-=20;
+  if(moonFriendSign&&!moonExalted&&!moonOwnSign)moonScore+=5;
+  if(moonEnemySign&&!moonDebilitated)moonScore-=5;
+  if(waxing)moonScore+=10;
+  if(!waxing)moonScore-=5;
+  if(sunMoon<12)moonScore-=15; /* Combust */
+  if(moonRahu<12)moonScore-=15;
+  if(moonKetu<12)moonScore-=10;
+  if(moonSat<10)moonScore-=10;
+  if(moonMars<8)moonScore-=8;
+  if(jupAspectMoon)moonScore+=15;
+  if(venAspectMoon)moonScore+=5;
+  if(papakartari)moonScore-=15;
+  if(shubhakartari)moonScore+=10;
+  moonScore=Math.max(0,Math.min(100,moonScore));
+  
+  /* Build factors list for display */
+  const factors=[];
+  factors.push({factor:'Moon Sign',value:GBH_SIGN_EN[moonSign],degree:moonDeg.toFixed(1)+'°',
+    status:moonExalted?'excellent':moonOwnSign?'good':moonDebilitated?'avoid':moonFriendSign?'good':'neutral',
+    reason:moonExalted?'Moon exalted in Taurus — highly auspicious':
+           moonOwnSign?'Moon in own sign Cancer — strong':
+           moonDebilitated?'Moon debilitated in Scorpio — weakened':
+           moonFriendSign?'Moon in friendly sign':'Moon in neutral/inimical sign',
+    source:'BPHS'});
+  factors.push({factor:'Moon Nakshatra',value:GBH_NAK_EN[moonNak.n]+' (Pada '+moonNak.pada+')',
+    status:'info',reason:'Lunar mansion determines Tarabala',source:'Muhurta Chintamani'});
+  factors.push({factor:'Paksha',value:paksha==='shukla'?'Shukla (Waxing)':'Krishna (Waning)',day:'Day '+pakshaDay,
+    status:waxing?'good':'caution',
+    reason:waxing?'Waxing Moon — increasing strength, favorable for beginnings':'Waning Moon — decreasing strength',
+    source:'Muhurta Chintamani'});
+  factors.push({factor:'Paksha Bala',value:Math.round(pakshaStrength)+'%',
+    status:pakshaStrength>=70?'good':pakshaStrength>=40?'neutral':'caution',
+    reason:'Strength based on distance from New/Full Moon',source:'BPHS'});
+  factors.push({factor:'Sun-Moon Elongation',value:sunMoon.toFixed(1)+'°',
+    status:sunMoon>=12?'good':'avoid',
+    reason:sunMoon<12?'Moon combust — too close to Sun':'Safe distance from Sun',source:'Muhurta Chintamani'});
+  if(sunMoon<12)factors.push({factor:'Moon Combust',value:'Yes ('+sunMoon.toFixed(1)+'° from Sun)',
+    status:'avoid',reason:'Moon within 12° of Sun — weakened by solar rays',source:'Muhurta Chintamani'});
+  if(moonRahu<12)factors.push({factor:'Moon-Rahu Conjunction',value:moonRahu.toFixed(1)+'° apart',
+    status:'avoid',reason:'Moon with Rahu — eclipse energy, mental disturbance',source:'Muhurta Chintamani'});
+  if(moonKetu<12)factors.push({factor:'Moon-Ketu Conjunction',value:moonKetu.toFixed(1)+'° apart',
+    status:'avoid',reason:'Moon with Ketu — detachment, spiritual but not material',source:'Muhurta Chintamani'});
+  if(moonSat<10)factors.push({factor:'Moon-Saturn Conjunction',value:moonSat.toFixed(1)+'° apart',
+    status:'caution',reason:'Moon with Saturn — emotional heaviness, delay',source:'Muhurta Chintamani'});
+  if(moonMars<8)factors.push({factor:'Moon-Mars Conjunction',value:moonMars.toFixed(1)+'° apart',
+    status:'caution',reason:'Moon with Mars — emotional intensity, impulsiveness',source:'Muhurta Chintamani'});
+  if(jupAspectMoon)factors.push({factor:'Jupiter Aspect on Moon',value:'Yes ('+moonJup.toFixed(1)+'°)',
+    status:'excellent',reason:'Jupiter blesses Moon — wisdom, protection, auspiciousness',source:'Muhurta Chintamani'});
+  if(venAspectMoon)factors.push({factor:'Venus Aspect on Moon',value:'Yes',
+    status:'good',reason:'Venus aspects Moon — harmony, fertility blessing',source:'BPHS'});
+  if(papakartari)factors.push({factor:'Papakartari Yoga',value:'Malefics in adjacent signs',
+    status:'avoid',reason:'Moon hemmed by malefics — constricted energy',source:'BPHS'});
+  if(shubhakartari)factors.push({factor:'Shubhakartari Yoga',value:'Benefics in adjacent signs',
+    status:'excellent',reason:'Moon protected by benefics — supportive environment',source:'BPHS'});
+  
   return{
+    moon_lon:moonLon,moon_sign:moonSign,moon_deg:moonDeg,
+    moon_nakshatra:moonNak.n,moon_pada:moonNak.pada,
+    paksha:paksha,paksha_day:pakshaDay,waxing:waxing,paksha_strength:pakshaStrength,
+    moon_exalted:moonExalted,moon_debilitated:moonDebilitated,moon_own_sign:moonOwnSign,
     sun_moon_elong:sunMoon,
     moon_combust:sunMoon<12,
     moon_rahu_conjunction:moonRahu<12,
     moon_ketu_conjunction:moonKetu<12,
     moon_saturn_conjunction:moonSat<10,
     moon_mars_conjunction:moonMars<8,
-    moon_jupiter_aspect:moonJup<12||(angDist(moonLon,rev(jupLon+120))<10)||(angDist(moonLon,rev(jupLon+240))<10),
+    moon_jupiter_aspect:jupAspectMoon,
+    moon_venus_aspect:venAspectMoon,
+    moon_mercury_aspect:merAspectMoon,
+    saturn_aspect_moon:satAspectMoon,
+    mars_aspect_moon:marsAspectMoon,
     moon_papakartari:papakartari,
-    _distances:{sunMoon,moonRahu,moonKetu,moonSat,moonMars,moonJup}
+    moon_shubhakartari:shubhakartari,
+    moon_score:moonScore,
+    factors:factors,
+    _distances:{sunMoon,moonRahu,moonKetu,moonSat,moonMars,moonJup,moonVen,moonMer}
   };
 }
 
@@ -8310,48 +8427,173 @@ function mhInRestriction(jd,restriction){
   return jd>=restriction.start&&jd<restriction.end;
 }
 
-/* Lagna (Ascendant) calculation for Muhurta - uses existing ascendant() function */
+/* ============================================================================
+   PHASE 5: ENHANCED LAGNA ENGINE - Comprehensive house/planetary analysis
+   ========================================================================== */
+const MH_LAGNA_LORDS=['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+const MH_BENEFICS=[1,3,4,5]; /* Moon, Mercury, Jupiter, Venus */
+const MH_MALEFICS=[0,2,6];   /* Sun, Mars, Saturn */
+const MH_NODES=[7,8];        /* Rahu, Ketu (shadow planets) */
+
 function mhLagnaAt(jd,place){
   if(!place||place.lat==null||place.lon==null)return null;
   const ayan=lahiriAyanamsa(jd);
   const lagLon=ascendant(jd,place.lat,place.lon,ayan);
   const lagSign=signOf(lagLon);
+  const lagDeg=lagLon%30;
   const lagNak=nakInfo(lagLon);
-  /* Lagna lord and its placement */
   const lagLord=SIGN_LORD[lagSign];
-  /* Check if lagna lord is in kendra (1,4,7,10) or trikona (5,9) from lagna */
+  
+  /* Build comprehensive planetary positions */
   const planets=[];
-  for(let i=0;i<7;i++){
+  for(let i=0;i<9;i++){ /* Include Rahu(7), Ketu(8) */
     const pLon=mfSidLon(i,jd);
     const pSign=signOf(pLon);
+    const pDeg=pLon%30;
     const fromLag=((pSign-lagSign+12)%12)+1;
-    planets.push({planet:i,lon:pLon,sign:pSign,houseFromLagna:fromLag});
+    const isBenefic=MH_BENEFICS.includes(i);
+    const isMalefic=MH_MALEFICS.includes(i)||MH_NODES.includes(i);
+    planets.push({planet:i,lon:pLon,deg:pDeg,sign:pSign,house:fromLag,isBenefic,isMalefic});
   }
+  
+  /* Lagna lord analysis */
   const lagLordData=planets.find(p=>p.planet===lagLord);
-  const lagLordHouse=lagLordData?lagLordData.houseFromLagna:0;
-  const lagLordInKendra=[1,4,7,10].includes(lagLordHouse);
-  const lagLordInTrikona=[1,5,9].includes(lagLordHouse);
-  /* Check for malefics in lagna (house 1) */
-  const maleficsInLagna=planets.filter(p=>[2,6].includes(p.planet)&&p.houseFromLagna===1);
-  /* Check for benefics in lagna */
-  const beneficsInLagna=planets.filter(p=>[1,3,4,5].includes(p.planet)&&p.houseFromLagna===1);
-  /* Jupiter aspect on lagna (Jupiter in houses 5,7,9 from lagna aspects lagna) */
+  const lagLordHouse=lagLordData?lagLordData.house:0;
+  const lagLordSign=lagLordData?lagLordData.sign:0;
+  const kendras=[1,4,7,10],trikonas=[1,5,9],dusthanas=[6,8,12],upachayas=[3,6,10,11];
+  const lagLordInKendra=kendras.includes(lagLordHouse);
+  const lagLordInTrikona=trikonas.includes(lagLordHouse);
+  const lagLordInDusthana=dusthanas.includes(lagLordHouse);
+  
+  /* Check lagna lord dignity */
+  const lagLordExalted=(lagLord===0&&lagLordSign===0)||(lagLord===1&&lagLordSign===1)||(lagLord===2&&lagLordSign===9)||
+    (lagLord===3&&lagLordSign===5)||(lagLord===4&&lagLordSign===3)||(lagLord===5&&lagLordSign===11)||(lagLord===6&&lagLordSign===6);
+  const lagLordDebilitated=(lagLord===0&&lagLordSign===6)||(lagLord===1&&lagLordSign===7)||(lagLord===2&&lagLordSign===3)||
+    (lagLord===3&&lagLordSign===11)||(lagLord===4&&lagLordSign===9)||(lagLord===5&&lagLordSign===5)||(lagLord===6&&lagLordSign===0);
+  /* Lagna lord combustion (within 6° of Sun) */
+  const sunData=planets.find(p=>p.planet===0);
+  const lagLordCombust=lagLord!==0&&lagLordData&&sunData&&Math.abs(lagLordData.lon-sunData.lon)<6;
+  /* Lagna lord retrograde (approximation - check if outer planet) */
+  const lagLordRetro=false; /* Would need additional calculation */
+  
+  /* Planets in Lagna (house 1) */
+  const inLagna=planets.filter(p=>p.house===1);
+  const maleficsInLagna=inLagna.filter(p=>p.isMalefic);
+  const beneficsInLagna=inLagna.filter(p=>p.isBenefic);
+  
+  /* Planets in Kendras (1,4,7,10) */
+  const inKendras=planets.filter(p=>kendras.includes(p.house));
+  const beneficsInKendras=inKendras.filter(p=>p.isBenefic);
+  const maleficsInKendras=inKendras.filter(p=>p.isMalefic);
+  
+  /* Planets in Trikonas (1,5,9) */
+  const inTrikonas=planets.filter(p=>trikonas.includes(p.house));
+  const beneficsInTrikonas=inTrikonas.filter(p=>p.isBenefic);
+  const maleficsInTrikonas=inTrikonas.filter(p=>p.isMalefic);
+  
+  /* 5th House (Progeny) analysis */
+  const fifth=planets.filter(p=>p.house===5);
+  const fifthLord=SIGN_LORD[(lagSign+4)%12];
+  const fifthLordData=planets.find(p=>p.planet===fifthLord);
+  const fifthLordHouse=fifthLordData?fifthLordData.house:0;
+  const fifthHasBenefics=fifth.some(p=>p.isBenefic);
+  const fifthHasMalefics=fifth.some(p=>p.isMalefic);
+  
+  /* 9th House (Fortune/Dharma) analysis */
+  const ninth=planets.filter(p=>p.house===9);
+  const ninthLord=SIGN_LORD[(lagSign+8)%12];
+  const ninthLordData=planets.find(p=>p.planet===ninthLord);
+  const ninthLordHouse=ninthLordData?ninthLordData.house:0;
+  
+  /* 8th House (Obstacles) analysis */
+  const eighth=planets.filter(p=>p.house===8);
+  const eighthLord=SIGN_LORD[(lagSign+7)%12];
+  const eighthLordData=planets.find(p=>p.planet===eighthLord);
+  const eighthLordHouse=eighthLordData?eighthLordData.house:0;
+  const eighthLordInKendra=kendras.includes(eighthLordHouse);
+  
+  /* Papakartari Yoga (malefics in 2nd and 12th from Lagna) */
+  const second=planets.filter(p=>p.house===2&&p.isMalefic);
+  const twelfth=planets.filter(p=>p.house===12&&p.isMalefic);
+  const papakartari=second.length>0&&twelfth.length>0;
+  
+  /* Jupiter aspect on Lagna (Jupiter in 5,7,9 aspects Lagna; also special 5th/9th aspects) */
   const jupData=planets.find(p=>p.planet===4);
-  const jupAspectsLagna=jupData&&[5,7,9].includes(jupData.houseFromLagna);
+  const jupAspectsLagna=jupData&&[5,7,9].includes(jupData.house);
+  
+  /* Benefic/Malefic aspects on Lagna */
+  const aspectsLagna=planets.filter(p=>[5,7,9].includes(p.house)||(p.planet===2&&[4,8].includes(p.house))||(p.planet===6&&[3,7,10].includes(p.house)));
+  const beneficAspectsLagna=aspectsLagna.filter(p=>p.isBenefic);
+  const maleficAspectsLagna=aspectsLagna.filter(p=>p.isMalefic);
+  
+  /* Calculate Lagna Quality Score (0-100) */
+  let lagnaScore=50;
+  if(lagLordInKendra)lagnaScore+=15;
+  if(lagLordInTrikona&&!lagLordInKendra)lagnaScore+=10;
+  if(lagLordInDusthana)lagnaScore-=15;
+  if(lagLordExalted)lagnaScore+=10;
+  if(lagLordDebilitated)lagnaScore-=15;
+  if(lagLordCombust)lagnaScore-=10;
+  if(beneficsInLagna.length>0)lagnaScore+=10;
+  if(maleficsInLagna.length>0)lagnaScore-=10;
+  if(jupAspectsLagna)lagnaScore+=15;
+  if(papakartari)lagnaScore-=15;
+  if(beneficsInKendras.length>=2)lagnaScore+=5;
+  if(maleficsInKendras.length>=2)lagnaScore-=5;
+  if(fifthHasBenefics)lagnaScore+=5;
+  if(fifthHasMalefics)lagnaScore-=5;
+  lagnaScore=Math.max(0,Math.min(100,lagnaScore));
+  
+  /* Build factors list for display */
+  const factors=[];
+  factors.push({factor:'Rising Sign',value:GBH_SIGN_EN[lagSign],degree:lagDeg.toFixed(1)+'°',
+    status:'info',reason:'The ascendant at the moment of conception',source:'Muhurta Chintamani'});
+  factors.push({factor:'Lagna Degree',value:lagDeg.toFixed(2)+'°',
+    status:lagDeg>3&&lagDeg<27?'good':'caution',
+    reason:lagDeg<=3?'Sandhi (junction) — very early degree':lagDeg>=27?'Sandhi — very late degree':'Mid-degree is stable',
+    source:'BPHS'});
+  factors.push({factor:'Lagna Lord',value:PL[lagLord]+' in House '+lagLordHouse,
+    status:lagLordInKendra?'excellent':lagLordInTrikona?'good':lagLordInDusthana?'avoid':'neutral',
+    reason:lagLordInKendra?'Lagna lord in angular house — strong foundation':
+           lagLordInTrikona?'Lagna lord in trine — dharmic support':
+           lagLordInDusthana?'Lagna lord in 6/8/12 — weakened vitality':'Lagna lord in neutral position',
+    source:'BPHS Ch.24'});
+  if(lagLordExalted)factors.push({factor:'Lagna Lord Exalted',value:'Yes',status:'excellent',
+    reason:'Exalted lagna lord gives exceptional strength',source:'BPHS'});
+  if(lagLordDebilitated)factors.push({factor:'Lagna Lord Debilitated',value:'Yes',status:'avoid',
+    reason:'Debilitated lagna lord weakens the muhurta',source:'BPHS'});
+  if(lagLordCombust)factors.push({factor:'Lagna Lord Combust',value:'Yes',status:'avoid',
+    reason:'Combust lagna lord — hidden, weakened by Sun',source:'BPHS'});
+  if(beneficsInLagna.length>0)factors.push({factor:'Benefics in Lagna',value:beneficsInLagna.map(p=>PL[p.planet]).join(', '),
+    status:'excellent',reason:'Benefic planets in 1st house — auspicious blessing',source:'Muhurta Chintamani'});
+  if(maleficsInLagna.length>0)factors.push({factor:'Malefics in Lagna',value:maleficsInLagna.map(p=>PL[p.planet]).join(', '),
+    status:'avoid',reason:'Malefic planets in 1st house — inauspicious start',source:'Muhurta Chintamani'});
+  if(jupAspectsLagna)factors.push({factor:'Jupiter Aspects Lagna',value:'Yes (from House '+jupData.house+')',
+    status:'excellent',reason:'Guru drishti on Lagna — divine protection and wisdom',source:'Muhurta Chintamani'});
+  if(papakartari)factors.push({factor:'Papakartari Yoga',value:'Malefics in 2nd & 12th',
+    status:'avoid',reason:'Lagna hemmed by malefics — constricted energy',source:'BPHS'});
+  factors.push({factor:'5th House (Progeny)',value:fifth.length?fifth.map(p=>PL[p.planet]).join(', '):'Empty',
+    status:fifthHasBenefics?'good':fifthHasMalefics?'caution':'neutral',
+    reason:'5th house indicates children and creativity',source:'BPHS Ch.15'});
+  factors.push({factor:'5th Lord',value:PL[fifthLord]+' in House '+fifthLordHouse,
+    status:kendras.includes(fifthLordHouse)||trikonas.includes(fifthLordHouse)?'good':dusthanas.includes(fifthLordHouse)?'caution':'neutral',
+    reason:'5th lord placement affects progeny promise',source:'BPHS Ch.15'});
   
   return{
-    lagna_lon:lagLon,
-    lagna_sign:lagSign,
-    lagna_nakshatra:lagNak.n,
-    lagna_pada:lagNak.pada,
-    lagna_lord:lagLord,
-    lagna_lord_house:lagLordHouse,
-    lagna_lord_in_kendra:lagLordInKendra,
-    lagna_lord_in_trikona:lagLordInTrikona,
-    malefics_in_lagna:maleficsInLagna.length>0,
-    benefics_in_lagna:beneficsInLagna.length>0,
-    jupiter_aspects_lagna:jupAspectsLagna,
-    _planets:planets
+    lagna_lon:lagLon,lagna_deg:lagDeg,lagna_sign:lagSign,lagna_nakshatra:lagNak.n,lagna_pada:lagNak.pada,
+    lagna_lord:lagLord,lagna_lord_house:lagLordHouse,lagna_lord_sign:lagLordSign,
+    lagna_lord_in_kendra:lagLordInKendra,lagna_lord_in_trikona:lagLordInTrikona,lagna_lord_in_dusthana:lagLordInDusthana,
+    lagna_lord_exalted:lagLordExalted,lagna_lord_debilitated:lagLordDebilitated,lagna_lord_combust:lagLordCombust,
+    malefics_in_lagna:maleficsInLagna.length>0,benefics_in_lagna:beneficsInLagna.length>0,
+    malefics_in_lagna_list:maleficsInLagna,benefics_in_lagna_list:beneficsInLagna,
+    benefics_in_kendras:beneficsInKendras,malefics_in_kendras:maleficsInKendras,
+    benefics_in_trikonas:beneficsInTrikonas,malefics_in_trikonas:maleficsInTrikonas,
+    jupiter_aspects_lagna:jupAspectsLagna,papakartari:papakartari,
+    fifth_house:fifth,fifth_lord:fifthLord,fifth_lord_house:fifthLordHouse,
+    ninth_house:ninth,ninth_lord:ninthLord,ninth_lord_house:ninthLordHouse,
+    eighth_house:eighth,eighth_lord:eighthLord,eighth_lord_house:eighthLordHouse,
+    benefic_aspects_lagna:beneficAspectsLagna,malefic_aspects_lagna:maleficAspectsLagna,
+    lagna_score:lagnaScore,factors:factors,_planets:planets
   };
 }
 
@@ -9510,6 +9752,7 @@ function gbhDayDetail(r,S){
     ${timeWindowsHtml}
     <div class="lhd" style="margin-top:12px">🧬 Biological state</div>${bio}
     ${auditHtml}
+    ${gbhConflictResolverHtml(r)}
     ${why?`<div class="lhd" style="margin-top:12px">💡 What the texts mean by this</div><ul class="lp-list">${why}</ul>`:''}
     <p class="tag" style="margin-top:10px">Audit trail — rules fired: <code style="font-size:10.5px">${r.firedRuleIds.join(', ')}</code>${r.engineVersion?` · Engine v${r.engineVersion}`:''}</p>
   </td></tr>`;
@@ -9534,6 +9777,228 @@ function gbhDayRow(r,S){
     <td style="font-size:12px">${reason}<br>${bio}</td>
     <td style="text-align:right;white-space:nowrap;color:var(--gold-soft)">${open?'▲':'▼'}</td></tr>
     ${open?gbhDayDetail(r,S):''}`;
+}
+
+/* ============================================================================
+   PHASE 5: DATE COMPARISON ENGINE - Compare top dates with detailed reasons
+   ========================================================================== */
+function gbhDateComparisonHtml(rows){
+  const top5=rows.filter(r=>!r.vetoed&&(r.band==='excellent'||r.band==='good'||r.band==='average'))
+    .sort((a,b)=>b.total-a.total).slice(0,5);
+  if(top5.length<2)return '';
+  
+  return `<p class="tag" style="margin-bottom:8px">Compare the top ${top5.length} dates side-by-side. Understanding why one date ranks higher helps you make an informed choice.</p>
+  <div style="overflow-x:auto">
+  <table class="dt" style="font-size:12px">
+    <tr><th>Rank</th><th>Date</th><th>Score</th><th>Why This Date</th><th>Strengths</th><th>Weaknesses</th></tr>
+    ${top5.map((r,i)=>{
+      /* Collect strengths (high-scoring components) */
+      const strengths=[];
+      const weaknesses=[];
+      if(r.factors){
+        r.factors.filter(f=>f.kind==='scored').forEach(f=>{
+          const meta=GBH_COMP_META[f.key]||['',f.key];
+          const part=f.parts[0];
+          if(f.quality>=70&&part?.en){
+            strengths.push(meta[1]+': '+part.status);
+          }else if(f.quality<50&&part?.en){
+            weaknesses.push(meta[1]+': '+part.status);
+          }
+        });
+      }
+      /* Build "why this date" summary */
+      const whyParts=[];
+      if(r.biological){
+        if(r.biological.phase==='peak')whyParts.push('Peak fertility');
+        else if(r.biological.phase==='fertile_mid')whyParts.push('High fertility');
+        else if(r.biological.phase==='fertile_early')whyParts.push('Fertile window');
+      }
+      const best=r.factors?.filter(f=>f.kind==='scored'&&f.quality>=80).slice(0,2);
+      if(best)best.forEach(f=>{
+        const meta=GBH_COMP_META[f.key]||['',f.key];
+        whyParts.push(meta[1]+' '+f.quality+'%');
+      });
+      if(r.moonAfflictions?.moon_jupiter_aspect)whyParts.push('Jupiter aspects Moon');
+      if(r.lagnaInfo?.jupiter_aspects_lagna)whyParts.push('Jupiter aspects Lagna');
+      
+      const col=r.color==='good'?'var(--good)':r.color==='bad'?'var(--bad)':'var(--gold-soft)';
+      return `<tr>
+        <td style="text-align:center"><b style="font-size:16px">#${i+1}</b></td>
+        <td style="white-space:nowrap"><b>${gbhFmt(r.facts)}</b><br><span style="color:var(--muted);font-size:11px">${GBH_VARA_EN[r.facts.vara]||'—'}</span></td>
+        <td style="text-align:center"><b style="font-size:18px;color:${col}">${r.total}</b><br>${r.chip} ${'⭐'.repeat(r.stars)}</td>
+        <td style="font-size:11px">${whyParts.slice(0,3).join('<br>')||'Good overall score'}</td>
+        <td style="font-size:11px;color:var(--good)">${strengths.slice(0,3).map(s=>'✓ '+s).join('<br>')||'—'}</td>
+        <td style="font-size:11px;color:var(--gold-soft)">${weaknesses.slice(0,2).map(w=>'△ '+w).join('<br>')||'None significant'}</td>
+      </tr>`;
+    }).join('')}
+  </table>
+  </div>
+  <p class="tag" style="margin-top:8px">The ranking is based on the combined score from biological timing, Panchanga quality, Moon strength, and classical prohibitions. Click any date in the calendar below for the complete breakdown.</p>`;
+}
+
+/* ============================================================================
+   PHASE 5: RULE CONFLICT RESOLVER - Explain how conflicts are resolved
+   ========================================================================== */
+function gbhConflictResolverHtml(r){
+  if(!r||!r.factors)return '';
+  const conflicts=[];
+  
+  /* Check for conflicts between high-scoring components and vetoes/penalties */
+  const highScoring=r.factors.filter(f=>f.kind==='scored'&&f.quality>=70);
+  const lowScoring=r.factors.filter(f=>f.kind==='scored'&&f.quality<40);
+  
+  if(r.vetoed&&highScoring.length>0){
+    conflicts.push({
+      type:'veto_override',
+      description:'Absolute veto overrides otherwise good Panchanga',
+      highFactors:highScoring.map(f=>(GBH_COMP_META[f.key]||['',f.key])[1]+' ('+f.quality+'%)'),
+      vetoReason:r.vetoes[0]?.reason||'Unknown veto',
+      resolution:'A veto is absolute — the classical texts bar the act regardless of how good other factors are.',
+      source:r.vetoes[0]?.source?.text||'Muhurta Chintamani'
+    });
+  }
+  
+  if(highScoring.length>0&&lowScoring.length>0&&!r.vetoed){
+    conflicts.push({
+      type:'mixed_quality',
+      description:'Some excellent factors, some weak factors',
+      highFactors:highScoring.slice(0,3).map(f=>(GBH_COMP_META[f.key]||['',f.key])[1]+' ('+f.quality+'%)'),
+      lowFactors:lowScoring.slice(0,3).map(f=>(GBH_COMP_META[f.key]||['',f.key])[1]+' ('+f.quality+'%)'),
+      resolution:'The final score is a weighted average. Higher-weight components (Nakshatra, Moon, Biological) have more influence than lower-weight ones (Yoga, Karana).',
+      source:'Profile weights'
+    });
+  }
+  
+  /* Check for Moon affliction vs good Panchanga */
+  if(r.moonAfflictions&&(r.moonAfflictions.combust||r.moonAfflictions.rahuConjunct)&&
+     r.factors.some(f=>f.key==='nakshatra'&&f.quality>=70)){
+    conflicts.push({
+      type:'moon_vs_nakshatra',
+      description:'Good Nakshatra but afflicted Moon',
+      resolution:'Moon afflictions are weighted under the "moon" component. A strong Nakshatra helps but cannot fully compensate for a weak Moon, as Moon is the primary karaka for conception.',
+      source:'Muhurta Chintamani'
+    });
+  }
+  
+  if(conflicts.length===0)return '';
+  
+  return `<div class="lhd" style="margin-top:12px">⚖️ Rule Conflict Resolution</div>
+    <table class="dt" style="margin-top:8px;font-size:12px">
+      <tr><th>Conflict</th><th>Resolution</th><th>Source</th></tr>
+      ${conflicts.map(c=>`<tr>
+        <td style="vertical-align:top"><b>${c.description}</b>
+          ${c.highFactors?'<br><span style="color:var(--good)">Strong: '+c.highFactors.join(', ')+'</span>':''}
+          ${c.lowFactors?'<br><span style="color:var(--gold-soft)">Weak: '+c.lowFactors.join(', ')+'</span>':''}
+          ${c.vetoReason?'<br><span style="color:var(--bad)">Veto: '+gbhEsc(c.vetoReason)+'</span>':''}
+        </td>
+        <td style="font-size:11px">${c.resolution}</td>
+        <td><span class="tag">${gbhEsc(c.source)}</span></td>
+      </tr>`).join('')}
+    </table>`;
+}
+
+/* ============================================================================
+   PHASE 5: SCHOLAR MODE - Advanced display for researchers
+   ========================================================================== */
+var GBH_SCHOLAR_MODE=false;
+
+function gbhToggleScholarMode(){
+  GBH_SCHOLAR_MODE=!GBH_SCHOLAR_MODE;
+  showMuhurat('garbhadhana');
+}
+
+function gbhScholarModeHtml(S){
+  if(!GBH_SCHOLAR_MODE)return '';
+  const {rows,profile:P}=S;
+  
+  /* Collect all rules evaluated */
+  const allRules=new Set();
+  const appliedRules=new Set();
+  const rejectedRules=new Set();
+  
+  rows.forEach(r=>{
+    r.firedRuleIds.forEach(id=>allRules.add(id));
+    r.factors.forEach(f=>f.parts.forEach(p=>{
+      if(p.rule){
+        allRules.add(p.rule.id);
+        if(p.matched)appliedRules.add(p.rule.id);
+      }
+    }));
+    r.penaltyGroups.forEach(g=>g.rules.forEach(x=>{
+      if(x.rule)allRules.add(x.rule.id);
+    }));
+  });
+  
+  /* Calculate statistics */
+  const totalRulesInDB=mhRuleCount();
+  const rulesEvaluated=allRules.size;
+  const rulesApplied=appliedRules.size;
+  const rulesIgnored=totalRulesInDB-rulesEvaluated;
+  
+  /* Validation checks */
+  const validationErrors=[];
+  const validationWarnings=[];
+  
+  /* Check for missing sources */
+  let missingSourceCount=0;
+  for(const fn in MUHURTA_DB.tables){
+    MUHURTA_DB.tables[fn].rules.forEach(r=>{
+      if(!r.source||!r.source.text)missingSourceCount++;
+    });
+  }
+  if(missingSourceCount>0)validationWarnings.push(''+missingSourceCount+' rules have missing or incomplete source citations');
+  
+  /* Check for pending verifications */
+  let pendingVerification=0;
+  for(const fn in MUHURTA_DB.tables){
+    MUHURTA_DB.tables[fn].rules.forEach(r=>{
+      if(r.source&&r.source.verified===false)pendingVerification++;
+    });
+  }
+  if(pendingVerification>0)validationWarnings.push(''+pendingVerification+' rules are pending verse verification');
+  
+  /* Database version info */
+  const dbVersion=MUHURTA_DB.tables['mc_tithi.json']?.meta?.version||1;
+  const buildDate=MUHURTA_DB_INLINE?.meta?.built||'unknown';
+  
+  return `<div class="lblock" style="border-color:var(--gold-soft);margin-top:12px">
+    <div class="lhd" style="color:var(--gold-soft)">🔬 Scholar Mode — Research-Grade Analysis</div>
+    
+    <div class="lhd" style="margin-top:10px">📊 Evaluation Statistics</div>
+    <table class="dt" style="font-size:12px">
+      <tr><td>Total rules in database</td><td><b>${totalRulesInDB}</b></td></tr>
+      <tr><td>Rules evaluated this window</td><td><b>${rulesEvaluated}</b></td></tr>
+      <tr><td>Rules that matched (applied)</td><td><b>${rulesApplied}</b></td></tr>
+      <tr><td>Rules not applicable (ignored)</td><td><b>${rulesIgnored}</b></td></tr>
+      <tr><td>Days analyzed</td><td><b>${rows.length}</b></td></tr>
+      <tr><td>Vetoed dates</td><td><b>${rows.filter(r=>r.vetoed).length}</b></td></tr>
+    </table>
+    
+    <div class="lhd" style="margin-top:10px">✅ Validation Report</div>
+    ${validationErrors.length?'<ul class="lp-weak">'+validationErrors.map(e=>'<li style="color:var(--bad)">❌ '+e+'</li>').join('')+'</ul>':''}
+    ${validationWarnings.length?'<ul class="lp-weak">'+validationWarnings.map(w=>'<li style="color:var(--gold-soft)">⚠️ '+w+'</li>').join('')+'</ul>':''}
+    ${!validationErrors.length&&!validationWarnings.length?'<p style="color:var(--good)">✓ All validation checks passed</p>':''}
+    
+    <div class="lhd" style="margin-top:10px">📋 Rule Database Metadata</div>
+    <table class="dt" style="font-size:12px">
+      <tr><td>Database version</td><td>v${dbVersion}</td></tr>
+      <tr><td>Tables loaded</td><td>${Object.keys(MUHURTA_DB.tables).length}</td></tr>
+      <tr><td>Source</td><td>${MUHURTA_DB.source}</td></tr>
+      <tr><td>Primary authority</td><td>${P.authority||'muhurta_chintamani'}</td></tr>
+      <tr><td>Profile version</td><td>v${P.version||1}</td></tr>
+      <tr><td>Engine version</td><td>v${rows[0]?.engineVersion||1}</td></tr>
+      <tr><td>Report generated</td><td>${new Date().toISOString()}</td></tr>
+    </table>
+    
+    <div class="lhd" style="margin-top:10px">📚 Authority Profile</div>
+    <table class="dt" style="font-size:12px">
+      <tr><td>Primary Authority</td><td><b>Muhurta Chintamani</b></td></tr>
+      <tr><td>Supporting Authorities</td><td>Dharma Sindhu, Nirnaya Sindhu, BPHS, Narada Samhita</td></tr>
+      <tr><td>Methodology</td><td>Multi-stage weighted scoring with rule hierarchy</td></tr>
+    </table>
+    
+    <p class="tag" style="margin-top:10px">Scholar Mode displays all evaluation details for research and verification. Every rule can be traced to its source in <code>verse_database/muhurta/</code>.</p>
+  </div>`;
 }
 
 /* ---- P3: Rejected Dates Section (enhanced to show multiple reasons) -------- */
@@ -10134,6 +10599,7 @@ function pGarbhadhana(){
    <p class="lead">A ${S.days}-day scan in which <b>every point is traceable to a numbered rule</b> in <code>verse_database/muhurta/</code>. Biology decides when conception is possible; the classical rules decide which of those days the texts commend. ⚕️ <b>Not medical advice.</b></p>
    <div style="margin:10px 0 14px;display:flex;gap:9px;flex-wrap:wrap">
      <button class="modebtn" style="padding:8px 18px;background:linear-gradient(180deg,#f0d080,#d4af37);color:#1a1030;font-weight:700" onclick="gbhOpenPDFOverlay()">📄 Download PDF Report</button>
+     <button class="modebtn" style="padding:8px 18px;background:${GBH_SCHOLAR_MODE?'var(--gold-soft)':'var(--panel2)'};color:${GBH_SCHOLAR_MODE?'#1a1030':'var(--ink)'};border:1px solid var(--line)" onclick="gbhToggleScholarMode()">🔬 Scholar Mode ${GBH_SCHOLAR_MODE?'ON':'OFF'}</button>
    </div>
    ${gbhInputForm()}
 
@@ -10155,6 +10621,8 @@ function pGarbhadhana(){
        </div>`;}).join('')}
      </div><p class="tag" style="margin-top:8px">Click any date in the calendar below to see, rule by rule, exactly how its number was reached.</p>`
     :`<p class="tag" style="color:var(--gold-soft)">No date in this ${S.days}-day window reaches the “Good” band. That is a real result, not an error — ${count.avoid} of ${rows.length} days are barred or weak here. Move the window forward, or open a barred date to see precisely which rule bars it.</p>`)}
+
+   ${lblk('📊 Date Comparison',gbhDateComparisonHtml(rows))}
 
    ${lblk('⛔ Rejected dates with reasons',gbhRejectedDatesHtml(rows))}
 
@@ -10190,6 +10658,18 @@ function pGarbhadhana(){
    ${lblk('🕉 What Garbhadhana is',`<b>What:</b> the first of the sixteen samskaras — a rite of conscious intent before conception.<br>
      <b>Why a muhurat:</b> the tradition holds that the state of body, mind and sky at conception colours the child's disposition. Its practical value is that it makes the moment deliberate, calm and prepared.<br>
      <b>How to use this page:</b> enter the LMP → read the recommended dates → open a date to see the reasoning → confirm with your doctor and your own convenience. If a date you like is barred, open it: the specific rule and its source are named, so you can weigh it yourself.`)}
+
+   ${gbhScholarModeHtml(S)}
+
+   ${lblk('📋 Report Metadata',`<table class="dt" style="font-size:11px">
+     <tr><td>Engine Version</td><td>v${rows[0]?.engineVersion||1}</td></tr>
+     <tr><td>Rule Database</td><td>${Object.keys(MUHURTA_DB.tables).length} tables · ${mhRuleCount()} rules</td></tr>
+     <tr><td>Profile</td><td>garbhadhana v${P.version||1}</td></tr>
+     <tr><td>Authority</td><td>${P.authority||'muhurta_chintamani'}</td></tr>
+     <tr><td>Generated</td><td>${new Date().toLocaleString()}</td></tr>
+     <tr><td>Days Analyzed</td><td>${rows.length}</td></tr>
+     <tr><td>Rules Evaluated</td><td>${rows.length?rows[0].firedRuleIds.length:0} per day</td></tr>
+   </table>`)}
 
    <p class="tag" style="color:var(--bad)">⚠️ <b>Important.</b> This is <b>not medical advice</b>. The fertile window is a calendar estimate and real ovulation can differ by days, especially in an irregular cycle. For conception, reproductive health or any difficulty, consult a qualified doctor. Astrology cannot guarantee conception. <b>🚫 No sex-selection guidance is provided or possible here — sex determination and selection are illegal in India under the PCPNDT Act.</b> This is a date-level muhurat: Rahu Kalam, Abhijit and lagna-shuddhi at the chosen hour are not evaluated, and the hora shown is only a rough within-day refinement.</p></div>`;}
 function chartAnalysis(v){const M=VARGA_META[v];const vasc=dSign(CH.asc,v);
